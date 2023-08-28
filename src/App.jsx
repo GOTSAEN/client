@@ -1,14 +1,10 @@
 import './App.css'
-import Hello from '@components/Hello'
-import { Accordion } from './components/ui/accordion'
-import { Button } from '@components/ui/button'
+import { Outlet } from 'react-router-dom'
 function App() {
   return (
-    <div className='App'>
-      <Hello />
-      <Accordion />
-      <Button>Test</Button>
-    </div>
+    <section className='App'>
+      <Outlet />
+    </section>
   )
 }
 
