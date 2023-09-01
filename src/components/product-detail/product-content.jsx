@@ -17,7 +17,7 @@ export default function ProductContent({ data }) {
 
   const label_style = 'font-semibold inline-block mr-4'
   return (
-    <article className='px-4 grow flex flex-col justify-between'>
+    <article className='px-4 grow flex flex-col'>
       <div>
         <h2 className='flex text-xl font-semibold items-center mb-8'>
           <Heart className='mr-2' />
@@ -56,9 +56,11 @@ export default function ProductContent({ data }) {
           </span>
         </aside>
       </div>
-      <hr className='mt-8' />
-      <div>
-        <aside className='py-2'>{short}</aside>
+      <div className='pt-8'>
+        <hr />
+      </div>
+      <div className='flex flex-col grow justify-between'>
+        <aside className='py-8'>{short}</aside>
         <Button className={cn('w-full')}>대기 신청</Button>
       </div>
     </article>
