@@ -10,9 +10,11 @@ import {
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/utils/lib'
 import { Link } from 'react-router-dom'
-import { Accessibility as Icons } from 'lucide-react'
 import { useQuery } from 'react-query'
 import { fetchCategories } from '@/api/menu/menu'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Search, search } from 'lucide-react'
 
 export default function HorizontalMenuBar() {
   const {
@@ -25,7 +27,7 @@ export default function HorizontalMenuBar() {
     { staleTime: 1000 * 60 * 24 }
   )
   return (
-    <nav className='px-2 py-1 border-b-[1px]'>
+    <nav className='flex px-2 py-2 border-b-[1px] justify-between'>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -45,16 +47,39 @@ export default function HorizontalMenuBar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href='/docs' legacyBehavior passHref>
+            <Link href='/guide' legacyBehavior passHref>
               <NavigationMenuLink
                 className={navigationMenuTriggerStyle()}
               >
-                Documentation
+                가이드
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href='/community' legacyBehavior passHref>
+              <NavigationMenuLink
+                className={navigationMenuTriggerStyle()}
+              >
+                커뮤니티
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+      <div className='flex w-[300px] items-center'>
+        <Input
+          type='text'
+          className={cn('grow-0 rounded-none rounded-l-lg')}
+        />
+        <Button
+          type='submit'
+          className={cn(
+            'w-fit px-3 rounded-none rounded-r-lg'
+          )}
+        >
+          <Search size={14} />
+        </Button>
+      </div>
     </nav>
   )
 }
