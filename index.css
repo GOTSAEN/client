@@ -86,3 +86,11 @@
 body {
   font-family: 'Pretendard-Regular';
 }
+
+.Draftail-Editor .DraftEditor-root {
+  height: 100vh !important;
+}
+
+.demo-wrapper {
+  background-color: red !important;
+}
