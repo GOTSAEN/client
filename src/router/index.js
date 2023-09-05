@@ -6,6 +6,7 @@ import ProductDetail from '@/pages/ProductDetail'
 import ProductEnroll from '@/pages/ProductEnroll'
 export const router = createBrowserRouter([
   {
+    basename: process.env.PUBLIC_URL,
     path: '/',
     element: <App />,
     errorElement: <NotFound />,
