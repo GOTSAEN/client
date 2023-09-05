@@ -91,6 +91,6 @@ body {
   height: 100vh !important;
 }
 
-.demo-wrapper {
-  background-color: red !important;
+.text-editor {
+  background-color: aqua !important;
 }

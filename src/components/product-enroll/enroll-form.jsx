@@ -13,6 +13,7 @@ import { cn } from '@/utils/lib'
 import { DatePicker } from '../common/DatePicker'
 import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
+import { Button } from '../ui/button'
 
 export default function EnrollForm() {
   const form = {
@@ -30,10 +31,15 @@ export default function EnrollForm() {
 
   return (
     <Card className={cn('p-4 flex flex-col gap-2')}>
-      <CardHeader className={cn('px-1')}>
+      <CardHeader
+        className={cn(
+          'px-1 flex-row items-end justify-between'
+        )}
+      >
         <CardTitle className={cn('text-lg')}>
           상품 등록
         </CardTitle>
+        <Button>작성 완료</Button>
       </CardHeader>
       <Input placeholder='상품명' />
       <Input placeholder='모집인원' />
