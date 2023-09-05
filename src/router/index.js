@@ -4,19 +4,26 @@ import Home from '@pages/Home'
 import App from '@/App'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductEnroll from '@/pages/ProductEnroll'
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      errorElement: <NotFound />,
+      children: [
+        { index: true, path: '/', element: <Home /> },
+        {
+          path: '/product/:id',
+          element: <ProductDetail />,
+        },
+        {
+          path: '/product/create',
+          element: <ProductEnroll />,
+        },
+      ],
+    },
+  ],
   {
-    basename: process.env.PUBLIC_URL,
-    path: '/',
-    element: <App />,
-    errorElement: <NotFound />,
-    children: [
-      { index: true, path: '/', element: <Home /> },
-      { path: '/product/:id', element: <ProductDetail /> },
-      {
-        path: '/product/create',
-        element: <ProductEnroll />,
-      },
-    ],
-  },
-])
+    basename: '/client',
+  }
+)
