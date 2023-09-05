@@ -69,7 +69,9 @@ export default function HorizontalMenuBar() {
       <div className='flex w-[300px] items-center'>
         <Input
           type='text'
-          className={cn('grow-0 rounded-none rounded-l-lg')}
+          className={cn(
+            'grow-0 rounded-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-offset-0'
+          )}
         />
         <Button
           type='submit'
