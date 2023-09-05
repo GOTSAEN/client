@@ -68,7 +68,7 @@ jobs:
       # index.html 을 복사하여 404.html에서도 사용하도록 합니다.
       - name: Build
         run: |
-          yarn build
+          npm run build
           cp ./build/index.html ./build/404.html
 
         env:
