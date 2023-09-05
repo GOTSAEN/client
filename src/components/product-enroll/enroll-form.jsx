@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import { Form, FormField, FormItem } from '../ui/form'
@@ -16,11 +16,7 @@ import TextEditor from '../common/TextEditor'
 import { Button } from '../ui/button'
 
 export default function EnrollForm() {
-  const form = {
-    defaultValues: {
-      username: '',
-    },
-  }
+  const [form, setForm] = useState({})
 
   const categories = [
     { id: 14, name: '맛집' },
@@ -28,6 +24,18 @@ export default function EnrollForm() {
     { id: 29, name: '전자기기' },
     { id: 13, name: '기타' },
   ]
+
+  const handleChange = (e) => {
+    console.log(e)
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+    console.log(form)
+  }
+
+  const handleDataChange = (name, value) => {
+    setForm({ ...form, [name]: value })
+    console.log(form)
+  }
 
   return (
     <Card className={cn('p-4 flex flex-col gap-2')}>
@@ -41,15 +49,39 @@ export default function EnrollForm() {
         </CardTitle>
         <Button>작성 완료</Button>
       </CardHeader>
-      <Input placeholder='상품명' />
-      <Input placeholder='모집인원' />
+      <Input
+        placeholder='상품명'
+        name='productNm'
+        value={form.productNm}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder='모집인원'
+        type='number'
+        name='amount'
+        value={form.amount}
+      />
       <div className='flex gap-2'>
-        <DatePicker placeholder='시작날짜' />
-        <DatePicker placeholder='종료날짜' />
+        <DatePicker
+          placeholder='시작날짜'
+          name='startDt'
+          value={form.startDt}
+          onChange={handleDataChange}
+        />
+        <DatePicker
+          placeholder='종료날짜'
+          name='endDt'
+          value={form.endDt}
+          onChange={handleDataChange}
+        />
       </div>
-      <Select>
+      <Select
+        onValueChange={(val) =>
+          handleDataChange('category', val)
+        }
+      >
         <SelectTrigger className='w-[180px]'>
-          <SelectValue placeholder='카테고리' />
+          <SelectValue placeholder='-- 카테고리 --' />
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -64,13 +96,19 @@ export default function EnrollForm() {
       </Select>
       <Input placeholder='제공 내용 50자 내외' />
       <div className='py-2'>
-        <Label htmlFor='explain' className={cn('text-md')}>
+        <Label
+          htmlFor='explain'
+          className={cn('text-md my-2 block')}
+        >
           🎁상품 설명
         </Label>
         <TextEditor />
       </div>
       <div className='py-2'>
-        <Label htmlFor='explain' className={cn('text-md')}>
+        <Label
+          htmlFor='explain'
+          className={cn('text-md my-2 block')}
+        >
           ✅ 주의 사항
         </Label>
         <TextEditor />
