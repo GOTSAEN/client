@@ -50,7 +50,8 @@ jobs:
         run: npm install -g yarn
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
+          yarn add draft-js
         # cache hit이 발생한 경우 (즉 package-lock.json이 변경되지 않은 경우)
         # npm ci 실행은 skip 됩니다.
         if: steps.cache.outputs.cache-hit != 'true'
@@ -68,7 +69,7 @@ jobs:
       # index.html 을 복사하여 404.html에서도 사용하도록 합니다.
       - name: Build
         run: |
-          npm run build
+          yarn build
           cp ./build/index.html ./build/404.html
 
         env:
