@@ -1,29 +1,31 @@
-import { createBrowserRouter } from 'react-router-dom'
-import NotFound from '@pages/NotFound'
-import Home from '@pages/Home'
-import App from '@/App'
-import ProductDetail from '@/pages/ProductDetail'
-import ProductEnroll from '@/pages/ProductEnroll'
+import { createBrowserRouter } from "react-router-dom";
+import NotFound from "@pages/NotFound";
+import Home from "@pages/Home";
+import App from "@/App";
+import ProductDetail from "@/pages/ProductDetail";
+import ProductEnroll from "@/pages/ProductEnroll";
+import LogIn from "@/pages/LogIn";
 export const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: "/",
       element: <App />,
       errorElement: <NotFound />,
       children: [
-        { index: true, path: '/', element: <Home /> },
+        { index: true, path: "/", element: <Home /> },
         {
-          path: '/product/:id',
+          path: "/product/:id",
           element: <ProductDetail />,
         },
         {
-          path: '/product/create',
+          path: "/product/create",
           element: <ProductEnroll />,
         },
+        { path: "/login", element: <LogIn /> },
       ],
     },
   ],
   {
-    basename: '/client',
+    basename: "/client",
   }
-)
+);
