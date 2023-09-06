@@ -4,6 +4,7 @@ import Home from '@pages/Home'
 import App from '@/App'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductEnroll from '@/pages/ProductEnroll'
+import Setting from '@/pages/Setting'
 export const router = createBrowserRouter(
   [
     {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter(
         {
           path: '/product/create',
           element: <ProductEnroll />,
+        },
+        {
+          path: '/setting/*',
+          element: <Setting />,
         },
       ],
     },
