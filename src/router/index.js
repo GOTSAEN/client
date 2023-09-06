@@ -5,6 +5,7 @@ import App from "@/App";
 import ProductDetail from "@/pages/ProductDetail";
 import ProductEnroll from "@/pages/ProductEnroll";
 import LogIn from "@/pages/LogIn";
+import SignUp from "@/pages/SignUp";
 export const router = createBrowserRouter(
   [
     {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter(
           element: <ProductEnroll />,
         },
         { path: "/login", element: <LogIn /> },
+        {
+          path: "/signup",
+          element: <SignUp />,
+        },
       ],
     },
   ],
