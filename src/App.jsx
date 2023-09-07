@@ -15,10 +15,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <Header />
-        <HorizontalMenuBar />
-        <section className='p-2'>
-          <Outlet />
+        <div>
+          <Header />
+          <HorizontalMenuBar />
+        </div>
+        <section className='w-full min-h-full px-auto flex justify-center'>
+          <main className='max-w-[1400px] w-full h-full'>
+            <Outlet />
+          </main>
         </section>
       </DarkModeProvider>
       <ReactQueryDevtools />

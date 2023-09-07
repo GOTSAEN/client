@@ -9,11 +9,12 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Gift } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { cn } from '@/utils/lib'
 
 export default function ProductDropDownMenu() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className={cn('px-2')}>
         <Gift size={15} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
