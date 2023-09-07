@@ -1,0 +1,93 @@
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from '@/components/ui/navigation-menu'
+import { cn } from '@/utils/lib'
+import { Link } from 'react-router-dom'
+import React from 'react'
+import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
+
+export default function Menu() {
+  const navigation_styles =
+    'group inline-flex h-10 w-max items-center justify-center rounded-md  text-zinc-500 rounded-none bg-background px-4 py-2 text-sm font-medium transition-colors border-l-[1px] hover:border-zinc-900 hover:text-zinc-900 focus:bg-accent focus:text-accent/50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 w-full'
+  return (
+    <nav className='h-full justify-between w-fit mt-4 pl-2 pr-12 sticky top-[153px]'>
+      <NavigationMenu>
+        <NavigationMenuList className={cn('flex flex-col')}>
+          <DropdownMenuLabel className='text-sm font-semibold px-2 py-2 w-full'>
+            광고 관리
+          </DropdownMenuLabel>
+          <NavigationMenuItem className='w-full'>
+            <Link
+              to='/setting/ads/progress'
+              className='px-0'
+              legacyBehavior
+              passHref
+            >
+              <NavigationMenuLink
+                className={navigation_styles}
+              >
+                진행 광고
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem className='w-full'>
+            <Link
+              to='/setting/ads/waiting'
+              legacyBehavior
+              passHref
+            >
+              <NavigationMenuLink
+                className={navigation_styles}
+              >
+                대기 광고
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem className='w-full'>
+            <Link
+              to='/setting/ads/past'
+              legacyBehavior
+              passHref
+            >
+              <NavigationMenuLink
+                className={navigation_styles}
+              >
+                지난 광고
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </nav>
+  )
+}
+
+const ListItem = React.forwardRef(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+              className
+            )}
+            {...props}
+          >
+            <div className='text-sm font-medium leading-none'>
+              {title}
+            </div>
+            <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
+              {children}
+            </p>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    )
+  }
+)
+ListItem.displayName = 'ListItem'

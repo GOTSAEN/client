@@ -38,7 +38,9 @@ export default function EnrollForm() {
   }
 
   return (
-    <Card className={cn('p-4 flex flex-col gap-2')}>
+    <Card
+      className={cn('p-4 flex flex-col gap-2 border-0')}
+    >
       <CardHeader
         className={cn(
           'px-1 flex-row items-end justify-between'
