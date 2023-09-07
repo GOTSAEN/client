@@ -19,8 +19,8 @@ function App() {
           <Header />
           <HorizontalMenuBar />
         </div>
-        <section className='w-full min-h-full px-auto flex justify-center'>
-          <main className='max-w-[1400px] w-full h-full'>
+        <section className='w-full h- px-auto flex justify-center'>
+          <main className='max-w-[1400px] w-full'>
             <Outlet />
           </main>
         </section>

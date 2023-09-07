@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom'
 import ProgressAds from '@/pages/setting/progress-ads'
 import WaitingAds from '@/pages/setting/waiting-ads'
+import LogIn from '@/pages/LogIn'
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
       <Routes>
         <Route element={<App />}>
           <Route index path='/' element={<Home />} />
+          <Route path='/login' element={<LogIn />} />
           <Route
             path='/product/:id'
             element={<ProductDetail />}

@@ -16,7 +16,9 @@ export default function Header() {
           <button className='text-sm mr-2 text-zinc-500 hover:text-blue-800'>
             <Link to='/product/create'>상품등록</Link>
           </button>
-          <Button>로그인</Button>
+          <Button>
+            <Link to='/login'>로그인</Link>
+          </Button>
           <ProductDropDownMenu />
           <button className='mx-3' onClick={toggleDarkMode}>
             {darkMode ? (
