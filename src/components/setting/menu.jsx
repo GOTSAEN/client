@@ -13,7 +13,7 @@ export default function Menu() {
   const navigation_styles =
     'group inline-flex h-10 w-max items-center justify-center rounded-md  text-zinc-500 rounded-none bg-background px-4 py-2 text-sm font-medium transition-colors border-l-[1px] hover:border-zinc-900 hover:text-zinc-900 focus:bg-accent focus:text-accent/50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 w-full'
   return (
-    <nav className='h-full justify-between w-fit mt-4 pl-2 pr-4'>
+    <nav className='h-full justify-between w-fit mt-4 pl-2 pr-12 sticky top-[153px]'>
       <NavigationMenu>
         <NavigationMenuList className={cn('flex flex-col')}>
           <DropdownMenuLabel className='text-sm font-semibold px-2 py-2 w-full'>
