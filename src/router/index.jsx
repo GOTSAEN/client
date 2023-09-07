@@ -5,47 +5,14 @@ import App from '@/App'
 import ProductDetail from '@/pages/ProductDetail'
 import ProductEnroll from '@/pages/ProductEnroll'
 import Setting from '@/pages/Setting'
-import PastAds from '@/components/setting/past-ads'
+import PastAds from '@/pages/setting/past-ads'
 import {
   BrowserRouter,
   Route,
   Routes,
 } from 'react-router-dom'
-import ProgressAds from '@/components/setting/progress-ads'
-import Index from '@/components/setting'
-// export const router = createBrowserRouter(
-//   [
-//     {
-//       path: '/',
-//       element: <App />,
-//       errorElement: <NotFound />,
-//       children: [
-//         { index: true, path: '/', element: <Home /> },
-//         {
-//           path: '/product/:id',
-//           element: <ProductDetail />,
-//         },
-//         {
-//           path: '/product/create',
-//           element: <ProductEnroll />,
-//         },
-//         {
-//           path: '/setting',
-//           element: <Setting />,
-//           children: [
-//             {
-//               path: '/setting/ads/past',
-//               element: <PastAds />,
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//   ],
-//   {
-//     basename: '/client',
-//   }
-// )
+import ProgressAds from '@/pages/setting/progress-ads'
+import WaitingAds from '@/pages/setting/waiting-ads'
 
 export default function Router() {
   return (
@@ -68,6 +35,10 @@ export default function Router() {
               element={<ProgressAds />}
             />
             <Route path='ads/past' element={<PastAds />} />
+            <Route
+              path='ads/waiting'
+              element={<WaitingAds />}
+            />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Route>

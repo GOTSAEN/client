@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { cn } from '@/utils/lib'
-import { Card } from '../ui/card'
+import { Card } from '../../components/ui/card'
 export default function PastAds() {
   return (
     <Card className='flex justify-center'>
