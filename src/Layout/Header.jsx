@@ -13,9 +13,6 @@ export default function Header() {
       <div className='relative max-w-[1400px] w-fit flex grow justify-center items-center'>
         <h1 className='text-center'>로고</h1>
         <div className='absolute index-y-0 right-0 flex'>
-          <button className='text-sm mr-2 text-zinc-500 hover:text-blue-800'>
-            <Link to='/product/create'>상품등록</Link>
-          </button>
           <Button>
             <Link to='/login'>로그인</Link>
           </Button>

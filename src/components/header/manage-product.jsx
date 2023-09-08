@@ -17,6 +17,7 @@ export default function ProductDropDownMenu() {
       <DropdownMenuTrigger className={cn('px-2')}>
         <Gift size={15} />
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuLabel>광고상품 관리</DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -28,6 +29,10 @@ export default function ProductDropDownMenu() {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link to='/setting/ads/past'>지난 상품</Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link to='/product/create'>새 상품 등록</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

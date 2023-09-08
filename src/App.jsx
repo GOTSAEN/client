@@ -15,7 +15,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <div className='sticky top-0  bg-background '>
+        <div className='sticky top-0  bg-background z-10'>
           <Header />
           <HorizontalMenuBar />
         </div>
