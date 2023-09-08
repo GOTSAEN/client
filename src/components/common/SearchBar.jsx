@@ -42,11 +42,14 @@ export default function SearchBar() {
         </SheetTrigger>
         <SheetContent
           side='top'
-          className='w-full px-12 flex justify-center'
+          className='w-full px-4 justify flex gap-1'
         >
-          <Input placeholder='검색어를 입력하세요' />
-          <Button>
-            <Search />
+          <Input
+            placeholder='검색어를 입력하세요'
+            className='text-xs w-full'
+          />
+          <Button variant='outline' className='px-2'>
+            <Search size={14} />
           </Button>
         </SheetContent>
       </Sheet>
