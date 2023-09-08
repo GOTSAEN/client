@@ -12,9 +12,7 @@ import { cn } from '@/utils/lib'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { fetchCategories } from '@/api/menu/menu'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Search, search } from 'lucide-react'
+import SearchBar from '@/components/common/SearchBar'
 
 export default function HorizontalMenuBar() {
   const {
@@ -71,22 +69,7 @@ export default function HorizontalMenuBar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className='flex w-[300px] items-center'>
-          <Input
-            type='text'
-            className={cn(
-              'grow-0 rounded-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-offset-0'
-            )}
-          />
-          <Button
-            type='submit'
-            className={cn(
-              'w-fit px-3 rounded-none rounded-r-lg'
-            )}
-          >
-            <Search size={14} />
-          </Button>
-        </div>
+        <SearchBar />
       </div>
     </nav>
   )
