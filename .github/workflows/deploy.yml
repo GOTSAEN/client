@@ -32,20 +32,20 @@ jobs:
 
       # node_modules 폴더를 캐싱합니다.
       # 이게 없으면 workflow를 실행할 때 마다 node_modules를 다시 생성합니다.
-      - name: Cache node_modules
-        id: cache
-        uses: actions/cache@v3
-        with:
-          # 캐싱할 폴더를 지정합니다.
-          path: '**/node_modules'
-          # package-lock.json 파일의 변경이 발생했을 경우 새로 캐싱될 수 있도록 해줍니다.
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          # cache hit이 발생하지 않았을 경우, restore-keys 에 있는 것을 꺼냅니다.
-          # 단, npm ci 명령은 실행됩니다. 기존의 node_modules 캐시를 기반으로
-          # 추가된 패키지만 설치할테니, 아예 처음부터 node_modules 폴더를 생성하는 것보다
-          # 시간이 적게 걸릴 겁니다.
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - name: Cache node_modules
+      #   id: cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     # 캐싱할 폴더를 지정합니다.
+      #     path: '**/node_modules'
+      #     # package-lock.json 파일의 변경이 발생했을 경우 새로 캐싱될 수 있도록 해줍니다.
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     # cache hit이 발생하지 않았을 경우, restore-keys 에 있는 것을 꺼냅니다.
+      #     # 단, npm ci 명령은 실행됩니다. 기존의 node_modules 캐시를 기반으로
+      #     # 추가된 패키지만 설치할테니, 아예 처음부터 node_modules 폴더를 생성하는 것보다
+      #     # 시간이 적게 걸릴 겁니다.
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
       - name: Install Yarn
         run: npm install -g yarn
 
