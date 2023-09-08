@@ -1,25 +1,55 @@
 import React from 'react'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Search } from 'lucide-react'
 import { cn } from '@/utils/lib'
 export default function SearchBar() {
   return (
-    <div className='flex max-w-[300px] items-center'>
-      <Input
-        type='text'
-        className={cn(
-          'grow-0 rounded-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-offset-0 max-md:hidden'
-        )}
-      />
-      <Button
-        type='submit'
-        className={cn(
-          'w-fit px-3 rounded-none rounded-r-lg max-md:rounded-full'
-        )}
-      >
-        <Search size={14} />
-      </Button>
-    </div>
+    <>
+      <div className='flex max-w-[300px] items-center max-sm:hidden'>
+        <Input
+          type='text'
+          className={cn(
+            'grow-0 rounded-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-offset-0 max-sm:hidden'
+          )}
+        />
+        <Button
+          type='submit'
+          className={cn(
+            'w-fit px-3 rounded-none rounded-r-lg'
+          )}
+          variant='outline'
+        >
+          <Search size={14} />
+        </Button>
+      </div>
+      <Sheet className='max-sm:block'>
+        <SheetTrigger asChild>
+          <Button
+            type='submit'
+            className={cn(
+              'w-fit h-fit px-2 rounded-full hidden max-sm:block'
+            )}
+            variant='outline'
+          >
+            <Search size={14} />
+          </Button>
+        </SheetTrigger>
+        <SheetContent
+          side='top'
+          className='w-full px-12 flex justify-center'
+        >
+          <Input placeholder='검색어를 입력하세요' />
+          <Button>
+            <Search />
+          </Button>
+        </SheetContent>
+      </Sheet>
+    </>
   )
 }
