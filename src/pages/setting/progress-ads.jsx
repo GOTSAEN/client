@@ -12,13 +12,14 @@ import { cn } from '@/utils/lib'
 import { Card } from '../../components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 
 export default function ProgressAds() {
   return (
     <Card className='flex justify-center'>
       <Table>
         <TableHeader>
-          <TableRow className='grid grid-cols-12 items-center'>
+          <TableRow className='grid grid-cols-12 items-center '>
             <TableHead className='col-span-5'>
               상품
             </TableHead>
@@ -31,7 +32,7 @@ export default function ProgressAds() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow className='grid grid-cols-12'>
+          <TableRow className='grid grid-cols-12 px-1'>
             <TableCell className='font-medium'>
               <img
                 src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
@@ -40,7 +41,12 @@ export default function ProgressAds() {
               />
             </TableCell>
             <TableCell className='col-span-4'>
-              [강남]서도촌 맛있는 돼지갈비/양념갈비
+              <Link
+                to='/product/1234'
+                className='hover:underline underline-offset-2'
+              >
+                [강남]서도촌 맛있는 돼지갈비/양념갈비
+              </Link>
             </TableCell>
 
             <TableCell className='col-span-2 justify-center'>

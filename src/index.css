@@ -93,3 +93,9 @@ body {
 li {
   list-style: none;
 }
+
+@media (max-width: 640px) {
+  th {
+    font-size: 12px;
+  }
+}

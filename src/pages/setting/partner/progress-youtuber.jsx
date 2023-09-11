@@ -8,33 +8,33 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { cn } from '@/utils/lib'
-import { Card } from '../../components/ui/card'
+import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 
-export default function WaitingAds() {
+export default function ProgressYoutuber() {
   return (
     <Card className='flex justify-center'>
       <Table>
         <TableHeader>
           <TableRow className='grid grid-cols-12 items-center'>
             <TableHead className='col-span-5'>
-              상품
+              유튜버
             </TableHead>
 
             <TableHead className='justify-center col-span-2'>
-              상태
+              구독자
             </TableHead>
             <TableHead className='text-right col-span-3 justify-center'>
-              포인트
+              뷰 수
             </TableHead>
+            <TableHead className='text-right col-span-3 justify-center'></TableHead>
             <TableHead className='text-center col-span-2 justify-center'>
-              신청일
+              링크
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow className='grid grid-cols-12 px-1'>
+          <TableRow className='grid grid-cols-12 px-1 hover:cursor-pointer'>
             <TableCell className='font-medium'>
               <img
                 src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
@@ -51,7 +51,7 @@ export default function WaitingAds() {
               </Link>
             </TableCell>
             <TableCell className='justify-center col-span-2'>
-              확인중
+              7
             </TableCell>
             <TableCell className='col-span-3 justify-center'>
               500,000

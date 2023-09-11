@@ -54,7 +54,12 @@
     #5ffbe6
   );
 }
-
+.header {
+  z-index: 10;
+}
+.text-editor {
+  z-index: 1;
+}
 .gradient {
   top: 0rem;
   width: 30%;

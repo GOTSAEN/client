@@ -11,6 +11,7 @@ import {
 import { cn } from '@/utils/lib'
 import { Card } from '../../components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 export default function PastAds() {
   return (
     <Card className='flex justify-center'>
@@ -33,7 +34,7 @@ export default function PastAds() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow className='grid grid-cols-12'>
+          <TableRow className='grid grid-cols-12 px-1'>
             <TableCell className='font-medium'>
               <img
                 src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
@@ -42,7 +43,12 @@ export default function PastAds() {
               />
             </TableCell>
             <TableCell className='col-span-4'>
-              [강남]서도촌 맛있는 돼지갈비/양념갈비
+              <Link
+                to='/product/1234'
+                className='hover:underline underline-offset-2'
+              >
+                [강남]서도촌 맛있는 돼지갈비/양념갈비
+              </Link>
             </TableCell>
             <TableCell className='justify-center col-span-2'>
               완료

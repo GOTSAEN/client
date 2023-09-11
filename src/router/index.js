@@ -1,4 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom'
 import NotFound from '@pages/NotFound'
 import Home from '@pages/Home'
 import App from '@/App'
@@ -15,6 +14,8 @@ import ProgressAds from '@/pages/setting/progress-ads'
 import WaitingAds from '@/pages/setting/waiting-ads'
 import LogIn from '@/pages/LogIn'
 import SignUp from '@/pages/SignUp'
+import PartnerProgressAds from '@/pages/setting/partner/progress-ads'
+import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
 
 export default function Router() {
   return (
@@ -42,6 +43,14 @@ export default function Router() {
             <Route
               path='ads/waiting'
               element={<WaitingAds />}
+            />
+            <Route
+              path='ads/partner/progress'
+              element={<PartnerProgressAds />}
+            />
+            <Route
+              path='ads/partner/progress/campaign/:campaignId'
+              element={<ProgressYoutuber />}
             />
           </Route>
           <Route path='*' element={<NotFound />} />

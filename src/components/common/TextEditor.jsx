@@ -22,7 +22,7 @@ function TextEditor() {
   }
 
   return (
-    <div>
+    <div className='z-10'>
       <Editor
         editorState={editorState}
         editorClassName='text-editor'
