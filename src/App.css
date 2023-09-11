@@ -28,7 +28,53 @@
 .App-link {
   color: #61dafb;
 }
+.gradient,
+.gradient-2 {
+  position: absolute;
+  opacity: 0.2;
+  width: 30rem;
+  height: 10rem;
+  background-image: linear-gradient(
+    to bottom,
+    #f65db4,
+    #e270cc,
+    #cb81dd,
+    #b290e7,
+    #9c9ceb,
+    #87a9f4,
+    #73b4f8,
+    #63bff9,
+    #44d0fe,
+    #2ce0fc,
+    #3aeef4,
+    #5ffbe6
+  );
+}
 
+.gradient {
+  top: 0rem;
+  right: 20rem;
+  opacity: 0.15;
+}
+.gradient-2 {
+  top: 0;
+  right: -5rem;
+  background-image: linear-gradient(
+    to bottom,
+    #25d469,
+    #8cc541,
+    #bdb435,
+    #dda146,
+    #ec9162,
+    #f28874,
+    #f28288,
+    #eb809c,
+    #ea7ead,
+    #e47ebf,
+    #d981d2,
+    #c886e5
+  );
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
