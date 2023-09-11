@@ -24,15 +24,19 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.app {
+  width: 100vw;
+  overflow-x: hidden;
+}
 .App-link {
   color: #61dafb;
 }
 .gradient,
 .gradient-2 {
+  transform-origin: top left;
   position: absolute;
   opacity: 0.2;
-  width: 30rem;
+  width: 30%;
   height: 10rem;
   background-image: linear-gradient(
     to bottom,
@@ -53,12 +57,14 @@
 
 .gradient {
   top: 0rem;
-  right: 20rem;
+  width: 30%;
+  right: 20%;
   opacity: 0.15;
 }
 .gradient-2 {
   top: 0;
-  right: -5rem;
+  right: -20%;
+  overflow-x: hidden;
   background-image: linear-gradient(
     to bottom,
     #25d469,
