@@ -15,11 +15,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <div className='sticky top-0  bg-background z-10'>
+        <div className='gradient blur-2xl rotate-45'></div>
+        <div className='gradient-2 blur-2xl rotate-45'></div>
+        <div className='sticky top-0  bg-background/40 z-10'>
           <Header />
           <HorizontalMenuBar />
         </div>
-        <section className='w-full h- px-auto flex justify-center'>
+        <section className='w-full flex justify-center'>
           <main className='max-w-[1400px] w-full'>
             <Outlet />
           </main>

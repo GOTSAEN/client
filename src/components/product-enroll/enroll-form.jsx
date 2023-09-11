@@ -14,6 +14,7 @@ import { DatePicker } from '../common/DatePicker'
 import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '../ui/button'
+import ImageUploader from '../common/ImageUploader'
 
 export default function EnrollForm() {
   const [form, setForm] = useState({})
@@ -51,6 +52,7 @@ export default function EnrollForm() {
         </CardTitle>
         <Button>작성 완료</Button>
       </CardHeader>
+      <ImageUploader />
       <Input
         placeholder='상품명'
         name='productNm'
