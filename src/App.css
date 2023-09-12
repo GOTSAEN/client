@@ -34,7 +34,7 @@
   min-height: 100%;
 }
 .main {
-  height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
 }
 
 .App-link {
@@ -44,7 +44,7 @@
 .gradient-2 {
   transform-origin: top left;
   position: absolute;
-  opacity: 0.2;
+  opacity: 0.15;
   width: 30%;
   height: 10rem;
   background-image: linear-gradient(

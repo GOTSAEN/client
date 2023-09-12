@@ -15,9 +15,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <div className='gradient blur-2xl rotate-45 z-0'></div>
-        <div className='gradient-2 blur-2xl rotate-45 z-0'></div>
-        <div className='sticky top-0  bg-background/30 backdrop-blur-lg header'>
+        <div className='gradient blur-2xl rotate-45'></div>
+        <div className='gradient-2 blur-2xl rotate-45'></div>
+        <div className='sticky top-0  bg-background/50 z-10 '>
           <Header />
           <HorizontalMenuBar />
         </div>
