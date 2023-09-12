@@ -15,17 +15,16 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <div className='gradient blur-2xl rotate-45'></div>
-        <div className='gradient-2 blur-2xl rotate-45'></div>
+        <div className='gradient blur-2xl rotate-45 z-0'></div>
+        <div className='gradient-2 blur-2xl rotate-45 z-0'></div>
         <div className='sticky top-0  bg-background/30 backdrop-blur-lg header'>
           <Header />
           <HorizontalMenuBar />
         </div>
-        <section className='w-full flex justify-center'>
-          <main className='max-w-[1400px] w-full'>
-            <Outlet />
-          </main>
-        </section>
+
+        <main className='max-w-[1400px] main'>
+          <Outlet />
+        </main>
       </DarkModeProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>

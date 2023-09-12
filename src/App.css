@@ -27,7 +27,16 @@
 .app {
   width: 100vw;
   overflow-x: hidden;
+  min-height: 100%;
 }
+
+#root {
+  min-height: 100%;
+}
+.main {
+  height: calc(100vh - 200px);
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -61,12 +70,14 @@
   z-index: 1;
 }
 .gradient {
+  z-index: 0;
   top: 0rem;
   width: 30%;
   right: 20%;
   opacity: 0.15;
 }
 .gradient-2 {
+  z-index: 0;
   top: 0;
   right: -20%;
   overflow-x: hidden;

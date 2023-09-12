@@ -12,17 +12,11 @@ import { cn } from '@/utils/lib'
 import { Card } from '../../components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import LocationLabel from '@/components/setting/location-label'
 export default function PastAds() {
   return (
     <>
-      <div className='flex items-end pb-4'>
-        <h4 className='text-xs text-muted-foreground'>
-          광고 관리 {'>'}
-        </h4>
-        <h1 className='text-xs font-semibold px-2'>
-          지난 광고
-        </h1>
-      </div>
+      <LocationLabel labels={['광고 관리', '지난 광고']} />
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>

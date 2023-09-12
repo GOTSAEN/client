@@ -1,5 +1,10 @@
 import React from 'react'
-import { SunMedium, Moon, UserCircle2 } from 'lucide-react'
+import {
+  SunMedium,
+  Moon,
+  UserCircle2,
+  Setting,
+} from 'lucide-react'
 import { useDarkMode } from '@/context/DarkModeContext'
 import { Button } from '@/components/ui/button'
 import ProductDropDownMenu from '@/components/header/manage-product'
@@ -25,9 +30,9 @@ export default function Header() {
           <ProductDropDownMenu />
           <button className='mx-3' onClick={toggleDarkMode}>
             {darkMode ? (
-              <SunMedium size={15} />
+              <SunMedium size={15} fill='#A73121' />
             ) : (
-              <Moon size={15} />
+              <Moon size={15} fill='#FFCC70' />
             )}
           </button>
         </div>
