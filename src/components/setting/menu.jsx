@@ -62,6 +62,52 @@ export default function Menu() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+
+            {/* 광고주 광고 관리 임시용 */}
+            <DropdownMenuLabel className='text-sm font-semibold px-2 py-2 w-full'>
+              광고 관리
+            </DropdownMenuLabel>
+            <NavigationMenuItem className='w-full'>
+              <Link
+                to='/setting/partner/ads/progress'
+                className='px-0'
+                legacyBehavior
+                passHref
+              >
+                <NavigationMenuLink
+                  className={navigation_styles}
+                >
+                  진행 광고
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem className='w-full'>
+              <Link
+                to='/setting/partner/ads/waiting'
+                legacyBehavior
+                passHref
+              >
+                <NavigationMenuLink
+                  className={navigation_styles}
+                >
+                  대기 광고
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem className='w-full'>
+              <Link
+                to='/setting/partner/ads/past'
+                legacyBehavior
+                passHref
+              >
+                <NavigationMenuLink
+                  className={navigation_styles}
+                >
+                  지난 광고
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            {/* 정보관리 */}
             <DropdownMenuLabel className='text-sm font-semibold px-2 py-2 w-full'>
               정보 관리
             </DropdownMenuLabel>

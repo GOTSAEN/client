@@ -9,6 +9,16 @@
 :root {
   font-family: 'Pretendard-Regular';
 }
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -88,4 +98,10 @@
 
 li {
   list-style: none;
+}
+
+@media (max-width: 640px) {
+  th {
+    font-size: 12px;
+  }
 }

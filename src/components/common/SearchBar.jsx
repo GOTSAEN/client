@@ -33,7 +33,7 @@ export default function SearchBar() {
           <Button
             type='submit'
             className={cn(
-              'w-fit h-fit px-2 rounded-full hidden max-sm:block'
+              'w-fit h-fit px-2 rounded hidden max-sm:block'
             )}
             variant='outline'
           >

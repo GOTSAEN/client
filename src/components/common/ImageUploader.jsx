@@ -42,7 +42,7 @@ export default function ImageUploader() {
             </button>
             &nbsp;
             <Button
-              variant='outline'
+              variant='secondary'
               onClick={onImageRemoveAll}
             >
               전체 삭제
