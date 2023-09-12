@@ -52,7 +52,7 @@ export default function EnrollForm() {
         </CardTitle>
         <Button>작성 완료</Button>
       </CardHeader>
-      <ImageUploader />
+
       <Input
         placeholder='상품명'
         name='productNm'
@@ -99,6 +99,7 @@ export default function EnrollForm() {
         </SelectContent>
       </Select>
       <Input placeholder='제공 내용 50자 내외' />
+      <ImageUploader />
       <div className='py-2'>
         <Label
           htmlFor='explain'

@@ -44,13 +44,24 @@ export default function Router() {
               path='ads/waiting'
               element={<WaitingAds />}
             />
+          </Route>
+          <Route
+            path='/setting/partner'
+            element={<Setting />}
+          >
             <Route
-              path='ads/partner/progress'
+              path='ads/progress'
               element={<PartnerProgressAds />}
             />
             <Route
-              path='ads/partner/progress/campaign/:campaignId'
+              path='ads/progress/campaign/:campaignId'
               element={<ProgressYoutuber />}
+            />
+
+            <Route path='ads/past' element={<PastAds />} />
+            <Route
+              path='ads/waiting'
+              element={<WaitingAds />}
             />
           </Route>
           <Route path='*' element={<NotFound />} />
