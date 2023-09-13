@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-.pem
+
+youad.store+5-key.pem
+youad.store+5.pem
 
 # dependencies
 /node_modules
