@@ -2,7 +2,7 @@
   "name": "genius-cli",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gotsaen.github.io/client",
+  "homepage": "https://yo/",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
