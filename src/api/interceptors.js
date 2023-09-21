@@ -1,5 +1,3 @@
-import { AxiosInstance } from 'axios'
-import { logout } from './auth'
 export function setInterceptors(instance) {
   // Add a request interceptor
   instance.interceptors.request.use(
@@ -25,7 +23,8 @@ export function setInterceptors(instance) {
         data.code === 101 ||
         error.response?.status === 403
       ) {
-        logout()
+        // logout()
+        console.log('로그아웃')
       } else if (data.code === 205) {
         console.log('bad-request')
       }

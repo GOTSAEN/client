@@ -11,8 +11,8 @@ import {
 import { cn } from '@/utils/lib'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { fetchCategories } from '@/api/menu/menu'
 import SearchBar from '@/components/common/SearchBar'
+import { fetchCategories } from '@/api/categories'
 
 export default function HorizontalMenuBar() {
   const {

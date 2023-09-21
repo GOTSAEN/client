@@ -75,11 +75,13 @@
   width: 30%;
   right: 0%;
   opacity: 0.15;
+  border-radius: 40%;
 }
 .gradient-2 {
   z-index: 0;
   bottom: 10%;
   left: 20%;
+  border-radius: 50%;
   overflow-x: hidden;
   background-image: linear-gradient(
     to bottom,

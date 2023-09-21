@@ -16,4 +16,5 @@ function createInstanceNoAuth(url) {
 }
 
 export const instance = createInstanceWithAuth('')
-export const example = createInstanceWithAuth('example')
+export const categories =
+  createInstanceWithAuth('categories')
