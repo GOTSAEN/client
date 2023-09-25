@@ -43,7 +43,7 @@
 .gradient,
 .gradient-2 {
   transform-origin: top left;
-  position: absolute;
+  position: fixed;
   opacity: 0.15;
   width: 30%;
   height: 20rem;
