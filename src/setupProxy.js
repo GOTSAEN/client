@@ -8,6 +8,9 @@ module.exports = function (app) {
       target:
         'http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080',
       changeOrigin: true,
+      pathRewrite: {
+        '^/api': '', // URL ^/api -> 공백 변경
+      },
     })
   )
 }
