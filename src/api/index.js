@@ -4,16 +4,17 @@ axios.defaults.withCredentials = true
 
 function createInstanceWithAuth(url) {
   const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}${url}`,
+    baseURL: `/api/${url}`,
   })
   return setInterceptors(instance)
 }
 
 function createInstanceNoAuth(url) {
   return axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}${url}`,
+    baseURL: `/${url}`,
   })
 }
 
 export const instance = createInstanceWithAuth('')
-export const example = createInstanceWithAuth('example')
+export const categories =
+  createInstanceWithAuth('categories')

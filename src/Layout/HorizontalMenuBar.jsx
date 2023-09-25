@@ -11,8 +11,8 @@ import {
 import { cn } from '@/utils/lib'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { fetchCategories } from '@/api/menu/menu'
 import SearchBar from '@/components/common/SearchBar'
+import { fetchCategories } from '@/api/categories'
 
 export default function HorizontalMenuBar() {
   const {
@@ -35,11 +35,11 @@ export default function HorizontalMenuBar() {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className='grid w-[400px] gap-3 p-4 lg:w-[600px] lg:grid-cols-3 md:w-[500px] md:grid-cols-2'>
-                  {categories?.map((component) => (
+                  {categories?.map((category) => (
                     <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.href}
+                      key={category.categoryId}
+                      title={category.categoryName}
+                      href={category.categoryName}
                     ></ListItem>
                   ))}
                 </ul>
