@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
-import { Form, FormField, FormItem } from '../ui/form'
 import {
   Select,
   SelectContent,
@@ -15,109 +14,146 @@ import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '../ui/button'
 import ImageUploader from '../common/ImageUploader'
+import { useQuery } from 'react-query'
+import { fetchCategories } from '@/api/categories'
+import { newAds } from '@/api/ads'
 
 export default function EnrollForm() {
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState({
+    productName: '',
+    numberOfRecruit: 0,
+    startDate: '',
+    endDate: '',
+    category: '',
+    offer: '',
+    productDescription: '',
+    precaution: '',
+  })
 
-  const categories = [
-    { id: 14, name: '맛집' },
-    { id: 80, name: '뷰티' },
-    { id: 29, name: '전자기기' },
-    { id: 13, name: '기타' },
-  ]
+  const {
+    isLoading,
+    data: categories,
+    error,
+  } = useQuery(
+    ['categories'],
+    async () => await fetchCategories().then((res) => res),
+    { staleTime: 1000 * 60 * 24 }
+  )
 
   const handleChange = (e) => {
-    console.log(e)
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
-    console.log(form)
   }
 
   const handleDataChange = (name, value) => {
     setForm({ ...form, [name]: value })
-    console.log(form)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    newAds(form)
   }
 
   return (
-    <Card
-      className={cn('p-4 flex flex-col gap-2 border-0')}
-    >
-      <CardHeader
-        className={cn(
-          'px-1 flex-row items-end justify-between'
-        )}
+    <form onSubmit={handleSubmit}>
+      <Card
+        className={cn('p-4 flex flex-col gap-2 border-0')}
       >
-        <CardTitle className={cn('text-lg')}>
-          상품 등록
-        </CardTitle>
-        <Button>작성 완료</Button>
-      </CardHeader>
+        <CardHeader
+          className={cn(
+            'px-1 flex-row items-end justify-between'
+          )}
+        >
+          <CardTitle className={cn('text-lg')}>
+            상품 등록
+          </CardTitle>
+          <Button>작성 완료</Button>
+        </CardHeader>
 
-      <Input
-        placeholder='상품명'
-        name='productNm'
-        value={form.productNm}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder='모집인원'
-        type='number'
-        name='amount'
-        value={form.amount}
-      />
-      <div className='flex gap-2'>
-        <DatePicker
-          placeholder='시작날짜'
-          name='startDt'
-          value={form.startDt}
-          onChange={handleDataChange}
+        <Input
+          placeholder='상품명'
+          name='productName'
+          value={form.productName}
+          onChange={handleChange}
         />
-        <DatePicker
-          placeholder='종료날짜'
-          name='endDt'
-          value={form.endDt}
-          onChange={handleDataChange}
+        <Input
+          placeholder='모집인원'
+          type='number'
+          name='numberOfRecruit'
+          onChange={handleChange}
+          value={form.numberOfRecruit}
         />
-      </div>
-      <Select
-        onValueChange={(val) =>
-          handleDataChange('category', val)
-        }
-      >
-        <SelectTrigger className='w-[180px]'>
-          <SelectValue placeholder='-- 카테고리 --' />
-        </SelectTrigger>
-        <SelectContent>
-          {categories.map((category) => (
-            <SelectItem
-              value={category.name}
-              key={category.id}
-            >
-              {category.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Input placeholder='제공 내용 50자 내외' />
-      <ImageUploader />
-      <div className='py-2'>
-        <Label
-          htmlFor='explain'
-          className={cn('text-md my-2 block')}
+        <div className='flex gap-2'>
+          <DatePicker
+            placeholder='시작날짜'
+            name='startDate'
+            value={form.startDate}
+            onChange={handleDataChange}
+          />
+          <DatePicker
+            placeholder='종료날짜'
+            name='endDate'
+            value={form.endDate}
+            onChange={handleDataChange}
+          />
+        </div>
+        <Select
+          onValueChange={(val) =>
+            handleDataChange('category', val)
+          }
         >
-          🎁상품 설명
-        </Label>
-        <TextEditor />
-      </div>
-      <div className='py-2'>
-        <Label
-          htmlFor='explain'
-          className={cn('text-md my-2 block')}
-        >
-          ✅ 주의 사항
-        </Label>
-        <TextEditor />
-      </div>
-    </Card>
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue placeholder='-- 카테고리 --' />
+          </SelectTrigger>
+          <SelectContent>
+            {categories &&
+              categories.map(
+                ({ categoryName, categoryId }) => (
+                  <SelectItem
+                    value={categoryName}
+                    key={categoryId}
+                  >
+                    {categoryName}
+                  </SelectItem>
+                )
+              )}
+          </SelectContent>
+        </Select>
+        <Input
+          placeholder='제공 내용 50자 내외'
+          type='text'
+          name='offer'
+          value={form.offer}
+          onChange={handleChange}
+        />
+        <ImageUploader />
+        <div className='py-2'>
+          <Label
+            htmlFor='explain'
+            className={cn('text-md my-2 block')}
+          >
+            🎁상품 설명
+          </Label>
+          <TextEditor
+            name='productDescription'
+            value={form.productDescription}
+            onChange={handleDataChange}
+          />
+        </div>
+        <div className='py-2'>
+          <Label
+            htmlFor='explain'
+            className={cn('text-md my-2 block')}
+          >
+            ✅ 주의 사항
+          </Label>
+          <TextEditor
+            name='precaution'
+            value={form.precaution}
+            onChange={handleDataChange}
+          />
+        </div>
+      </Card>
+    </form>
   )
 }

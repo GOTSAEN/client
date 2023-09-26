@@ -18,3 +18,4 @@ function createInstanceNoAuth(url) {
 export const instance = createInstanceWithAuth('')
 export const categories =
   createInstanceWithAuth('categories')
+export const ads = createInstanceWithAuth('advertisement')
