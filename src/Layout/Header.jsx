@@ -1,14 +1,10 @@
 import React from 'react'
-import {
-  SunMedium,
-  Moon,
-  UserCircle2,
-  Setting,
-} from 'lucide-react'
+import { SunMedium, Moon } from 'lucide-react'
 import { useDarkMode } from '@/context/DarkModeContext'
 import { Button } from '@/components/ui/button'
 import ProductDropDownMenu from '@/components/header/manage-product'
 import { Link } from 'react-router-dom'
+import UserDropDownMenu from '@/components/header/manage-user'
 
 export default function Header() {
   const { darkMode, toggleDarkMode } = useDarkMode()
@@ -22,9 +18,7 @@ export default function Header() {
         </h1>
         <div className='absolute index-y-0 right-0 flex'>
           <div className='px-2'>
-            <Link to='/login'>
-              <UserCircle2 size={15} />
-            </Link>
+            <UserDropDownMenu />
           </div>
 
           <ProductDropDownMenu />

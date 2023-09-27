@@ -25,7 +25,7 @@ export default function HorizontalMenuBar() {
     { staleTime: 1000 * 60 * 24 }
   )
   return (
-    <nav className='flex px-2 border-b-[1px] justify-center py-2'>
+    <nav className='flex px-2 border-b-[1px] justify-center py-2 '>
       <div className='flex max-w-[1400px] w-full justify-between'>
         <NavigationMenu>
           <NavigationMenuList>

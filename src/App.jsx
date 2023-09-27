@@ -22,7 +22,7 @@ function App() {
           <HorizontalMenuBar />
         </div>
 
-        <main className='max-w-[1400px] grow mx-auto z-10'>
+        <main className='max-w-[1400px] grow mx-auto '>
           <Outlet />
         </main>
       </DarkModeProvider>

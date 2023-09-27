@@ -15,9 +15,11 @@ import {
 } from '@/components/ui/tabs'
 import { cn } from '@/utils/lib'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { saveUserSession } from '@/service/login-auth'
 
 export default function LogIn() {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -30,14 +32,14 @@ export default function LogIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login(form).then((res) => console.log(res))
+    login(form).then((res) => {
+      saveUserSession(res.headers)
+      navigate('/')
+    })
   }
   return (
-    <div className='h-full '>
-      <Tabs
-        defaultValue='account'
-        className='w-[450px] x-20 mt-20'
-      >
+    <div className=''>
+      <Tabs defaultValue='account' className='w-[450px]'>
         <TabsList className={cn('grid w-full grid-cols-2')}>
           <TabsTrigger value='account'>유튜버</TabsTrigger>
           <TabsTrigger value='password'>광고주</TabsTrigger>
