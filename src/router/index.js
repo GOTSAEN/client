@@ -12,6 +12,7 @@ import LogIn from "@/pages/LogIn";
 import SignUp from "@/pages/SignUp";
 import PartnerProgressAds from "@/pages/setting/partner/progress-ads";
 import ProgressYoutuber from "@/pages/setting/partner/progress-youtuber";
+import PwChange from "@/pages/setting/PwChange";
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
             <Route index path="ads/progress" element={<ProgressAds />} />
             <Route path="ads/past" element={<PastAds />} />
             <Route path="ads/waiting" element={<WaitingAds />} />
+            <Route path="pwchange" element={<PwChange />} />
           </Route>
           <Route path="/setting/partner" element={<Setting />}>
             <Route path="ads/progress" element={<PartnerProgressAds />} />
