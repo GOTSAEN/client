@@ -31,10 +31,9 @@
 }
 
 #root {
-  min-height: 100%;
-}
-.main {
-  min-height: calc(100vh - 200px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-link {
@@ -47,6 +46,7 @@
   opacity: 0.15;
   width: 30%;
   height: 20rem;
+  z-index: 0;
   background-image: linear-gradient(
     to bottom,
     #f65db4,
@@ -73,15 +73,16 @@
   z-index: 0;
   top: 0rem;
   width: 30%;
-  right: 0%;
+  height: 400px;
+  right: -20%;
   opacity: 0.15;
-  border-radius: 40%;
+  border-radius: 100%;
 }
 .gradient-2 {
   z-index: 0;
   bottom: 10%;
   left: 20%;
-  border-radius: 50%;
+  border-radius: 100%;
   overflow-x: hidden;
   background-image: linear-gradient(
     to bottom,
@@ -99,6 +100,7 @@
     #c886e5
   );
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

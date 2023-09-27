@@ -19,3 +19,4 @@ export const instance = createInstanceWithAuth('')
 export const categories =
   createInstanceWithAuth('categories')
 export const ads = createInstanceWithAuth('advertisement')
+export const auth = createInstanceWithAuth('auth')

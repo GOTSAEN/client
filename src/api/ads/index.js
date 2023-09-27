@@ -9,6 +9,7 @@ export const fetchAds = () => {
 }
 
 export const newAds = (data) => {
+  console.log({ requestBody: data })
   ads
     .post('', { requestBody: data })
     .then((res) => console.log(res))

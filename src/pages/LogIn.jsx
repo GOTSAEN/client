@@ -1,3 +1,4 @@
+import { login } from '@/api/auth'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -13,15 +14,29 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs'
 import { cn } from '@/utils/lib'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function LogIn() {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login(form).then((res) => console.log(res))
+  }
   return (
-    <div className='flex justify-center items-center h-full z-20'>
+    <div className='h-full '>
       <Tabs
         defaultValue='account'
-        className='w-[450px] x-20'
+        className='w-[450px] x-20 mt-20'
       >
         <TabsList className={cn('grid w-full grid-cols-2')}>
           <TabsTrigger value='account'>유튜버</TabsTrigger>
@@ -40,35 +55,40 @@ export default function LogIn() {
         </TabsContent>
 
         <TabsContent value='password'>
-          <Card
-            className={cn(
-              'flex flex-col justify-center items-center min-h-[300px] px-10 gap-3'
-            )}
-          >
-            <div className='space-y-1 w-full'>
-              <Input
-                id='current'
-                type='id'
-                placeholder='아이디'
-              />
-            </div>
-            <div className='space-y-1 w-full'>
-              <Input
-                id='new'
-                type='password'
-                placeholder='비밀번호'
-              />
-            </div>
-            <Button className='w-full'>
-              <Link to='/'>로그인</Link>
-            </Button>
-            <CardDescription className='mt-2'>
-              - or -
-            </CardDescription>
-            <CardDescription className='text-lg'>
-              <Link to='/signup'>회원가입</Link>
-            </CardDescription>
-          </Card>
+          <form onSubmit={handleSubmit}>
+            <Card
+              className={cn(
+                'flex flex-col justify-center items-center min-h-[300px] px-10 gap-3'
+              )}
+            >
+              <div className='space-y-1 w-full'>
+                <Input
+                  id='current'
+                  type='id'
+                  name='email'
+                  placeholder='아이디'
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='space-y-1 w-full'>
+                <Input
+                  id='new'
+                  type='password'
+                  name='password'
+                  onChange={handleChange}
+                  placeholder='비밀번호'
+                />
+              </div>
+              <Button className='w-full'>로그인</Button>
+
+              <CardDescription className='mt-2'>
+                - or -
+              </CardDescription>
+              <CardDescription className='text-lg'>
+                <Link to='/signup'>회원가입</Link>
+              </CardDescription>
+            </Card>
+          </form>
         </TabsContent>
       </Tabs>
     </div>
