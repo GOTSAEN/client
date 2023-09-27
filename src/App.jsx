@@ -15,14 +15,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <div className='gradient blur-3xl rotate-45'></div>
-        <div className='gradient-2 blur-3xl rotate-45'></div>
-        <div className='sticky top-0  bg-background/50 z-10 '>
+        <div className='gradient blur-3xl rotate-45 z-0'></div>
+        <div className='gradient-2 blur-3xl rotate-45 z-0'></div>
+        <div className='sticky top-0  bg-background/50'>
           <Header />
           <HorizontalMenuBar />
         </div>
 
-        <main className='max-w-[1400px] main'>
+        <main className='max-w-[1400px] grow mx-auto '>
           <Outlet />
         </main>
       </DarkModeProvider>
