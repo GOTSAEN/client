@@ -1,7 +1,6 @@
 import React from 'react'
 import { SunMedium, Moon } from 'lucide-react'
 import { useDarkMode } from '@/context/DarkModeContext'
-import { Button } from '@/components/ui/button'
 import ProductDropDownMenu from '@/components/header/manage-product'
 import { Link } from 'react-router-dom'
 import UserDropDownMenu from '@/components/header/manage-user'

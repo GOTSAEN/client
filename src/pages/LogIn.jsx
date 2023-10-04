@@ -34,6 +34,7 @@ export default function LogIn() {
     e.preventDefault()
     login(form).then((res) => {
       saveUserSession(res.headers)
+
       navigate('/')
     })
   }
