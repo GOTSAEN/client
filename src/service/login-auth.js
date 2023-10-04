@@ -4,18 +4,29 @@ export async function saveUserSession({
   authorization,
   refresh,
 }) {
-  window.localStorage.setItem(
+  const p1 = window.localStorage.setItem(
     'Authorization',
     authorization
   )
-  window.localStorage.setItem('Refresh', refresh)
+  const p2 = window.localStorage.setItem('Refresh', refresh)
+  Promise.all([p1, p2]).then(() => {
+    saveUserInfo()
+  })
+}
+
+async function saveUserInfo() {
   const user = await getMember()
-  console.log(user.email)
-  window.localStorage.setItem('User', user.email)
+  window.localStorage.setItem('Email', user.email)
+}
+
+export function getUser() {
+  return {
+    email: localStorage.getItem('Email'),
+  }
 }
 
 export function deleteUserSession() {
   localStorage.removeItem('Authorization')
   localStorage.removeItem('Refresh')
-  localStorage.removeItem('User')
+  localStorage.removeItem('Email')
 }

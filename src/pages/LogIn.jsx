@@ -1,4 +1,4 @@
-import { login } from '@/api/auth'
+import { signIn } from '@/api/auth'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -17,9 +17,11 @@ import { cn } from '@/utils/lib'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveUserSession } from '@/service/login-auth'
+import { useAuth } from '@/context/AuthContext'
 
 export default function LogIn() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -32,11 +34,14 @@ export default function LogIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login(form).then((res) => {
-      saveUserSession(res.headers)
-
-      navigate('/')
-    })
+    signIn(form)
+      .then((res) => {
+        saveUserSession(res.headers)
+      })
+      .then(() => {
+        login()
+        navigate('/')
+      })
   }
   return (
     <div className=''>

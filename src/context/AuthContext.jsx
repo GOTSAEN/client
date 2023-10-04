@@ -1,4 +1,7 @@
-import { deleteUserSession } from '@/service/login-auth'
+import {
+  deleteUserSession,
+  getUser,
+} from '@/service/login-auth'
 import {
   createContext,
   useContext,
@@ -13,10 +16,19 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     deleteUserSession()
+    setUser(undefined)
   }
 
+  const login = () => {
+    setUser(getUser())
+  }
+
+  useEffect(() => {
+    login()
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, logout, login }}>
       {children}
     </AuthContext.Provider>
   )

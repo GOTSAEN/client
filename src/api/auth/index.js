@@ -1,6 +1,6 @@
 import { auth } from '..'
 
-export const login = (data) => {
+export const signIn = (data) => {
   return auth
     .post('/login', data)
     .then((res) => res)

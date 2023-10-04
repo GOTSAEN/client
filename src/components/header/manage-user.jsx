@@ -12,14 +12,16 @@ import { cn } from '@/utils/lib'
 import { UserCircle2, LogOut } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 export default function UserDropDownMenu() {
-  const { logout } = useAuth()
+  const { logout, user } = useAuth()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn('px-2')}>
+      <DropdownMenuTrigger className={cn('flex')}>
         <UserCircle2 size={15} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>민준기 님</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {user.email?.split('@')[0]} 님
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link to='/setting/ads/waiting'>회원정보</Link>
