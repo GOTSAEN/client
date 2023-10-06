@@ -1,33 +1,28 @@
 export function ApiResponse(response) {
+  console.log('응답 진입 : ', response)
   const status = response.status
   switch (status) {
     case 200:
-      return new Response({
-        status,
-        data: response.data ? response.data : '성공',
-      })
     case 201:
-      return new Response({})
-    case 401:
-      console.log('여기서 끝나')
-      return new Error({
-        status: 401,
-        data: '입력한 정보로 등록된 회원정보가 존재하지 않습니다',
-      })
-    default:
-      break
+      return response
   }
 }
 
 export function ErrorResponse(error) {
+  console.log('에러 진입 : ', error)
   const status = error.response.status
   switch (status) {
+    case 401:
+      throw new Error({
+        status,
+        message: '잘못된 로그인 정보입니다',
+      })
     case 409:
-      return new Error({
+      throw new Error({
         ...error.response.data,
       })
     default:
-      return new Error({
+      throw new Error({
         status: 500,
         message: '알수 없는 오류가 발생했습니다.',
       })

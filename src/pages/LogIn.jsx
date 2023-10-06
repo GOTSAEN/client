@@ -36,15 +36,13 @@ export default function LogIn() {
     e.preventDefault()
     signIn(form)
       .then((res) => {
-        console.log(res)
         saveUserSession(res.headers)
       })
       .then(() => {
-        console.log('???')
         login()
         navigate('/')
       })
-      .catch((error) => console.log(error))
+      .catch((e) => console.log(e))
   }
   return (
     <section className='h-full flex justify-center items-center'>
@@ -60,7 +58,12 @@ export default function LogIn() {
             )}
           >
             <Button className={cn('w-full')}>
-              <Link to='/'>유튜브 아이디로 로그인</Link>
+              <Link
+                to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'
+                target='blank'
+              >
+                유튜브 아이디로 로그인
+              </Link>
             </Button>
           </Card>
         </TabsContent>

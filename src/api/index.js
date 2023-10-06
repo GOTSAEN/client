@@ -1,13 +1,14 @@
 import axios, { AxiosInstance } from 'axios'
 import { setInterceptors } from './interceptors'
-axios.defaults.withCredentials = true
+import { getCookie } from '@/utils/cookie'
 
 function createInstanceWithAuth(url) {
   const instance = axios.create({
+    withCredentials: true,
     baseURL: `/api/${url}`,
     headers: {
-      Authorization: localStorage.getItem('Authorization'),
-      Refresh: localStorage.getItem('Refresh'),
+      Authorization: getCookie('Authorization'),
+      Refresh: getCookie('Refresh'),
     },
   })
   return setInterceptors(instance)
