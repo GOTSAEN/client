@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Gift, Settings } from 'lucide-react'
+import { Gift } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { cn } from '@/utils/lib'
 
@@ -15,7 +15,7 @@ export default function ProductDropDownMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={cn('px-2')}>
-        <Settings size={15} fill='#D8D9DA' />
+        <Gift size={15} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>광고상품 관리</DropdownMenuLabel>

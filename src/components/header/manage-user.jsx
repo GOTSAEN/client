@@ -10,27 +10,32 @@ import {
 import { Link } from 'react-router-dom'
 import { cn } from '@/utils/lib'
 import { UserCircle2, LogOut } from 'lucide-react'
+import { useAuth } from '@/context/AuthContext'
 export default function UserDropDownMenu() {
+  const { logout, user } = useAuth()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn('px-2')}>
+      <DropdownMenuTrigger className={cn('flex')}>
         <UserCircle2 size={15} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>민준기 님</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {user.email?.split('@')[0]} 님
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link to='/setting/ads/waiting'>회원정보</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link to='/setting/ads/past'>패스워드 변경</Link>
+          <Link to='/setting/pwchange'>패스워드 변경</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link to='/logout' className='flex items-center'>
-            <LogOut size={15} className='mr-2' />
-            로그아웃
-          </Link>
+        <DropdownMenuItem
+          onClick={logout}
+          className='cursor-pointer'
+        >
+          <LogOut size={15} className='mr-2' />
+          로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

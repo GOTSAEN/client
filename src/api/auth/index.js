@@ -1,8 +1,10 @@
 import { auth } from '..'
+import { ApiResponse, ErrorResponse } from '../response'
 
-export const login = (data) => {
+export const signIn = (data) => {
+  console.log('SignIn 함수 진입')
   return auth
     .post('/login', data)
-    .then((res) => res)
-    .catch((e) => e)
+    .then((res) => ApiResponse(res))
+    .catch((e) => ErrorResponse(e))
 }

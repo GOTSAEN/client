@@ -856,6 +856,7 @@
   border: 1px solid var(--text-editor-border);
   padding: 0 0.3rem;
   min-height: 200px;
+  background: var(--text-editor-background);
   border-radius: 4px;
 }
 .rdw-editor-toolbar {

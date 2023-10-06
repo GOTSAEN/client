@@ -1,14 +1,16 @@
-import React from 'react'
-import { SunMedium, Moon } from 'lucide-react'
+import React, { useEffect } from 'react'
 import { useDarkMode } from '@/context/DarkModeContext'
-import { Button } from '@/components/ui/button'
-import ProductDropDownMenu from '@/components/header/manage-product'
-import { Link } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
 import UserDropDownMenu from '@/components/header/manage-user'
+import ProductDropDownMenu from '@/components/header/manage-product'
+import { Link, useNavigate } from 'react-router-dom'
+import { SunMedium, Moon, UserCircle2 } from 'lucide-react'
 
 export default function Header() {
+  const navigate = useNavigate()
   const { darkMode, toggleDarkMode } = useDarkMode()
-
+  const { user } = useAuth()
+  useEffect(() => {}, [user])
   return (
     <header className='relative h-20 flex justify-center w-full items-center'>
       <div className='relative max-w-[1400px] w-fit flex grow justify-center items-center'>
@@ -18,7 +20,15 @@ export default function Header() {
         </h1>
         <div className='absolute index-y-0 right-0 flex'>
           <div className='px-2'>
-            <UserDropDownMenu />
+            {user?.email ? (
+              <UserDropDownMenu />
+            ) : (
+              <UserCircle2
+                size={15}
+                onClick={() => navigate('/login')}
+                className='cursor-pointer'
+              />
+            )}
           </div>
 
           <ProductDropDownMenu />

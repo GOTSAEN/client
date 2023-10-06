@@ -1,4 +1,4 @@
-import { login } from '@/api/auth'
+import { signIn } from '@/api/auth'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -17,9 +17,11 @@ import { cn } from '@/utils/lib'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveUserSession } from '@/service/login-auth'
+import { useAuth } from '@/context/AuthContext'
 
 export default function LogIn() {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -32,13 +34,18 @@ export default function LogIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login(form).then((res) => {
-      saveUserSession(res.headers)
-      navigate('/')
-    })
+    signIn(form)
+      .then((res) => {
+        saveUserSession(res.headers)
+      })
+      .then(() => {
+        login()
+        navigate('/')
+      })
+      .catch((e) => console.log(e))
   }
   return (
-    <div className=''>
+    <section className='h-full flex justify-center items-center'>
       <Tabs defaultValue='account' className='w-[450px]'>
         <TabsList className={cn('grid w-full grid-cols-2')}>
           <TabsTrigger value='account'>유튜버</TabsTrigger>
@@ -51,7 +58,12 @@ export default function LogIn() {
             )}
           >
             <Button className={cn('w-full')}>
-              <Link to='/'>유튜브 아이디로 로그인</Link>
+              <Link
+                to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'
+                target='blank'
+              >
+                유튜브 아이디로 로그인
+              </Link>
             </Button>
           </Card>
         </TabsContent>
@@ -93,6 +105,6 @@ export default function LogIn() {
           </form>
         </TabsContent>
       </Tabs>
-    </div>
+    </section>
   )
 }
