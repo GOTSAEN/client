@@ -10,7 +10,5 @@ export const fetchAds = () => {
 
 export const newAds = (data) => {
   console.log(data)
-  return ads
-    .post('', { requestBody: data })
-    .then((res) => console.log(res))
+  return ads.post('', data).then((res) => console.log(res))
 }

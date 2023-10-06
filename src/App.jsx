@@ -19,12 +19,11 @@ function App() {
         <AuthProvider>
           <div className='gradient blur-3xl rotate-45 z-0'></div>
           <div className='gradient-2 blur-3xl rotate-45 z-0'></div>
-          <div className='sticky top-0  bg-background/50'>
+          <div className='sticky top-0 z-20 bg-background/50'>
             <Header />
             <HorizontalMenuBar />
           </div>
-
-          <main className='max-w-[1400px] grow mx-auto '>
+          <main className='relative main w-full max-w-[1400px] z-10 mx-auto overflow-y-auto'>
             <Outlet />
           </main>
         </AuthProvider>

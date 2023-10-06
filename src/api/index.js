@@ -22,6 +22,6 @@ function createInstanceNoAuth(url) {
 export const instance = createInstanceWithAuth('')
 export const categories = createInstanceNoAuth('categories')
 export const ads = createInstanceWithAuth('advertisement')
-export const auth = createInstanceWithAuth('auth')
+export const auth = createInstanceNoAuth('auth')
 export const members = createInstanceNoAuth('members')
 export const authMembers = createInstanceWithAuth('members')

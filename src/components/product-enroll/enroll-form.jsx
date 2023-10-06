@@ -12,7 +12,7 @@ import { cn } from '@/utils/lib'
 import { DatePicker } from '../common/DatePicker'
 import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import ImageUploader from '../common/ImageUploader'
 import { useQuery } from 'react-query'
 import { fetchCategories } from '@/api/categories'
@@ -50,14 +50,14 @@ export default function EnrollForm() {
   }
 
   const handleSubmit = (e) => {
-    console.log('????')
     e.preventDefault()
+    console.log(form)
     newAds(form)
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card
+      <div
         className={cn('p-4 flex flex-col gap-2 border-0')}
       >
         <CardHeader
@@ -154,7 +154,7 @@ export default function EnrollForm() {
             onChange={handleDataChange}
           />
         </div>
-      </Card>
+      </div>
     </form>
   )
 }

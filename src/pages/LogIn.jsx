@@ -36,15 +36,18 @@ export default function LogIn() {
     e.preventDefault()
     signIn(form)
       .then((res) => {
+        console.log(res)
         saveUserSession(res.headers)
       })
       .then(() => {
+        console.log('???')
         login()
         navigate('/')
       })
+      .catch((error) => console.log(error))
   }
   return (
-    <div className=''>
+    <section className='h-full flex justify-center items-center'>
       <Tabs defaultValue='account' className='w-[450px]'>
         <TabsList className={cn('grid w-full grid-cols-2')}>
           <TabsTrigger value='account'>유튜버</TabsTrigger>
@@ -99,6 +102,6 @@ export default function LogIn() {
           </form>
         </TabsContent>
       </Tabs>
-    </div>
+    </section>
   )
 }

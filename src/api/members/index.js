@@ -1,7 +1,11 @@
 import { members, authMembers } from '..'
+import { ApiResponse, ErrorResponse } from '../response'
 
 export const newMember = (data) => {
-  return members.post('', data).then((res) => res)
+  return members
+    .post('', data)
+    .then((res) => ApiResponse(res))
+    .catch((e) => ErrorResponse(e))
 }
 
 export const getMember = () => {
