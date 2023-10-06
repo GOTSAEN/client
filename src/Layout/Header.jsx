@@ -10,8 +10,6 @@ export default function Header() {
   const navigate = useNavigate()
   const { darkMode, toggleDarkMode } = useDarkMode()
   const { user } = useAuth()
-  console.log(user)
-
   useEffect(() => {}, [user])
   return (
     <header className='relative h-20 flex justify-center w-full items-center'>

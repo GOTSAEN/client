@@ -2,8 +2,10 @@ export function setInterceptors(instance) {
   // Add a request interceptor
   instance.interceptors.request.use(
     function (config) {
-      // Do something before request is sent
-      // config.headers.Userid = store.state.userid;
+      config.headers.Authorization =
+        localStorage.getItem('Authorization')
+      config.headers.Refresh =
+        localStorage.getItem('Refresh')
       return config
     },
     function (error) {
