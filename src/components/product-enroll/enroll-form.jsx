@@ -17,11 +17,13 @@ import ImageUploader from '../common/ImageUploader'
 import { useQuery } from 'react-query'
 import { fetchCategories } from '@/api/categories'
 import { newAds } from '@/api/ads'
+import { useNavigate } from 'react-router-dom'
 
 export default function EnrollForm() {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     productName: '',
-    numberOfRecruit: 0,
+    numberOfRecruit: 1,
     startDate: '',
     endDate: '',
     category: '',
@@ -52,7 +54,11 @@ export default function EnrollForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(form)
-    newAds(form)
+    newAds(form).then((status) => {
+      if (status === 201) {
+        navigate('/setting/ads/enroll')
+      }
+    })
   }
 
   return (

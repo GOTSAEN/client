@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { cn } from '@/utils/lib'
-import { Card } from '../../components/ui/card'
+import { Card } from '../../../components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'

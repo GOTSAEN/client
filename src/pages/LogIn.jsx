@@ -32,17 +32,16 @@ export default function LogIn() {
     setForm({ ...form, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    signIn(form)
+    await signIn(form)
       .then((res) => {
         saveUserSession(res.headers)
       })
-      .then(() => {
-        login()
-        navigate('/')
-      })
       .catch((e) => console.log(e))
+    login()
+    console.log('로그인합니다')
+    navigate('/')
   }
   return (
     <section className='h-full flex justify-center items-center'>
@@ -82,6 +81,7 @@ export default function LogIn() {
                   name='email'
                   placeholder='아이디'
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className='space-y-1 w-full'>
@@ -91,6 +91,7 @@ export default function LogIn() {
                   name='password'
                   onChange={handleChange}
                   placeholder='비밀번호'
+                  required
                 />
               </div>
               <Button className='w-full'>로그인</Button>
