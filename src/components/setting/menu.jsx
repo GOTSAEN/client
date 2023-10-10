@@ -65,15 +65,10 @@ export default function Menu() {
             <DropdownMenuLabel className='text-sm font-semibold px-2 py-2 w-full'>
               정보 관리
             </DropdownMenuLabel>
-            <NavigationMenuItem className='w-full'>
-              <Link
-                to='/setting/ads/past'
-                legacyBehavior
-                passHref
-              >
-                <NavigationMenuLink
-                  className={navigation_styles}
-                >
+
+            <NavigationMenuItem className="w-full">
+              <Link to="/setting/profile" legacyBehavior passHref>
+                <NavigationMenuLink className={navigation_styles}>
                   내 정보
                 </NavigationMenuLink>
               </Link>

@@ -19,6 +19,8 @@ import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
 import PwChange from '@/pages/setting/PwChange'
 import ProtectedRoutes from '@/pages/ProtectedRoutes'
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
+import Profile from "@/pages/setting/profile";
+
 
 export default function Router() {
   return (
@@ -49,6 +51,11 @@ export default function Router() {
               </ProtectedRoutes>
             }
           >
+            <Route
+              index
+              path='profile'
+              element={<Profile />}
+            />
             <Route
               index
               path='ads/progress'
