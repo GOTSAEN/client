@@ -1,6 +1,7 @@
 export function ApiResponse(response) {
   console.log('응답 진입 : ', response)
   const status = response.status
+
   switch (status) {
     case 200:
     case 201:

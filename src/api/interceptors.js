@@ -1,3 +1,5 @@
+import { deleteUserSession } from '@/service/login-auth'
+
 export function setInterceptors(instance) {
   // Add a request interceptor
   instance.interceptors.request.use(
@@ -26,7 +28,7 @@ export function setInterceptors(instance) {
         error.response?.status === 403
       ) {
         // logout()
-        console.log('로그아웃')
+        deleteUserSession()
       } else if (data.code === 205) {
         console.log('bad-request')
       }

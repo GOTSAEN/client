@@ -12,7 +12,10 @@ import {
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState({
+    email: '',
+    auth: '',
+  })
 
   const logout = () => {
     deleteUserSession()

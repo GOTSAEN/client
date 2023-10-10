@@ -1,28 +1,22 @@
 import { getMember } from '@/api/members'
 
-export async function saveUserSession({
-  authorization,
-  refresh,
-}) {
-  const p1 = window.localStorage.setItem(
+export async function saveUserSession(
+  { authorization, refresh, usertype },
+  { email }
+) {
+  window.localStorage.setItem(
     'Authorization',
     authorization
   )
-  const p2 = window.localStorage.setItem('Refresh', refresh)
-  Promise.all([p1, p2]).then(() => {
-    saveUserInfo()
-  })
-}
-
-async function saveUserInfo() {
-  await getMember().then((res) => {
-    window.localStorage.setItem('Email', res.email)
-  })
+  window.localStorage.setItem('Refresh', refresh)
+  window.localStorage.setItem('User', usertype)
+  window.localStorage.setItem('Email', email)
 }
 
 export function getUser() {
   return {
     email: localStorage.getItem('Email'),
+    auth: localStorage.getItem('User'),
   }
 }
 

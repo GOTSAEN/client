@@ -9,6 +9,5 @@ export const fetchAds = () => {
 }
 
 export const newAds = (data) => {
-  console.log(data)
-  return ads.post('', data).then((res) => console.log(res))
+  return ads.post('', data).then((res) => res.status)
 }
