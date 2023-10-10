@@ -8,7 +8,7 @@ export default function ProtectedRoutes({ children }) {
   const session =
     window.localStorage.getItem('Authorization')
 
-  if (!(user?.auth === 'youtuber' && session)) {
+  if (!(session && user.email)) {
     return <Navigate to='/login' replace />
   }
 

@@ -19,8 +19,7 @@ import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
 import PwChange from '@/pages/setting/PwChange'
 import ProtectedRoutes from '@/pages/ProtectedRoutes'
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
-import Profile from "@/pages/setting/profile";
-
+import Profile from '@/pages/setting/profile'
 
 export default function Router() {
   return (
@@ -34,7 +33,6 @@ export default function Router() {
             path='/product/:id'
             element={<ProductDetail />}
           />
-
           <Route
             path='/product/create'
             element={
@@ -43,6 +41,7 @@ export default function Router() {
               </ProtectedAdminRoutes>
             }
           />
+          {/* 로그인 된 회원만 접근 가능  */}
           <Route
             path='/setting'
             element={
@@ -51,11 +50,7 @@ export default function Router() {
               </ProtectedRoutes>
             }
           >
-            <Route
-              index
-              path='profile'
-              element={<Profile />}
-            />
+            <Route path='profile' element={<Profile />} />
             <Route
               index
               path='ads/progress'
@@ -90,6 +85,7 @@ export default function Router() {
               path='ads/waiting'
               element={<WaitingAds />}
             />
+            <Route path='profile' element={Profile} />
           </Route>
 
           <Route path='*' element={<NotFound />} />

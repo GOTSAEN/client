@@ -24,7 +24,7 @@ export default function UserDropDownMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link to='/setting/ads/waiting'>회원정보</Link>
+          <Link to='/setting/profile'>회원정보</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link to='/setting/pwchange'>패스워드 변경</Link>

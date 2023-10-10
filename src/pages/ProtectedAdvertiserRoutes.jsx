@@ -7,8 +7,7 @@ export default function ProtectedAdminRoutes({ children }) {
   const { user } = useAuth()
   const session =
     window.localStorage.getItem('Authorization')
-
-  if (!user?.auth === 'advertisement' || !session) {
+  if (!(user?.auth === 'advertisement' && session)) {
     return <Navigate to='/login' replace />
   }
 
