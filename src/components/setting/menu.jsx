@@ -50,7 +50,7 @@ export default function Menu() {
               정보 관리
             </DropdownMenuLabel>
             <NavigationMenuItem className="w-full">
-              <Link to="/setting/ads/past" legacyBehavior passHref>
+              <Link to="/setting/profile" legacyBehavior passHref>
                 <NavigationMenuLink className={navigation_styles}>
                   내 정보
                 </NavigationMenuLink>
