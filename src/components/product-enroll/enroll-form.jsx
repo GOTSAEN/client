@@ -53,10 +53,9 @@ export default function EnrollForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(form)
     newAds(form).then((status) => {
       if (status === 201) {
-        navigate('/setting/ads/enroll')
+        navigate('/setting/partner/ads/enroll')
       }
     })
   }

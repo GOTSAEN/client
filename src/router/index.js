@@ -36,12 +36,11 @@ export default function Router() {
           <Route
             path='/product/create'
             element={
-              <ProtectedRoutes>
+              <ProtectedAdminRoutes>
                 <ProductEnroll />
-              </ProtectedRoutes>
+              </ProtectedAdminRoutes>
             }
           />
-
           <Route
             path='/setting'
             element={
