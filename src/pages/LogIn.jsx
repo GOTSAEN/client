@@ -36,11 +36,10 @@ export default function LogIn() {
     e.preventDefault()
     await signIn(form)
       .then((res) => {
-        saveUserSession(res.headers)
+        saveUserSession(res.headers, form)
       })
       .catch((e) => console.log(e))
     login()
-    console.log('로그인합니다')
     navigate('/')
   }
   return (

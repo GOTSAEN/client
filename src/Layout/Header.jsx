@@ -31,9 +31,7 @@ export default function Header() {
             )}
           </div>
 
-          {user?.email && user?.auth && (
-            <ProductDropDownMenu />
-          )}
+          {user?.auth && <ProductDropDownMenu />}
           <button className='mx-3' onClick={toggleDarkMode}>
             {darkMode ? (
               <SunMedium size={15} fill='#A73121' />
