@@ -15,11 +15,12 @@ import WaitingAds from '@/pages/setting/youtuber/waiting-ads'
 import LogIn from '@/pages/LogIn'
 import SignUp from '@/pages/SignUp'
 import PartnerProgressAds from '@/pages/setting/partner/progress-ads'
-import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
+import ProgressYoutuber from '@/pages/setting/partner/past-ads'
 import PwChange from '@/pages/setting/PwChange'
 import ProtectedRoutes from '@/pages/ProtectedRoutes'
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
 import Profile from '@/pages/setting/profile'
+import PartnerWaitingAds from '@/pages/setting/partner/wating-ads'
 
 export default function Router() {
   return (
@@ -63,6 +64,8 @@ export default function Router() {
             />
             <Route path='pwchange' element={<PwChange />} />
           </Route>
+
+          {/* 광고주의 광고 상품 관련 url */}
           <Route
             path='/setting/partner'
             element={
@@ -74,6 +77,10 @@ export default function Router() {
             <Route
               path='ads/progress'
               element={<PartnerProgressAds />}
+            />
+            <Route
+              path='ads/enroll'
+              element={<PartnerWaitingAds />}
             />
             <Route
               path='ads/progress/campaign/:campaignId'

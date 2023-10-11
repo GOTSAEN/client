@@ -9,6 +9,5 @@ export const newMember = (data) => {
 }
 
 export const getMember = () => {
-  console.log(authMembers)
   return authMembers.get('').then((res) => res.data)
 }
