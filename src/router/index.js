@@ -31,8 +31,18 @@ export default function Router() {
           <Route path='/login' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route
+            path='/product/update/campaign/:campaignId'
+            exact
+            element={
+              <ProtectedAdminRoutes>
+                <ProductEnroll />
+              </ProtectedAdminRoutes>
+            }
+          />
+          <Route
             path='/product/:id'
             element={<ProductDetail />}
+            exact
           />
           <Route
             path='/product/create'

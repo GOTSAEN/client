@@ -11,3 +11,11 @@ export const fetchAds = () => {
 export const newAds = (data) => {
   return ads.post('', data).then((res) => res.status)
 }
+
+export const fetchAdsById = (id) => {
+  const data = ads
+    .get(`/${id}`)
+    .then((res) => res.data)
+    .catch((e) => console.log(e))
+  return data
+}

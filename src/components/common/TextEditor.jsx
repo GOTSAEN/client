@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { EditorState, convertToRaw } from 'draft-js'
+import React, { useEffect, useState } from 'react'
+import {
+  ContentState,
+  EditorState,
+  convertToRaw,
+} from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 
-function TextEditor({ name, onChange }) {
+function TextEditor({ name, onChange, value }) {
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty()
   )
@@ -17,6 +21,16 @@ function TextEditor({ name, onChange }) {
       )
     )
   }
+
+  useEffect(() => {
+    if (value) {
+      setEditorState(
+        EditorState.createWithContent(
+          ContentState.createFromText(value)
+        )
+      )
+    }
+  }, [])
 
   return (
     <div className='z-10'>

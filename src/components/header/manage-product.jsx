@@ -25,13 +25,13 @@ export default function ProductDropDownMenu() {
         {user.auth === 'advertisement' && (
           <>
             <DropdownMenuItem>
-              <Link to='/setting/partner/ads/progress'>
-                진행 상품
+              <Link to='/setting/partner/ads/enroll'>
+                모집 상품
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link to='/setting/partner/ads/enroll'>
-                모집 상품
+              <Link to='/setting/partner/ads/progress'>
+                진행 상품
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
