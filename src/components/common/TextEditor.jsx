@@ -14,6 +14,7 @@ function TextEditor({ name, onChange, value }) {
 
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState)
+    console.log(newEditorState)
     onChange(
       name,
       draftToHtml(
@@ -24,13 +25,13 @@ function TextEditor({ name, onChange, value }) {
 
   useEffect(() => {
     if (value) {
-      setEditorState(
-        EditorState.createWithContent(
-          ContentState.createFromText(value)
-        )
+      const input = EditorState.createWithContent(
+        ContentState.createFromText(value)
       )
+      console.log(input)
+      // onEditorStateChange(input)
     }
-  }, [])
+  }, [value])
 
   return (
     <div className='z-10'>
