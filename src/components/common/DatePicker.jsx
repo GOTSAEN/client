@@ -19,7 +19,6 @@ export function DatePicker({
 }) {
   const [date, setDate] = useState()
   const handleDateChange = (selectedDate) => {
-    console.log(selectedDate)
     setDate(selectedDate)
     onChange(
       name,
@@ -33,17 +32,9 @@ export function DatePicker({
 
   useEffect(() => {
     if (value) {
-      setDate(new Date(value))
-      onChange(
-        name,
-        new Intl.DateTimeFormat('ko-KR')
-          .format(new Date(value))
-          .replaceAll(/ /g, '')
-          .replaceAll('.', '-')
-          .slice(0, -1)
-      )
+      handleDateChange(new Date(value))
     }
-  }, [])
+  }, [value])
   return (
     <Popover>
       <PopoverTrigger asChild>

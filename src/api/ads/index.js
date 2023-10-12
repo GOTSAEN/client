@@ -15,8 +15,8 @@ export const newAds = (data) => {
     .catch(() => new Response('Error', { status: 500 }))
 }
 
-export const fetchAdsById = (id) => {
-  const data = ads
+export const fetchAdsById = async (id) => {
+  const data = await ads
     .get(`/${id}`)
     .then((res) => res.data)
     .catch((e) => console.log(e))
