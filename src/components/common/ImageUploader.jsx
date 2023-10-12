@@ -29,10 +29,13 @@ export default function ImageUploader() {
           dragProps,
         }) => (
           // write your building UI
-          <div className='border rounded'>
+          <div className='border rounded bg-background'>
             <button
               style={isDragging ? { color: 'red' } : null}
-              onClick={onImageUpload}
+              onClick={(e) => {
+                e.preventDefault()
+                onImageUpload()
+              }}
               {...dragProps}
             >
               <h2 className='pt-8 '>
@@ -40,10 +43,12 @@ export default function ImageUploader() {
                 1장)
               </h2>
             </button>
-            &nbsp;
             <Button
               variant='secondary'
-              onClick={onImageRemoveAll}
+              onClick={(e) => {
+                e.preventDefault()
+                onImageRemoveAll()
+              }}
             >
               전체 삭제
             </Button>

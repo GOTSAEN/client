@@ -59,8 +59,10 @@ export default function EnrollForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     newAds(form).then((status) => {
       if (status === 201) {
+        console.log(status)
         navigate('/setting/partner/ads/enroll')
       }
     })
@@ -74,8 +76,8 @@ export default function EnrollForm() {
       })
       fetchAdsById(param.campaignId).then((res) => {
         setForm(res)
+        console.log(form)
       })
-      console.log(form)
     }
   }, [param])
 

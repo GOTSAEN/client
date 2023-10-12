@@ -11,7 +11,7 @@ export default function ProtectedAdminRoutes({ children }) {
   console.log(user)
   console.log(Boolean(session))
   if (!(user?.auth === 'advertisement' && session)) {
-    console.log('여기걸림')
+    logout()
     return <Navigate to='/login' replace />
   }
 

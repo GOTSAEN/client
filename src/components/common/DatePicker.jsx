@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 
@@ -11,14 +11,15 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-const options = {}
 export function DatePicker({
   placeholder,
   name,
+  value,
   onChange,
 }) {
   const [date, setDate] = useState()
   const handleDateChange = (selectedDate) => {
+    console.log(selectedDate)
     setDate(selectedDate)
     onChange(
       name,
@@ -29,6 +30,20 @@ export function DatePicker({
         .slice(0, -1)
     )
   }
+
+  useEffect(() => {
+    if (value) {
+      setDate(new Date(value))
+      onChange(
+        name,
+        new Intl.DateTimeFormat('ko-KR')
+          .format(new Date(value))
+          .replaceAll(/ /g, '')
+          .replaceAll('.', '-')
+          .slice(0, -1)
+      )
+    }
+  }, [])
   return (
     <Popover>
       <PopoverTrigger asChild>

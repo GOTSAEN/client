@@ -9,7 +9,10 @@ export const fetchAds = () => {
 }
 
 export const newAds = (data) => {
-  return ads.post('', data).then((res) => res.status)
+  return ads
+    .post('', data)
+    .then((res) => res.status)
+    .catch(() => new Response('Error', { status: 500 }))
 }
 
 export const fetchAdsById = (id) => {

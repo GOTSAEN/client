@@ -66,6 +66,7 @@ export default function PartnerWaitingAds() {
                 <TableRow
                   className='grid grid-cols-11 px-1 hover:cursor-pointer'
                   onClick={() => console.log('click')}
+                  key={ad.advertisementId}
                 >
                   <TableCell className='font-medium'>
                     <img
