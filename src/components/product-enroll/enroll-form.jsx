@@ -79,6 +79,7 @@ export default function EnrollForm() {
       })
       fetchAdsById(param.campaignId).then((res) => {
         setForm(res)
+        console.log(res)
       })
     }
   }, [param])
