@@ -37,6 +37,11 @@ export default function PartnerWaitingAds() {
     e.stopPropagation()
     navigate(`/product/update/campaign/${id}`)
   }
+
+  const handleMoveProduct = (e, id) => {
+    e.preventDefault()
+    navigate(`/product/${id}`)
+  }
   return (
     <>
       <LocationLabel labels={['광고 관리', '등록 광고']} />
@@ -68,7 +73,15 @@ export default function PartnerWaitingAds() {
                   onClick={() => console.log('click')}
                   key={ad.advertisementId}
                 >
-                  <TableCell className='font-medium'>
+                  <TableCell
+                    className='font-medium'
+                    onClick={(e) =>
+                      handleMoveProduct(
+                        e,
+                        ad.advertisementId
+                      )
+                    }
+                  >
                     <img
                       src={
                         ad.imageUrl
@@ -79,13 +92,18 @@ export default function PartnerWaitingAds() {
                       className='h-[50px] w-[50px] cover block rounded'
                     />
                   </TableCell>
-                  <TableCell className='col-span-3'>
-                    <Link
-                      to='/product/1234'
-                      className='hover:underline underline-offset-2'
-                    >
+                  <TableCell
+                    className='col-span-3'
+                    onClick={(e) =>
+                      handleMoveProduct(
+                        e,
+                        ad.advertisementId
+                      )
+                    }
+                  >
+                    <span className='hover:underline underline-offset-2'>
                       {ad.productName}
-                    </Link>
+                    </span>
                   </TableCell>
                   <TableCell className='justify-center col-span-2'>
                     {ad.category}

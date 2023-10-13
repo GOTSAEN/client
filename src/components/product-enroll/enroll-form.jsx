@@ -14,7 +14,7 @@ import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '@/components/ui/button'
 import ImageUploader from '../common/ImageUploader'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -57,12 +57,15 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
+  const queryClient = useQueryClient()
   const handleSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
     newAds(form).then((status) => {
       if (status === 201) {
-        console.log(status)
+        queryClient.invalidateQueries({
+          queryKey: ['partner', 'ads', 'waiting'],
+        })
         navigate('/setting/partner/ads/enroll')
       }
     })
@@ -127,6 +130,7 @@ export default function EnrollForm() {
           onValueChange={(val) =>
             handleDataChange('category', val)
           }
+          value={form.category}
         >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='-- 카테고리 --' />

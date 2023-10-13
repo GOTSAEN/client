@@ -24,42 +24,34 @@ export default function ProductDropDownMenu() {
         <DropdownMenuSeparator />
         {user.auth === 'advertisement' && (
           <>
-            <DropdownMenuItem>
-              <Link to='/setting/partner/ads/enroll'>
-                모집 상품
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link to='/setting/partner/ads/progress'>
-                진행 상품
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link to='/setting/partner/ads/past'>
-                지난 상품
-              </Link>
-            </DropdownMenuItem>
+            <Link to='/setting/partner/ads/enroll'>
+              <DropdownMenuItem>모집 광고</DropdownMenuItem>
+            </Link>
+            <Link to='/setting/partner/ads/progress'>
+              <DropdownMenuItem>진행 광고</DropdownMenuItem>
+            </Link>
+            <Link to='/setting/partner/ads/past'>
+              <DropdownMenuItem>종료 광고</DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link to='/product/create'>새 상품 등록</Link>
-            </DropdownMenuItem>
+            <Link to='/product/create'>
+              <DropdownMenuItem>
+                새 상품 등록
+              </DropdownMenuItem>
+            </Link>
           </>
         )}
         {user.auth === 'youtuber' && (
           <>
-            <DropdownMenuItem>
-              <Link to='/setting/ads/progress'>
-                진행 상품
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link to='/setting/ads/waiting'>
-                대기 상품
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link to='/setting/ads/past'>지난 상품</Link>
-            </DropdownMenuItem>
+            <Link to='/setting/ads/progress'>
+              <DropdownMenuItem>진행 상품</DropdownMenuItem>
+            </Link>
+            <Link to='/setting/ads/waiting'>
+              <DropdownMenuItem>대기 상품</DropdownMenuItem>
+            </Link>
+            <Link to='/setting/ads/past'>
+              <DropdownMenuItem>지난 상품</DropdownMenuItem>
+            </Link>
           </>
         )}
       </DropdownMenuContent>
