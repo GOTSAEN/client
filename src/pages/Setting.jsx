@@ -12,7 +12,7 @@ export default function Setting() {
 
   return (
     <section className='w-full h-full flex relative max-sm:flex-col'>
-      <div className='max-sm:hidden'>
+      <div className='max-sm:hidden h-full'>
         <Menu />
       </div>
       <MenuBar />
