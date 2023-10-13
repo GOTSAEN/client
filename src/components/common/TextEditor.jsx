@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import { EditorState, convertToRaw } from 'draft-js'
+import React, { useEffect, useState } from 'react'
+import {
+  ContentState,
+  EditorState,
+  convertToRaw,
+} from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import draftToHtml from 'draftjs-to-html'
 
-function TextEditor({ name, onChange }) {
+function TextEditor({ name, onChange, value }) {
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty()
   )
 
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState)
+    console.log(newEditorState)
     onChange(
       name,
       draftToHtml(
@@ -17,6 +22,16 @@ function TextEditor({ name, onChange }) {
       )
     )
   }
+
+  useEffect(() => {
+    if (value) {
+      const input = EditorState.createWithContent(
+        ContentState.createFromText(value)
+      )
+      console.log(input)
+      // onEditorStateChange(input)
+    }
+  }, [value])
 
   return (
     <div className='z-10'>
@@ -34,6 +49,13 @@ function TextEditor({ name, onChange }) {
           link: { inDropdown: true },
           history: { inDropdown: true },
         }}
+      />
+
+      <textarea
+        disabled
+        value={draftToHtml(
+          convertToRaw(editorState.getCurrentContent())
+        )}
       />
     </div>
   )

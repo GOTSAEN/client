@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Progress } from '@/components/ui/progress'
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import LocationLabel from '@/components/setting/location-label'
@@ -23,15 +24,18 @@ export default function PartnerProgressAds() {
               <TableHead className='col-span-5'>
                 상품
               </TableHead>
+              <TableHead className='justify-center col-span-1'>
+                카테고리
+              </TableHead>
 
               <TableHead className='justify-center col-span-2'>
                 유튜버 수
               </TableHead>
-              <TableHead className='text-right col-span-3 justify-center'>
-                총 예산
+              <TableHead className='text-right col-span-1 justify-center'>
+                진행률
               </TableHead>
               <TableHead className='text-center col-span-2 justify-center'>
-                마감일
+                종료일
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -53,19 +57,20 @@ export default function PartnerProgressAds() {
                     [강남]서도촌 맛있는 돼지갈비/양념갈비
                   </Link>
                 </TableCell>
-                <TableCell className='justify-center col-span-2'>
-                  7
+                <TableCell className='justify-center col-span-1'>
+                  맛집
                 </TableCell>
-                <TableCell className='col-span-3 justify-center'>
-                  500,000
+                <TableCell className='justify-center col-span-2'>
+                  3
+                </TableCell>
+                <TableCell className='col-span-1 justify-center'>
+                  <Progress value={30} className='w-full' />
                 </TableCell>
                 <TableCell className='text-right right col-span-2 justify-center'>
-                  <a
-                    target='blank'
-                    href='https://www.youtube.com/watch?v=TRauMX-NUYY&ab_channel=TheCHOOM%28%EB%8D%94%EC%B6%A4%29'
-                  >
-                    2023-09-08
-                  </a>
+                  2023-10-22
+                </TableCell>
+                <TableCell className='text-right right col-span-1 justify-center'>
+                  D-13
                 </TableCell>
               </TableRow>
             </Link>

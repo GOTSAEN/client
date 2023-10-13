@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import {
@@ -14,13 +14,15 @@ import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '@/components/ui/button'
 import ImageUploader from '../common/ImageUploader'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { fetchCategories } from '@/api/categories'
-import { newAds } from '@/api/ads'
-import { useNavigate } from 'react-router-dom'
+import { fetchAdsById, newAds } from '@/api/ads'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function EnrollForm() {
   const navigate = useNavigate()
+  const param = useParams()
+
   const [form, setForm] = useState({
     productName: '',
     numberOfRecruit: 1,
@@ -30,6 +32,10 @@ export default function EnrollForm() {
     offer: '',
     productDescription: '',
     precaution: '',
+  })
+  const [enrollForm, setEnrollForm] = useState({
+    mainTitle: '새 상품 등록',
+    button: '작성 완료',
   })
 
   const {
@@ -51,14 +57,32 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
+  const queryClient = useQueryClient()
   const handleSubmit = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     newAds(form).then((status) => {
       if (status === 201) {
+        queryClient.invalidateQueries({
+          queryKey: ['partner', 'ads', 'waiting'],
+        })
         navigate('/setting/partner/ads/enroll')
       }
     })
   }
+
+  useEffect(() => {
+    if (param.campaignId) {
+      setEnrollForm({
+        mainTitle: '정보 수정',
+        button: '수정 완료',
+      })
+      fetchAdsById(param.campaignId).then((res) => {
+        setForm(res)
+        console.log(res)
+      })
+    }
+  }, [param])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -71,9 +95,9 @@ export default function EnrollForm() {
           )}
         >
           <CardTitle className={cn('text-lg')}>
-            상품 등록
+            {enrollForm.mainTitle}
           </CardTitle>
-          <Button>작성 완료</Button>
+          <Button>{enrollForm.button}</Button>
         </CardHeader>
 
         <Input
@@ -107,22 +131,21 @@ export default function EnrollForm() {
           onValueChange={(val) =>
             handleDataChange('category', val)
           }
+          value={form.category}
         >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='-- 카테고리 --' />
           </SelectTrigger>
           <SelectContent>
             {categories &&
-              categories.map(
-                ({ categoryName, categoryId }) => (
-                  <SelectItem
-                    value={categoryName}
-                    key={categoryId}
-                  >
-                    {categoryName}
-                  </SelectItem>
-                )
-              )}
+              categories.map(({ categoryName }) => (
+                <SelectItem
+                  value={categoryName}
+                  key={categoryName}
+                >
+                  {categoryName}
+                </SelectItem>
+              ))}
           </SelectContent>
         </Select>
         <Input

@@ -1,3 +1,5 @@
+import { deleteUserSession } from '@/service/login-auth'
+
 export function ApiResponse(response) {
   console.log('응답 진입 : ', response)
   const status = response.status
@@ -23,6 +25,8 @@ export function ErrorResponse(error) {
         ...error.response.data,
       })
     default:
+      console.log('들어옴')
+      deleteUserSession()
       throw new Error({
         status: 500,
         message: '알수 없는 오류가 발생했습니다.',

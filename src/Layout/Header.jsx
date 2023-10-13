@@ -9,8 +9,10 @@ import { SunMedium, Moon, UserCircle2 } from 'lucide-react'
 export default function Header() {
   const navigate = useNavigate()
   const { darkMode, toggleDarkMode } = useDarkMode()
-  const { user } = useAuth()
-  useEffect(() => {}, [user])
+  const { user, login } = useAuth()
+  useEffect(() => {
+    login()
+  }, [])
   return (
     <header className='relative h-20 flex justify-center w-full items-center'>
       <div className='relative max-w-[1400px] w-fit flex grow justify-center items-center'>
