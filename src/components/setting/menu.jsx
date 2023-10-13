@@ -17,7 +17,7 @@ export const navigation_styles =
 export default function Menu() {
   const { user } = useAuth()
   return (
-    <nav className='w-fit mt-4 pl-2 pr-12 top-0 '>
+    <nav className='w-fit mt-4 pl-2 pr-12 sticky top-[140px]'>
       <div className='sticky top-40 max-sm:static'>
         <NavigationMenu>
           <NavigationMenuList
