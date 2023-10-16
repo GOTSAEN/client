@@ -14,9 +14,13 @@ export async function saveUserSession(
 }
 
 export function getUser() {
+  console.log(
+    'getUser',
+    window.localStorage.getItem('Email')
+  )
   return {
-    email: localStorage.getItem('Email'),
-    auth: localStorage.getItem('User'),
+    email: window.localStorage.getItem('Email'),
+    auth: window.localStorage.getItem('User'),
   }
 }
 

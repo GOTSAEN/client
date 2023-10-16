@@ -1,17 +1,21 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
+import { fetchAdsByCategory } from '@/api/ads'
 import AdsCard from '@/components/AdsCard'
+import React from 'react'
 import { useQuery } from 'react-query'
-import { fetchAds } from '@/api/ads'
+import { useParams } from 'react-router-dom'
 
-export default function Home() {
+export default function Ads() {
+  const params = useParams()
   const {
     isLoading,
     data: ads,
     error,
   } = useQuery(
-    ['ads', 'all'],
-    async () => await fetchAds().then((res) => res),
+    ['ads', `${params.category}`],
+    async () =>
+      await fetchAdsByCategory(params.category).then(
+        (res) => res
+      ),
     {
       staleTime: 1000 * 60 * 30,
     }

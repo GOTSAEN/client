@@ -14,7 +14,11 @@ import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '@/components/ui/button'
 import ImageUploader from '../common/ImageUploader'
-import { useQuery, useQueryClient } from 'react-query'
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query'
 import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -48,6 +52,17 @@ export default function EnrollForm() {
     { staleTime: 1000 * 60 * 24 }
   )
 
+  const { mutate } = useMutation((data) => newAds(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        'partner',
+        'ads',
+        'waiting',
+      ])
+      navigate('/setting/partner/ads/enroll')
+    },
+  })
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
@@ -60,15 +75,7 @@ export default function EnrollForm() {
   const queryClient = useQueryClient()
   const handleSubmit = (e) => {
     e.preventDefault()
-    e.stopPropagation()
-    newAds(form).then((status) => {
-      if (status === 201) {
-        queryClient.invalidateQueries({
-          queryKey: ['partner', 'ads', 'waiting'],
-        })
-        navigate('/setting/partner/ads/enroll')
-      }
-    })
+    mutate()
   }
 
   useEffect(() => {

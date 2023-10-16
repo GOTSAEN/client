@@ -1,17 +1,26 @@
 import { ads, authAds } from '..'
 
 export const fetchAds = async () => {
-  const data = await ads
+  return await ads
     .get('/allAd')
     .then((res) => res.data.data)
     .catch((e) => console.log(e))
-  return data
+}
+
+export const fetchAdsByCategory = async (category) => {
+  return ads
+    .get(`/byCategory?category=${category}`)
+    .then((res) => res.data.data)
+    .catch((e) => console.log(e))
 }
 
 export const newAds = (data) => {
   return authAds
     .post('', data)
-    .then((res) => res.status)
+    .then((res) => {
+      if (res.status === 200) return true
+      else new Response('Error', { status: 500 })
+    })
     .catch(() => new Response('Error', { status: 500 }))
 }
 

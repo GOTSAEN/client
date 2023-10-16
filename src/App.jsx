@@ -9,6 +9,7 @@ import {
 } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { AuthProvider } from './context/AuthContext'
+import AlertToast from './components/ui/toast'
 
 const queryClient = new QueryClient()
 
@@ -25,6 +26,7 @@ function App() {
           </div>
           <main className='relative main w-full max-w-[1400px] z-10 mx-auto '>
             <Outlet />
+            <AlertToast />
           </main>
         </AuthProvider>
       </DarkModeProvider>

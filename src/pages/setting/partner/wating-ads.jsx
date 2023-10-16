@@ -112,7 +112,8 @@ export default function PartnerWaitingAds() {
                     {ad.category}
                   </TableCell>
                   <TableCell className='justify-center col-span-2'>
-                    7 / {ad.numberOfRecruit}
+                    {ad.numberOfApplicants} /{' '}
+                    {ad.numberOfRecruit}
                   </TableCell>
 
                   <TableCell className='text-right right col-span-2 justify-center'>

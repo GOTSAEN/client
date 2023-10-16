@@ -74,7 +74,7 @@ export default function SignUp() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-1'>
                   <Input
                     type={
                       passwordVisible ? 'text' : 'password'
@@ -90,7 +90,7 @@ export default function SignUp() {
                     <AiOutlineEye />
                   </Button>
                 </div>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-1'>
                   <Input
                     type={
                       rePasswordVisible

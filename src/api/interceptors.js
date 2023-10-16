@@ -25,7 +25,8 @@ export function setInterceptors(instance) {
       let { data } = error.response
       if (
         data.code === 101 ||
-        error.response?.status === 403
+        error.response?.status === 403 ||
+        error.response?.status === 500
       ) {
         // logout()
         deleteUserSession()

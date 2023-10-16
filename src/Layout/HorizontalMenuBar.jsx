@@ -9,12 +9,13 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/utils/lib'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import SearchBar from '@/components/common/SearchBar'
 import { fetchCategories } from '@/api/categories'
 
 export default function HorizontalMenuBar() {
+  const navigate = useNavigate()
   const {
     isLoading,
     data: categories,
@@ -39,7 +40,11 @@ export default function HorizontalMenuBar() {
                     <ListItem
                       key={category.categoryId}
                       title={category.categoryName}
-                      href={category.categoryName}
+                      onClick={() =>
+                        navigate(
+                          `ads/${category.categoryName}`
+                        )
+                      }
                     ></ListItem>
                   ))}
                 </ul>
