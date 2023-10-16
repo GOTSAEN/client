@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 
-const ToastContext = createToast()
+const ToastContext = createContext()
 
 export function ToastProvider({ children }) {
   const [show, setShow] = useState(false)
