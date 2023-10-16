@@ -50,13 +50,6 @@ function TextEditor({ name, onChange, value }) {
           history: { inDropdown: true },
         }}
       />
-
-      <textarea
-        disabled
-        value={draftToHtml(
-          convertToRaw(editorState.getCurrentContent())
-        )}
-      />
     </div>
   )
 }

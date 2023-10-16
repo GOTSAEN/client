@@ -1,16 +1,36 @@
-import React from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 function AdsCard({ adsCardInfo }) {
-  const { image, title, category } = adsCardInfo;
+  const {
+    advertisementId,
+    productName,
+    numberOfRecruit,
+    category,
+  } = adsCardInfo
+
   return (
-    <div className="border rounded-lg shadow-md p-3">
-      <img src={image} alt={title} className="w-full h-auto" />
-      <div className="flex justify-between items-center mt-3">
-        <h2 className="font-semibold">{title}</h2>
-        <p className="text-gray-500 text-sm">{category}</p>
-      </div>
-    </div>
-  );
+    <Link to={`/product/${advertisementId}`}>
+      <article className='border rounded-lg shadow-sm p-3 bg-background'>
+        <img
+          src=''
+          alt={productName}
+          className='w-full h-auto'
+        />
+        <h2 className='font-semibold py-2'>
+          {productName}
+        </h2>
+        <div className='flex justify-between items-center'>
+          <p className='text-gray-500 text-sm'>
+            {category}
+          </p>
+          <p className='text-gray-500 text-xs'>
+            모집인원 {numberOfRecruit}명
+          </p>
+        </div>
+      </article>
+    </Link>
+  )
 }
 
-export default AdsCard;
+export default AdsCard
