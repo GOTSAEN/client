@@ -1,5 +1,3 @@
-import { getMember } from '@/api/members'
-
 export async function saveUserSession(
   { authorization, refresh, usertype },
   { email }
@@ -14,10 +12,6 @@ export async function saveUserSession(
 }
 
 export function getUser() {
-  console.log(
-    'getUser',
-    window.localStorage.getItem('Email')
-  )
   return {
     email: window.localStorage.getItem('Email'),
     auth: window.localStorage.getItem('User'),
