@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/table'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
-import LocationLabel from '@/components/setting/location-label'
 import { Pencil } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useQuery } from 'react-query'
@@ -44,7 +43,6 @@ export default function PartnerWaitingAds() {
   }
   return (
     <>
-      <LocationLabel labels={['광고 관리', '등록 광고']} />
       <Card className='flex justify-center min-h-[250px]'>
         <Table>
           <TableHeader>

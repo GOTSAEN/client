@@ -77,7 +77,6 @@ export default function EnrollForm() {
   }
 
   const handleSubmit = (e) => {
-    console.log('???')
     e.preventDefault()
     mutate()
   }

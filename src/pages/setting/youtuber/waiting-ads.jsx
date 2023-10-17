@@ -11,12 +11,10 @@ import {
 import { cn } from '@/utils/lib'
 import { Card } from '../../../components/ui/card'
 import { Link } from 'react-router-dom'
-import LocationLabel from '@/components/setting/location-label'
 
 export default function WaitingAds() {
   return (
     <>
-      <LocationLabel labels={['광고 관리', '대기 광고']} />
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>

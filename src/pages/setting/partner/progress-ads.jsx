@@ -11,12 +11,10 @@ import {
 import { Progress } from '@/components/ui/progress'
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
-import LocationLabel from '@/components/setting/location-label'
 
 export default function PartnerProgressAds() {
   return (
     <>
-      <LocationLabel labels={['광고 관리', '진행 광고']} />
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>

@@ -37,20 +37,20 @@ export default function Menu() {
 
             <NavigationMenuItem className='w-full'>
               <Link
-                to='/setting/profile'
+                to='/setting/me/profile'
                 legacyBehavior
                 passHref
               >
                 <NavigationMenuLink
                   className={navigation_styles}
                 >
-                  내 정보
+                  회원정보 변경
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem className='w-full'>
               <Link
-                to='/setting/pwchange'
+                to='/setting/me/pwchange'
                 className='px-0'
                 legacyBehavior
                 passHref
