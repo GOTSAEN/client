@@ -1,11 +1,6 @@
 import { signIn } from '@/api/auth'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from '@/components/ui/card'
+import { Card, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
   Tabs,
@@ -16,26 +11,36 @@ import {
 import { cn } from '@/utils/lib'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  getUserType,
-  saveUserSession,
-} from '@/service/login-auth'
+import { getUserType } from '@/service/login-auth'
 import { useAuth } from '@/context/AuthContext'
 import { useMutation } from 'react-query'
+import { useCookies } from 'react-cookie'
 
 export default function LogIn() {
   const navigate = useNavigate()
+  const [cookies, setCookie] = useCookies()
   const { login } = useAuth()
   const [form, setForm] = useState({
     email: '',
     password: '',
   })
   const [auth, setAuth] = useState('')
-  const { mutate } = useMutation(() => signIn(form), {
-    onSuccess: (res) => {
-      console.log(res)
-    },
-  })
+  const { mutate } = useMutation(
+    async () => await signIn(form),
+    {
+      onSuccess: (res) => {
+        const { refresh, authorization, usertype } =
+          res.headers
+        const email = form.email
+        setCookie('SESSIONID', authorization)
+        setCookie('Refresh', refresh)
+        setCookie('User', usertype)
+        setCookie('Email', email)
+        login()
+        navigate('/')
+      },
+    }
+  )
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
@@ -44,8 +49,6 @@ export default function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     mutate()
-    login()
-    navigate('/')
   }
 
   useEffect(() => {

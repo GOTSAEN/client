@@ -1,40 +1,32 @@
-import {
-  deleteCookie,
-  getCookie,
-  saveObjectToCookies,
-} from '@/utils/cookie'
-
-const ls = window.localStorage
-
+import { Cookies } from 'react-cookie'
+const cookies = new Cookies()
 export async function saveUserSession(
   {
-    authorization: Authorization,
+    authorization: SESSIONID,
     refresh: Refresh,
     usertype: User,
   },
   { email: Email }
 ) {
-  saveObjectToCookies({
-    Authorization,
-    Refresh,
-    User,
-    Email,
-  })
+  cookies.set(SESSIONID)
+  cookies.set(Refresh)
+  cookies.set(User)
+  cookies.set(Email)
 }
 
 export function getUser() {
   return {
-    email: getCookie('Email'),
-    auth: getCookie('User'),
+    email: cookies.get('Email'),
+    auth: cookies.get('User'),
   }
 }
 
 export function deleteUserSession() {
-  deleteCookie('Authorization')
-  deleteCookie('Refresh')
-  deleteCookie('Email')
+  cookies.remove('SESSIONID')
+  cookies.remove('Refresh')
+  cookies.remove('Email')
 }
 
 export function getUserType() {
-  return getCookie('User')
+  return cookies.get('User')
 }

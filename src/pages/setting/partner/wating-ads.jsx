@@ -45,7 +45,7 @@ export default function PartnerWaitingAds() {
   return (
     <>
       <LocationLabel labels={['광고 관리', '등록 광고']} />
-      <Card className='flex justify-center'>
+      <Card className='flex justify-center min-h-[250px]'>
         <Table>
           <TableHeader>
             <TableRow className='grid grid-cols-11 items-center'>
@@ -66,6 +66,7 @@ export default function PartnerWaitingAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {error && <p>Error</p>}
             {ads?.length === 0 && (
               <p className='px-2 py-4 text-center'>
                 등록된 광고가 없습니다🥲{' '}

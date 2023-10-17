@@ -8,8 +8,10 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { Cookies } from 'react-cookie'
 
 const AuthContext = createContext()
+const cookies = new Cookies()
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState({
@@ -18,7 +20,9 @@ export function AuthProvider({ children }) {
   })
 
   const logout = () => {
-    deleteUserSession()
+    cookies.remove('SESSIONID')
+    cookies.remove('Refresh')
+    cookies.remove('Email')
     setUser(undefined)
   }
 
