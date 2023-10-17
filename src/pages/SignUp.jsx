@@ -26,7 +26,6 @@ export default function SignUp() {
     useState(false)
   const [rePasswordVisible, setRePasswordVisible] =
     useState(false)
-  const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   // const { showToast } = useToast()
   const [form, setForm] = useState({

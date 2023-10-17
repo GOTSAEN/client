@@ -1,28 +1,40 @@
+import {
+  deleteCookie,
+  getCookie,
+  saveObjectToCookies,
+} from '@/utils/cookie'
+
 const ls = window.localStorage
 
 export async function saveUserSession(
-  { authorization, refresh, usertype },
-  { email }
+  {
+    authorization: Authorization,
+    refresh: Refresh,
+    usertype: User,
+  },
+  { email: Email }
 ) {
-  ls.setItem('Authorization', authorization)
-  ls.setItem('Refresh', refresh)
-  ls.setItem('User', usertype)
-  ls.setItem('Email', email)
+  saveObjectToCookies({
+    Authorization,
+    Refresh,
+    User,
+    Email,
+  })
 }
 
 export function getUser() {
   return {
-    email: ls.getItem('Email'),
-    auth: ls.getItem('User'),
+    email: getCookie('Email'),
+    auth: getCookie('User'),
   }
 }
 
 export function deleteUserSession() {
-  ls.removeItem('Authorization')
-  ls.removeItem('Refresh')
-  ls.removeItem('Email')
+  deleteCookie('Authorization')
+  deleteCookie('Refresh')
+  deleteCookie('Email')
 }
 
 export function getUserType() {
-  return ls.getItem('User')
+  return getCookie('User')
 }

@@ -21,6 +21,7 @@ import {
   saveUserSession,
 } from '@/service/login-auth'
 import { useAuth } from '@/context/AuthContext'
+import { useMutation } from 'react-query'
 
 export default function LogIn() {
   const navigate = useNavigate()
@@ -30,7 +31,11 @@ export default function LogIn() {
     password: '',
   })
   const [auth, setAuth] = useState('')
-
+  const { mutate } = useMutation(() => signIn(form), {
+    onSuccess: (res) => {
+      console.log(res)
+    },
+  })
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
@@ -38,11 +43,7 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signIn(form)
-      .then((res) => {
-        saveUserSession(res.headers, form)
-      })
-      .catch((e) => console.log(e))
+    mutate()
     login()
     navigate('/')
   }
@@ -73,10 +74,7 @@ export default function LogIn() {
               )}
             >
               <Button className={cn('w-full')}>
-                <Link
-                  to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'
-                  target='blank'
-                >
+                <Link to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'>
                   유튜브 아이디로 로그인
                 </Link>
               </Button>
