@@ -63,7 +63,14 @@ export default function Router() {
               </ProtectedRoutes>
             }
           >
-            <Route path='profile' element={<Profile />} />
+            <Route
+              path='me/profile'
+              element={<Profile />}
+            />
+            <Route
+              path='me/pwchange'
+              element={<PwChange />}
+            />
             <Route
               index
               path='ads/progress'
@@ -74,7 +81,6 @@ export default function Router() {
               path='ads/waiting'
               element={<WaitingAds />}
             />
-            <Route path='pwchange' element={<PwChange />} />
           </Route>
 
           {/* 광고주의 광고 상품 관련 url */}
@@ -104,7 +110,6 @@ export default function Router() {
               path='ads/waiting'
               element={<WaitingAds />}
             />
-            <Route path='profile' element={Profile} />
           </Route>
 
           <Route path='*' element={<NotFound />} />

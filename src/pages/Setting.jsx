@@ -1,3 +1,4 @@
+import LocationLabel from '@/components/setting/location-label'
 import Menu from '@/components/setting/menu'
 import MenuBar from '@/components/setting/menu-bar'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -13,6 +14,7 @@ export default function Setting() {
       <MenuBar />
 
       <main className='py-8 w-full px-4'>
+        <LocationLabel />
         <Outlet />
       </main>
     </section>

@@ -15,7 +15,6 @@ export const fetchAdsByCategory = async (category) => {
 }
 
 export const newAds = (data) => {
-  console.log(data)
   return authAds
     .post('', data)
     .then((res) => {
