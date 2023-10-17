@@ -14,7 +14,11 @@ import { Label } from '../ui/label'
 import TextEditor from '../common/TextEditor'
 import { Button } from '@/components/ui/button'
 import ImageUploader from '../common/ImageUploader'
-import { useQuery, useQueryClient } from 'react-query'
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query'
 import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -22,6 +26,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 export default function EnrollForm() {
   const navigate = useNavigate()
   const param = useParams()
+  const queryClient = useQueryClient()
 
   const [form, setForm] = useState({
     productName: '',
@@ -44,9 +49,23 @@ export default function EnrollForm() {
     error,
   } = useQuery(
     ['categories'],
-    async () => await fetchCategories().then((res) => res),
+    async () =>
+      await fetchCategories().then((res) =>
+        console.log(res)
+      ),
     { staleTime: 1000 * 60 * 24 }
   )
+
+  const { mutate } = useMutation(() => newAds(form), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        'partner',
+        'ads',
+        'waiting',
+      ])
+      // navigate('/setting/partner/ads/enroll')
+    },
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -57,18 +76,10 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
-  const queryClient = useQueryClient()
   const handleSubmit = (e) => {
+    console.log('???')
     e.preventDefault()
-    e.stopPropagation()
-    newAds(form).then((status) => {
-      if (status === 201) {
-        queryClient.invalidateQueries({
-          queryKey: ['partner', 'ads', 'waiting'],
-        })
-        navigate('/setting/partner/ads/enroll')
-      }
-    })
+    mutate()
   }
 
   useEffect(() => {

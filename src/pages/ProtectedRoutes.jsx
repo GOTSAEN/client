@@ -1,13 +1,14 @@
 import React from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { Navigate } from 'react-router-dom'
-import { deleteUserSession } from '@/service/login-auth'
+import { Cookies } from 'react-cookie'
+const cookies = new Cookies()
 export default function ProtectedRoutes({ children }) {
   const { user, logout } = useAuth()
-  const session =
-    window.localStorage.getItem('Authorization')
+  const session = cookies.get('SESSIONID')
 
-  if (!(session && user.email)) {
+  if (!session) {
+    logout()
     return <Navigate to='/login' replace />
   }
 

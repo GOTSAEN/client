@@ -17,6 +17,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye } from 'react-icons/ai'
 import { newMember } from '@/api/members'
+import { useMutation } from 'react-query'
+import { useToast } from 'react-toastify'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -24,9 +26,8 @@ export default function SignUp() {
     useState(false)
   const [rePasswordVisible, setRePasswordVisible] =
     useState(false)
-  const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
-
+  // const { showToast } = useToast()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -34,7 +35,16 @@ export default function SignUp() {
     businessAddress: '',
   })
 
-  const [error, setError] = useState(null)
+  const { mutate } = useMutation(() => newMember(form), {
+    onSuccess: () => navigate('/login'),
+    // onError: () =>
+    //   showToast({
+    //     status: 'success',
+    //     message:
+    //       '패스워드는 문자+숫자로 구성된 8자리 이상이어야 합니다.',
+    //   }),
+  })
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
@@ -42,7 +52,7 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    newMember(form).then(() => navigate('/login'))
+    mutate()
   }
   const togglePasswordVisibility = (e) => {
     e.preventDefault()
@@ -74,7 +84,7 @@ export default function SignUp() {
                     onChange={handleChange}
                   />
                 </div>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-1'>
                   <Input
                     type={
                       passwordVisible ? 'text' : 'password'
@@ -90,7 +100,7 @@ export default function SignUp() {
                     <AiOutlineEye />
                   </Button>
                 </div>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-1'>
                   <Input
                     type={
                       rePasswordVisible
@@ -133,7 +143,6 @@ export default function SignUp() {
             </Card>
           </TabsContent>
         </Tabs>
-        <p>{error && { error }}</p>
       </form>
     </section>
   )

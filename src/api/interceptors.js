@@ -1,13 +1,14 @@
 import { deleteUserSession } from '@/service/login-auth'
+import { Cookies } from 'react-cookie'
 
+const cookies = new Cookies()
 export function setInterceptors(instance) {
   // Add a request interceptor
   instance.interceptors.request.use(
     function (config) {
       config.headers.Authorization =
-        localStorage.getItem('Authorization')
-      config.headers.Refresh =
-        localStorage.getItem('Refresh')
+        cookies.get('Authorization')
+      config.headers.Refresh = cookies.ge('Refresh')
       return config
     },
     function (error) {
@@ -25,7 +26,8 @@ export function setInterceptors(instance) {
       let { data } = error.response
       if (
         data.code === 101 ||
-        error.response?.status === 403
+        error.response?.status === 403 ||
+        error.response?.status === 500
       ) {
         // logout()
         deleteUserSession()

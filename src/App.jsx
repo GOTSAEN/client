@@ -9,6 +9,9 @@ import {
 } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { AuthProvider } from './context/AuthContext'
+import AlertToast from './components/ui/toast'
+import { ToastProvider } from './context/ToastContext'
+import { CookiesProvider } from 'react-cookie'
 
 const queryClient = new QueryClient()
 
@@ -16,17 +19,22 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>
-        <AuthProvider>
-          <div className='gradient blur-3xl rotate-45 z-0'></div>
-          <div className='gradient-2 blur-3xl rotate-45 z-0'></div>
-          <div className='sticky top-0 z-20 bg-background'>
-            <Header />
-            <HorizontalMenuBar />
-          </div>
-          <main className='relative main w-full max-w-[1400px] z-10 mx-auto '>
-            <Outlet />
-          </main>
-        </AuthProvider>
+        <CookiesProvider>
+          <AuthProvider>
+            <ToastProvider>
+              <div className='gradient blur-3xl rotate-45 z-0'></div>
+              <div className='gradient-2 blur-3xl rotate-45 z-0'></div>
+              <div className='sticky top-0 z-20 bg-background'>
+                <Header />
+                <HorizontalMenuBar />
+              </div>
+              <main className='relative main w-full max-w-[1400px] z-10 mx-auto '>
+                <Outlet />
+                <AlertToast />
+              </main>
+            </ToastProvider>
+          </AuthProvider>
+        </CookiesProvider>
       </DarkModeProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>

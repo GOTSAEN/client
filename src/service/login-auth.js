@@ -1,27 +1,32 @@
-import { getMember } from '@/api/members'
-
+import { Cookies } from 'react-cookie'
+const cookies = new Cookies()
 export async function saveUserSession(
-  { authorization, refresh, usertype },
-  { email }
+  {
+    authorization: SESSIONID,
+    refresh: Refresh,
+    usertype: User,
+  },
+  { email: Email }
 ) {
-  window.localStorage.setItem(
-    'Authorization',
-    authorization
-  )
-  window.localStorage.setItem('Refresh', refresh)
-  window.localStorage.setItem('User', usertype)
-  window.localStorage.setItem('Email', email)
+  cookies.set(SESSIONID)
+  cookies.set(Refresh)
+  cookies.set(User)
+  cookies.set(Email)
 }
 
 export function getUser() {
   return {
-    email: localStorage.getItem('Email'),
-    auth: localStorage.getItem('User'),
+    email: cookies.get('Email'),
+    auth: cookies.get('User'),
   }
 }
 
 export function deleteUserSession() {
-  localStorage.removeItem('Authorization')
-  localStorage.removeItem('Refresh')
-  localStorage.removeItem('Email')
+  cookies.remove('SESSIONID')
+  cookies.remove('Refresh')
+  cookies.remove('Email')
+}
+
+export function getUserType() {
+  return cookies.get('User')
 }
