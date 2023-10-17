@@ -23,12 +23,12 @@ export default function UserDropDownMenu() {
           {user.email?.split('@')[0]} 님
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link to='/setting/profile'>회원정보</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link to='/setting/pwchange'>패스워드 변경</Link>
-        </DropdownMenuItem>
+        <Link to='/setting/profile'>
+          <DropdownMenuItem>회원정보</DropdownMenuItem>
+        </Link>
+        <Link to='/setting/pwchange'>
+          <DropdownMenuItem>패스워드 변경</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={logout}

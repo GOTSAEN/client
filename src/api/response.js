@@ -22,7 +22,7 @@ export function ErrorResponse(error) {
       })
     case 409:
       throw new Error({
-        ...error.response.data,
+        ...error,
       })
     default:
       console.log('들어옴')
