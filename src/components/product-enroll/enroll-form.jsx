@@ -26,6 +26,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 export default function EnrollForm() {
   const navigate = useNavigate()
   const param = useParams()
+  const queryClient = useQueryClient()
 
   const [form, setForm] = useState({
     productName: '',
@@ -48,18 +49,21 @@ export default function EnrollForm() {
     error,
   } = useQuery(
     ['categories'],
-    async () => await fetchCategories().then((res) => res),
+    async () =>
+      await fetchCategories().then((res) =>
+        console.log(res)
+      ),
     { staleTime: 1000 * 60 * 24 }
   )
 
-  const { mutate } = useMutation((data) => newAds(data), {
+  const { mutate } = useMutation(() => newAds(form), {
     onSuccess: () => {
       queryClient.invalidateQueries([
         'partner',
         'ads',
         'waiting',
       ])
-      navigate('/setting/partner/ads/enroll')
+      // navigate('/setting/partner/ads/enroll')
     },
   })
 
@@ -72,8 +76,8 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
-  const queryClient = useQueryClient()
   const handleSubmit = (e) => {
+    console.log('???')
     e.preventDefault()
     mutate()
   }

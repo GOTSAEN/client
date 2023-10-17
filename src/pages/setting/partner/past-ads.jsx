@@ -22,7 +22,7 @@ export default function ProgressYoutuber() {
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>
-            <TableRow className='grid grid-cols-7 items-center'>
+            <TableRow className='grid grid-cols-8 items-center'>
               <TableHead className='col-span-2'>
                 유튜버
               </TableHead>
@@ -37,14 +37,14 @@ export default function ProgressYoutuber() {
                 좋아요 수
               </TableHead>
 
-              <TableHead className='text-center justify-center'>
+              <TableHead className='text-center justify-center '>
                 링크
               </TableHead>
-              <TableHead className='text-center justify-center'></TableHead>
+              <TableHead className='text-center justify-center col-span-2'></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className='grid grid-cols-7 hover:cursor-pointer'>
+            <TableRow className='grid grid-cols-8 hover:cursor-pointer'>
               <TableCell className='font-medium col-span-2'>
                 <img
                   src='https://yt3.ggpht.com/yzOkKjqHaC-vVkeQkz-8HLa5rCAyX0MMPEZy8eD28lALtHDl01PnWoq15xuiVV1j7irToNNH=s88-c-k-c0x00ffffff-no-rj'
@@ -77,8 +77,11 @@ export default function ProgressYoutuber() {
                   조회
                 </a>
               </TableCell>
-              <TableCell className='text-center justify-center'>
+              <TableCell className='text-center justify-center gap-1 col-span-2'>
                 <Button>확인</Button>
+                <Button className='bg-yellow-500'>
+                  반려
+                </Button>
               </TableCell>
             </TableRow>
           </TableBody>
