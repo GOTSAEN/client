@@ -11,14 +11,10 @@ import {
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import LocationLabel from '@/components/setting/location-label'
 
 export default function ProgressYoutuber() {
   return (
     <>
-      <LocationLabel
-        labels={['광고 관리', '지난 광고', '유튜버']}
-      />
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>
