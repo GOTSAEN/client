@@ -1,25 +1,28 @@
+const ls = window.localStorage
+
 export async function saveUserSession(
   { authorization, refresh, usertype },
   { email }
 ) {
-  window.localStorage.setItem(
-    'Authorization',
-    authorization
-  )
-  window.localStorage.setItem('Refresh', refresh)
-  window.localStorage.setItem('User', usertype)
-  window.localStorage.setItem('Email', email)
+  ls.setItem('Authorization', authorization)
+  ls.setItem('Refresh', refresh)
+  ls.setItem('User', usertype)
+  ls.setItem('Email', email)
 }
 
 export function getUser() {
   return {
-    email: window.localStorage.getItem('Email'),
-    auth: window.localStorage.getItem('User'),
+    email: ls.getItem('Email'),
+    auth: ls.getItem('User'),
   }
 }
 
 export function deleteUserSession() {
-  localStorage.removeItem('Authorization')
-  localStorage.removeItem('Refresh')
-  localStorage.removeItem('Email')
+  ls.removeItem('Authorization')
+  ls.removeItem('Refresh')
+  ls.removeItem('Email')
+}
+
+export function getUserType() {
+  return ls.getItem('User')
 }

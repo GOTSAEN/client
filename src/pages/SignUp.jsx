@@ -36,15 +36,15 @@ export default function SignUp() {
     businessAddress: '',
   })
 
-  // const { mutate } = useMutation(() => newMember(form), {
-  //   onSuccess: () => navigate('/login'),
-  //   onError: () =>
-  //     showToast({
-  //       status: 'success',
-  //       message:
-  //         '패스워드는 문자+숫자로 구성된 8자리 이상이어야 합니다.',
-  //     }),
-  // })
+  const { mutate } = useMutation(() => newMember(form), {
+    onSuccess: () => navigate('/login'),
+    // onError: () =>
+    //   showToast({
+    //     status: 'success',
+    //     message:
+    //       '패스워드는 문자+숫자로 구성된 8자리 이상이어야 합니다.',
+    //   }),
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -53,7 +53,7 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // mutate()
+    mutate()
   }
   const togglePasswordVisibility = (e) => {
     e.preventDefault()
