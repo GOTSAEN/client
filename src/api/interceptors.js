@@ -3,12 +3,13 @@ import { Cookies } from 'react-cookie'
 
 const cookies = new Cookies()
 export function setInterceptors(instance) {
+  console.log(instance)
   // Add a request interceptor
   instance.interceptors.request.use(
     function (config) {
       config.headers.Authorization =
-        cookies.get('Authorization')
-      config.headers.Refresh = cookies.ge('Refresh')
+        cookies.get('SESSIONID')
+      config.headers.Refresh = cookies.get('RENEW')
       return config
     },
     function (error) {

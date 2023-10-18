@@ -33,7 +33,7 @@ export default function LogIn() {
           res.headers
         const email = form.email
         setCookie('SESSIONID', authorization)
-        setCookie('Refresh', refresh)
+        setCookie('RENEW', refresh)
         setCookie('User', usertype)
         setCookie('Email', email)
         login()

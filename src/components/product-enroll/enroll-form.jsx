@@ -49,10 +49,7 @@ export default function EnrollForm() {
     error,
   } = useQuery(
     ['categories'],
-    async () =>
-      await fetchCategories().then((res) =>
-        console.log(res)
-      ),
+    async () => await fetchCategories().then((res) => res),
     { staleTime: 1000 * 60 * 24 }
   )
 

@@ -15,9 +15,11 @@ export const fetchAdsByCategory = async (category) => {
 }
 
 export const newAds = (data) => {
+  console.log('newAds')
   return authAds
     .post('', data)
     .then((res) => {
+      console.log(res)
       if (res.status === 200) return true
       else new Response('Error', { status: 500 })
     })

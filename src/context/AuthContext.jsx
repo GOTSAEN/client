@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     cookies.remove('SESSIONID')
-    cookies.remove('Refresh')
+    cookies.remove('RENEW')
     cookies.remove('Email')
     setUser(undefined)
   }
