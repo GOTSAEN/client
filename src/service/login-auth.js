@@ -3,13 +3,13 @@ const cookies = new Cookies()
 export async function saveUserSession(
   {
     authorization: SESSIONID,
-    refresh: Refresh,
+    refresh: RENEW,
     usertype: User,
   },
   { email: Email }
 ) {
   cookies.set(SESSIONID)
-  cookies.set(Refresh)
+  cookies.set(RENEW)
   cookies.set(User)
   cookies.set(Email)
 }
@@ -23,7 +23,7 @@ export function getUser() {
 
 export function deleteUserSession() {
   cookies.remove('SESSIONID')
-  cookies.remove('Refresh')
+  cookies.remove('RENEW')
   cookies.remove('Email')
 }
 
