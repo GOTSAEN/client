@@ -35,7 +35,7 @@ export default function HorizontalMenuBar() {
                 카테고리
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className='grid w-[400px] gap-3 p-4 lg:w-[600px] lg:grid-cols-3 md:w-[500px] md:grid-cols-2'>
+                <ul className='grid max-w-[600px] gap-3 p-4 lg:grid-cols-3 md:w-[500px] md:grid-cols-2 sm:w-[400px] sm:grid-cols-2'>
                   {categories?.map((category) => (
                     <ListItem
                       key={category.categoryId}
