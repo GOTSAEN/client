@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
-import { Pencil } from 'lucide-react'
+import { Pencil, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useQuery } from 'react-query'
 import { fetchPartnerAds } from '@/api/members/ads'
@@ -46,7 +46,7 @@ export default function PartnerWaitingAds() {
       <Card className='flex justify-center min-h-[250px]'>
         <Table>
           <TableHeader>
-            <TableRow className='grid grid-cols-11 items-center'>
+            <TableRow className='grid grid-cols-12 items-center'>
               <TableHead className='col-span-4'>
                 상품
               </TableHead>
@@ -61,6 +61,7 @@ export default function PartnerWaitingAds() {
               <TableHead className='text-center col-span-2 justify-center'>
                 마감일
               </TableHead>
+              <TableHead className='text-center col-span-2 justify-center'></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -80,7 +81,7 @@ export default function PartnerWaitingAds() {
             {ads?.length > 0 &&
               ads.map((ad) => (
                 <TableRow
-                  className='grid grid-cols-11 px-1 hover:cursor-pointer'
+                  className='grid grid-cols-12 px-1 hover:cursor-pointer'
                   onClick={() => console.log('click')}
                   key={ad.advertisementId}
                 >
@@ -118,13 +119,20 @@ export default function PartnerWaitingAds() {
                   <TableCell className='text-right right col-span-2 justify-center'>
                     {ad.endDate}
                   </TableCell>
-                  <TableCell className='text-right right col-span-1 justify-center'>
+                  <TableCell className='col-span-2 justify-center gap-2'>
                     <Button
                       onClick={(e) =>
                         handleUpdate(e, ad.advertisementId)
                       }
                     >
-                      <Pencil size={12} />
+                      <Pencil size={14} />
+                    </Button>
+                    <Button
+                      onClick={(e) =>
+                        handleUpdate(e, ad.advertisementId)
+                      }
+                    >
+                      <Trash2 size={14} />
                     </Button>
                   </TableCell>
                 </TableRow>

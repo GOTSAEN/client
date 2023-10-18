@@ -16,9 +16,6 @@ import LocationLabel from '@/components/setting/location-label'
 export default function ProgressYoutuber() {
   return (
     <>
-      <LocationLabel
-        labels={['광고 관리', '지난 광고', '유튜버']}
-      />
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>
@@ -77,9 +74,12 @@ export default function ProgressYoutuber() {
                   조회
                 </a>
               </TableCell>
-              <TableCell className='text-center justify-center gap-1 col-span-2'>
+              <TableCell className='text-center justify-center gap-2 col-span-2'>
                 <Button>확인</Button>
-                <Button className='bg-yellow-500'>
+                <Button
+                  variant='bright'
+                  className='bg-yellow-500'
+                >
                   반려
                 </Button>
               </TableCell>
