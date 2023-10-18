@@ -20,14 +20,13 @@ import {
   useQueryClient,
 } from 'react-query'
 import { fetchCategories } from '@/api/categories'
-import { fetchAdsById, newAds } from '@/api/ads'
+import { fetchAdsById, newAds, updateAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
 
 export default function EnrollForm() {
   const navigate = useNavigate()
   const param = useParams()
   const queryClient = useQueryClient()
-
   const [form, setForm] = useState({
     productName: '',
     numberOfRecruit: 1,
@@ -41,6 +40,7 @@ export default function EnrollForm() {
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: '새 상품 등록',
     button: '작성 완료',
+    handleSubmit: handleCreate,
   })
 
   const {
@@ -53,16 +53,38 @@ export default function EnrollForm() {
     { staleTime: 1000 * 60 * 24 }
   )
 
-  const { mutate } = useMutation(() => newAds(form), {
+  const createAd = useMutation(() => newAds(form), {
     onSuccess: () => {
       queryClient.invalidateQueries([
         'partner',
         'ads',
         'waiting',
       ])
-      // navigate('/setting/partner/ads/enroll')
+      navigate('/setting/partner/ads/enroll')
     },
   })
+  const updateAd = useMutation(
+    () => updateAds(param.campaignId, form),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          'partner',
+          'ads',
+          'waiting',
+        ])
+        navigate('/setting/partner/ads/enroll')
+      },
+    }
+  )
+
+  function handleCreate(e) {
+    e.preventDefault()
+    createAd.mutateAsync()
+  }
+  function handleUpdate(e) {
+    e.preventDefault()
+    updateAd.mutateAsync()
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -73,26 +95,21 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    mutate()
-  }
-
   useEffect(() => {
     if (param.campaignId) {
       setEnrollForm({
         mainTitle: '정보 수정',
         button: '수정 완료',
+        handleSubmit: handleUpdate,
       })
       fetchAdsById(param.campaignId).then((res) => {
         setForm(res)
-        console.log(res)
       })
     }
   }, [param])
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={enrollForm.handleSubmit}>
       <div
         className={cn('p-4 flex flex-col gap-2 border-0')}
       >
