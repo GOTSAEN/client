@@ -36,6 +36,16 @@ export const updateAds = (id, data) => {
     .catch(() => new Response('Error', { status: 500 }))
 }
 
+export const deleteAds = (id) => {
+  return authAds
+    .delete(`/${id}`)
+    .then((res) => {
+      if (res.status === 204) return true
+      else new Response('Error', { status: 500 })
+    })
+    .catch(() => new Response('Error', { status: 500 }))
+}
+
 export const fetchAdsById = async (id) => {
   const data = await authAds
     .get(`/${id}`)

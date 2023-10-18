@@ -23,20 +23,21 @@ import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds, updateAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
 
+const init = {
+  productName: '',
+  numberOfRecruit: 1,
+  startDate: '',
+  endDate: '',
+  category: '',
+  offer: '',
+  productDescription: '',
+  precaution: '',
+}
 export default function EnrollForm() {
   const navigate = useNavigate()
   const param = useParams()
   const queryClient = useQueryClient()
-  const [form, setForm] = useState({
-    productName: '',
-    numberOfRecruit: 1,
-    startDate: '',
-    endDate: '',
-    category: '',
-    offer: '',
-    productDescription: '',
-    precaution: '',
-  })
+  const [form, setForm] = useState(init)
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: '새 상품 등록',
     button: '작성 완료',
@@ -105,7 +106,13 @@ export default function EnrollForm() {
       fetchAdsById(param.campaignId).then((res) => {
         setForm(res)
       })
-    }
+    } else
+      setEnrollForm({
+        mainTitle: '새 상품 등록',
+        button: '작성 완료',
+        handleSubmit: handleCreate,
+      })
+    return setForm(init)
   }, [param])
 
   return (

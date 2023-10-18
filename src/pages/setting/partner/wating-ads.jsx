@@ -12,11 +12,17 @@ import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
 import { Pencil, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useQuery } from 'react-query'
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query'
 import { fetchPartnerAds } from '@/api/members/ads'
+import { deleteAds } from '@/api/ads'
 
 export default function PartnerWaitingAds() {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const {
     isLoading,
     data: ads,
@@ -32,15 +38,24 @@ export default function PartnerWaitingAds() {
     }
   )
 
+  const { mutate } = useMutation(
+    async (id) => await deleteAds(id),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          'partner',
+          'ads',
+          'waiting',
+        ])
+      },
+    }
+  )
+
   const handleUpdate = (e, id) => {
     e.stopPropagation()
     navigate(`/product/update/campaign/${id}`)
   }
 
-  const handleMoveProduct = (e, id) => {
-    e.preventDefault()
-    navigate(`/product/${id}`)
-  }
   return (
     <>
       <Card className='flex justify-center min-h-[250px]'>
@@ -87,10 +102,9 @@ export default function PartnerWaitingAds() {
                 >
                   <TableCell
                     className='font-medium col-span-4'
-                    onClick={(e) =>
-                      handleMoveProduct(
-                        e,
-                        ad.advertisementId
+                    onClick={() =>
+                      navigate(
+                        `/product/${ad.advertisementId}`
                       )
                     }
                   >
@@ -128,8 +142,9 @@ export default function PartnerWaitingAds() {
                       <Pencil size={14} />
                     </Button>
                     <Button
-                      onClick={(e) =>
-                        handleUpdate(e, ad.advertisementId)
+                      variant='destructive'
+                      onClick={() =>
+                        mutate(ad.advertisementId)
                       }
                     >
                       <Trash2 size={14} />
