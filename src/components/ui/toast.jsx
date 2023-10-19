@@ -10,20 +10,18 @@ export default function AlertToast({ status, message }) {
 
   return (
     <>
-      <div>
-        <button onClick={notify}>Notify!</button>
-      </div>
       <ToastContainer
-        position='top-center'
-        autoClose={5000}
+        position='bottom-center'
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover
         theme='light'
+        limit={1}
       />
     </>
   )

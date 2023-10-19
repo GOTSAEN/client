@@ -15,6 +15,7 @@ import { getUserType } from '@/service/login-auth'
 import { useAuth } from '@/context/AuthContext'
 import { useMutation } from 'react-query'
 import { useCookies } from 'react-cookie'
+import { toast } from 'react-toastify'
 
 export default function LogIn() {
   const navigate = useNavigate()
@@ -38,6 +39,10 @@ export default function LogIn() {
         setCookie('Email', email)
         login()
         navigate('/')
+      },
+      onError: (err) => {
+        console.log(err.message, '야호')
+        toast.error('아이디 혹은 패스워드를 확인하세요')
       },
     }
   )
