@@ -15,12 +15,32 @@ export const fetchAdsByCategory = async (category) => {
 }
 
 export const newAds = (data) => {
-  console.log('newAds')
   return authAds
     .post('', data)
     .then((res) => {
       console.log(res)
       if (res.status === 200) return true
+      else new Response('Error', { status: 500 })
+    })
+    .catch(() => new Response('Error', { status: 500 }))
+}
+
+export const updateAds = (id, data) => {
+  return authAds
+    .patch(`/${id}`, data)
+    .then((res) => {
+      console.log(res)
+      if (res.status === 201) return true
+      else new Response('Error', { status: 500 })
+    })
+    .catch(() => new Response('Error', { status: 500 }))
+}
+
+export const deleteAds = (id) => {
+  return authAds
+    .delete(`/${id}`)
+    .then((res) => {
+      if (res.status === 204) return true
       else new Response('Error', { status: 500 })
     })
     .catch(() => new Response('Error', { status: 500 }))

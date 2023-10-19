@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   ContentState,
   EditorState,
+  convertFromHTML,
   convertToRaw,
 } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
@@ -13,23 +14,33 @@ function TextEditor({ name, onChange, value }) {
   )
 
   const onEditorStateChange = (newEditorState) => {
+    console.log(newEditorState.getCurrentContent())
     setEditorState(newEditorState)
-    console.log(newEditorState)
-    onChange(
-      name,
-      draftToHtml(
-        convertToRaw(editorState.getCurrentContent())
-      )
+    const contentState = newEditorState.getCurrentContent()
+    const contentStateStr = JSON.stringify(
+      convertToRaw(contentState)
     )
+    onChange(name, draftToHtml(JSON.parse(contentStateStr)))
   }
 
   useEffect(() => {
-    if (value) {
-      const input = EditorState.createWithContent(
-        ContentState.createFromText(value)
+    if (
+      value !==
+      draftToHtml(
+        convertToRaw(editorState.getCurrentContent())
       )
-      console.log(input)
-      // onEditorStateChange(input)
+    ) {
+      const blocksFromHTML = convertFromHTML(value)
+
+      const contentState =
+        ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap
+        )
+
+      const input =
+        EditorState.createWithContent(contentState)
+      setEditorState(input)
     }
   }, [value])
 
