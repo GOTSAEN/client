@@ -1,30 +1,25 @@
-import React from 'react'
+import { useDarkMode } from '@/context/DarkModeContext'
+import React, { useEffect, useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 export default function AlertToast({ status, message }) {
-  const notify = () =>
-    toast[status](message, {
-      icon: false,
-    })
+  const { darkMode } = useDarkMode()
 
   return (
-    <>
-      <div>
-        <button onClick={notify}>Notify!</button>
-      </div>
-      <ToastContainer
-        position='top-center'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='light'
-      />
-    </>
+    <ToastContainer
+      toastClassName={'pretendard'}
+      position='bottom-center'
+      autoClose={2000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss={false}
+      draggable
+      pauseOnHover
+      theme={darkMode ? 'dark' : 'light'}
+      limit={1}
+    />
   )
 }

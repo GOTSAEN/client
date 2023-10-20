@@ -22,6 +22,7 @@ import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
 import Profile from '@/pages/setting/profile'
 import PartnerWaitingAds from '@/pages/setting/partner/wating-ads'
 import Ads from '@/pages/Ads'
+import Welcome from '@/pages/Welcome'
 
 export default function Router() {
   return (
@@ -31,6 +32,7 @@ export default function Router() {
           <Route index path='/' element={<Home />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/welcome' element={<Welcome />} />
           <Route path='/ads/:category' element={<Ads />} />
           <Route
             path='/product/update/campaign/:campaignId'

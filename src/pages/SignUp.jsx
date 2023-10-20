@@ -19,6 +19,7 @@ import { AiOutlineEye } from 'react-icons/ai'
 import { newMember } from '@/api/members'
 import { useMutation } from 'react-query'
 import { useToast } from 'react-toastify'
+import { saveUserType } from '@/service/login-auth'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -36,7 +37,10 @@ export default function SignUp() {
   })
 
   const { mutate } = useMutation(() => newMember(form), {
-    onSuccess: () => navigate('/login'),
+    onSuccess: () => {
+      navigate('/welcome')
+      saveUserType('advertisement')
+    },
     // onError: () =>
     //   showToast({
     //     status: 'success',
