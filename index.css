@@ -1,9 +1,10 @@
-@tailwind base;
+@import ('./src/styles/font.css') @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    --toastify-font-family: inherit;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -75,14 +76,6 @@
   }
 }
 
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
   font-family: 'Pretendard-Regular';
   width: 100vw;
@@ -91,4 +84,8 @@ body {
 
 .Draftail-Editor .DraftEditor-root {
   height: 100vh !important;
+}
+
+.pretendard {
+  font-family: 'Pretendard-Regular';
 }
