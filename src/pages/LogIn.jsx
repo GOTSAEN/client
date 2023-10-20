@@ -11,7 +11,10 @@ import {
 import { cn } from '@/utils/lib'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { getUserType } from '@/service/login-auth'
+import {
+  getUserType,
+  saveUserType,
+} from '@/service/login-auth'
 import { useAuth } from '@/context/AuthContext'
 import { useMutation } from 'react-query'
 import { useCookies } from 'react-cookie'
@@ -41,8 +44,7 @@ export default function LogIn() {
         navigate('/')
       },
       onError: (err) => {
-        console.log(err.message, '야호')
-        toast.error('아이디 혹은 패스워드를 확인하세요')
+        toast.error(err.message)
       },
     }
   )
@@ -68,10 +70,16 @@ export default function LogIn() {
           <TabsList
             className={cn('grid w-full grid-cols-2')}
           >
-            <TabsTrigger value='youtuber'>
+            <TabsTrigger
+              value='youtuber'
+              onClick={() => saveUserType('youtuber')}
+            >
               유튜버
             </TabsTrigger>
-            <TabsTrigger value='advertisement'>
+            <TabsTrigger
+              value='advertisement'
+              onClick={() => saveUserType('advertisement')}
+            >
               광고주
             </TabsTrigger>
           </TabsList>

@@ -30,3 +30,6 @@ export function deleteUserSession() {
 export function getUserType() {
   return cookies.get('User')
 }
+export function saveUserType(type) {
+  return cookies.set('User', type)
+}
