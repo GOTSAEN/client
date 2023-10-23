@@ -17,6 +17,7 @@ export default function SearchBar() {
           className={cn(
             'grow-0 rounded-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-offset-0 max-sm:hidden'
           )}
+          placeholder='검색어를 입력하세요'
         />
         <Button
           type='submit'

@@ -11,20 +11,23 @@ import { Gift } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { cn } from '@/utils/lib'
 import { useAuth } from '@/context/AuthContext'
+import { Button } from '../ui/button'
 
 export default function ProductDropDownMenu() {
   const { user } = useAuth()
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={cn('px-2')}>
-        <Gift size={15} />
+      <DropdownMenuTrigger>
+        <Button variant='bright'>
+          <Gift size={15} />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>광고상품 관리</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {user.auth === 'advertisement' && (
           <>
-            <Link to='/setting/partner/ads/enroll'>
+            <Link to='/setting/partner/ads/waiting'>
               <DropdownMenuItem>모집 광고</DropdownMenuItem>
             </Link>
             <Link to='/setting/partner/ads/progress'>

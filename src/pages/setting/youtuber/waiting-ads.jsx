@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { cn } from '@/utils/lib'
 import { Card } from '../../../components/ui/card'
 import { Link } from 'react-router-dom'
+import { Trash2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function WaitingAds() {
   return (
@@ -19,43 +20,42 @@ export default function WaitingAds() {
         <Table>
           <TableHeader>
             <TableRow className='grid grid-cols-12 items-center'>
-              <TableHead className='col-span-5'>
+              <TableHead className='col-span-4'>
                 상품
               </TableHead>
-
+              <TableHead className='justify-center col-span-2'>
+                카테고리
+              </TableHead>
               <TableHead className='justify-center col-span-2'>
                 상태
               </TableHead>
-              <TableHead className='text-right col-span-3 justify-center'>
-                포인트
-              </TableHead>
+
               <TableHead className='text-center col-span-2 justify-center'>
                 신청일
               </TableHead>
+              <TableHead className='text-center col-span-2 justify-center'></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow className='grid grid-cols-12 px-1'>
-              <TableCell className='font-medium'>
+              <TableCell className='col-span-4'>
                 <img
                   src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
                   alt='thumbnail'
                   className='h-[50px] w-[50px] cover block rounded'
                 />
-              </TableCell>
-              <TableCell className='col-span-4'>
                 <Link
                   to='/product/1234'
-                  className='hover:underline underline-offset-2'
+                  className='hover:underline underline-offset-2 px-2'
                 >
                   [강남]서도촌 맛있는 돼지갈비/양념갈비
                 </Link>
               </TableCell>
               <TableCell className='justify-center col-span-2'>
-                확인중
+                맛집
               </TableCell>
-              <TableCell className='col-span-3 justify-center'>
-                500,000
+              <TableCell className='justify-center col-span-2'>
+                확인중
               </TableCell>
               <TableCell className='text-right right col-span-2 justify-center'>
                 <a
@@ -64,6 +64,11 @@ export default function WaitingAds() {
                 >
                   2023-09-08
                 </a>
+              </TableCell>
+              <TableCell className='col-span-2 justify-center gap-2'>
+                <Button onClick={() => {}}>
+                  <Trash2 size={14} />
+                </Button>
               </TableCell>
             </TableRow>
           </TableBody>

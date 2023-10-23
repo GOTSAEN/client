@@ -11,12 +11,15 @@ import { Link } from 'react-router-dom'
 import { cn } from '@/utils/lib'
 import { UserCircle2, LogOut } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
+import { Button } from '../ui/button'
 export default function UserDropDownMenu() {
   const { logout, user } = useAuth()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={cn('flex')}>
-        <UserCircle2 size={15} />
+        <Button variant='bright'>
+          <UserCircle2 size={15} />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>

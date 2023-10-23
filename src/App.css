@@ -1,4 +1,5 @@
 @import './components/common/TextEditor.css';
+@import ('./src/styles/font.css');
 .main {
   height: calc(100vh - 137px);
 }

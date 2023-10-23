@@ -99,7 +99,7 @@ export default function Router() {
               element={<PartnerProgressAds />}
             />
             <Route
-              path='ads/enroll'
+              path='ads/waiting'
               element={<PartnerWaitingAds />}
             />
             <Route

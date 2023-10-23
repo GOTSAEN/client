@@ -23,11 +23,8 @@ export default function PastAds() {
                 상품
               </TableHead>
 
-              <TableHead className='justify-center col-span-2'>
-                상태
-              </TableHead>
-              <TableHead className='text-right justify-center col-span-3'>
-                포인트
+              <TableHead className='text-right justify-center col-span-2'>
+                카테고리
               </TableHead>
               <TableHead className='text-center col-span-2 justify-center'>
                 URL
@@ -51,11 +48,9 @@ export default function PastAds() {
                   [강남]서도촌 맛있는 돼지갈비/양념갈비
                 </Link>
               </TableCell>
-              <TableCell className='justify-center col-span-2'>
-                완료
-              </TableCell>
-              <TableCell className='col-span-3 justify-center'>
-                500,000
+
+              <TableCell className='col-span-2 justify-center'>
+                맛집
               </TableCell>
               <TableCell className='text-right right col-span-2 justify-center'>
                 <a
