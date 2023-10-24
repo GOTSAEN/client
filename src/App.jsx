@@ -28,7 +28,7 @@ function App() {
                 <Header />
                 <HorizontalMenuBar />
               </div>
-              <main className='relative main w-full max-w-[1400px] z-10 mx-auto '>
+              <main className='relative main w-full max-w-[1400px] z-10 mx-auto p-2'>
                 <Outlet />
                 <AlertToast />
               </main>

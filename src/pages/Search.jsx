@@ -28,9 +28,9 @@ export default function SearchPage() {
     <main>
       {isLoading && <p> loading </p>}
       {error && <p> error </p>}
-      <div className='py-2 flex items-end'>
-        <h2 className='text-xl flex items-center w-fit bg-muted py-2 px-4'>
-          <Search size={20} className='mr-2' />
+      <div className='flex items-end'>
+        <h2 className='text-lg font-semibold flex items-center w-fit bg-muted py-2 px-4'>
+          <Search size={20} className='mr-1' />
           {keyword}
         </h2>
         <p className='text-muted-foreground text-sm p-2 w-fit'>
@@ -38,20 +38,20 @@ export default function SearchPage() {
         </p>
       </div>
 
-      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-2'>
-        {data?.data.length ? (
-          data.data?.map((ads) => (
+      {data?.data.length ? (
+        <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-2'>
+          {data.data?.map((ads) => (
             <AdsCard
               adsCardInfo={ads}
               key={ads.advertisementId}
             />
-          ))
-        ) : (
-          <p className='py-12 text-center '>
-            해당 키워드로 검색된 결과가 없습니다🥲
-          </p>
-        )}
-      </section>
+          ))}
+        </section>
+      ) : (
+        <p className='py-12 text-center '>
+          해당 키워드로 검색된 결과가 없습니다🥲
+        </p>
+      )}
     </main>
   )
 }

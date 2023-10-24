@@ -43,7 +43,7 @@ export default function Home({ history, location }) {
   }, [location, history])
 
   return (
-    <section>
+    <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
       {ads?.length > 0 &&
         ads.map((ad) => (
           <AdsCard

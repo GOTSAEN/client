@@ -8,7 +8,7 @@ export default function Logo() {
       className={`text-center text-xl font-bold logo-font ${styles['logo-font']}`}
       onClick={() => navigate('/')}
     >
-      유<span className='text-neutral-600'>애드</span>
+      유<span className='text-muted-foreground'>애드</span>
     </h1>
   )
 }
