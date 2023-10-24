@@ -10,7 +10,7 @@ export default function PartnerMenu() {
   return (
     <>
       <NavigationMenuItem className='w-full'>
-        <Link to={url + 'enroll'} legacyBehavior passHref>
+        <Link to={url + 'waiting'} legacyBehavior passHref>
           <NavigationMenuLink className={navigation_styles}>
             등록 광고
           </NavigationMenuLink>

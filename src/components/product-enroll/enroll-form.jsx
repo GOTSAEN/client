@@ -61,7 +61,7 @@ export default function EnrollForm() {
         'ads',
         'waiting',
       ])
-      navigate('/setting/partner/ads/enroll')
+      navigate('/setting/partner/ads/waiting')
     },
   })
   const updateAd = useMutation(
@@ -73,7 +73,7 @@ export default function EnrollForm() {
           'ads',
           'waiting',
         ])
-        navigate('/setting/partner/ads/enroll')
+        navigate('/setting/partner/ads/waiting')
       },
     }
   )

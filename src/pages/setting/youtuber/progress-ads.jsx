@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -25,7 +24,7 @@ export default function ProgressAds() {
                 상품
               </TableHead>
               <TableHead className='text-right col-span-2 justify-center'>
-                포인트
+                카테고리
               </TableHead>
               <TableHead className='text-center col-span-5 '>
                 URL
@@ -51,7 +50,7 @@ export default function ProgressAds() {
               </TableCell>
 
               <TableCell className='col-span-2 justify-center'>
-                500,000
+                맛집
               </TableCell>
               <TableCell className='text-right right col-span-5 justify-center gap-1'>
                 <Input />

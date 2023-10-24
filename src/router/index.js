@@ -23,6 +23,7 @@ import Profile from '@/pages/setting/profile'
 import PartnerWaitingAds from '@/pages/setting/partner/wating-ads'
 import Ads from '@/pages/Ads'
 import Welcome from '@/pages/Welcome'
+import Search from '@/pages/Search'
 
 export default function Router() {
   return (
@@ -32,6 +33,7 @@ export default function Router() {
           <Route index path='/' element={<Home />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/search' element={<Search />} />
           <Route path='/welcome' element={<Welcome />} />
           <Route path='/ads/:category' element={<Ads />} />
           <Route
@@ -99,7 +101,7 @@ export default function Router() {
               element={<PartnerProgressAds />}
             />
             <Route
-              path='ads/enroll'
+              path='ads/waiting'
               element={<PartnerWaitingAds />}
             />
             <Route

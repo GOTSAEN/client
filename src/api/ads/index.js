@@ -47,7 +47,7 @@ export const deleteAds = (id) => {
 }
 
 export const fetchAdsById = async (id) => {
-  const data = await authAds
+  const data = await ads
     .get(`/${id}`)
     .then((res) => res.data)
     .catch((e) => console.log(e))
