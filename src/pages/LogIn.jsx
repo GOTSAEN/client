@@ -21,6 +21,7 @@ import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 
 export default function LogIn() {
+  const [popup, setPopup] = useState()
   const navigate = useNavigate()
   const [cookies, setCookie] = useCookies()
   const { login } = useAuth()
@@ -58,11 +59,37 @@ export default function LogIn() {
     mutate()
   }
 
+  const handleOAuth = () => {
+    const width = 500 // 팝업의 가로 길이: 500
+    const height = 400 // 팝업의 세로 길이 : 500
+    const left =
+      window.screenX + (window.outerWidth - width) / 2
+    const top =
+      window.screenY + (window.outerHeight - height) / 2
+    const popup = window.open(
+      'http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google',
+      '구글로 로그인',
+      `width=${width},height=${height},left=${left},top=${top}`
+    )
+    setPopup(popup)
+  }
   useEffect(() => {
     getUserType()
       ? setAuth(getUserType())
       : setAuth('youtuber')
   }, [])
+
+  useEffect(() => {
+    if (!popup) return
+    // popup으로부터 data를 전달 받을 listener 등록
+    console.log(popup)
+    if (popup.location?.pathname === '/client')
+      popup.close()
+
+    return () => {
+      setPopup(null)
+    }
+  }, [popup])
   return (
     <section className='h-full flex justify-center items-center'>
       {auth && (
@@ -89,10 +116,11 @@ export default function LogIn() {
                 'flex justify-center items-center min-h-[300px] px-10  shadow-lg'
               )}
             >
-              <Button className={cn('w-full')}>
-                <Link to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'>
-                  유튜브 아이디로 로그인
-                </Link>
+              <Button
+                className={cn('w-full')}
+                onClick={handleOAuth}
+              >
+                유튜브 아이디로 로그인
               </Button>
             </Card>
           </TabsContent>
