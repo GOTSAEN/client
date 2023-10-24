@@ -108,12 +108,15 @@ export default function Profile() {
               <Link to="/">Update Profile</Link>
             </Button>
           </div>
+<<<<<<< HEAD
           <Button
             className='w-32'
             onClick={handleUpdateProfile}
           >
             <Link to='/'>Update Profile</Link>
           </Button>
+=======
+>>>>>>> 2297407 (회원정보 불러오기)
         )}
       </div>
     </>
