@@ -60,6 +60,10 @@ export default function SearchBar() {
           <Input
             placeholder='검색어를 입력하세요'
             className='text-xs w-full'
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') handleSearch()
+            }}
           />
           <Button variant='outline' className='px-2'>
             <Search size={14} />
