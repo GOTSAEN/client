@@ -2,6 +2,7 @@
   "name": "genius-cli",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://youad.store/client/",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
@@ -32,6 +33,7 @@
     "draftjs-to-html": "^0.9.1",
     "http-proxy-middleware": "^2.0.6",
     "lucide-react": "^0.274.0",
+    "netlify-cli": "^16.9.2",
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
