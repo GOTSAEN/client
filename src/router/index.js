@@ -27,7 +27,7 @@ import Search from '@/pages/Search'
 
 export default function Router() {
   return (
-    <BrowserRouter basename='/client'>
+    <BrowserRouter>
       <Routes>
         <Route element={<App />}>
           <Route index path='/' element={<Home />} />
