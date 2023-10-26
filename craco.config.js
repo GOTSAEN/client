@@ -12,12 +12,4 @@ module.exports = {
       '@utils': path.resolve(__dirname, 'src/lib/utils'),
     },
   },
-  style: {
-    postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
-    },
-  },
 }
