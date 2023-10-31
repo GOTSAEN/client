@@ -10,7 +10,6 @@ import {
   Tabs,
   TabsContent,
   TabsList,
-  TabsTrigger,
 } from '@/components/ui/tabs'
 import { cn } from '@/utils/lib'
 import React, { useState } from 'react'
@@ -18,8 +17,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye } from 'react-icons/ai'
 import { newMember } from '@/api/members'
 import { useMutation } from 'react-query'
-import { useToast } from 'react-toastify'
+import { toast, useToast } from 'react-toastify'
 import { saveUserType } from '@/service/login-auth'
+import { checkSameValue } from '@/service/common'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -56,7 +56,8 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    mutate()
+    if (checkSameValue(form.password, rePassword)) mutate()
+    else toast.error('패스워드가 일치하지 않습니다')
   }
   const togglePasswordVisibility = (e) => {
     e.preventDefault()
@@ -71,7 +72,10 @@ export default function SignUp() {
   return (
     <section className='h-full flex justify-center items-center'>
       <form onSubmit={handleSubmit} className=''>
-        <Tabs defaultValue='account' className='w-[450px]'>
+        <Tabs
+          defaultValue='account'
+          className='w-[450px] max-sm:w-fit'
+        >
           <TabsContent value='account'>
             <Card>
               <CardHeader className={cn('items-center')}>
@@ -86,6 +90,7 @@ export default function SignUp() {
                     name='email'
                     placeholder='이메일'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className='flex items-center gap-1'>
@@ -97,6 +102,7 @@ export default function SignUp() {
                     name='password'
                     placeholder='비밀번호'
                     onChange={handleChange}
+                    required
                   />
                   <Button
                     onClick={togglePasswordVisibility}
@@ -117,9 +123,11 @@ export default function SignUp() {
                     onChange={(e) =>
                       setRePassword(e.target.value)
                     }
+                    required
                   />
                   <Button
                     onClick={toggleRePasswordVisibility}
+                    required
                   >
                     <AiOutlineEye />
                   </Button>
@@ -130,6 +138,7 @@ export default function SignUp() {
                     name='businessName'
                     placeholder='상호명'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className='space-y-1'>
@@ -138,6 +147,7 @@ export default function SignUp() {
                     name='businessAddress'
                     placeholder='사업장 주소'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <Button className={cn('w-full')}>

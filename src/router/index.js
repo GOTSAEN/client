@@ -24,6 +24,7 @@ import PartnerWaitingAds from '@/pages/setting/partner/wating-ads'
 import Ads from '@/pages/Ads'
 import Welcome from '@/pages/Welcome'
 import Search from '@/pages/Search'
+import NoAuthRoutes from '@/pages/NoAuthRoutes'
 
 export default function Router() {
   return (
@@ -31,8 +32,22 @@ export default function Router() {
       <Routes>
         <Route element={<App />}>
           <Route index path='/' element={<Home />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route
+            path='/login'
+            element={
+              <NoAuthRoutes>
+                <LogIn />
+              </NoAuthRoutes>
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <NoAuthRoutes>
+                <SignUp />
+              </NoAuthRoutes>
+            }
+          />
           <Route path='/search' element={<Search />} />
           <Route path='/welcome' element={<Welcome />} />
           <Route path='/ads/:category' element={<Ads />} />

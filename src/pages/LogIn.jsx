@@ -93,7 +93,10 @@ export default function LogIn() {
   return (
     <section className='h-full flex justify-center items-center'>
       {auth && (
-        <Tabs defaultValue={auth} className='w-[450px]'>
+        <Tabs
+          defaultValue={auth}
+          className='w-[450px] max-sm:w-full'
+        >
           <TabsList
             className={cn('grid w-full grid-cols-2')}
           >
