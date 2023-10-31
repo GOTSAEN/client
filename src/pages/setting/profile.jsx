@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { getMember } from "@/api/members";
 
@@ -25,15 +26,27 @@ export default function Profile() {
     newInputErrors.pop();
     setInputErrors(newInputErrors);
   };
+=======
+import { getMember, updateMember } from "@/api/members";
+import { useNavigate } from "react-router-dom";
+
+export default function Profile() {
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputName, setInputName] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
+
+  const navigate = useNavigate();
+>>>>>>> 62e87a3 (회원정보 수정 api)
 
   const {
     isLoading,
     data: memberData,
     error,
   } = useQuery(["members"], getMember, {
-    staleTime: 1000 * 60 * 24,
+    refetchOnWindowFocus: false,
   });
 
+<<<<<<< HEAD
   const handleUpdateProfile = () => {
     const newInputErrors = inputValues.map((value) => value.trim() === "");
     setInputErrors(newInputErrors);
@@ -41,6 +54,26 @@ export default function Profile() {
     if (newInputErrors.some((error) => error)) {
       return;
     }
+=======
+  useEffect(() => {
+    if (memberData) {
+      setInputEmail(memberData.email);
+      setInputName(memberData.businessName);
+      setInputAddress(memberData.businessAddress);
+    }
+  }, [memberData]);
+
+  const handleUpdateProfile = async () => {
+    if (inputEmail !== "" && inputName !== "" && inputAddress !== "") {
+      await updateMember({
+        email: inputEmail,
+        businessName: inputName,
+        businessAddress: inputAddress,
+      }).then(() => {
+        navigate("/");
+      });
+    }
+>>>>>>> 62e87a3 (회원정보 수정 api)
   };
 
   return (
@@ -51,19 +84,43 @@ export default function Profile() {
         </div>
         {isLoading && <p>로딩중</p>}
         {error && <p>에러</p>}
-        {memberData && (
+        {
           <div className="flex justify-center flex-col mt-8 gap-5">
             <div className="flex justify-center flex-col gap-2">
               <h3>이메일</h3>
+<<<<<<< HEAD
               <Input value={memberData.email} onChange={(e) => {}} />
+=======
+              <Input
+                value={inputEmail}
+                onChange={(e) => {
+                  setInputEmail(e.target.value);
+                }}
+              />
+>>>>>>> 62e87a3 (회원정보 수정 api)
             </div>
             <div className="flex justify-center flex-col gap-2">
               <h3>상호명</h3>
-              <Input value={memberData.businessName} onChange={(e) => {}} />
+              <Input
+                value={inputName}
+                onChange={(e) => {
+                  setInputName(e.target.value);
+                }}
+              />
             </div>
             <div className="flex justify-center flex-col gap-2">
               <h3>사업장 주소</h3>
+              <Input
+                value={inputAddress}
+                onChange={(e) => {
+                  setInputAddress(e.target.value);
+                }}
+              />
+              {inputAddress === "" && (
+                <p className="text-red-500">칸이 비어 있습니다.</p>
+              )}
 
+<<<<<<< HEAD
               {Array.from({ length: inputCount }).map((_, index) => (
                 <div key={index}>
                   <Input
@@ -98,6 +155,14 @@ export default function Profile() {
             </div>
           </div>
         )}
+=======
+              <Button className="w-32" onClick={handleUpdateProfile}>
+                Update Profile
+              </Button>
+            </div>
+          </div>
+        }
+>>>>>>> 62e87a3 (회원정보 수정 api)
       </div>
     </>
   );
