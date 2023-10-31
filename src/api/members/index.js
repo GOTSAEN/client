@@ -1,13 +1,20 @@
-import { members, authMembers } from '..'
-import { ApiResponse, ErrorResponse } from '../response'
+import { members, authMembers } from "..";
+import { ApiResponse, ErrorResponse } from "../response";
 
 export const newMember = (data) => {
   return members
-    .post('', data)
+    .post("", data)
     .then((res) => ApiResponse(res))
-    .catch((e) => ErrorResponse(e))
-}
+    .catch((e) => ErrorResponse(e));
+};
 
 export const getMember = () => {
-  return authMembers.get('').then((res) => res.data)
-}
+  return authMembers.get("").then((res) => res.data);
+};
+
+export const updateMember = (data) => {
+  return authMembers
+    .patch("", data)
+    .then((res) => ApiResponse(res))
+    .catch((e) => ErrorResponse(e));
+};
