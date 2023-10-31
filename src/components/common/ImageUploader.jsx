@@ -5,10 +5,11 @@ import { Button } from '../ui/button'
 
 export default function ImageUploader() {
   const [images, setImages] = React.useState([])
-  const maxNumber = 69
+  const maxNumber = 4
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
     setImages(imageList)
+    console.log(imageList)
   }
   return (
     <div className='App'>
@@ -18,6 +19,7 @@ export default function ImageUploader() {
         onChange={onChange}
         maxNumber={maxNumber}
         dataURLKey='data_url'
+        acceptType={['jpg', 'png']}
       >
         {({
           imageList,

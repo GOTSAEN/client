@@ -3,7 +3,6 @@ import { Cookies } from 'react-cookie'
 
 const cookies = new Cookies()
 export function setInterceptors(instance) {
-  console.log(instance)
   // Add a request interceptor
   instance.interceptors.request.use(
     function (config) {
