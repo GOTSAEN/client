@@ -85,7 +85,7 @@ export default function EnrollForm() {
   function handleCreate(e) {
     e.preventDefault()
     console.log(imageData)
-    // createAd.mutateAsync()
+    createAd.mutateAsync()
   }
   function handleUpdate(e) {
     e.preventDefault()

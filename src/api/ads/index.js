@@ -1,4 +1,5 @@
 import { ads, authAds } from '..'
+import { ApiResponse, ErrorResponse } from '../response'
 
 export const fetchAds = async () => {
   return await ads
@@ -18,22 +19,18 @@ export const newAds = (data) => {
   return authAds
     .post('', data)
     .then((res) => {
-      console.log(res)
-      if (res.status === 200) return true
-      else new Response('Error', { status: 500 })
+      ApiResponse(res)
     })
-    .catch(() => new Response('Error', { status: 500 }))
+    .catch((e) => ErrorResponse(e))
 }
 
 export const updateAds = (id, data) => {
   return authAds
     .patch(`/${id}`, data)
     .then((res) => {
-      console.log(res)
-      if (res.status === 201) return true
-      else new Response('Error', { status: 500 })
+      ApiResponse(res)
     })
-    .catch(() => new Response('Error', { status: 500 }))
+    .catch((e) => ErrorResponse(e))
 }
 
 export const deleteAds = (id) => {
