@@ -3,14 +3,12 @@ import { useQuery } from "react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { getMember, updateMember } from "@/api/members";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputName, setInputName] = useState("");
   const [inputAddress, setInputAddress] = useState("");
-
-  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -35,7 +33,7 @@ export default function Profile() {
         businessName: inputName,
         businessAddress: inputAddress,
       }).then(() => {
-        navigate("/");
+        toast.success("회원정보가 수정되었습니다.");
       });
     }
   };
