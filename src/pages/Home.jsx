@@ -26,17 +26,18 @@ export default function Home({ history, location }) {
       })
 
       try {
-        const response = await fetch(
-          `${authUri}?code=${code}`
-        )
+        console.log('????')
+        const response = await fetch('google')
         console.log('response', response)
         const data = await response.json()
-
+        console.log(data)
         localStorage.setItem('token', data.jwt)
         localStorage.setItem('ProfileURL', data.avatar_url)
 
         history.push('/')
-      } catch (error) {}
+      } catch (error) {
+        console.log('err')
+      }
     }
 
     getToken()
