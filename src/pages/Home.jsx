@@ -1,12 +1,15 @@
-import { Button } from '@/components/ui/button'
 import React, { useEffect } from 'react'
 import AdsCard from '@/components/AdsCard'
 import { useQuery } from 'react-query'
 import { fetchAds } from '@/api/ads'
 import qs from 'qs'
+import { useLocation, useParams } from 'react-router-dom'
+import { saveUserSession } from '@/service/login-auth'
+import { Cookies } from 'react-cookie'
 
-export default function Home({ history, location }) {
-  const authUri = 'https://youad.store:3000/client'
+export default function Home() {
+  const location = useLocation()
+  const cookies = new Cookies()
   const {
     isLoading,
     data: ads,
@@ -19,29 +22,23 @@ export default function Home({ history, location }) {
     }
   )
   useEffect(() => {
-    const getToken = async () => {
-      console.log(location)
-      const { code } = qs.parse(location?.search, {
-        ignoreQueryPrefix: true,
-      })
+    const urlSearchParams = new URLSearchParams(
+      location.search.split('?')[1]
+    )
+    const authorization =
+      urlSearchParams.get('Access_token')
+    const email = urlSearchParams.get('Email')
+    const usertype = urlSearchParams.get('UserType')
+    const cookie = cookies.get('Refresh')
 
-      try {
-        console.log('????')
-        const response = await fetch('google')
-        console.log('response', response)
-        const data = await response.json()
-        console.log(data)
-        localStorage.setItem('token', data.jwt)
-        localStorage.setItem('ProfileURL', data.avatar_url)
-
-        history.push('/')
-      } catch (error) {
-        console.log('err')
-      }
-    }
-
-    getToken()
-  }, [location, history])
+    saveUserSession(
+      {
+        authorization,
+        usertype,
+      },
+      { email }
+    )
+  }, [location])
 
   return (
     <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>

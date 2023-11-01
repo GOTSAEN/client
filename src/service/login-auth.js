@@ -8,6 +8,7 @@ export async function saveUserSession(
   },
   { email: Email }
 ) {
+  console.log('object')
   cookies.set(SESSIONID)
   cookies.set(RENEW)
   cookies.set(User)

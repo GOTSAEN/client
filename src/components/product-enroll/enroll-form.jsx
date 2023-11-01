@@ -38,6 +38,7 @@ export default function EnrollForm() {
   const param = useParams()
   const queryClient = useQueryClient()
   const [form, setForm] = useState(init)
+  const [advertisementId, setAdvertisementId] = useState(0)
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: '새 상품 등록',
     button: '작성 완료',
@@ -59,13 +60,14 @@ export default function EnrollForm() {
   )
 
   const createAd = useMutation(() => newAds(form), {
-    onSuccess: () => {
+    onSuccess: (res) => {
+      setAdvertisementId(res?.data)
       queryClient.invalidateQueries([
         'partner',
         'ads',
         'waiting',
       ])
-      navigate('/setting/partner/ads/waiting')
+      // navigate('/setting/partner/ads/waiting')
     },
   })
   const updateAd = useMutation(
@@ -201,7 +203,7 @@ export default function EnrollForm() {
           value={form.offer}
           onChange={handleChange}
         />
-        <ImageUploader />
+        <ImageUploader advertisementId={advertisementId} />
         <Input
           type='file'
           accept='image/jpg,impge/png,image/jpeg,image/gif'

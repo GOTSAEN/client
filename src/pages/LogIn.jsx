@@ -126,7 +126,9 @@ export default function LogIn() {
                 className={cn('w-full')}
                 onClick={handleOAuth}
               >
-                유튜브 아이디로 로그인
+                <Link to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'>
+                  유튜브 아이디로 로그인
+                </Link>
               </Button>
             </Card>
           </TabsContent>

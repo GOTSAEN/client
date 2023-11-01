@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import ImageUploading from 'react-images-uploading'
 import { Button } from '../ui/button'
 
-export default function ImageUploader() {
+export default function ImageUploader(advertisementId) {
   const [images, setImages] = React.useState([])
   const maxNumber = 4
   const onChange = (imageList, addUpdateIndex) => {
@@ -11,6 +11,12 @@ export default function ImageUploader() {
     setImages(imageList)
     console.log(imageList)
   }
+
+  useEffect(() => {
+    if (advertisementId > 0) {
+      console.log('?')
+    }
+  }, [advertisementId])
   return (
     <div className='App'>
       <ImageUploading
