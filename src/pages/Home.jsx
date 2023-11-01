@@ -3,12 +3,19 @@ import AdsCard from '@/components/AdsCard'
 import { useQuery } from 'react-query'
 import { fetchAds } from '@/api/ads'
 import qs from 'qs'
-import { useLocation, useParams } from 'react-router-dom'
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom'
 import { saveUserSession } from '@/service/login-auth'
 import { Cookies } from 'react-cookie'
+import { useAuth } from '@/context/AuthContext'
 
 export default function Home() {
+  const { login } = useAuth()
   const location = useLocation()
+  const navigate = useNavigate()
   const cookies = new Cookies()
   const {
     isLoading,
@@ -22,22 +29,26 @@ export default function Home() {
     }
   )
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(
-      location.search.split('?')[1]
-    )
-    const authorization =
-      urlSearchParams.get('Access_token')
-    const email = urlSearchParams.get('Email')
-    const usertype = urlSearchParams.get('UserType')
-    const cookie = cookies.get('Refresh')
+    if (location.search.includes('?')) {
+      console.log('동작')
+      const urlSearchParams = new URLSearchParams(
+        location.search.split('?')[1]
+      )
 
-    saveUserSession(
-      {
-        authorization,
-        usertype,
-      },
-      { email }
-    )
+      const authorization =
+        urlSearchParams.get('Access_token')
+      const email = urlSearchParams.get('Email')
+      const usertype = urlSearchParams.get('UserType')
+      const cookie = cookies.get('Refresh')
+
+      saveUserSession(
+        {
+          authorization,
+          usertype,
+        },
+        { email }
+      )
+    }
   }, [location])
 
   return (
