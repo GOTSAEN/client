@@ -30,16 +30,19 @@ const init = {
   precaution: "",
 };
 export default function EnrollForm() {
-  const navigate = useNavigate();
-  const param = useParams();
-  const queryClient = useQueryClient();
-  const [form, setForm] = useState(init);
+  const navigate = useNavigate()
+  const param = useParams()
+  const queryClient = useQueryClient()
+  const [form, setForm] = useState(init)
+  const [advertisementId, setAdvertisementId] = useState(0)
+
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: "새 상품 등록",
     button: "작성 완료",
     handleSubmit: handleCreate,
   });
 
+  const [imageData, setImageData] = useState(null)
   const {
     isLoading,
     data: categories,
@@ -64,8 +67,8 @@ export default function EnrollForm() {
   });
 
   function handleCreate(e) {
-    e.preventDefault();
-    createAd.mutateAsync();
+    e.preventDefault()
+    createAd.mutateAsync()
   }
   function handleUpdate(e) {
     e.preventDefault();
@@ -80,6 +83,12 @@ export default function EnrollForm() {
   const handleDataChange = (name, value) => {
     setForm({ ...form, [name]: value });
   };
+
+  const onChangeImage = (e) => {
+    const img = e.target.files[0]
+    imageData.append('file', img)
+    console.log(imageData)
+  }
 
   useEffect(() => {
     if (param.campaignId) {
@@ -115,6 +124,7 @@ export default function EnrollForm() {
           name="productName"
           value={form.productName}
           onChange={handleChange}
+          required
         />
         <Input
           placeholder="모집인원"
@@ -122,6 +132,7 @@ export default function EnrollForm() {
           name="numberOfRecruit"
           onChange={handleChange}
           value={form.numberOfRecruit}
+          required
         />
         <div className="flex gap-2">
           <DatePicker
@@ -129,12 +140,14 @@ export default function EnrollForm() {
             name="startDate"
             value={form.startDate}
             onChange={handleDataChange}
+            required
           />
           <DatePicker
             placeholder="종료날짜"
             name="endDate"
             value={form.endDate}
             onChange={handleDataChange}
+            required
           />
         </div>
         <Select
@@ -160,9 +173,19 @@ export default function EnrollForm() {
           value={form.offer}
           onChange={handleChange}
         />
-        <ImageUploader />
-        <div className="py-2">
-          <Label htmlFor="explain" className={cn("text-md my-2 block")}>
+        <ImageUploader advertisementId={advertisementId} />
+        <Input
+          type='file'
+          accept='image/jpg,impge/png,image/jpeg,image/gif'
+          name='images'
+          onChange={onChangeImage}
+          multiple='multiple'
+        />
+        <div className='py-2'>
+          <Label
+            htmlFor='explain'
+            className={cn('text-md my-2 block')}
+          >
             🎁상품 설명
           </Label>
           <TextEditor

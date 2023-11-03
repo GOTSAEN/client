@@ -10,7 +10,6 @@ import {
   Tabs,
   TabsContent,
   TabsList,
-  TabsTrigger,
 } from '@/components/ui/tabs'
 import { cn } from '@/utils/lib'
 import React, { useState } from 'react'
@@ -18,8 +17,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye } from 'react-icons/ai'
 import { newMember } from '@/api/members'
 import { useMutation } from 'react-query'
-import { useToast } from 'react-toastify'
+import { toast, useToast } from 'react-toastify'
 import { saveUserType } from '@/service/login-auth'
+import {
+  checkSameValue,
+  validatePassword,
+} from '@/service/common'
+import { ErrorResponse } from '@/api/response'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -41,12 +45,9 @@ export default function SignUp() {
       navigate('/welcome')
       saveUserType('advertisement')
     },
-    // onError: () =>
-    //   showToast({
-    //     status: 'success',
-    //     message:
-    //       '패스워드는 문자+숫자로 구성된 8자리 이상이어야 합니다.',
-    //   }),
+    onError: (err) => {
+      toast.error(err.message)
+    },
   })
 
   const handleChange = (e) => {
@@ -56,6 +57,17 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!checkSameValue(form.password, rePassword)) {
+      toast.warning('패스워드가 일치하지 않습니다')
+      return
+    }
+
+    if (!validatePassword(form.password)) {
+      toast.warning(
+        '패스워드는 8자리 이상의 숫자와 문자 조합입니다'
+      )
+    }
+
     mutate()
   }
   const togglePasswordVisibility = (e) => {
@@ -71,7 +83,10 @@ export default function SignUp() {
   return (
     <section className='h-full flex justify-center items-center'>
       <form onSubmit={handleSubmit} className=''>
-        <Tabs defaultValue='account' className='w-[450px]'>
+        <Tabs
+          defaultValue='account'
+          className='w-[450px] max-sm:w-fit'
+        >
           <TabsContent value='account'>
             <Card>
               <CardHeader className={cn('items-center')}>
@@ -86,6 +101,7 @@ export default function SignUp() {
                     name='email'
                     placeholder='이메일'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className='flex items-center gap-1'>
@@ -97,6 +113,7 @@ export default function SignUp() {
                     name='password'
                     placeholder='비밀번호'
                     onChange={handleChange}
+                    required
                   />
                   <Button
                     onClick={togglePasswordVisibility}
@@ -117,9 +134,11 @@ export default function SignUp() {
                     onChange={(e) =>
                       setRePassword(e.target.value)
                     }
+                    required
                   />
                   <Button
                     onClick={toggleRePasswordVisibility}
+                    required
                   >
                     <AiOutlineEye />
                   </Button>
@@ -130,6 +149,7 @@ export default function SignUp() {
                     name='businessName'
                     placeholder='상호명'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className='space-y-1'>
@@ -138,6 +158,7 @@ export default function SignUp() {
                     name='businessAddress'
                     placeholder='사업장 주소'
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <Button className={cn('w-full')}>

@@ -13,8 +13,6 @@ export default function ProductContent({ data }) {
     offer,
   } = data
 
-  console.log(productName)
-
   const label_style = 'font-semibold inline-block mr-4'
   return (
     <article className='px-4 grow flex flex-col'>

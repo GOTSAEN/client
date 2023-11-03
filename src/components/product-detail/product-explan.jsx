@@ -5,7 +5,6 @@ export default function ProductExplain({ data }) {
   const { precaution, productDescription } = data
   const labelTitle = 'text-lg font-semibold py-4'
 
-  console.log(precaution, productDescription)
   return (
     <main className='py-5 flex flex-col gap-12 px-2'>
       <div>

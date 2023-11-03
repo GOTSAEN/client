@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom'
 
 export default function ProductDetail() {
   const params = useParams()
-  console.log(params.id)
 
   const { data, isLoading, error } = useQuery(
     ['ads', `${params.id}`],

@@ -23,6 +23,7 @@ import { toast } from 'react-toastify'
 export default function LogIn() {
   const [popup, setPopup] = useState()
   const navigate = useNavigate()
+
   const [cookies, setCookie] = useCookies()
   const { login } = useAuth()
   const [form, setForm] = useState({
@@ -60,18 +61,7 @@ export default function LogIn() {
   }
 
   const handleOAuth = () => {
-    const width = 500 // 팝업의 가로 길이: 500
-    const height = 400 // 팝업의 세로 길이 : 500
-    const left =
-      window.screenX + (window.outerWidth - width) / 2
-    const top =
-      window.screenY + (window.outerHeight - height) / 2
-    const popup = window.open(
-      'http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google',
-      '구글로 로그인',
-      `width=${width},height=${height},left=${left},top=${top}`
-    )
-    setPopup(popup)
+    // 'http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google',
   }
   useEffect(() => {
     getUserType()
@@ -82,18 +72,34 @@ export default function LogIn() {
   useEffect(() => {
     if (!popup) return
     // popup으로부터 data를 전달 받을 listener 등록
-    console.log(popup)
-    if (popup.location?.pathname === '/client')
-      popup.close()
+    const timer = setInterval(() => {
+      if (!popup) {
+        timer && clearInterval(timer)
+        return
+      }
+      const currentUrl = popup.location.href
+      if (!currentUrl) {
+        return
+      }
+      const searchParams = new URL(currentUrl).searchParams
+      const code = searchParams.get('code')
 
-    return () => {
-      setPopup(null)
-    }
+      if (code) {
+        popup.close()
+        console.log(
+          `The popup URL has URL code param = ${code}`
+        )
+        // 가져온 code 로 다른 정보를 가져오는 API 호출
+      }
+    }, 500)
   }, [popup])
   return (
     <section className='h-full flex justify-center items-center'>
       {auth && (
-        <Tabs defaultValue={auth} className='w-[450px]'>
+        <Tabs
+          defaultValue={auth}
+          className='w-[450px] max-sm:w-full'
+        >
           <TabsList
             className={cn('grid w-full grid-cols-2')}
           >
@@ -120,7 +126,9 @@ export default function LogIn() {
                 className={cn('w-full')}
                 onClick={handleOAuth}
               >
-                유튜브 아이디로 로그인
+                <Link to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'>
+                  유튜브 아이디로 로그인
+                </Link>
               </Button>
             </Card>
           </TabsContent>
