@@ -25,6 +25,9 @@ export const ads = createInstanceNoAuth('advertisement')
 export const auth = createInstanceNoAuth('auth')
 export const members = createInstanceNoAuth('members')
 export const authMembers = createInstanceWithAuth('members')
+export const youtubers = createInstanceNoAuth('youtubers')
+export const authYoutubers =
+  createInstanceWithAuth('youtubers')
 export const partnerAds = createInstanceWithAuth(
   'members/advertisement'
 )
