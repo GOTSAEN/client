@@ -22,6 +22,7 @@ import {
 import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds, updateAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
+import { formatDate } from '@/service/common'
 
 const init = {
   productName: '',
@@ -67,7 +68,7 @@ export default function EnrollForm() {
         'ads',
         'waiting',
       ])
-      // navigate('/setting/partner/ads/waiting')
+      navigate('/setting/partner/ads/waiting')
     },
   })
   const updateAd = useMutation(
@@ -96,10 +97,13 @@ export default function EnrollForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
+
     setForm({ ...form, [name]: value })
   }
 
   const handleDataChange = (name, value) => {
+    if (name === 'startDate' || name === 'endDate')
+      value = formatDate(value)
     setForm({ ...form, [name]: value })
   }
 
