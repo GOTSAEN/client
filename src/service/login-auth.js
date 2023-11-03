@@ -1,18 +1,14 @@
 import { Cookies } from 'react-cookie'
 const cookies = new Cookies()
 export async function saveUserSession(
-  {
-    authorization: SESSIONID,
-    refresh: RENEW,
-    usertype: User,
-  },
-  { email: Email }
+  { authorization, refresh, usertype },
+  { email }
 ) {
-  console.log('object')
-  cookies.set(SESSIONID)
-  cookies.set(RENEW)
-  cookies.set(User)
-  cookies.set(Email)
+  console.log('object', authorization)
+  cookies.set('SESSIONID', authorization)
+  cookies.set('RENEW', refresh)
+  cookies.set('User', usertype)
+  cookies.set('Email', email)
 }
 
 export function getUser() {
