@@ -21,7 +21,7 @@ export default function ProductDetail() {
         <>
           <section className='lg:flex md:flex py-5 px-2'>
             <div className='lg:w-[600px] md:w-[480px] sm:w-full '>
-              <ImagesFetcher />
+              <ImagesFetcher images={data.imageUrls} />
             </div>
             {data && <ProductContent data={data} />}
           </section>
