@@ -2,9 +2,14 @@ import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import ImageUploading from 'react-images-uploading'
 import { Button } from '../ui/button'
+import { useMutation, useQueryClient } from 'react-query'
+import { postImage } from '@/api/ads'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-export default function ImageUploader(advertisementId) {
+export default function ImageUploader({ advertisementId }) {
   const [images, setImages] = React.useState([])
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const maxNumber = 4
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
@@ -12,9 +17,24 @@ export default function ImageUploader(advertisementId) {
     console.log(imageList)
   }
 
+  const sendImage = () => {
+    console.log('이미지 전송')
+    images.map((image) => {
+      const uploadFile = image.file
+      const formData = new FormData()
+      formData.append('file', uploadFile)
+      postImage(advertisementId, formData)
+    })
+    queryClient
+      .invalidateQueries(['partner', 'ads', 'waiting'])
+      .then(navigate('/setting/partner/ads/waiting'))
+  }
+
   useEffect(() => {
+    console.log(advertisementId)
     if (advertisementId > 0) {
-      console.log('?')
+      console.log('진입했습니다.')
+      sendImage()
     }
   }, [advertisementId])
   return (

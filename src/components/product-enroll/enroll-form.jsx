@@ -59,13 +59,8 @@ export default function EnrollForm() {
   )
 
   const createAd = useMutation(() => newAds(form), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([
-        'partner',
-        'ads',
-        'waiting',
-      ])
-      navigate('/setting/partner/ads/waiting')
+    onSuccess: (id) => {
+      setAdvertisementId(id)
     },
     onError: () => {
       console.log('?emfdj')
@@ -209,13 +204,7 @@ export default function EnrollForm() {
           onChange={handleChange}
         />
         <ImageUploader advertisementId={advertisementId} />
-        <Input
-          type='file'
-          accept='image/jpg,impge/png,image/jpeg,image/gif'
-          name='images'
-          onChange={onChangeImage}
-          multiple='multiple'
-        />
+
         <div className='py-2'>
           <Label
             htmlFor='explain'
