@@ -23,7 +23,6 @@ import {
   checkSameValue,
   validatePassword,
 } from '@/service/common'
-import { ErrorResponse } from '@/api/response'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -40,15 +39,18 @@ export default function SignUp() {
     businessAddress: '',
   })
 
-  const { mutate } = useMutation(() => newMember(form), {
-    onSuccess: () => {
-      navigate('/welcome')
-      saveUserType('advertisement')
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    },
-  })
+  const { mutate, isLoading } = useMutation(
+    () => newMember(form),
+    {
+      onSuccess: () => {
+        navigate('/welcome')
+        saveUserType('advertisement')
+      },
+      onError: (err) => {
+        toast.error(err.message)
+      },
+    }
+  )
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -161,7 +163,10 @@ export default function SignUp() {
                     required
                   />
                 </div>
-                <Button className={cn('w-full')}>
+                <Button
+                  className={cn('w-full')}
+                  disabled={isLoading}
+                >
                   회원가입
                 </Button>
               </CardContent>

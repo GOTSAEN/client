@@ -8,7 +8,7 @@ export default function Welcome() {
 
   return (
     <section className='h-full flex justify-center items-center'>
-      <Card className='min-w-[400px] h-[300px] p-8 flex flex-col'>
+      <Card className='w-[450px] max-sm:w-full h-[300px] p-8 flex flex-col'>
         <h2 className='text-center text-2xl font-bold py-4 '>
           회원가입을 축하합니다🎉
         </h2>

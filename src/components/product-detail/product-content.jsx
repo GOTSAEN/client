@@ -21,7 +21,7 @@ export default function ProductContent({ data }) {
 
   const label_style = 'font-semibold inline-block mr-4'
 
-  const enrollAd = useMutation(
+  const { mutateAsync, isLoading } = useMutation(
     async () => await enrollWaiting(param.id),
     {
       onSuccess: () => {
@@ -33,7 +33,7 @@ export default function ProductContent({ data }) {
     }
   )
   const handleEnroll = () => {
-    enrollAd.mutateAsync()
+    mutateAsync()
   }
   return (
     <article className='px-4 grow flex flex-col'>
@@ -73,6 +73,7 @@ export default function ProductContent({ data }) {
           <Button
             className={cn('w-full')}
             onClick={handleEnroll}
+            disabled={isLoading}
           >
             대기 신청
           </Button>

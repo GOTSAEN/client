@@ -31,7 +31,7 @@ export default function LogIn() {
     password: '',
   })
   const [auth, setAuth] = useState('')
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     async () => await signIn(form),
     {
       onSuccess: (res) => {
@@ -154,7 +154,12 @@ export default function LogIn() {
                     required
                   />
                 </div>
-                <Button className='w-full'>로그인</Button>
+                <Button
+                  className='w-full'
+                  disabled={isLoading}
+                >
+                  로그인
+                </Button>
 
                 <CardDescription className='mt-2'>
                   - or -
