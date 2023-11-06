@@ -58,7 +58,7 @@ export default function PartnerWaitingAds() {
 
   return (
     <>
-      <Card className='flex justify-center min-h-[250px]'>
+      <Card className='flex justify-center'>
         <Table>
           <TableHeader>
             <TableRow className='grid grid-cols-12 items-center'>
@@ -82,7 +82,7 @@ export default function PartnerWaitingAds() {
           <TableBody>
             {error && <p>Error</p>}
             {ads?.length === 0 && (
-              <p className='px-2 py-4 text-center'>
+              <p className='px-2 py-4 text-center min-h-[200px]'>
                 등록된 광고가 없습니다🥲{' '}
                 <Link
                   className='hover:text-cyan-700'

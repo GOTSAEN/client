@@ -51,11 +51,11 @@ export default function HorizontalMenuBar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href='/guide' legacyBehavior passHref>
+              <Link to='/youtuber' legacyBehavior passHref>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                 >
-                  가이드
+                  유튜버
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

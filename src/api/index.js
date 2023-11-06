@@ -31,3 +31,5 @@ export const authYoutubers =
 export const partnerAds = createInstanceWithAuth(
   'members/advertisement'
 )
+export const application =
+  createInstanceWithAuth('applications')

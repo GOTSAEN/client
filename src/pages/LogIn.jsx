@@ -60,9 +60,6 @@ export default function LogIn() {
     mutate()
   }
 
-  const handleOAuth = () => {
-    // 'http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google',
-  }
   useEffect(() => {
     getUserType()
       ? setAuth(getUserType())
@@ -122,10 +119,7 @@ export default function LogIn() {
                 'flex justify-center items-center min-h-[300px] px-10  shadow-lg'
               )}
             >
-              <Button
-                className={cn('w-full')}
-                onClick={handleOAuth}
-              >
+              <Button className={cn('w-full')}>
                 <Link to='http://ec2-43-202-148-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'>
                   유튜브 아이디로 로그인
                 </Link>

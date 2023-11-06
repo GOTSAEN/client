@@ -7,13 +7,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { cn } from '@/utils/lib'
 import { UserCircle2, LogOut } from 'lucide-react'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '../ui/button'
 export default function UserDropDownMenu() {
   const { logout, user } = useAuth()
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={cn('flex')}>
@@ -34,7 +39,7 @@ export default function UserDropDownMenu() {
         </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={logout}
+          onClick={handleLogout}
           className='cursor-pointer'
         >
           <LogOut size={15} className='mr-2' />

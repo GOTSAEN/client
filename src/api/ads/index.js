@@ -18,9 +18,7 @@ export const fetchAdsByCategory = async (category) => {
 export const newAds = (data) => {
   return authAds
     .post('', data)
-    .then((res) => {
-      ApiResponse(res)
-    })
+    .then((res) => res.data)
     .catch((e) => ErrorResponse(e))
 }
 
@@ -49,4 +47,8 @@ export const fetchAdsById = async (id) => {
     .then((res) => res.data)
     .catch((e) => console.log(e))
   return data
+}
+
+export const postImage = (id, data) => {
+  authAds.post(`/upload/${id}`, data)
 }

@@ -7,15 +7,16 @@ function AdsCard({ adsCardInfo }) {
     productName,
     numberOfRecruit,
     category,
+    imageUrl,
   } = adsCardInfo
 
   return (
     <Link to={`/product/${advertisementId}`}>
       <article className='border rounded-lg shadow-sm p-3 bg-background'>
         <img
-          src=''
+          src={imageUrl}
           alt={productName}
-          className='w-full h-auto'
+          className='w-full h-[200px]'
         />
         <h2 className='font-semibold py-2'>
           {productName}

@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react'
 import { Cookies } from 'react-cookie'
+import { useNavigation } from 'react-router-dom'
 
 const AuthContext = createContext()
 const cookies = new Cookies()
@@ -23,6 +24,8 @@ export function AuthProvider({ children }) {
     cookies.remove('SESSIONID')
     cookies.remove('RENEW')
     cookies.remove('Email')
+    cookies.remove('Refresh')
+    cookies.remove('Authorization')
     setUser(undefined)
   }
 
