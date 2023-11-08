@@ -91,7 +91,7 @@ export default function LogIn() {
     }, 500)
   }, [popup])
   return (
-    <section className='h-full flex justify-center items-center'>
+    <section className='main flex justify-center items-center'>
       {auth && (
         <Tabs
           defaultValue={auth}

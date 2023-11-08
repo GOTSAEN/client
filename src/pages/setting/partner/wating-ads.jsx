@@ -19,6 +19,7 @@ import {
 } from 'react-query'
 import { fetchPartnerAds } from '@/api/members/ads'
 import { deleteAds } from '@/api/ads'
+import EmptyRow from '@/components/common/EmptyRow'
 
 export default function PartnerWaitingAds() {
   const navigate = useNavigate()
@@ -82,16 +83,11 @@ export default function PartnerWaitingAds() {
           <TableBody>
             {error && <p>Error</p>}
             {ads?.length === 0 && (
-              <p className='px-2 py-4 text-center min-h-[200px]'>
-                등록된 광고가 없습니다🥲{' '}
-                <Link
-                  className='hover:text-cyan-700'
-                  to={'/product/create'}
-                >
-                  새 광고
-                </Link>
-                를 등록해보세요 !
-              </p>
+              <EmptyRow
+                mainMessage='등록된 광고가 없습니😢'
+                link='/product/create'
+                submessage='새 광고를 등록해보세요'
+              />
             )}
             {ads?.length > 0 &&
               ads.map((ad) => (

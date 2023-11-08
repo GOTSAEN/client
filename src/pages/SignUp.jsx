@@ -83,7 +83,7 @@ export default function SignUp() {
   }
 
   return (
-    <section className='h-full flex justify-center items-center'>
+    <section className='main flex justify-center items-center'>
       <form onSubmit={handleSubmit} className=''>
         <Tabs
           defaultValue='account'

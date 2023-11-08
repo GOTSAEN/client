@@ -11,12 +11,15 @@ function AdsCard({ adsCardInfo }) {
   } = adsCardInfo
 
   return (
-    <Link to={`/product/${advertisementId}`}>
-      <article className='border rounded-lg shadow-sm p-3 bg-background'>
+    <Link
+      to={`/product/${advertisementId}`}
+      className='bg-card'
+    >
+      <article className='border rounded-lg shadow-sm p-3'>
         <img
-          src={imageUrl}
+          src={imageUrl || '/no_img.jpg'}
           alt={productName}
-          className='w-full h-[200px]'
+          className='w-full h-[200px] outline outline-1 outline-border'
         />
         <h2 className='font-semibold py-2'>
           {productName}

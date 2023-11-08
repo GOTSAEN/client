@@ -27,6 +27,7 @@ import Search from '@/pages/Search'
 import YoutuberProfile from '@/pages/setting/youtuber/youtuber-profile'
 import NoAuthRoutes from '@/pages/NoAuthRoutes'
 import Youtuber from '@/pages/Youtuber'
+import Secession from '@/pages/Secession'
 
 export default function Router() {
   return (
@@ -53,6 +54,7 @@ export default function Router() {
           />
           <Route path='/search' element={<Search />} />
           <Route path='/welcome' element={<Welcome />} />
+
           <Route path='/ads/:category' element={<Ads />} />
           <Route
             path='/product/update/campaign/:campaignId'
@@ -94,6 +96,10 @@ export default function Router() {
             <Route
               path='me/pwchange'
               element={<PwChange />}
+            />
+            <Route
+              path='secession'
+              element={<Secession />}
             />
             <Route
               index

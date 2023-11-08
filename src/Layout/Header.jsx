@@ -21,7 +21,7 @@ export default function Header() {
         <Logo />
         <div className='absolute index-y-0 right-0 flex'>
           <div>
-            {user?.auth ? (
+            {user?.email ? (
               <UserDropDownMenu />
             ) : (
               <Button
