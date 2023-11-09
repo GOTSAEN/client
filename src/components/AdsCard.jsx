@@ -19,7 +19,7 @@ function AdsCard({ adsCardInfo }) {
         <img
           src={imageUrl || '/no_img.jpg'}
           alt={productName}
-          className='w-full h-[200px] outline outline-1 outline-border'
+          className='w-full h-[200px] outline outline-1 outline-border hover:scale-105 rounded-sm'
         />
         <h2 className='font-semibold py-2'>
           {productName}

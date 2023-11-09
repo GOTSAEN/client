@@ -11,7 +11,6 @@ import {
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import LocationLabel from '@/components/setting/location-label'
 
 export default function ProgressYoutuber() {
   return (
@@ -48,13 +47,7 @@ export default function ProgressYoutuber() {
                   alt='thumbnail'
                   className='h-[50px] w-[50px] cover block rounded-full m-2'
                 />
-
-                <Link
-                  to='/product/1234'
-                  className='hover:underline underline-offset-2'
-                >
-                  갓생돌돌돌돌이
-                </Link>
+                갓생돌돌돌돌이
               </TableCell>
               <TableCell className='justify-center'>
                 119만명

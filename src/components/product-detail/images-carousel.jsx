@@ -28,11 +28,11 @@ export default function ImagesCarousel({ images }) {
         {images?.length > 0 ? (
           images.map((image, idx) => (
             <div
-              className='w-full lg:h-[420px] md:h-[320px] sm:h-[400px] cursor-pointer hover:shadow-lg bg-cover'
+              className='w-full  max-sm:h-[200px] max-md:h-[320px] max-lg:h-[420px] cursor-pointer hover:shadow-lg overflow-hidden rounded-sm'
               key={idx}
             >
               <img
-                className='w-full h-full'
+                className='w-full h-full bg-cover'
                 src={image}
                 alt='hu'
               />

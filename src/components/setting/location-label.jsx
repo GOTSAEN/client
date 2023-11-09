@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom'
 export default function LocationLabel() {
   const location = useLocation()
   const [labels, setLabels] = useState([])
-
-  const getUrlList = useCallback((url) => {
+  const url = location.pathname
+  const getUrlList = (url) => {
     const labels = []
     if (url.includes('/ads')) {
       labels.push('광고 관리')
@@ -19,6 +19,8 @@ export default function LocationLabel() {
           labels.push('참여한 유튜버')
       } else if (url.includes('/waiting'))
         labels.push('등록 광고')
+      if (url.includes('campaign'))
+        labels.push('신청한 유튜버')
       else if (url.includes('/past'))
         labels.push('종료 광고')
     }
@@ -33,10 +35,9 @@ export default function LocationLabel() {
     }
 
     return labels
-  })
+  }
   useEffect(() => {
     setLabels([])
-    const url = location.pathname
     setLabels(getUrlList(url))
   }, [location])
   return (
@@ -44,7 +45,11 @@ export default function LocationLabel() {
       <h4 className='text-xs text-muted-foreground'>
         {labels.length > 0 && (
           <>
-            {labels.slice(0, labels.length - 1).join(' > ')}
+            <span>
+              {labels
+                .slice(0, labels.length - 1)
+                .join(' > ')}
+            </span>
             {' > '}
           </>
         )}

@@ -15,7 +15,7 @@ import WaitingAds from '@/pages/setting/youtuber/waiting-ads'
 import LogIn from '@/pages/LogIn'
 import SignUp from '@/pages/SignUp'
 import PartnerProgressAds from '@/pages/setting/partner/progress-ads'
-import ProgressYoutuber from '@/pages/setting/partner/past-ads'
+import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
 import PwChange from '@/pages/setting/PwChange'
 import ProtectedRoutes from '@/pages/ProtectedRoutes'
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
@@ -28,6 +28,7 @@ import YoutuberProfile from '@/pages/setting/youtuber/youtuber-profile'
 import NoAuthRoutes from '@/pages/NoAuthRoutes'
 import Youtuber from '@/pages/Youtuber'
 import Secession from '@/pages/Secession'
+import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber'
 
 export default function Router() {
   return (
@@ -129,6 +130,10 @@ export default function Router() {
             <Route
               path='ads/waiting'
               element={<PartnerWaitingAds />}
+            />
+            <Route
+              path='ads/waiting/campaign/:campaignId'
+              element={<WaitingYoutuber />}
             />
             <Route
               path='ads/progress/campaign/:campaignId'

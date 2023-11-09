@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table'
 import { Card } from '@/components/ui/card'
 import { Link, useNavigate } from 'react-router-dom'
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Play, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   useMutation,
@@ -91,62 +91,78 @@ export default function PartnerWaitingAds() {
             )}
             {ads?.length > 0 &&
               ads.map((ad) => (
-                <TableRow
-                  className='grid grid-cols-12 px-1 hover:cursor-pointer'
-                  onClick={() => console.log('click')}
-                  key={ad.advertisementId}
-                >
-                  <TableCell
-                    className='font-medium col-span-4'
-                    onClick={() =>
-                      navigate(
-                        `/product/${ad.advertisementId}`
-                      )
-                    }
+                <Link to={`campaign/${ad.advertisementId}`}>
+                  <TableRow
+                    className='grid grid-cols-12 px-1 hover:cursor-pointer'
+                    onClick={() => console.log('click')}
+                    key={ad.advertisementId}
                   >
-                    <img
-                      src={
-                        ad.imageUrl
-                          ? ad.imageUrl
-                          : 'https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
-                      }
-                      alt='thumbnail'
-                      className='h-[50px] w-[50px] cover block rounded'
-                    />
-                    <span className='hover:underline underline-offset-2 px-2'>
-                      {ad.productName}
-                    </span>
-                  </TableCell>
+                    <TableCell className='font-medium col-span-4'>
+                      <img
+                        src={
+                          ad.imageUrl
+                            ? ad.imageUrl
+                            : 'https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
+                        }
+                        alt='thumbnail'
+                        className='h-[50px] w-[50px] cover block rounded'
+                      />
+                      <span
+                        className='hover:underline underline-offset-2 px-2'
+                        onClick={() =>
+                          navigate(
+                            `/product/${ad.advertisementId}`
+                          )
+                        }
+                      >
+                        {ad.productName}
+                      </span>
+                    </TableCell>
 
-                  <TableCell className='justify-center col-span-2'>
-                    {ad.category}
-                  </TableCell>
-                  <TableCell className='justify-center col-span-2'>
-                    {ad.numberOfApplicants} /{' '}
-                    {ad.numberOfRecruit}
-                  </TableCell>
+                    <TableCell className='justify-center col-span-2'>
+                      {ad.category}
+                    </TableCell>
+                    <TableCell className='justify-center col-span-2'>
+                      {ad.numberOfApplicants} /{' '}
+                      {ad.numberOfRecruit}
+                    </TableCell>
 
-                  <TableCell className='text-right right col-span-2 justify-center'>
-                    {ad.endDate}
-                  </TableCell>
-                  <TableCell className='col-span-2 justify-center gap-2'>
-                    <Button
-                      onClick={(e) =>
-                        handleUpdate(e, ad.advertisementId)
-                      }
-                    >
-                      <Pencil size={14} />
-                    </Button>
-                    <Button
-                      variant='destructive'
-                      onClick={() =>
-                        mutate(ad.advertisementId)
-                      }
-                    >
-                      <Trash2 size={14} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                    <TableCell className='text-right right col-span-2 justify-center'>
+                      {ad.endDate}
+                    </TableCell>
+                    <TableCell className='col-span-2 justify-center gap-2'>
+                      <Button
+                        variant='outline'
+                        onClick={(e) =>
+                          handleUpdate(
+                            e,
+                            ad.advertisementId
+                          )
+                        }
+                      >
+                        <Play size={14} />
+                      </Button>
+                      <Button
+                        onClick={(e) =>
+                          handleUpdate(
+                            e,
+                            ad.advertisementId
+                          )
+                        }
+                      >
+                        <Pencil size={14} />
+                      </Button>
+                      <Button
+                        variant='destructive'
+                        onClick={() =>
+                          mutate(ad.advertisementId)
+                        }
+                      >
+                        <Trash2 size={14} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </Link>
               ))}
           </TableBody>
         </Table>
