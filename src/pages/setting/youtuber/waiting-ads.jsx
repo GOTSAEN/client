@@ -17,12 +17,12 @@ import EmptyRow from '@/components/common/EmptyRow'
 
 export default function WaitingAds() {
   const [page, setPage] = useState(1)
-  const { isLoading, data, error } = useQuery(
-    ['waiting', 'ads'],
-    () => {
-      getApplication(page, 'WAITING')
-    }
-  )
+  // const { isLoading, data, error } = useQuery(
+  //   ['waiting', 'ads'],
+  //   () => {
+  //     getApplication(page, 'WAITING')
+  //   }
+  // )
   return (
     <>
       <Card className='flex justify-center'>
@@ -46,7 +46,7 @@ export default function WaitingAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.length > 0 ? (
+            {/* {data?.length > 0 ? (
               <TableRow className='grid grid-cols-12 px-1'>
                 <TableCell className='col-span-4'>
                   <img
@@ -87,7 +87,7 @@ export default function WaitingAds() {
                 link='/'
                 subMessage='새 광고를 신청해보세요'
               />
-            )}
+            )} */}
           </TableBody>
         </Table>
       </Card>

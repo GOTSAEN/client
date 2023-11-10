@@ -29,6 +29,7 @@ import NoAuthRoutes from '@/pages/NoAuthRoutes'
 import Youtuber from '@/pages/Youtuber'
 import Secession from '@/pages/Secession'
 import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber'
+import Bookmarks from '@/pages/setting/youtuber/bookmarks'
 
 export default function Router() {
   return (
@@ -101,6 +102,11 @@ export default function Router() {
             <Route
               path='secession'
               element={<Secession />}
+            />
+            <Route
+              index
+              path='ads/bookmark'
+              element={<Bookmarks />}
             />
             <Route
               index

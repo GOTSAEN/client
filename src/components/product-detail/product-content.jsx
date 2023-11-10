@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Heart } from 'lucide-react'
 import { Button } from '../ui/button'
 import { cn } from '@/utils/lib'
 import { useMutation } from 'react-query'
 import { enrollWaiting } from '@/api/application'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Cookies } from 'react-cookie'
+import { useEffect } from 'react'
+import {
+  getBookmarkStatus,
+  toggleBookmarkStatus,
+} from '@/api/bookmark'
+import { useAuth } from '@/context/AuthContext'
 export default function ProductContent({ data }) {
   const cookie = new Cookies()
   const param = useParams()
+  const navigate = useNavigate()
+  const [bookmark, setBookmark] = useState(false)
   const {
     productName,
     startDate,
@@ -35,12 +43,52 @@ export default function ProductContent({ data }) {
   const handleEnroll = () => {
     mutateAsync()
   }
+
+  const { user } = useAuth()
+
+  const makeHeartTrue = () => {
+    if (user?.email) {
+      toggleBookmarkStatus({
+        advertisementId: param.id,
+      }).then((res) => {
+        setBookmark(res)
+      })
+      toast.info('찜 완료 💝')
+    } else navigate('/login')
+  }
+
+  const makeHeartFalse = () => {
+    toggleBookmarkStatus({
+      advertisementId: param.id,
+    }).then(setBookmark)
+  }
+
+  useEffect(() => {
+    if (user?.email) {
+      getBookmarkStatus(param.id).then((res) =>
+        setBookmark(res)
+      )
+    }
+  }, [user?.email])
   return (
     <article className='px-4 grow flex flex-col'>
       <div>
         <h2 className='flex text-xl font-semibold items-center mt-2 mb-6'>
-          <Heart className='mr-2' />
-          {productName}
+          {bookmark ? (
+            <Heart
+              className='cursor-pointer'
+              fill='red'
+              strokeWidth={1}
+              onClick={makeHeartFalse}
+            />
+          ) : (
+            <Heart
+              className='cursor-pointer'
+              strokeWidth={1}
+              onClick={makeHeartTrue}
+            />
+          )}
+          <span className='ml-2'>{productName}</span>
         </h2>
         <aside>
           <label className={label_style}>모집기간</label>

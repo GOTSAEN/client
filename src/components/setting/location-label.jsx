@@ -13,12 +13,17 @@ export default function LocationLabel() {
     const labels = []
     if (url.includes('/ads')) {
       labels.push('광고 관리')
+      if (url.includes('bookmark')) {
+        labels.push('찜한 광고')
+      }
       if (url.includes('/progress')) {
         labels.push('진행 광고')
         if (url.includes('campaign'))
           labels.push('참여한 유튜버')
       } else if (url.includes('/waiting'))
-        labels.push('등록 광고')
+        if (url.includes('partner'))
+          labels.push('등록 광고')
+        else labels.push('대기 광고')
       if (url.includes('campaign'))
         labels.push('신청한 유튜버')
       else if (url.includes('/past'))
