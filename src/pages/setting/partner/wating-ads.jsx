@@ -13,6 +13,7 @@ import { Pencil, Play, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import EmptyRow from '@/components/common/EmptyRow'
 import { useWaitingAds } from './hooks/use-waiting-ads'
+import { imageSize } from '@/css/image'
 
 export default function PartnerWaitingAds() {
   const navigate = useNavigate()
@@ -82,7 +83,7 @@ export default function PartnerWaitingAds() {
                             : '/no_img.jpg'
                         }
                         alt='thumbnail'
-                        className='h-[50px] w-[50px] cover block rounded'
+                        className={imageSize}
                       />
                       <span
                         className='hover:underline underline-offset-2 px-2'
@@ -131,9 +132,10 @@ export default function PartnerWaitingAds() {
                       </Button>
                       <Button
                         variant='destructive'
-                        onClick={() =>
+                        onClick={(e) => {
+                          e.preventDefault()
                           mutate(ad.advertisementId)
-                        }
+                        }}
                       >
                         <Trash2 size={14} />
                       </Button>

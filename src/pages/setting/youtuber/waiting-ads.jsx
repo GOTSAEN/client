@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { useQuery } from 'react-query'
 import { getApplication } from '@/api/youtuber/application'
 import EmptyRow from '@/components/common/EmptyRow'
+import { imageSize } from '@/css/image'
 
 export default function WaitingAds() {
   const [page, setPage] = useState(1)
@@ -52,7 +53,7 @@ export default function WaitingAds() {
                   <img
                     src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
                     alt='thumbnail'
-                    className='h-[50px] w-[50px] cover block rounded'
+                    className={imageSize}
                   />
                   <Link
                     to='/product/1234'

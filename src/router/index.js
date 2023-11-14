@@ -30,10 +30,13 @@ import Youtuber from '@/pages/Youtuber'
 import Secession from '@/pages/Secession'
 import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber'
 import Bookmarks from '@/pages/setting/youtuber/bookmarks'
+import PartnerPastAds from '@/pages/setting/partner/past-ads'
+import ScrollTop from '@/components/common/ScrollTop'
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Routes>
         <Route element={<App />}>
           <Route index path='/' element={<Home />} />
@@ -137,6 +140,7 @@ export default function Router() {
               path='ads/waiting'
               element={<PartnerWaitingAds />}
             />
+
             <Route
               path='ads/waiting/campaign/:campaignId'
               element={<WaitingYoutuber />}
@@ -146,7 +150,10 @@ export default function Router() {
               element={<ProgressYoutuber />}
             />
 
-            <Route path='ads/past' element={<PastAds />} />
+            <Route
+              path='ads/past'
+              element={<PartnerPastAds />}
+            />
             <Route
               path='ads/waiting'
               element={<WaitingAds />}

@@ -63,7 +63,6 @@ export default function EnrollForm() {
       setAdvertisementId(id)
     },
     onError: () => {
-      console.log('?emfdj')
       navigate('/login')
     },
   })
@@ -71,6 +70,7 @@ export default function EnrollForm() {
     () => updateAds(param.campaignId, form),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries(['ads', 'all'])
         queryClient.invalidateQueries([
           'partner',
           'ads',

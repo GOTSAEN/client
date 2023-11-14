@@ -12,6 +12,7 @@ import { Card } from '../../../components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import { imageSize } from '@/css/image'
 
 export default function ProgressAds() {
   return (
@@ -37,7 +38,7 @@ export default function ProgressAds() {
                 <img
                   src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
                   alt='thumbnail'
-                  className='h-[50px] w-[50px] cover block rounded'
+                  className={imageSize}
                 />
               </TableCell>
               <TableCell className='col-span-4'>

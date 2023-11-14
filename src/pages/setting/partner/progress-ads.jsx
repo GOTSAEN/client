@@ -15,6 +15,7 @@ import { useProgressAds } from './hooks/use-progress-ads'
 import EmptyRow from '@/components/common/EmptyRow'
 import { Button } from '@/components/ui/button'
 import { Check } from 'lucide-react'
+import { imageSize } from '@/css/image'
 
 export default function PartnerProgressAds() {
   const [isLoading, ads, error, updateAdToFinish] =
@@ -66,7 +67,7 @@ export default function PartnerProgressAds() {
                               : '/no_img.jpg'
                           }
                           alt='thumbnail'
-                          className='h-[50px] w-[50px] cover block rounded'
+                          className={imageSize}
                         />
                         <Link
                           to={`/product/${advertisementId}`}

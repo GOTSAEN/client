@@ -29,8 +29,8 @@ export function useProgressAds() {
       toFinishAd(id)
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries([
+      onSuccess: async () => {
+        await queryClient.fetchQuery([
           'partner',
           'ads',
           'progress',

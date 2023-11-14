@@ -27,26 +27,30 @@ export function useWaitingAds() {
   const { mutate } = useMutation(
     async (id) => await deleteAds(id),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries([
+      onSuccess: async () => {
+        await queryClient.fetchQuery([
           'partner',
           'ads',
           'waiting',
         ])
+        toast.success('삭제 완료')
       },
     }
   )
 
   const updateAdToProgress = useMutation(
-    (id) => {
-      toProgressAd(id)
-    },
+    async (id) => await toProgressAd(id),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries([
+      onSuccess: async () => {
+        await queryClient.fetchQuery([
           'partner',
           'ads',
           'waiting',
+        ])
+        await queryClient.invalidateQueries([
+          'partner',
+          'ads',
+          'progress',
         ])
         toast.success('광고를 진행합니다')
       },
