@@ -6,20 +6,21 @@ import { useMutation, useQueryClient } from 'react-query'
 import { postImage } from '@/api/ads'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-export default function ImageUploader({ advertisementId }) {
-  const [images, setImages] = React.useState([])
+export default function ImageUploader({
+  advertisementId,
+  existImages,
+}) {
+  const [images, setImages] = React.useState(existImages)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const maxNumber = 4
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
     setImages(imageList)
-    console.log(imageList)
   }
 
-  const sendImage = () => {
-    console.log('이미지 전송')
-    images.map((image) => {
+  const sendImage = async () => {
+    await images.map((image) => {
       const uploadFile = image.file
       const formData = new FormData()
       formData.append('file', uploadFile)
@@ -31,10 +32,8 @@ export default function ImageUploader({ advertisementId }) {
   }
 
   useEffect(() => {
-    console.log(advertisementId)
     if (advertisementId > 0) {
-      console.log('진입했습니다.')
-      sendImage()
+      sendImage(existImages)
     }
   }, [advertisementId])
   return (

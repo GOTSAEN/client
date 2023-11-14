@@ -56,7 +56,6 @@ export function useWaitingAds() {
       },
       onError: (e) => {
         toast.error(e)
-        console.log(error)
       },
     }
   )

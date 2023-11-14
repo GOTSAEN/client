@@ -16,6 +16,7 @@ import EmptyRow from '@/components/common/EmptyRow'
 import { Button } from '@/components/ui/button'
 import { Check } from 'lucide-react'
 import { imageSize } from '@/css/image'
+import { link_text } from '@/css'
 
 export default function PartnerProgressAds() {
   const [isLoading, ads, error, updateAdToFinish] =
@@ -71,7 +72,7 @@ export default function PartnerProgressAds() {
                         />
                         <Link
                           to={`/product/${advertisementId}`}
-                          className='hover:underline underline-offset-2'
+                          className={link_text}
                         >
                           {productName}
                         </Link>

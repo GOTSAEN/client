@@ -25,9 +25,7 @@ export const newAds = (data) => {
 export const updateAds = (id, data) => {
   return authAds
     .patch(`/${id}`, data)
-    .then((res) => {
-      ApiResponse(res)
-    })
+    .then(() => id)
     .catch((e) => ErrorResponse(e))
 }
 

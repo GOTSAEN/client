@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import { usePastAds } from './hooks/use-past-ads'
 import EmptyRow from '@/components/common/EmptyRow'
 import { imageSize } from '@/css/image'
+import { link_text } from '@/css'
 export default function PartnerPastAds() {
   const [isLoading, ads, error] = usePastAds()
   return (
@@ -22,8 +23,8 @@ export default function PartnerPastAds() {
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>
-            <TableRow className='grid grid-cols-9 items-center'>
-              <TableHead className='col-span-5'>
+            <TableRow className='grid grid-cols-8 items-center'>
+              <TableHead className='col-span-4'>
                 상품
               </TableHead>
 
@@ -45,7 +46,7 @@ export default function PartnerPastAds() {
                   category,
                   numberOfRecruit,
                 }) => (
-                  <TableRow className='grid grid-cols-9 px-1'>
+                  <TableRow className='grid grid-cols-8 px-1'>
                     <TableCell className='col-span-4'>
                       <img
                         src={
@@ -59,7 +60,7 @@ export default function PartnerPastAds() {
 
                       <Link
                         to={`product/${advertisementId}`}
-                        className='hover:underline underline-offset-2'
+                        className={link_text}
                       >
                         {productName}
                       </Link>

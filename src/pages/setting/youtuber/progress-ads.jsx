@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import { imageSize } from '@/css/image'
+import { link_text } from '@/css'
 
 export default function ProgressAds() {
   return (
@@ -44,7 +45,7 @@ export default function ProgressAds() {
               <TableCell className='col-span-4'>
                 <Link
                   to='/product/1234'
-                  className='hover:underline underline-offset-2'
+                  className={link_text}
                 >
                   [강남]서도촌 맛있는 돼지갈비/양념갈비
                 </Link>
