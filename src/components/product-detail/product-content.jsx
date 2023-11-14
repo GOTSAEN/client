@@ -64,7 +64,7 @@ export default function ProductContent({ data }) {
   }
 
   useEffect(() => {
-    if (user?.email) {
+    if (user?.email && user?.auth === 'youtuber') {
       getBookmarkStatus(param.id).then((res) =>
         setBookmark(res)
       )

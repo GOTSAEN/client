@@ -52,3 +52,17 @@ export const fetchAdsById = async (id) => {
 export const postImage = (id, data) => {
   authAds.post(`/upload/${id}`, data)
 }
+
+export const toProgressAd = (id) => {
+  authAds
+    .patch(`/${id}/progressAd`)
+    .then((res) => res)
+    .catch(ErrorResponse)
+}
+
+export const toFinishAd = (id) => {
+  authAds
+    .patch(`/${id}/finishAd`)
+    .then((res) => res)
+    .catch(ErrorResponse)
+}

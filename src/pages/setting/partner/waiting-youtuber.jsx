@@ -11,8 +11,10 @@ import {
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { useProgressAds } from './hooks/use-progress-ads'
 
 export default function WaitingYoutuber() {
+  const [] = useProgressAds()
   return (
     <>
       <Card className='flex justify-center'>
