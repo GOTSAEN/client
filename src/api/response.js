@@ -16,9 +16,9 @@ export function ErrorResponse(error) {
   console.log(error.response)
   switch (status) {
     case 500:
-      deleteUserSession()
-      window.location.href = '/login'
-      throw new Error('알수 없는 오류가 발생했습니다.')
+    // deleteUserSession()
+    // window.location.href = '/login'
+    // throw new Error('알수 없는 오류가 발생했습니다.')
     default:
       throw new Error(message)
   }

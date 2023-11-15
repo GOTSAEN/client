@@ -17,7 +17,7 @@ export function useProgressAds() {
     ['partner', 'ads', 'progress'],
     async () =>
       await fetchPartnerAds(1, 'PROGRESS').then(
-        (res) => res.data.data
+        (res) => res
       ),
     {
       staleTime: 1000 * 60 * 24,

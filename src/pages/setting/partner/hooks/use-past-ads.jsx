@@ -11,7 +11,7 @@ export function usePastAds() {
     ['partner', 'ads', 'past'],
     async () =>
       await fetchPartnerAds(1, 'FINISHED').then(
-        (res) => res.data.data
+        (res) => res
       ),
     {
       staleTime: 1000 * 60 * 24,

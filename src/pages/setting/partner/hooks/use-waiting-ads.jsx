@@ -17,7 +17,7 @@ export function useWaitingAds() {
     ['partner', 'ads', 'waiting'],
     async () =>
       await fetchPartnerAds(1, 'WAITING').then(
-        (res) => res.data.data
+        (res) => res
       ),
     {
       staleTime: 1000 * 60 * 24,

@@ -16,7 +16,7 @@ export default function Header() {
     login()
   }, [])
   return (
-    <header className='relative h-20 flex justify-center w-full items-center px-4 cursor-pointer'>
+    <header className='relative h-14 flex justify-center w-full items-center px-4 cursor-pointer'>
       <div className='relative max-w-[1400px] w-fit flex grow items-center'>
         <Logo />
         <div className='absolute index-y-0 right-0 flex'>
