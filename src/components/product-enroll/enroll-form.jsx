@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardHeader, CardTitle } from '../ui/card'
+import { CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import {
   Select,
@@ -23,7 +23,6 @@ import { fetchCategories } from '@/api/categories'
 import { fetchAdsById, newAds, updateAds } from '@/api/ads'
 import { useNavigate, useParams } from 'react-router-dom'
 import { formatDate } from '@/service/common'
-import { id } from 'date-fns/locale'
 
 const init = {
   productName: '',
@@ -195,7 +194,7 @@ export default function EnrollForm() {
         />
         <ImageUploader
           advertisementId={advertisementId}
-          images={existImages}
+          existImages={existImages}
         />
 
         <div className='py-2'>

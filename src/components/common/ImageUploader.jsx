@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import ImageUploading from 'react-images-uploading'
 import { Button } from '../ui/button'
-import { useMutation, useQueryClient } from 'react-query'
+import { useQueryClient } from 'react-query'
 import { postImage } from '@/api/ads'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function ImageUploader({
   advertisementId,
@@ -14,18 +13,21 @@ export default function ImageUploader({
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const maxNumber = 4
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
+  const onChange = (imageList) => {
     setImages(imageList)
   }
 
   const sendImage = async () => {
-    await images.map((image) => {
+    for (let i = 0; i < images.length; i++) {
+      let image = images[i]
+      if (image.data_url.includes('https://gotsaen'))
+        continue
       const uploadFile = image.file
       const formData = new FormData()
       formData.append('file', uploadFile)
       postImage(advertisementId, formData)
-    })
+    }
+
     queryClient
       .invalidateQueries(['partner', 'ads', 'waiting'])
       .then(navigate('/setting/partner/ads/waiting'))
@@ -35,7 +37,14 @@ export default function ImageUploader({
     if (advertisementId > 0) {
       sendImage(existImages)
     }
-  }, [advertisementId])
+    if (existImages?.length > 0) {
+      const list = []
+      console.log(existImages)
+      existImages.map((img) => list.push({ data_url: img }))
+      setImages(list)
+    }
+  }, [advertisementId, existImages])
+
   return (
     <div className='App'>
       <ImageUploading
