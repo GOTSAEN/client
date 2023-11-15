@@ -17,7 +17,13 @@ import EmptyRow from '@/components/common/EmptyRow'
 
 export default function WaitingYoutuber() {
   const params = useParams()
-  const [isLoading, youtubers, error] = useWaitingYoutuber()
+  const [isLoading, youtubers, error, updateStatus] =
+    useWaitingYoutuber()
+
+  const handleChangeStatus = (id, data) => {
+    console.log(data)
+    updateStatus.mutateAsync(id, data)
+  }
   return (
     <>
       <Card className='flex justify-center'>
@@ -34,12 +40,9 @@ export default function WaitingYoutuber() {
               <TableHead className='text-right justify-center'>
                 뷰 수
               </TableHead>
-              <TableHead className='text-right justify-center'>
-                좋아요 수
-              </TableHead>
 
-              <TableHead className='text-center justify-center '>
-                링크
+              <TableHead className='text-center justify-center col-span-2 '>
+                신청일
               </TableHead>
               <TableHead className='text-center justify-center col-span-2'></TableHead>
             </TableRow>
@@ -50,6 +53,7 @@ export default function WaitingYoutuber() {
                 ({
                   applicationId,
                   status,
+                  createdAt,
                   youtubeMemberImage,
                   youtubeMemberNickname,
                 }) => (
@@ -57,7 +61,7 @@ export default function WaitingYoutuber() {
                     <TableCell className='font-medium col-span-2'>
                       <img
                         src={youtubeMemberImage}
-                        className='h-[50px] w-[50px] cover block rounded-full m-2'
+                        className='h-[40px] w-[40px] cover block rounded-full m-2'
                       />
                       {youtubeMemberNickname}
                     </TableCell>
@@ -67,26 +71,37 @@ export default function WaitingYoutuber() {
                     <TableCell className='justify-center'>
                       77만회
                     </TableCell>
-                    <TableCell className='justify-center'>
-                      8.8천
-                    </TableCell>
-                    <TableCell className='text-right right  justify-center'>
-                      <a
-                        href='https://www.youtube.com/watch?v=KgsPK4X2BFA&ab_channel=%EC%A4%80%EC%9A%B0'
-                        target='blank'
-                        className='underline underline-offset-2'
-                      >
-                        조회
-                      </a>
+
+                    <TableCell className='col-span-2 text-right right  justify-center'>
+                      {createdAt?.slice(0, 10)}
                     </TableCell>
                     <TableCell className='text-center justify-center gap-2 col-span-2'>
-                      <Button>확정</Button>
-                      <Button
-                        variant='bright'
-                        className='bg-yellow-500'
-                      >
-                        반려
-                      </Button>
+                      {status === 'WAITING' && (
+                        <>
+                          <Button
+                            onClick={() =>
+                              handleChangeStatus(
+                                applicationId,
+                                { status: 'PROGRESS' }
+                              )
+                            }
+                          >
+                            확정
+                          </Button>
+                          <Button
+                            variant='bright'
+                            className='bg-yellow-500'
+                            onClick={() =>
+                              handleChangeStatus(
+                                applicationId,
+                                { status: 'REJECTION' }
+                              )
+                            }
+                          >
+                            반려
+                          </Button>
+                        </>
+                      )}
                     </TableCell>
                   </TableRow>
                 )
