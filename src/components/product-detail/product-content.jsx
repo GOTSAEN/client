@@ -71,7 +71,7 @@ export default function ProductContent({ data }) {
     }
   }, [user?.email])
   return (
-    <article className='px-4 grow flex flex-col'>
+    <article className='grow flex flex-col'>
       <div>
         <h2 className='flex text-xl font-semibold items-center mt-2 mb-6'>
           {bookmark ? (

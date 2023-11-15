@@ -23,6 +23,7 @@ import {
   checkSameValue,
   validatePassword,
 } from '@/service/common'
+import { auth_form } from '@/css'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -84,11 +85,11 @@ export default function SignUp() {
 
   return (
     <section className='main flex justify-center items-center'>
-      <form onSubmit={handleSubmit} className=''>
-        <Tabs
-          defaultValue='account'
-          className='w-[450px] max-sm:w-fit'
-        >
+      <form
+        onSubmit={handleSubmit}
+        className='w-full flex justify-center'
+      >
+        <Tabs defaultValue='account' className={auth_form}>
           <TabsContent value='account'>
             <Card>
               <CardHeader className={cn('items-center')}>
