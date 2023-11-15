@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext'
 import AlertToast from './components/ui/toast'
 import { ToastProvider } from './context/ToastContext'
 import { CookiesProvider } from 'react-cookie'
+import Footer from './Layout/Footer'
 
 const queryClient = new QueryClient()
 
@@ -32,6 +33,7 @@ function App() {
                 <Outlet />
                 <AlertToast />
               </main>
+              <Footer />
             </ToastProvider>
           </AuthProvider>
         </CookiesProvider>

@@ -15,7 +15,7 @@ import WaitingAds from '@/pages/setting/youtuber/waiting-ads'
 import LogIn from '@/pages/LogIn'
 import SignUp from '@/pages/SignUp'
 import PartnerProgressAds from '@/pages/setting/partner/progress-ads'
-import ProgressYoutuber from '@/pages/setting/partner/past-ads'
+import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber'
 import PwChange from '@/pages/setting/PwChange'
 import ProtectedRoutes from '@/pages/ProtectedRoutes'
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes'
@@ -27,10 +27,16 @@ import Search from '@/pages/Search'
 import YoutuberProfile from '@/pages/setting/youtuber/youtuber-profile'
 import NoAuthRoutes from '@/pages/NoAuthRoutes'
 import Youtuber from '@/pages/Youtuber'
+import Secession from '@/pages/Secession'
+import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber'
+import Bookmarks from '@/pages/setting/youtuber/bookmarks'
+import PartnerPastAds from '@/pages/setting/partner/past-ads'
+import ScrollTop from '@/components/common/ScrollTop'
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Routes>
         <Route element={<App />}>
           <Route index path='/' element={<Home />} />
@@ -53,6 +59,7 @@ export default function Router() {
           />
           <Route path='/search' element={<Search />} />
           <Route path='/welcome' element={<Welcome />} />
+
           <Route path='/ads/:category' element={<Ads />} />
           <Route
             path='/product/update/campaign/:campaignId'
@@ -96,6 +103,15 @@ export default function Router() {
               element={<PwChange />}
             />
             <Route
+              path='secession'
+              element={<Secession />}
+            />
+            <Route
+              index
+              path='ads/bookmark'
+              element={<Bookmarks />}
+            />
+            <Route
               index
               path='ads/progress'
               element={<ProgressAds />}
@@ -124,12 +140,20 @@ export default function Router() {
               path='ads/waiting'
               element={<PartnerWaitingAds />}
             />
+
+            <Route
+              path='ads/waiting/campaign/:campaignId'
+              element={<WaitingYoutuber />}
+            />
             <Route
               path='ads/progress/campaign/:campaignId'
               element={<ProgressYoutuber />}
             />
 
-            <Route path='ads/past' element={<PastAds />} />
+            <Route
+              path='ads/past'
+              element={<PartnerPastAds />}
+            />
             <Route
               path='ads/waiting'
               element={<WaitingAds />}

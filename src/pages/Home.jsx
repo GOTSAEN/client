@@ -30,7 +30,6 @@ export default function Home() {
   )
   useEffect(() => {
     if (location.search.includes('?')) {
-      console.log('동작')
       const urlSearchParams = new URLSearchParams(
         location.search.split('?')[1]
       )

@@ -19,6 +19,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useMutation } from 'react-query'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
+import { auth_form } from '@/css'
 
 export default function LogIn() {
   const [popup, setPopup] = useState()
@@ -91,12 +92,9 @@ export default function LogIn() {
     }, 500)
   }, [popup])
   return (
-    <section className='h-full flex justify-center items-center'>
+    <section className='main flex justify-center items-center'>
       {auth && (
-        <Tabs
-          defaultValue={auth}
-          className='w-[450px] max-sm:w-full'
-        >
+        <Tabs defaultValue={auth} className={auth_form}>
           <TabsList
             className={cn('grid w-full grid-cols-2')}
           >

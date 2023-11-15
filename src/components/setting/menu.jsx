@@ -64,7 +64,7 @@ export default function Menu() {
             </NavigationMenuItem>
             <NavigationMenuItem className='w-full'>
               <Link
-                to='/setting/ads/waiting'
+                to='/setting/secession'
                 legacyBehavior
                 passHref
               >

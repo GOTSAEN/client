@@ -16,3 +16,12 @@ export const enrollWaiting = async (advertisementId) => {
       .catch((e) => ErrorResponse(e))
   })
 }
+
+export const changeApplicationStatus = async (
+  applicationId,
+  data
+) => {
+  return await application(`/${applicationId}`, data)
+    .then((res) => res.data)
+    .catch(ErrorResponse)
+}

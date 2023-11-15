@@ -33,3 +33,4 @@ export const partnerAds = createInstanceWithAuth(
 )
 export const application =
   createInstanceWithAuth('applications')
+export const bookmarks = createInstanceWithAuth('bookmarks')

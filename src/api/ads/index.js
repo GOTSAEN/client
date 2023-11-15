@@ -25,9 +25,7 @@ export const newAds = (data) => {
 export const updateAds = (id, data) => {
   return authAds
     .patch(`/${id}`, data)
-    .then((res) => {
-      ApiResponse(res)
-    })
+    .then(() => id)
     .catch((e) => ErrorResponse(e))
 }
 
@@ -51,4 +49,18 @@ export const fetchAdsById = async (id) => {
 
 export const postImage = (id, data) => {
   authAds.post(`/upload/${id}`, data)
+}
+
+export const toProgressAd = (id) => {
+  authAds
+    .patch(`/${id}/progressAd`)
+    .then((res) => res)
+    .catch(ErrorResponse)
+}
+
+export const toFinishAd = (id) => {
+  authAds
+    .patch(`/${id}/finishAd`)
+    .then((res) => res)
+    .catch(ErrorResponse)
 }

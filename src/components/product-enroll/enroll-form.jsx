@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardHeader, CardTitle } from '../ui/card'
+import { CardHeader, CardTitle } from '../ui/card'
 import { Input } from '../ui/input'
 import {
   Select,
@@ -40,14 +40,14 @@ export default function EnrollForm() {
   const queryClient = useQueryClient()
   const [form, setForm] = useState(init)
   const [advertisementId, setAdvertisementId] = useState(0)
-
+  const [images, setImages] = useState([])
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: '새 상품 등록',
     button: '작성 완료',
     handleSubmit: handleCreate,
   })
 
-  const [imageData, setImageData] = useState(null)
+  const [existImages, setExistImages] = useState(null)
   const {
     isLoading,
     data: categories,
@@ -63,20 +63,14 @@ export default function EnrollForm() {
       setAdvertisementId(id)
     },
     onError: () => {
-      console.log('?emfdj')
       navigate('/login')
     },
   })
   const updateAd = useMutation(
     () => updateAds(param.campaignId, form),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries([
-          'partner',
-          'ads',
-          'waiting',
-        ])
-        navigate('/setting/partner/ads/waiting')
+      onSuccess: (id) => {
+        setAdvertisementId(id)
       },
       onError: () => {
         navigate('/login')
@@ -104,12 +98,6 @@ export default function EnrollForm() {
     setForm({ ...form, [name]: value })
   }
 
-  const onChangeImage = (e) => {
-    const img = e.target.files[0]
-    imageData.append('file', img)
-    console.log(imageData)
-  }
-
   useEffect(() => {
     if (param.campaignId) {
       setEnrollForm({
@@ -118,6 +106,7 @@ export default function EnrollForm() {
         handleSubmit: handleUpdate,
       })
       fetchAdsById(param.campaignId).then((res) => {
+        setExistImages(res.imageUrls)
         setForm(res)
       })
     } else
@@ -203,7 +192,10 @@ export default function EnrollForm() {
           value={form.offer}
           onChange={handleChange}
         />
-        <ImageUploader advertisementId={advertisementId} />
+        <ImageUploader
+          advertisementId={advertisementId}
+          existImages={existImages}
+        />
 
         <div className='py-2'>
           <Label

@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -10,67 +9,103 @@ import {
 } from '@/components/ui/table'
 import { Card } from '../../../components/ui/card'
 import { Link } from 'react-router-dom'
-import { Trash2 } from 'lucide-react'
+import { Trash2, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useQuery } from 'react-query'
+import { getApplication } from '@/api/youtuber/application'
+import EmptyRow from '@/components/common/EmptyRow'
+import { imageSize } from '@/css/image'
+import { link_text } from '@/css'
 
 export default function WaitingAds() {
+  const [page, setPage] = useState(1)
+  const {
+    isLoading,
+    data: ads,
+    error,
+  } = useQuery(
+    ['youtuber', 'waiting', 'ads'],
+    async () =>
+      await getApplication(page, 'WAITING').then(
+        (res) => res
+      ),
+    {
+      staleTime: 1000 * 60 * 24,
+    }
+  )
   return (
     <>
       <Card className='flex justify-center'>
         <Table>
           <TableHeader>
-            <TableRow className='grid grid-cols-12 items-center'>
-              <TableHead className='col-span-4'>
+            <TableRow className='grid grid-cols-7 items-center'>
+              <TableHead className='col-span-3'>
                 상품
               </TableHead>
-              <TableHead className='justify-center col-span-2'>
+              <TableHead className='justify-center col-span-1'>
                 카테고리
               </TableHead>
-              <TableHead className='justify-center col-span-2'>
+              <TableHead className='justify-center col-span-1'>
                 상태
               </TableHead>
 
-              <TableHead className='text-center col-span-2 justify-center'>
+              <TableHead className='text-center col-span-1 justify-center'>
                 신청일
               </TableHead>
-              <TableHead className='text-center col-span-2 justify-center'></TableHead>
+              <TableHead className='text-center col-span-1 justify-center'></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className='grid grid-cols-12 px-1'>
-              <TableCell className='col-span-4'>
-                <img
-                  src='https://res.cloudinary.com/testdart/image/upload/v1686622372/lgfjbpyuklur2albx0ht.jpg'
-                  alt='thumbnail'
-                  className='h-[50px] w-[50px] cover block rounded'
-                />
-                <Link
-                  to='/product/1234'
-                  className='hover:underline underline-offset-2 px-2'
-                >
-                  [강남]서도촌 맛있는 돼지갈비/양념갈비
-                </Link>
-              </TableCell>
-              <TableCell className='justify-center col-span-2'>
-                맛집
-              </TableCell>
-              <TableCell className='justify-center col-span-2'>
-                확인중
-              </TableCell>
-              <TableCell className='text-right right col-span-2 justify-center'>
-                <a
-                  target='blank'
-                  href='https://www.youtube.com/watch?v=TRauMX-NUYY&ab_channel=TheCHOOM%28%EB%8D%94%EC%B6%A4%29'
-                >
-                  2023-09-08
-                </a>
-              </TableCell>
-              <TableCell className='col-span-2 justify-center gap-2'>
-                <Button onClick={() => {}}>
-                  <Trash2 size={14} />
-                </Button>
-              </TableCell>
-            </TableRow>
+            {ads?.length > 0 ? (
+              ads.map(
+                ({
+                  advertisementId,
+                  adName,
+                  adImage,
+                  adCategory,
+                  createdAt,
+                  status,
+                }) => (
+                  <TableRow className='grid grid-cols-7 px-1 hover:cursor-pointer'>
+                    <TableCell className='col-span-3'>
+                      <img
+                        src={
+                          adImage ? adImage : '/no_img.jpg'
+                        }
+                        alt='thumbnail'
+                        className={imageSize}
+                      />
+                      <Link
+                        to={`/product/${advertisementId}`}
+                        className={link_text}
+                      >
+                        {adName}
+                      </Link>
+                    </TableCell>
+                    <TableCell className='justify-center col-span-1'>
+                      {adCategory}
+                    </TableCell>
+                    <TableCell className='justify-center col-span-1'>
+                      {status}
+                    </TableCell>
+                    <TableCell className='col-span-1 justify-center'>
+                      {createdAt.slice(0, 10)}
+                    </TableCell>
+                    <TableCell className='text-right right col-span-1 justify-end'>
+                      <Button>
+                        <X size={14} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                )
+              )
+            ) : (
+              <EmptyRow
+                mainMessage='대기중인 광고가 없습니다😢'
+                link='/'
+                subMessage='새 광고를 신청해보세요'
+              />
+            )}
           </TableBody>
         </Table>
       </Card>

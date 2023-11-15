@@ -16,11 +16,11 @@ export default function ProductDetail() {
   )
 
   return (
-    <main className='w-full h-full py-2'>
+    <main className='w-full h-full py-2 lg:px-[60px]'>
       {data && (
         <>
-          <section className='lg:flex md:flex py-5 px-2'>
-            <div className='lg:w-[600px] md:w-[480px] sm:w-full '>
+          <section className='lg:flex  md:flex py-5 px-2'>
+            <div className='lg:w-[50%] lg:mr-4 md:mr-4 md:w-[50%] sm:w-full aspect-1'>
               <ImagesFetcher images={data.imageUrls} />
             </div>
             {data && <ProductContent data={data} />}

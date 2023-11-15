@@ -25,19 +25,28 @@ export default function ImagesCarousel({ images }) {
   return (
     <section className='w-full h-full'>
       <MultiCarousel responsive={responsive}>
-        {images &&
+        {images?.length > 0 ? (
           images.map((image, idx) => (
             <div
-              className='w-full lg:h-[420px] md:h-[320px] sm:h-[400px] cursor-pointer hover:shadow-lg bg-cover'
+              className='w-full h-full overflow-hidden aspect-1'
               key={idx}
             >
               <img
-                className='w-full h-full'
                 src={image}
-                alt='hu'
+                alt={idx}
+                className='object-cover w-full h-full'
               />
             </div>
-          ))}
+          ))
+        ) : (
+          <div className='w-full cursor-pointer hover:shadow-lg bg-cover'>
+            <img
+              className='w-full h-full'
+              src='/no_img.jpg'
+              alt='no image'
+            />
+          </div>
+        )}
       </MultiCarousel>
     </section>
   )

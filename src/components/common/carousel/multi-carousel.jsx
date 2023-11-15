@@ -10,7 +10,6 @@ export default function MultiCarousel({
     <Carousel
       arrows={false}
       infinite
-      autoPlay
       responsive={responsive}
       showDots={true}
       className='rounded-md'
