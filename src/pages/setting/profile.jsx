@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { getMember, updateMember } from "@/api/members";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { getMember, updateMember } from '@/api/members';
+import { toast } from 'react-toastify';
 
 export default function Profile() {
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputName, setInputName] = useState("");
-  const [inputAddress, setInputAddress] = useState("");
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputName, setInputName] = useState('');
+  const [inputAddress, setInputAddress] = useState('');
 
   const {
     isLoading,
     data: memberData,
     error,
-  } = useQuery(["members"], getMember, {
+  } = useQuery(['members'], getMember, {
     refetchOnWindowFocus: false,
   });
 
@@ -27,13 +27,13 @@ export default function Profile() {
   }, [memberData]);
 
   const handleUpdateProfile = async () => {
-    if (inputEmail !== "" && inputName !== "" && inputAddress !== "") {
+    if (inputEmail !== '' && inputName !== '' && inputAddress !== '') {
       await updateMember({
         email: inputEmail,
         businessName: inputName,
         businessAddress: inputAddress,
       }).then(() => {
-        toast.success("회원정보가 수정되었습니다.");
+        toast.success('회원정보가 수정되었습니다.');
       });
     }
   };
@@ -75,9 +75,7 @@ export default function Profile() {
                   setInputAddress(e.target.value);
                 }}
               />
-              {inputAddress === "" && (
-                <p className="text-red-500">칸이 비어 있습니다.</p>
-              )}
+              {inputAddress === '' && <p className="text-red-500">칸이 비어 있습니다.</p>}
             </div>
             <div>
               <Button className="w-32" onClick={handleUpdateProfile}>

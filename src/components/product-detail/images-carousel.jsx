@@ -1,6 +1,6 @@
-import React from 'react'
-import MultiCarousel from '../common/carousel/multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
+import React from 'react';
+import MultiCarousel from '../common/carousel/multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function ImagesCarousel({ images }) {
   const responsive = {
@@ -21,33 +21,22 @@ export default function ImagesCarousel({ images }) {
       breakpoint: { max: 464, min: 0 },
       items: 1,
     },
-  }
+  };
   return (
-    <section className='w-full h-full'>
+    <section className="w-full h-full">
       <MultiCarousel responsive={responsive}>
         {images?.length > 0 ? (
           images.map((image, idx) => (
-            <div
-              className='w-full h-full overflow-hidden aspect-1'
-              key={idx}
-            >
-              <img
-                src={image}
-                alt={idx}
-                className='object-cover w-full h-full'
-              />
+            <div className="w-full h-full overflow-hidden aspect-1" key={idx}>
+              <img src={image} alt={idx} className="object-cover w-full h-full" />
             </div>
           ))
         ) : (
-          <div className='w-full cursor-pointer hover:shadow-lg bg-cover'>
-            <img
-              className='w-full h-full'
-              src='/no_img.jpg'
-              alt='no image'
-            />
+          <div className="w-full cursor-pointer hover:shadow-lg bg-cover">
+            <img className="w-full h-full" src="/no_img.jpg" alt="no image" />
           </div>
         )}
       </MultiCarousel>
     </section>
-  )
+  );
 }

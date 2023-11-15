@@ -1,119 +1,67 @@
-import React from 'react'
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { Progress } from '@/components/ui/progress'
-import { Card } from '@/components/ui/card'
-import { Link } from 'react-router-dom'
-import { useProgressAds } from './hooks/use-progress-ads'
-import EmptyRow from '@/components/common/EmptyRow'
-import { Button } from '@/components/ui/button'
-import { Check } from 'lucide-react'
-import { imageSize } from '@/css/image'
-import { link_text } from '@/css'
+import React from 'react';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Progress } from '@/components/ui/progress';
+import { Card } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
+import { useProgressAds } from './hooks/use-progress-ads';
+import EmptyRow from '@/components/common/EmptyRow';
+import { Button } from '@/components/ui/button';
+import { Check } from 'lucide-react';
+import { imageSize } from '@/css/image';
+import { link_text } from '@/css';
 
 export default function PartnerProgressAds() {
-  const [isLoading, ads, error, updateAdToFinish] =
-    useProgressAds()
+  const [isLoading, ads, error, updateAdToFinish] = useProgressAds();
 
   const handleAdToFinish = (e, id) => {
-    e.preventDefault()
-    updateAdToFinish.mutateAsync(id)
-  }
+    e.preventDefault();
+    updateAdToFinish.mutateAsync(id);
+  };
 
   return (
     <>
-      <Card className='flex justify-center'>
+      <Card className="flex justify-center">
         <Table>
           <TableHeader>
-            <TableRow className='grid grid-cols-11 items-center'>
-              <TableHead className='col-span-4'>
-                상품
-              </TableHead>
-              <TableHead className='justify-center col-span-1'>
-                카테고리
-              </TableHead>
+            <TableRow className="grid grid-cols-11 items-center">
+              <TableHead className="col-span-4">상품</TableHead>
+              <TableHead className="justify-center col-span-1">카테고리</TableHead>
 
-              <TableHead className='justify-center col-span-2'>
-                유튜버 수
-              </TableHead>
-              <TableHead className='text-right col-span-2 justify-center'>
-                진행률
-              </TableHead>
-              <TableHead className='text-center col-span-2 justify-center'></TableHead>
+              <TableHead className="justify-center col-span-2">유튜버 수</TableHead>
+              <TableHead className="text-right col-span-2 justify-center">진행률</TableHead>
+              <TableHead className="text-center col-span-2 justify-center"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {ads?.length > 0 ? (
-              ads.map(
-                ({
-                  advertisementId,
-                  productName,
-                  imageUrl,
-                  category,
-                }) => (
-                  <Link>
-                    <TableRow className='grid grid-cols-11 px-1 hover:cursor-pointer'>
-                      <TableCell className='col-span-4'>
-                        <img
-                          src={
-                            imageUrl
-                              ? imageUrl
-                              : '/no_img.jpg'
-                          }
-                          alt='thumbnail'
-                          className={imageSize}
-                        />
-                        <Link
-                          to={`/product/${advertisementId}`}
-                          className={link_text}
-                        >
-                          {productName}
-                        </Link>
-                      </TableCell>
-                      <TableCell className='justify-center col-span-1'>
-                        {category}
-                      </TableCell>
-                      <TableCell className='justify-center col-span-2'>
-                        3
-                      </TableCell>
-                      <TableCell className='col-span-2 justify-center'>
-                        <Progress
-                          value={30}
-                          className='w-full'
-                        />
-                      </TableCell>
-                      <TableCell className='text-right right col-span-2 justify-center'>
-                        <Button>
-                          <Check
-                            size={14}
-                            onClick={(e) =>
-                              handleAdToFinish(
-                                e,
-                                advertisementId
-                              )
-                            }
-                          />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </Link>
-                )
-              )
+              ads.map(({ advertisementId, productName, imageUrl, category }) => (
+                <Link>
+                  <TableRow className="grid grid-cols-11 px-1 hover:cursor-pointer">
+                    <TableCell className="col-span-4">
+                      <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
+                      <Link to={`/product/${advertisementId}`} className={link_text}>
+                        {productName}
+                      </Link>
+                    </TableCell>
+                    <TableCell className="justify-center col-span-1">{category}</TableCell>
+                    <TableCell className="justify-center col-span-2">3</TableCell>
+                    <TableCell className="col-span-2 justify-center">
+                      <Progress value={30} className="w-full" />
+                    </TableCell>
+                    <TableCell className="text-right right col-span-2 justify-center">
+                      <Button>
+                        <Check size={14} onClick={(e) => handleAdToFinish(e, advertisementId)} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </Link>
+              ))
             ) : (
-              <EmptyRow
-                mainMessage={'진행중인 광고가 없습니다😢'}
-              />
+              <EmptyRow mainMessage={'진행중인 광고가 없습니다😢'} />
             )}
           </TableBody>
         </Table>
       </Card>
     </>
-  )
+  );
 }

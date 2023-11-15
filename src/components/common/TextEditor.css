@@ -531,8 +531,7 @@
 
   border-radius: 100%;
   display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite
-    ease-in-out both;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 .rdw-spinner .rdw-bounce1 {
@@ -930,8 +929,7 @@
 .DraftEditor-alignCenter .public-DraftStyleDefault-block {
   text-align: center;
 }
-.DraftEditor-alignCenter
-  .public-DraftEditorPlaceholder-root {
+.DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {
   margin: 0 auto;
   text-align: center;
   width: 100%;
@@ -939,8 +937,7 @@
 .DraftEditor-alignRight .public-DraftStyleDefault-block {
   text-align: right;
 }
-.DraftEditor-alignRight
-  .public-DraftEditorPlaceholder-root {
+.DraftEditor-alignRight .public-DraftEditorPlaceholder-root {
   right: 0;
   text-align: right;
 }

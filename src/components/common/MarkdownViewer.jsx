@@ -1,6 +1,4 @@
-import React from 'react'
+import React from 'react';
 export default function MarkdownViewer({ content }) {
-  return (
-    <div dangerouslySetInnerHTML={{ __html: content }} />
-  )
+  return <div dangerouslySetInnerHTML={{ __html: content }} />;
 }

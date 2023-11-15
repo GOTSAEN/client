@@ -1,9 +1,9 @@
-import { categories } from '..'
+import { categories } from '..';
 
 export const fetchCategories = () => {
   const data = categories
     .get('')
     .then((res) => res.data)
-    .catch((e) => console.log(e))
-  return data
-}
+    .catch((e) => console.log(e));
+  return data;
+};

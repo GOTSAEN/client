@@ -1,15 +1,15 @@
-import { useDarkMode } from '@/context/DarkModeContext'
-import React, { useEffect, useState } from 'react'
+import { useDarkMode } from '@/context/DarkModeContext';
+import React, { useEffect, useState } from 'react';
 
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function AlertToast({ status, message }) {
-  const { darkMode } = useDarkMode()
+  const { darkMode } = useDarkMode();
 
   return (
     <ToastContainer
       toastClassName={'pretendard'}
-      position='bottom-center'
+      position="bottom-center"
       autoClose={2000}
       hideProgressBar={true}
       newestOnTop={false}
@@ -21,5 +21,5 @@ export default function AlertToast({ status, message }) {
       theme={darkMode ? 'dark' : 'light'}
       limit={1}
     />
-  )
+  );
 }

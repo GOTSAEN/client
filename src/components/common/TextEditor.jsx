@@ -1,54 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import {
-  ContentState,
-  EditorState,
-  convertFromHTML,
-  convertToRaw,
-} from 'draft-js'
-import { Editor } from 'react-draft-wysiwyg'
-import draftToHtml from 'draftjs-to-html'
+import React, { useEffect, useState } from 'react';
+import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
 
 function TextEditor({ name, onChange, value }) {
-  const [editorState, setEditorState] = useState(
-    EditorState.createEmpty()
-  )
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (newEditorState) => {
-    console.log(newEditorState.getCurrentContent())
-    setEditorState(newEditorState)
-    const contentState = newEditorState.getCurrentContent()
-    const contentStateStr = JSON.stringify(
-      convertToRaw(contentState)
-    )
-    onChange(name, draftToHtml(JSON.parse(contentStateStr)))
-  }
+    console.log(newEditorState.getCurrentContent());
+    setEditorState(newEditorState);
+    const contentState = newEditorState.getCurrentContent();
+    const contentStateStr = JSON.stringify(convertToRaw(contentState));
+    onChange(name, draftToHtml(JSON.parse(contentStateStr)));
+  };
 
   useEffect(() => {
-    if (
-      value !==
-      draftToHtml(
-        convertToRaw(editorState.getCurrentContent())
-      )
-    ) {
-      const blocksFromHTML = convertFromHTML(value)
+    if (value !== draftToHtml(convertToRaw(editorState.getCurrentContent()))) {
+      const blocksFromHTML = convertFromHTML(value);
 
-      const contentState =
-        ContentState.createFromBlockArray(
-          blocksFromHTML.contentBlocks,
-          blocksFromHTML.entityMap
-        )
+      const contentState = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap);
 
-      const input =
-        EditorState.createWithContent(contentState)
-      setEditorState(input)
+      const input = EditorState.createWithContent(contentState);
+      setEditorState(input);
     }
-  }, [value])
+  }, [value]);
 
   return (
-    <div className='z-10'>
+    <div className="z-10">
       <Editor
         editorState={editorState}
-        editorClassName='text-editor'
+        editorClassName="text-editor"
         localization={{
           locale: 'ko',
         }}
@@ -62,7 +43,7 @@ function TextEditor({ name, onChange, value }) {
         }}
       />
     </div>
-  )
+  );
 }
 
-export default TextEditor
+export default TextEditor;

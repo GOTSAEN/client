@@ -1,66 +1,41 @@
-import { useEffect, useState } from 'react'
-import { format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
 
-import { cn } from '@/utils/lib'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { cn } from '@/utils/lib';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-export function DatePicker({
-  placeholder,
-  name,
-  value,
-  onChange,
-}) {
-  const [date, setDate] = useState()
+export function DatePicker({ placeholder, name, value, onChange }) {
+  const [date, setDate] = useState();
   const handleDateChange = (selectedDate) => {
-    setDate(selectedDate)
+    setDate(selectedDate);
     onChange(
       name,
-      new Intl.DateTimeFormat('ko-KR')
-        .format(selectedDate)
-        .replaceAll(/ /g, '')
-        .replaceAll('.', '-')
-        .slice(0, -1)
-    )
-  }
+      new Intl.DateTimeFormat('ko-KR').format(selectedDate).replaceAll(/ /g, '').replaceAll('.', '-').slice(0, -1),
+    );
+  };
 
   useEffect(() => {
     if (value) {
-      handleDateChange(new Date(value))
+      handleDateChange(new Date(value));
     }
-  }, [value])
+  }, [value]);
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
-          className={cn(
-            'w-[180px] justify-start text-left font-normal',
-            !date && 'text-muted-foreground'
-          )}
+          className={cn('w-[180px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
         >
-          <CalendarIcon className='mr-2 h-4 w-4' />
-          {date ? (
-            format(date, 'yyyy-MM-dd')
-          ) : (
-            <span>{placeholder}</span>
-          )}
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {date ? format(date, 'yyyy-MM-dd') : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
-        <Calendar
-          mode='single'
-          selected={date}
-          onSelect={handleDateChange}
-          initialFocus
-        />
+      <PopoverContent className="w-auto p-0">
+        <Calendar mode="single" selected={date} onSelect={handleDateChange} initialFocus />
       </PopoverContent>
     </Popover>
-  )
+  );
 }
