@@ -8,11 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { cn } from '@/utils/lib'
 import { Card } from '../../../components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import { imageSize } from '@/css/image'
+import { link_text } from '@/css'
 export default function PastAds() {
   return (
     <>

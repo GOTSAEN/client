@@ -8,9 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { cn } from '@/utils/lib'
 import { Card } from '../../../components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import { usePastAds } from './hooks/use-past-ads'
 import EmptyRow from '@/components/common/EmptyRow'
