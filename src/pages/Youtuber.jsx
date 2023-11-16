@@ -1,52 +1,52 @@
-import { fetchCategories } from '@/api/categories';
-import { getAllYoutuberList } from '@/api/youtuber';
-import SearchBar from '@/components/common/SearchBar';
+import { getAllYoutuberList, getYoutuberByCategory } from '@/api/youtuber';
 import { Card } from '@/components/ui/card';
-import { ListItem } from '@/components/ui/list-item';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import YoutuberList from '@/components/youtuber/youtuber-list';
 import { useCategory } from '@/hooks/use-category';
 import { Filter } from 'lucide-react';
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 export default function Youtuber() {
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState('');
   const { categories } = useCategory();
-  const {
-    isLoading,
-    data: youtubers,
-    error,
-  } = useQuery(['youtuber'], async () => await getAllYoutuberList(page).then((res) => res), {
-    staleTime: 1000 * 60 * 30,
-  });
+  const [youtubers, setYoutubers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('에러');
+  useEffect(() => {
+    if (category) {
+      getYoutuberByCategory(page, category).then((res) => {
+        if (res.length === 0) setErrorMessage('해당 카테고리의 유튜버가 없어요😢');
+        setYoutubers(res);
+      });
+    } else {
+      getAllYoutuberList(page).then((res) => {
+        if (res.length === 0) setErrorMessage('회원가입한 유튜버가 없어요😢');
+        setYoutubers(res);
+      });
+    }
+  }, [page, category]);
 
   return (
     <>
-      <NavigationMenu>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            <Filter size={14} className="mr-1" />
-            유튜버 카테고리
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid max-w-[600px] gap-3 p-4 lg:grid-cols-3 md:w-[500px] md:grid-cols-2 sm:w-[400px] sm:grid-cols-2">
-              <ListItem key={0} title="전체"></ListItem>
-              {categories?.map(({ categoryId, categoryName }) => (
-                <ListItem key={categoryId} title={categoryName}></ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenu>
+      <Select onValueChange={(val) => setCategory(val)}>
+        <SelectTrigger className="w-[150px] border-none">
+          <Filter size={14} />
+          <SelectValue placeholder={category || '전체'} />
+        </SelectTrigger>
+        <SelectContent className="max-h-[50vh]">
+          <SelectItem value="" key="전체">
+            전체
+          </SelectItem>
+
+          {categories &&
+            categories.map(({ categoryName }) => (
+              <SelectItem value={categoryName} key={categoryName}>
+                {categoryName}
+              </SelectItem>
+            ))}
+        </SelectContent>
+      </Select>
 
       <Card className="mt-2">
         <Table>
@@ -58,12 +58,12 @@ export default function Youtuber() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {error && <p>Error</p>}
-            {isLoading && <p>로딩중..</p>}
+            {/* {error && <p>Error</p>}
+            {isLoading && <p>로딩중..</p>} */}
             {youtubers?.length > 0 ? (
               youtubers.map((youtuber) => <YoutuberList youtuber={youtuber} />)
             ) : (
-              <p className="min-h-[200px] flex justify-center items-center">회원가입 한 유튜버가 없어요😢</p>
+              <p className="min-h-[200px] flex justify-center items-center">{errorMessage}</p>
             )}
           </TableBody>
         </Table>
