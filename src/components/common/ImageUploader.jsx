@@ -40,7 +40,7 @@ export default function ImageUploader({ advertisementId, existImages }) {
   }, [advertisementId, existImages]);
 
   return (
-    <div className="App">
+    <>
       <ImageUploading
         multiple
         value={images}
@@ -96,6 +96,6 @@ export default function ImageUploader({ advertisementId, existImages }) {
           </div>
         )}
       </ImageUploading>
-    </div>
+    </>
   );
 }

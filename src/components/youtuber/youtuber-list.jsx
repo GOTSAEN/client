@@ -7,6 +7,7 @@ import { TableCell, TableRow } from '../ui/table';
 
 export default function YoutuberList({ youtuber }) {
   const { youtuberMemberId, email, nickname, avatarUri, channelId, category } = youtuber;
+
   return (
     <TableRow className="grid grid-cols-12 px-1 py-2" key={youtuberMemberId}>
       <TableCell className="font-medium col-span-4">

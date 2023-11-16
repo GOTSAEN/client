@@ -13,6 +13,7 @@ import { fetchCategories } from '@/api/categories';
 import { fetchAdsById, newAds, updateAds } from '@/api/ads';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
+import { useCategory } from '@/hooks/use-category';
 
 const init = {
   productName: '',
@@ -38,11 +39,7 @@ export default function EnrollForm() {
   });
 
   const [existImages, setExistImages] = useState(null);
-  const {
-    isLoading,
-    data: categories,
-    error,
-  } = useQuery(['categories'], async () => await fetchCategories().then((res) => res), { staleTime: 1000 * 60 * 24 });
+  const { categories } = useCategory();
 
   const createAd = useMutation(() => newAds(form), {
     onSuccess: (id) => {
