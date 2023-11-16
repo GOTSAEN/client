@@ -34,7 +34,7 @@ export default function Youtuber() {
           <Filter size={14} />
           <SelectValue placeholder={category || '전체'} />
         </SelectTrigger>
-        <SelectContent className="max-h-[50vh]">
+        <SelectContent>
           <SelectItem value="" key="전체">
             전체
           </SelectItem>
