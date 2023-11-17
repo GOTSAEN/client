@@ -14,7 +14,7 @@ export default function Header() {
   const { user, checkAuth } = useAuth();
   useEffect(() => {
     checkAuth();
-  }, [user]);
+  }, []);
   return (
     <header className="relative h-14 flex justify-center w-full items-center px-4 cursor-pointer">
       <div className="relative max-w-[1400px] w-fit flex grow items-center">

@@ -5,10 +5,10 @@ import { navigation_styles } from './menu';
 export default function YoutuberMenu() {
   const url = '/setting/ads/';
   const items = [
-    { key: 'bookmark', name: '찜한 광고' },
     { key: 'waiting', name: '대기 광고' },
     { key: 'progress', name: '진행 광고' },
     { key: 'past', name: '종료 광고' },
+    { key: 'bookmark', name: '찜한 광고' },
   ];
   return (
     <>

@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     checkAuth();
-  }, [user]);
+  }, []);
 
   return <AuthContext.Provider value={{ user, logout, login, checkAuth }}>{children}</AuthContext.Provider>;
 }
