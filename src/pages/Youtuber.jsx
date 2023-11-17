@@ -61,7 +61,7 @@ export default function Youtuber() {
             {/* {error && <p>Error</p>}
             {isLoading && <p>로딩중..</p>} */}
             {youtubers?.length > 0 ? (
-              youtubers.map((youtuber) => <YoutuberList youtuber={youtuber} />)
+              youtubers.map((youtuber) => <YoutuberList youtuber={youtuber} key={youtuber.youtuberMemberId} />)
             ) : (
               <p className="min-h-[200px] flex justify-center items-center">{errorMessage}</p>
             )}
