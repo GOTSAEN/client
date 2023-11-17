@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/utils/lib';
 import { useMutation } from 'react-query';
-import { enrollWaiting } from '@/api/application';
+import { enrollWaiting, getApplicationStatus } from '@/api/application';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Cookies } from 'react-cookie';
@@ -15,18 +15,24 @@ export default function ProductContent({ data }) {
   const param = useParams();
   const navigate = useNavigate();
   const [bookmark, setBookmark] = useState(false);
-  const { productName, startDate, endDate, numberOfRecruit, category, offer } = data;
+  const [application, setApplication] = useState(false);
+  const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
 
   const label_style = 'font-semibold inline-block mr-4';
 
-  const { mutateAsync, isLoading } = useMutation(async () => await enrollWaiting(param.id), {
-    onSuccess: () => {
-      toast.success('신청완료 되었습니다👍🏻');
-    },
-    onError: (e) => {
-      console.log(e);
-    },
-  });
+  const { mutateAsync, isLoading } = useMutation(
+    async () => await enrollWaiting({ advertisementId: param.id, memberId: memberId }),
+    {
+      onSuccess: (res) => {
+        if (res) toast.success('신청완료 되었습니다👍🏻');
+        else toast.info('취소완료 되었습니다');
+        setApplication(res);
+      },
+      onError: (e) => {
+        console.log(e);
+      },
+    }
+  );
   const handleEnroll = () => {
     mutateAsync();
   };
@@ -52,7 +58,10 @@ export default function ProductContent({ data }) {
 
   useEffect(() => {
     if (user?.email && user?.auth === 'youtuber') {
-      getBookmarkStatus(param.id).then((res) => setBookmark(res));
+      const applicationId = param.id;
+
+      getBookmarkStatus(applicationId).then((res) => setBookmark(res));
+      getApplicationStatus(applicationId).then((res) => setApplication(res));
     }
   }, [user?.email]);
   return (
@@ -95,7 +104,7 @@ export default function ProductContent({ data }) {
         </div>
         {cookie.get('User') === 'youtuber' && (
           <Button className={cn('w-full')} onClick={handleEnroll} disabled={isLoading}>
-            대기 신청
+            {application ? '취소신청' : '대기신청'}
           </Button>
         )}
       </div>
