@@ -15,3 +15,10 @@ export const changeBookmarkStatus = async (data) => {
     .then(({ data }) => data)
     .catch((e) => ErrorResponse(e));
 };
+
+export const getBookmarks = async (page) => {
+  return bookmarks
+    .get(`?page=${page}&size=20`)
+    .then((res) => res.data.data)
+    .catch(ErrorResponse);
+};
