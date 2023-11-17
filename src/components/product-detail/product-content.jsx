@@ -57,17 +57,19 @@ export default function ProductContent({ data }) {
   return (
     <article className="grow flex flex-col">
       <div>
-        <h2 className="flex text-xl font-semibold items-center mt-2 mb-6">
-          <Heart
-            className="cursor-pointer"
-            fill={bookmark ? '#ED2B2A' : 'none'}
-            stroke={bookmark ? '#ED2B2A' : 'currentColor'}
-            strokeWidth={2}
-            onClick={toggleHeartStatus}
-            size={30}
-          />
+        <h2 className="flex text-xl font-semibold items-center my-4">
+          {cookie.get('User') === 'youtuber' && (
+            <Heart
+              className="cursor-pointer mr-2"
+              fill={bookmark ? '#ED2B2A' : 'none'}
+              stroke={bookmark ? '#ED2B2A' : 'currentColor'}
+              strokeWidth={2}
+              onClick={toggleHeartStatus}
+              size={30}
+            />
+          )}
 
-          <span className="ml-2">{productName}</span>
+          <span>{productName}</span>
         </h2>
         <aside>
           <label className={label_style}>모집기간</label>
@@ -93,7 +95,7 @@ export default function ProductContent({ data }) {
       </div>
       <div className="flex flex-col grow justify-between">
         <div>
-          <label className={label_style}>제공내용</label>
+          <label className={label_style}>✨ 제공내용</label>
           <aside className="py-4">{offer}</aside>
         </div>
         {cookie.get('User') === 'youtuber' && (

@@ -19,11 +19,8 @@ export default function SearchPage() {
       }),
     {
       staleTime: 1000 * 60 * 24,
-    },
+    }
   );
-  useEffect(() => {
-    console.log('object');
-  }, [keyword]);
   return (
     <main>
       {isLoading && <p> loading </p>}

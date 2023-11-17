@@ -8,24 +8,22 @@
 .gradient-2 {
   transform-origin: top left;
   position: fixed;
-  opacity: 0.15;
-  width: 30%;
-  height: 20rem;
+  width: 40%;
+  height: 40vh;
   z-index: 0;
   background-image: linear-gradient(
     to bottom,
-    #f65db4,
-    #e270cc,
-    #cb81dd,
-    #b290e7,
-    #9c9ceb,
-    #87a9f4,
-    #73b4f8,
-    #63bff9,
-    #44d0fe,
-    #2ce0fc,
-    #3aeef4,
-    #5ffbe6
+    rgba(246, 93, 180, 0.1),
+    rgba(226, 112, 204, 0.1),
+    rgba(203, 129, 221, 0.15),
+    rgba(178, 144, 231, 0.15),
+    rgba(156, 153, 235, 0.2),
+    rgba(135, 169, 244, 0.2),
+    rgba(115, 180, 248, 0.2),
+    rgba(99, 191, 249, 0.15),
+    rgba(68, 208, 254, 0.15),
+    rgba(44, 224, 252, 0.1),
+    rgba(58, 238, 244, 0.1)
   );
 }
 .header {
@@ -37,42 +35,28 @@
 .gradient {
   z-index: 0;
   top: 0rem;
-  width: 30%;
-  height: 400px;
-  right: -20%;
-  opacity: 0.15;
-  border-radius: 100%;
+  right: -20vw;
 }
 .gradient-2 {
   z-index: 0;
-  bottom: 10%;
-  left: 20%;
-  border-radius: 100%;
+  bottom: 20%;
+  left: 10vw;
   overflow-x: hidden;
-  background-image: linear-gradient(
+  background: linear-gradient(
     to bottom,
-    #25d469,
-    #8cc541,
-    #bdb435,
-    #dda146,
-    #ec9162,
-    #f28874,
-    #f28288,
-    #eb809c,
-    #ea7ead,
-    #e47ebf,
-    #d981d2,
-    #c886e5
+    rgba(37, 212, 105, 0.1),
+    rgba(140, 197, 65, 0.1),
+    rgba(189, 180, 53, 0.15),
+    rgba(221, 161, 70, 0.15),
+    rgba(236, 145, 98, 0.2),
+    rgba(242, 136, 116, 0.2),
+    rgba(242, 130, 136, 0.2),
+    rgba(235, 128, 156, 0.15),
+    rgba(234, 126, 173, 0.15),
+    rgba(228, 126, 191, 0.1),
+    rgba(217, 129, 210, 0.1),
+    rgba(200, 134, 229, 0.1)
   );
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .Toastify__toast-body {
