@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Cookies } from 'react-cookie';
 import { useEffect } from 'react';
-import { getBookmarkStatus, toggleBookmarkStatus } from '@/api/bookmark';
+import { getBookmarkStatus, changeBookmarkStatus } from '@/api/bookmark';
 import { useAuth } from '@/context/AuthContext';
 export default function ProductContent({ data }) {
   const cookie = new Cookies();
@@ -17,7 +17,7 @@ export default function ProductContent({ data }) {
   const [bookmark, setBookmark] = useState(false);
   const [application, setApplication] = useState(false);
   const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
-
+  const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
 
   const { mutateAsync, isLoading } = useMutation(
@@ -39,40 +39,34 @@ export default function ProductContent({ data }) {
 
   const { user } = useAuth();
 
-  const makeHeartTrue = () => {
+  const toggleHeartStatus = () => {
     if (user?.email) {
-      toggleBookmarkStatus({
-        advertisementId: param.id,
-      }).then((res) => {
-        setBookmark(res);
-      });
-      toast.info('찜 완료 💝');
+      changeBookmarkStatus({
+        advertisementId,
+        memberId,
+      }).then(setBookmark);
     } else navigate('/login');
-  };
-
-  const makeHeartFalse = () => {
-    toggleBookmarkStatus({
-      advertisementId: param.id,
-    }).then(setBookmark);
   };
 
   useEffect(() => {
     if (user?.email && user?.auth === 'youtuber') {
-      const applicationId = param.id;
-
-      getBookmarkStatus(applicationId).then((res) => setBookmark(res));
-      getApplicationStatus(applicationId).then((res) => setApplication(res));
+      getBookmarkStatus(advertisementId).then((res) => setBookmark(res));
+      getApplicationStatus(advertisementId).then((res) => setApplication(res));
     }
   }, [user?.email]);
   return (
     <article className="grow flex flex-col">
       <div>
         <h2 className="flex text-xl font-semibold items-center mt-2 mb-6">
-          {bookmark ? (
-            <Heart className="cursor-pointer" fill="red" strokeWidth={1} onClick={makeHeartFalse} />
-          ) : (
-            <Heart className="cursor-pointer" strokeWidth={1} onClick={makeHeartTrue} />
-          )}
+          <Heart
+            className="cursor-pointer"
+            fill={bookmark ? '#ED2B2A' : 'none'}
+            stroke={bookmark ? '#ED2B2A' : 'currentColor'}
+            strokeWidth={2}
+            onClick={toggleHeartStatus}
+            size={30}
+          />
+
           <span className="ml-2">{productName}</span>
         </h2>
         <aside>

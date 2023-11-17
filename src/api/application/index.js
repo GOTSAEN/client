@@ -15,8 +15,8 @@ export const getApplicationStatus = async (advertisementId) => {
     .catch(ErrorResponse);
 };
 
-export const changeApplicationStatus = async (applicationId, data) => {
-  return await application(`/${applicationId}`, data)
+export const changeApplicationStatus = async (advertisementId, data) => {
+  return await application(`/${advertisementId}`, data)
     .then((res) => res.data)
     .catch(ErrorResponse);
 };
