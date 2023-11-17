@@ -1,13 +1,5 @@
 import { cn } from '@/utils/lib';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
+import { NavigationMenuLink } from '@/components/ui/navigation-menu';
 import React from 'react';
 
 export const ListItem = React.forwardRef(({ className, title, children, ...props }, ref) => {
