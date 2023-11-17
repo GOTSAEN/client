@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Gift } from 'lucide-react';
+import { Gift, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/utils/lib';
 import { useAuth } from '@/context/AuthContext';
@@ -52,6 +52,13 @@ export default function ProductDropDownMenu() {
             </Link>
             <Link to="/setting/ads/past">
               <DropdownMenuItem>지난 상품</DropdownMenuItem>
+            </Link>
+            <DropdownMenuSeparator />
+            <Link to="/setting/ads/bookmark">
+              <DropdownMenuItem>
+                <Heart size={15} className="mr-2" fill="currentColor" />
+                찜한 광고
+              </DropdownMenuItem>
             </Link>
           </>
         )}

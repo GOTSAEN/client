@@ -11,9 +11,9 @@ import { Button } from '@/components/ui/button';
 export default function Header() {
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const { user, login } = useAuth();
+  const { user, checkAuth } = useAuth();
   useEffect(() => {
-    login();
+    checkAuth();
   }, []);
   return (
     <header className="relative h-14 flex justify-center w-full items-center px-4 cursor-pointer">

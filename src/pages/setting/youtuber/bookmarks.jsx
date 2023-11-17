@@ -1,15 +1,17 @@
 import { fetchAds } from '@/api/ads';
+import { getBookmarks } from '@/api/bookmark';
 import AdsCard from '@/components/AdsCard';
 import LocationLabel from '@/components/setting/location-label';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
 export default function Bookmarks() {
+  const [page, setPage] = useState(1);
   const {
     isLoading,
     data: ads,
     error,
-  } = useQuery(['ads', 'all'], async () => await fetchAds().then((res) => res), {
+  } = useQuery(['bookmark'], async () => await getBookmarks(page).then((res) => res), {
     staleTime: 1000 * 60 * 30,
   });
   return (

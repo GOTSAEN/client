@@ -7,7 +7,7 @@ export default function ProtectedAdminRoutes({ children }) {
   const { user, logout } = useAuth();
   const session = cookies.get('SESSIONID');
 
-  if (!session) {
+  if (!session || !user?.email) {
     logout();
     return <Navigate to="/login" replace />;
   }

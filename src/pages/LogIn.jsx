@@ -17,22 +17,15 @@ export default function LogIn() {
   const [popup, setPopup] = useState();
   const navigate = useNavigate();
 
-  const [cookies, setCookie] = useCookies();
   const { login } = useAuth();
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
   const [auth, setAuth] = useState('');
-  const { mutate, isLoading } = useMutation(async () => await signIn(form), {
-    onSuccess: (res) => {
-      const { refresh, authorization, usertype } = res.headers;
-      const email = form.email;
-      setCookie('SESSIONID', authorization);
-      setCookie('RENEW', refresh);
-      setCookie('User', usertype);
-      setCookie('Email', email);
-      login();
+  const { mutate, isLoading } = useMutation(async () => await signIn(form, form.email), {
+    onSuccess: (data) => {
+      login(data);
       navigate('/');
     },
     onError: (err) => {
@@ -53,28 +46,6 @@ export default function LogIn() {
     getUserType() ? setAuth(getUserType()) : setAuth('youtuber');
   }, []);
 
-  useEffect(() => {
-    if (!popup) return;
-    // popup으로부터 data를 전달 받을 listener 등록
-    const timer = setInterval(() => {
-      if (!popup) {
-        timer && clearInterval(timer);
-        return;
-      }
-      const currentUrl = popup.location.href;
-      if (!currentUrl) {
-        return;
-      }
-      const searchParams = new URL(currentUrl).searchParams;
-      const code = searchParams.get('code');
-
-      if (code) {
-        popup.close();
-        console.log(`The popup URL has URL code param = ${code}`);
-        // 가져온 code 로 다른 정보를 가져오는 API 호출
-      }
-    }, 500);
-  }, [popup]);
   return (
     <section className="main flex justify-center items-center">
       {auth && (

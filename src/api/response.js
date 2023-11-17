@@ -13,12 +13,11 @@ export function ApiResponse(response) {
 export function ErrorResponse(error) {
   const status = error.response.status;
   const message = error.response.data.message;
-  console.log(error.response);
+  console.log(status);
   switch (status) {
     case 500:
-    // deleteUserSession()
-    // window.location.href = '/login'
-    // throw new Error('알수 없는 오류가 발생했습니다.')
+      deleteUserSession();
+      window.location.href = '/login';
     default:
       throw new Error(message);
   }
