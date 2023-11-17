@@ -22,6 +22,7 @@ export function AuthProvider({ children }) {
     });
   };
   const logout = () => {
+    console.log('로그아웃합니다');
     cookies.remove('SESSIONID');
     cookies.remove('RENEW');
     cookies.remove('Email');
