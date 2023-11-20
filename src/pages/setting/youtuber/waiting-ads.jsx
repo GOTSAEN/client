@@ -9,9 +9,11 @@ import { getApplication } from '@/api/youtuber/application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
+import { useWaiting } from '@/hooks/use-waiting';
 
 export default function WaitingAds() {
   const [page, setPage] = useState(1);
+  const { waitingLoading, handleEnroll } = useWaiting();
   const {
     isLoading,
     data: ads,
@@ -35,7 +37,7 @@ export default function WaitingAds() {
           </TableHeader>
           <TableBody>
             {ads?.length > 0 ? (
-              ads.map(({ advertisementId, adName, adImage, adCategory, createdAt, status }) => (
+              ads.map(({ advertisementId, adName, adImage, adCategory, createdAt, status, memberId }) => (
                 <TableRow className="grid grid-cols-7 px-1 hover:cursor-pointer">
                   <TableCell className="col-span-3">
                     <img src={adImage ? adImage : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
@@ -47,7 +49,12 @@ export default function WaitingAds() {
                   <TableCell className="justify-center col-span-1">{status}</TableCell>
                   <TableCell className="col-span-1 justify-center">{createdAt.slice(0, 10)}</TableCell>
                   <TableCell className="text-right right col-span-1 justify-end">
-                    <Button>
+                    <Button
+                      onClick={async () => {
+                        await handleEnroll({ advertisementId, memberId });
+                      }}
+                      disabled={waitingLoading}
+                    >
                       <X size={14} />
                     </Button>
                   </TableCell>

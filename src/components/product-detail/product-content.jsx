@@ -20,11 +20,7 @@ export default function ProductContent({ data }) {
   const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
   const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
-  const [waitingAsync, waitingLoading] = useWaiting();
-
-  const handleEnroll = () => {
-    waitingAsync({ advertisementId: param.id, memberId: memberId }).then(setApplication);
-  };
+  const { waitingAsync, waitingLoading, handleEnroll } = useWaiting();
 
   const { user } = useAuth();
 
@@ -88,7 +84,18 @@ export default function ProductContent({ data }) {
           <aside className="py-4">{offer}</aside>
         </div>
         {cookie.get('User') === 'youtuber' && (
-          <Button className={cn('w-full')} onClick={handleEnroll} disabled={waitingLoading}>
+          <Button
+            className={cn('w-full')}
+            onClick={async () => {
+              try {
+                const res = await handleEnroll({ advertisementId: param.id, memberId });
+                setApplication(res);
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+            disabled={waitingLoading}
+          >
             {application ? '취소신청' : '대기신청'}
           </Button>
         )}

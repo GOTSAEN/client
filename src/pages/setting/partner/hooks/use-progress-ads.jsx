@@ -26,7 +26,7 @@ export function useProgressAds() {
         toast.error(e);
         console.log(error);
       },
-    },
+    }
   );
   return [isLoading, ads, error, updateAdToFinish];
 }
