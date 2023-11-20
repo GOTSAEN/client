@@ -16,16 +16,12 @@ export function useWaitingYoutuber() {
     error,
   } = useQuery(
     ['partner', 'ads', 'progress'],
-    async () => await fetchPartnerAdsYoutuber(page, params.campaignId).then((res) => res),
+    async () => await fetchPartnerAdsYoutuber(page, params.campaignId).then((res) => res)
   );
 
-  const updateStatus = useMutation((id, data) => changeApplicationStatus(id, data), {
+  const updateStatus = useMutation(({ id, data }) => changeApplicationStatus(id, data), {
     onSuccess: (res) => {
       queryClient.fetchQuery(['partner', 'ads', 'progress']);
-      const { status } = res;
-      if (status === 'PROGRESS') toast.success('확정했습니다');
-      if (status === 'REJECTION') toast.success('반려했습니다');
-      if (status === 'FINISHED') toast.success('승인했습니다');
     },
     onError: () => {
       navigate('/login');

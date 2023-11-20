@@ -12,8 +12,7 @@ export default function WaitingYoutuber() {
   const [isLoading, youtubers, error, updateStatus] = useWaitingYoutuber();
 
   const handleChangeStatus = (id, data) => {
-    console.log(data);
-    updateStatus.mutateAsync(id, data);
+    updateStatus.mutateAsync({ id, data });
   };
 
   return (
@@ -55,6 +54,23 @@ export default function WaitingYoutuber() {
                           onClick={() => handleChangeStatus(applicationId, { status: 'REJECTION' })}
                         >
                           반려
+                        </Button>
+                      </>
+                    )}
+                    {status === 'PROGRESS' && (
+                      <>
+                        <Button onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}>
+                          확정 취소
+                        </Button>
+                      </>
+                    )}
+                    {status === 'REJECTION' && (
+                      <>
+                        <Button
+                          variant="secondary"
+                          onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}
+                        >
+                          반려 취소
                         </Button>
                       </>
                     )}

@@ -8,8 +8,6 @@ export default function ProtectedRoutes({ children }) {
   const session = cookies.get('SESSIONID');
 
   if (!session || !user?.email) {
-    console.log(Boolean(session));
-    console.log(Boolean(user.email));
     logout();
     return <Navigate to="/login" replace />;
   }

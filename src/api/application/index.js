@@ -16,7 +16,8 @@ export const getApplicationStatus = async (advertisementId) => {
 };
 
 export const changeApplicationStatus = async (advertisementId, data) => {
-  return await application(`/${advertisementId}`, data)
+  return await application
+    .patch(`/${advertisementId}`, data)
     .then((res) => res.data)
     .catch(ErrorResponse);
 };

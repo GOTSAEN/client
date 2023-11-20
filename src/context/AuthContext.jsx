@@ -22,13 +22,14 @@ export function AuthProvider({ children }) {
     });
   };
   const logout = () => {
-    console.log('로그아웃합니다');
-    cookies.remove('SESSIONID');
-    cookies.remove('RENEW');
-    cookies.remove('Email');
-    cookies.remove('Refresh');
-    cookies.remove('Authorization');
+    initAuthCookie();
     setUser(undefined);
+  };
+
+  const initAuthCookie = () => {
+    console.log('로그아웃합니다');
+    const cookieList = ['SESSIONID', 'RENEW', 'Email', 'Refresh', 'Authorization'];
+    cookieList.map((name) => cookies.remove(name));
   };
 
   const checkAuth = () => {
