@@ -26,7 +26,7 @@ export default function ProgressYoutuber() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {youtubers.length > 0 ? (
+            {youtubers?.length > 0 ? (
               youtubers?.map(
                 ({
                   applicationId,
