@@ -52,7 +52,7 @@ export const postImage = (id, data) => {
 };
 
 export const toProgressAd = (id) => {
-  authAds
+  return authAds
     .patch(`/${id}/progressAd`)
     .then((res) => res)
     .catch(ErrorResponse);

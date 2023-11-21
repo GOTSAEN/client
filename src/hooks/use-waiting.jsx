@@ -10,7 +10,7 @@ export function useWaiting() {
     async (data) => await enrollWaiting(data),
     {
       onSuccess: async (res) => {
-        await queryClient.fetchQuery(['youtuber', 'waiting', 'ads']);
+        await queryClient.invalidateQueries(['youtuber', 'waiting', 'ads']);
         if (res) toast.success('신청완료 되었습니다👍🏻');
         else toast.info('취소완료 되었습니다');
         return res;

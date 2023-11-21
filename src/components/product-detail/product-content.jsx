@@ -89,6 +89,7 @@ export default function ProductContent({ data }) {
             onClick={async () => {
               try {
                 const res = await handleEnroll({ advertisementId: param.id, memberId });
+                console.log(res);
                 setApplication(res);
               } catch (error) {
                 console.error(error);

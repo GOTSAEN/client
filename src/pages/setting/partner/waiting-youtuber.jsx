@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { useProgressAds } from './hooks/use-progress-ads';
+
 import { useWaitingYoutuber } from './hooks/use-waiting-youtuber';
 import EmptyRow from '@/components/common/EmptyRow';
+import { useYoutuberList } from './hooks/use-youtuber-list';
 
 export default function WaitingYoutuber() {
+  const [page, setPage] = useState(1);
   const params = useParams();
-  const [isLoading, youtubers, error, updateStatus] = useWaitingYoutuber();
-
+  const [updateStatus] = useWaitingYoutuber();
+  const { GetYoutuberList } = useYoutuberList();
+  const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'waiting');
   const handleChangeStatus = (id, data) => {
     updateStatus.mutateAsync({ id, data });
   };
@@ -34,7 +37,7 @@ export default function WaitingYoutuber() {
             {youtubers?.length > 0 ? (
               youtubers.map(({ applicationId, status, createdAt, youtubeMemberImage, youtubeMemberNickname }) => (
                 <TableRow className="grid grid-cols-8 hover:cursor-pointer">
-                  <TableCell className="font-medium col-span-2">
+                  <TableCell className="font-medium col-span-2" key={applicationId}>
                     <img src={youtubeMemberImage} className="h-[40px] w-[40px] cover block rounded-full m-2" />
                     {youtubeMemberNickname}
                   </TableCell>

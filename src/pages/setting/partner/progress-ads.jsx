@@ -35,7 +35,7 @@ export default function PartnerProgressAds() {
           <TableBody>
             {ads?.length > 0 ? (
               ads.map(({ advertisementId, productName, imageUrl, category }) => (
-                <Link>
+                <Link to={`campaign/${advertisementId}`}>
                   <TableRow className="grid grid-cols-11 px-1 hover:cursor-pointer">
                     <TableCell className="col-span-4">
                       <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />

@@ -19,7 +19,7 @@ export default function PartnerWaitingAds() {
 
   const handleAdToProgress = (e, id) => {
     e.preventDefault();
-    updateAdToProgress.mutateAsync(id);
+    updateAdToProgress(id);
   };
 
   return (
