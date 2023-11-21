@@ -11,11 +11,6 @@ export default function ProgressAds() {
   const [page, setPage] = useState(1);
   const { GetAdsList } = useAdsList();
   const { isLoading, data: ads, error } = GetAdsList(page, 'progress');
-  const [updateStatus] = useApplication();
-
-  const handleChangeStatus = (id, data) => {
-    updateStatus.mutateAsync({ id, data });
-  };
   return (
     <>
       <Card className="flex justify-center">
