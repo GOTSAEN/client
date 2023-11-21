@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useYoutuberList } from './hooks/use-youtuber-list';
+import { useParams } from 'react-router-dom';
+import { youtubers } from '@/api';
+import EmptyRow from '@/components/common/EmptyRow';
 
 export default function ProgressYoutuber() {
-  
+  const params = useParams();
+  const [page, setPage] = useState(1);
+  const { GetYoutuberList } = useYoutuberList();
+  const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'progress');
+
   return (
     <>
       <Card className="flex justify-center">
@@ -19,32 +26,57 @@ export default function ProgressYoutuber() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="grid grid-cols-5">
-              <TableCell className="font-medium col-span-2">
-                <img
-                  src="https://yt3.ggpht.com/yzOkKjqHaC-vVkeQkz-8HLa5rCAyX0MMPEZy8eD28lALtHDl01PnWoq15xuiVV1j7irToNNH=s88-c-k-c0x00ffffff-no-rj"
-                  alt="thumbnail"
-                  className="h-[50px] w-[50px] cover block rounded-full m-2"
-                />
-                갓생돌돌돌돌이
-              </TableCell>
+            {youtubers.length > 0 ? (
+              youtubers?.map(
+                ({
+                  applicationId,
+                  memberId,
+                  status,
+                  youtuberMemberId,
+                  youtubeMemberImage,
+                  youtubeMemberNickname,
+                  youtubeUrl,
+                }) => (
+                  <TableRow className="grid grid-cols-5">
+                    <TableCell className="font-medium col-span-2">
+                      <img
+                        src={youtubeMemberImage}
+                        alt="thumbnail"
+                        className="h-[50px] w-[50px] cover block rounded-full m-2"
+                      />
+                      {youtubeMemberNickname}
+                    </TableCell>
 
-              <TableCell className="text-right right  justify-center">
-                <a
-                  href="https://www.youtube.com/watch?v=KgsPK4X2BFA&ab_channel=%EC%A4%80%EC%9A%B0"
-                  target="blank"
-                  className="underline underline-offset-2"
-                >
-                  조회
-                </a>
-              </TableCell>
-              <TableCell className="text-center justify-end  mr-2 gap-2 col-span-2">
-                <Button>확인</Button>
-                <Button variant="bright" className="bg-yellow-500">
-                  반려
-                </Button>
-              </TableCell>
-            </TableRow>
+                    <TableCell className="text-right right  justify-center">
+                      {youtubeUrl ? (
+                        <Button
+                          variant="link"
+                          href={youtubeUrl}
+                          target="blank"
+                          className="underline underline-offset-2 link"
+                        >
+                          조회
+                        </Button>
+                      ) : (
+                        <p>미등록</p>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-center justify-end  mr-2 gap-2 col-span-2">
+                      {youtubeUrl && (
+                        <>
+                          <Button>확인</Button>
+                          <Button variant="bright" className="bg-yellow-500">
+                            반려
+                          </Button>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                )
+              )
+            ) : (
+              <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />
+            )}
           </TableBody>
         </Table>
       </Card>
