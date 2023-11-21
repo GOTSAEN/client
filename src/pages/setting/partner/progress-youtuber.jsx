@@ -37,12 +37,12 @@ export default function ProgressYoutuber() {
                   youtubeMemberNickname,
                   youtubeUrl,
                 }) => (
-                  <TableRow className="grid grid-cols-5">
+                  <TableRow className="grid grid-cols-5" key={applicationId}>
                     <TableCell className="font-medium col-span-2">
                       <img
                         src={youtubeMemberImage}
                         alt="thumbnail"
-                        className="h-[50px] w-[50px] cover block rounded-full m-2"
+                        className="h-[40px] w-[40px] cover block rounded-full m-2"
                       />
                       {youtubeMemberNickname}
                     </TableCell>

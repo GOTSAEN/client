@@ -4,18 +4,18 @@ import { Card } from '@/components/ui/card';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
-import { useWaitingYoutuber } from './hooks/use-waiting-youtuber';
+import { useApplication } from '@/hooks/use-application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { useYoutuberList } from './hooks/use-youtuber-list';
 
 export default function WaitingYoutuber() {
   const [page, setPage] = useState(1);
   const params = useParams();
-  const [updateStatus] = useWaitingYoutuber();
+  const [updateStatus] = useApplication();
   const { GetYoutuberList } = useYoutuberList();
   const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'waiting');
-  const handleChangeStatus = (id, data) => {
-    updateStatus.mutateAsync({ id, data });
+  const handleChangeStatus = (applicationId, data) => {
+    updateStatus({ applicationId, data, status: 'waiting' });
   };
 
   return (

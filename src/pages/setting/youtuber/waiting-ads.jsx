@@ -2,25 +2,19 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '../../../components/ui/card';
 import { Link } from 'react-router-dom';
-import { Trash2, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useQuery } from 'react-query';
-import { getApplication } from '@/api/youtuber/application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
 import { useWaiting } from '@/hooks/use-waiting';
+import { useAdsList } from './hooks/use-ads-list';
 
 export default function WaitingAds() {
   const [page, setPage] = useState(1);
   const { waitingLoading, handleEnroll } = useWaiting();
-  const {
-    isLoading,
-    data: ads,
-    error,
-  } = useQuery(['youtuber', 'waiting', 'ads'], async () => await getApplication(page, 'WAITING').then((res) => res), {
-    staleTime: 1000 * 60 * 24,
-  });
+  const { GetAdsList } = useAdsList();
+  const { isLoading, data: ads, error } = GetAdsList(page, 'waiting');
   return (
     <>
       <Card className="flex justify-center">

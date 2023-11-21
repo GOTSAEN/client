@@ -20,7 +20,7 @@ export function useWaitingAds() {
     },
   });
 
-  const updateAdToProgress = useMutation(async (id) => await toProgressAd(id), {
+  const { mutate: updateAdToProgress } = useMutation(async (id) => await toProgressAd(id), {
     onSuccess: async () => {
       await queryClient.fetchQuery(['partner', 'ads', 'waiting']);
       toast.success('광고를 진행합니다');

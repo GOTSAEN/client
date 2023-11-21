@@ -44,11 +44,11 @@ export default function ProductDropDownMenu() {
         )}
         {user.auth === 'youtuber' && (
           <>
-            <Link to="/setting/ads/progress">
-              <DropdownMenuItem>진행 상품</DropdownMenuItem>
-            </Link>
             <Link to="/setting/ads/waiting">
               <DropdownMenuItem>대기 상품</DropdownMenuItem>
+            </Link>
+            <Link to="/setting/ads/progress">
+              <DropdownMenuItem>진행 상품</DropdownMenuItem>
             </Link>
             <Link to="/setting/ads/past">
               <DropdownMenuItem>지난 상품</DropdownMenuItem>
