@@ -18,9 +18,10 @@ export default function ProgressYoutuber() {
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
-            <TableRow className="grid grid-cols-5 items-center">
+            <TableRow className="grid grid-cols-7 items-center">
               <TableHead className="col-span-2">유튜버</TableHead>
 
+              <TableHead className="text-center justify-center  col-span-2">등록날짜</TableHead>
               <TableHead className="text-center justify-center ">링크</TableHead>
               <TableHead className="text-center justify-center col-span-2"></TableHead>
             </TableRow>
