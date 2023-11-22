@@ -9,10 +9,10 @@ import { useApplication } from '@/hooks/use-application';
 export default function ProgressAdItem({ data }) {
   const { applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, status, memberId } = data;
   const [url, setUrl] = useState(youtubeUrl);
-  const [updateStatus] = useApplication();
+  const { updateStatus, isLoading } = useApplication();
 
   const handleChangeStatus = () => {
-    updateStatus({ applicationId, youtubeUrl: url, status: 'progress' });
+    updateStatus({ applicationId, data: { youtubeUrl: url }, status: 'progress' });
   };
   return (
     <TableRow className="grid grid-cols-12 px-1" key={applicationId}>
@@ -28,7 +28,7 @@ export default function ProgressAdItem({ data }) {
       <TableCell className="col-span-2 justify-center">{adCategory}</TableCell>
       <TableCell className="text-right right col-span-5 justify-center gap-1">
         <Input value={url} onChange={(e) => setUrl(e.target.value)} />
-        <Button className="w-[50px] text-[11px] px-2" onClick={handleChangeStatus}>
+        <Button className="w-[50px] text-[11px] px-2" onClick={handleChangeStatus} disabled={isLoading}>
           확인
         </Button>
       </TableCell>
