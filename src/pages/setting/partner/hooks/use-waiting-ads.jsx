@@ -5,25 +5,16 @@ import { toast } from 'react-toastify';
 
 export function useWaitingAds() {
   const queryClient = useQueryClient();
-  const {
-    isLoading,
-    data: ads,
-    error,
-  } = useQuery(['partner', 'ads', 'waiting'], async () => await fetchPartnerAds(1, 'WAITING').then((res) => res), {
-    staleTime: 1000 * 60 * 24,
-  });
-
-  const { mutate } = useMutation(async (id) => await deleteAds(id), {
+  const { mutate: deleteAd } = useMutation(async (id) => await deleteAds(id), {
     onSuccess: async () => {
       await queryClient.fetchQuery(['partner', 'ads', 'waiting']);
       toast.success('삭제 완료');
     },
   });
 
-  const updateAdToProgress = useMutation(async (id) => await toProgressAd(id), {
+  const { mutate: updateAdToProgress } = useMutation(async (id) => await toProgressAd(id), {
     onSuccess: async () => {
       await queryClient.fetchQuery(['partner', 'ads', 'waiting']);
-      await queryClient.invalidateQueries(['partner', 'ads', 'progress']);
       toast.success('광고를 진행합니다');
     },
     onError: (e) => {
@@ -31,5 +22,5 @@ export function useWaitingAds() {
     },
   });
 
-  return [isLoading, ads, error, mutate, updateAdToProgress];
+  return [deleteAd, updateAdToProgress];
 }

@@ -5,13 +5,6 @@ import { toast } from 'react-toastify';
 
 export function useProgressAds() {
   const queryClient = useQueryClient();
-  const {
-    isLoading,
-    data: ads,
-    error,
-  } = useQuery(['partner', 'ads', 'progress'], async () => await fetchPartnerAds(1, 'PROGRESS').then((res) => res), {
-    staleTime: 1000 * 60 * 24,
-  });
 
   const updateAdToFinish = useMutation(
     (id) => {
@@ -24,9 +17,8 @@ export function useProgressAds() {
       },
       onError: (e) => {
         toast.error(e);
-        console.log(error);
       },
-    },
+    }
   );
-  return [isLoading, ads, error, updateAdToFinish];
+  return [updateAdToFinish];
 }

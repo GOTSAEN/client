@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '../../../components/ui/card';
 import { Link } from 'react-router-dom';
@@ -6,8 +6,12 @@ import { usePastAds } from './hooks/use-past-ads';
 import EmptyRow from '@/components/common/EmptyRow';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
+import { useAds } from './hooks/use-ads';
 export default function PartnerPastAds() {
-  const [isLoading, ads, error] = usePastAds();
+  const [page, setPage] = useState(1);
+  const { GetAdsList } = useAds();
+
+  const { isLoading, data: ads, error } = GetAdsList(page, 'finished');
   return (
     <>
       <Card className="flex justify-center">

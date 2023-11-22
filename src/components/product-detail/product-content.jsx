@@ -10,6 +10,7 @@ import { Cookies } from 'react-cookie';
 import { useEffect } from 'react';
 import { getBookmarkStatus, changeBookmarkStatus } from '@/api/bookmark';
 import { useAuth } from '@/context/AuthContext';
+import { useWaiting } from '@/hooks/use-waiting';
 export default function ProductContent({ data }) {
   const cookie = new Cookies();
   const param = useParams();
@@ -19,23 +20,7 @@ export default function ProductContent({ data }) {
   const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
   const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
-
-  const { mutateAsync, isLoading } = useMutation(
-    async () => await enrollWaiting({ advertisementId: param.id, memberId: memberId }),
-    {
-      onSuccess: (res) => {
-        if (res) toast.success('신청완료 되었습니다👍🏻');
-        else toast.info('취소완료 되었습니다');
-        setApplication(res);
-      },
-      onError: (e) => {
-        console.log(e);
-      },
-    }
-  );
-  const handleEnroll = () => {
-    mutateAsync();
-  };
+  const { waitingAsync, waitingLoading, handleEnroll } = useWaiting();
 
   const { user } = useAuth();
 
@@ -99,7 +84,19 @@ export default function ProductContent({ data }) {
           <aside className="py-4">{offer}</aside>
         </div>
         {cookie.get('User') === 'youtuber' && (
-          <Button className={cn('w-full')} onClick={handleEnroll} disabled={isLoading}>
+          <Button
+            className={cn('w-full')}
+            onClick={async () => {
+              try {
+                const res = await handleEnroll({ advertisementId: param.id, memberId });
+                console.log(res);
+                setApplication(res);
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+            disabled={waitingLoading}
+          >
             {application ? '취소신청' : '대기신청'}
           </Button>
         )}
