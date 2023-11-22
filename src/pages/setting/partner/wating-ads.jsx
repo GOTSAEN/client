@@ -7,10 +7,15 @@ import { Button } from '@/components/ui/button';
 import EmptyRow from '@/components/common/EmptyRow';
 import { useWaitingAds } from './hooks/use-waiting-ads';
 import { imageSize } from '@/css/image';
+import { useAds } from './hooks/use-ads';
+import { useState } from 'react';
 
 export default function PartnerWaitingAds() {
   const navigate = useNavigate();
-  const [isLoading, ads, error, mutate, updateAdToProgress] = useWaitingAds();
+  const [page, setPage] = useState(1);
+  const { GetAdsList } = useAds();
+  const { isLoading, data: ads, error } = GetAdsList(page, 'waiting');
+  const [deleteAd, updateAdToProgress] = useWaitingAds();
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
@@ -81,7 +86,7 @@ export default function PartnerWaitingAds() {
                         variant="destructive"
                         onClick={(e) => {
                           e.preventDefault();
-                          mutate(ad.advertisementId);
+                          deleteAd(ad.advertisementId);
                         }}
                       >
                         <Trash2 size={14} />

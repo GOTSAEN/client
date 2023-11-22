@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdsCard from '@/components/AdsCard';
 import { useQuery } from 'react-query';
-import { fetchAds } from '@/api/ads';
+import { fetchAds, fetchAdsByStatus } from '@/api/ads';
 import qs from 'qs';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { saveUserSession } from '@/service/login-auth';
@@ -10,6 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
   const { login } = useAuth();
+  const [page, setPage] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
   const cookies = new Cookies();
@@ -17,7 +18,7 @@ export default function Home() {
     isLoading,
     data: ads,
     error,
-  } = useQuery(['ads', 'all'], async () => await fetchAds().then((res) => res), {
+  } = useQuery(['ads', 'waiting'], async () => await fetchAdsByStatus('WAITING', page).then((res) => res), {
     staleTime: 1000 * 60 * 30,
   });
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Home() {
           authorization,
           usertype,
         },
-        { email },
+        { email }
       );
     }
   }, [location]);

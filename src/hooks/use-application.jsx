@@ -15,9 +15,11 @@ export function useApplication() {
       const { status } = variables;
       await queryClient.fetchQuery(['application', status]);
       toast.success('성공적으로 입력되었습니다👍🏻');
+      return true;
     },
     onError: (e) => {
       toast.error(e);
+      return false;
     },
   });
 

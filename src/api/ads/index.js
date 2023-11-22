@@ -8,6 +8,12 @@ export const fetchAds = async () => {
     .catch((e) => console.log(e));
 };
 
+export const fetchAdsByStatus = async (status, page) => {
+  return await ads
+    .get(`/byStatus?status=${status}&page=${page}&size=20`)
+    .then((res) => res.data.data)
+    .catch((e) => ErrorResponse(e));
+};
 export const fetchAdsByCategory = async (category) => {
   return ads
     .get(`/byCategory?category=${category}`)

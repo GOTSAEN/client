@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Progress } from '@/components/ui/progress';
 import { Card } from '@/components/ui/card';
@@ -9,13 +9,17 @@ import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
+import { useAds } from './hooks/use-ads';
 
 export default function PartnerProgressAds() {
-  const [isLoading, ads, error, updateAdToFinish] = useProgressAds();
+  const [page, setPage] = useState(1);
+  const { GetAdsList } = useAds();
+  const { isLoading, data: ads, error } = GetAdsList(page, 'progress');
+  const [updateAdToFinish] = useProgressAds();
 
   const handleAdToFinish = (e, id) => {
     e.preventDefault();
-    updateAdToFinish.mutateAsync(id);
+    updateAdToFinish(id);
   };
 
   return (
@@ -49,8 +53,8 @@ export default function PartnerProgressAds() {
                       <Progress value={30} className="w-full" />
                     </TableCell>
                     <TableCell className="text-right right col-span-2 justify-center">
-                      <Button>
-                        <Check size={14} onClick={(e) => handleAdToFinish(e, advertisementId)} />
+                      <Button onClick={(e) => handleAdToFinish(e, advertisementId)}>
+                        <Check size={14} />
                       </Button>
                     </TableCell>
                   </TableRow>
