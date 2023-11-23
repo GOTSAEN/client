@@ -7,7 +7,6 @@ function TextEditor({ name, onChange, value }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (newEditorState) => {
-    console.log(newEditorState.getCurrentContent());
     setEditorState(newEditorState);
     const contentState = newEditorState.getCurrentContent();
     const contentStateStr = JSON.stringify(convertToRaw(contentState));

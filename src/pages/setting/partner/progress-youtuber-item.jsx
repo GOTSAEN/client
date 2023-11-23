@@ -41,7 +41,9 @@ export default function ProgressYoutuberItem({ data }) {
         )}
         {youtubeUrl && status === 'REJECTION' && (
           <>
-            <Button onClick={() => handleChangeStatus('PROGRESS')}>반려취소</Button>
+            <Button onClick={() => handleChangeStatus('PROGRESS')} variant="destructive">
+              반려취소
+            </Button>
           </>
         )}
       </TableCell>

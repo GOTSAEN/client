@@ -65,7 +65,7 @@ export const toProgressAd = (id) => {
 };
 
 export const toFinishAd = (id) => {
-  authAds
+  return authAds
     .patch(`/${id}/finishAd`)
     .then((res) => res)
     .catch(ErrorResponse);
