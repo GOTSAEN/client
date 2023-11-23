@@ -6,15 +6,18 @@ import { useYoutuberList } from './hooks/use-youtuber-list';
 import { useParams } from 'react-router-dom';
 import EmptyRow from '@/components/common/EmptyRow';
 import ProgressYoutuberItem from './progress-youtuber-item';
+import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
 
 export default function ProgressYoutuber() {
   const params = useParams();
+  const campaignId = params.campaignId;
   const [page, setPage] = useState(1);
   const { GetYoutuberList } = useYoutuberList();
-  const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'progress');
+  const { isLoading, data: youtubers, error } = GetYoutuberList(campaignId, page, 'progress');
 
   return (
     <>
+      <CompactAdInfo id={campaignId} />
       <Card className="flex justify-center">
         <Table>
           <TableHeader>

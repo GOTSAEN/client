@@ -7,19 +7,22 @@ import { Button } from '@/components/ui/button';
 import { useApplication } from '@/hooks/use-application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { useYoutuberList } from './hooks/use-youtuber-list';
+import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
 
 export default function WaitingYoutuber() {
   const [page, setPage] = useState(1);
   const params = useParams();
+  const campaignId = params.campaignId;
   const { updateStatus } = useApplication();
   const { GetYoutuberList } = useYoutuberList();
-  const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'waiting');
+  const { isLoading, data: youtubers, error } = GetYoutuberList(campaignId, page, 'waiting');
   const handleChangeStatus = (applicationId, data) => {
     updateStatus({ applicationId, data, status: 'waiting' });
   };
 
   return (
     <>
+      <CompactAdInfo />
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
