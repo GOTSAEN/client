@@ -13,7 +13,7 @@ export default function Setting() {
       </div>
       <MenuBar />
 
-      <main className="py-8 w-full px-4">
+      <main className="py-4 w-full px-4">
         <LocationLabel />
         <Outlet />
       </main>

@@ -22,16 +22,14 @@ export default function WaitingYoutuber() {
 
   return (
     <>
-      <CompactAdInfo />
+      <CompactAdInfo id={campaignId}/>
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
             <TableRow className="grid grid-cols-8 items-center">
               <TableHead className="col-span-2">유튜버</TableHead>
-
               <TableHead className="justify-center">구독자</TableHead>
               <TableHead className="text-right justify-center">뷰 수</TableHead>
-
               <TableHead className="text-center justify-center col-span-2 ">신청일</TableHead>
               <TableHead className="text-center justify-center col-span-2"></TableHead>
             </TableRow>
