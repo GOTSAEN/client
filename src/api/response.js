@@ -1,4 +1,5 @@
 import { deleteUserSession } from '@/service/login-auth';
+import { toast } from 'react-toastify';
 
 export function ApiResponse(response) {
   const status = response.status;
@@ -13,12 +14,11 @@ export function ApiResponse(response) {
 export function ErrorResponse(error) {
   const status = error.response.status;
   const message = error.response.data.message;
-  console.log(status);
   switch (status) {
     case 500:
       deleteUserSession();
       window.location.href = '/login';
     default:
-      throw new Error(message);
+      toast.error(message);
   }
 }

@@ -14,6 +14,7 @@ import { fetchAdsById, newAds, updateAds } from '@/api/ads';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
 import { useCategory } from '@/hooks/use-category';
+import { toast } from 'react-toastify';
 
 const init = {
   productName: '',
@@ -66,6 +67,7 @@ export default function EnrollForm() {
     e.preventDefault();
     updateAd.mutateAsync();
   }
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
