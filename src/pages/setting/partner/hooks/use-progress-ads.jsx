@@ -7,13 +7,14 @@ export function useProgressAds() {
   const queryClient = useQueryClient();
 
   const { mutate: updateAdToFinish } = useMutation(async (id) => await toFinishAd(id), {
-    onSuccess: async () => {
+    onSuccess: async (status) => {
+      console.log(status);
       await queryClient.fetchQuery(['partner', 'ads', 'progress']);
       queryClient.invalidateQueries(['partner', 'ads', 'finished']);
       toast.success('광고를 종료합니다');
     },
-    onError: (e) => {
-      toast.error(e);
+    onError: (error) => {
+      toast.error(error.toString().replace('Error:', ''));
     },
   });
   return [updateAdToFinish];

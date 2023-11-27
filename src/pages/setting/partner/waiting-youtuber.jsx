@@ -22,7 +22,7 @@ export default function WaitingYoutuber() {
 
   return (
     <>
-      <CompactAdInfo id={campaignId}/>
+      <CompactAdInfo id={campaignId} />
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
@@ -62,7 +62,7 @@ export default function WaitingYoutuber() {
                           <Button
                             variant="bright"
                             className="bg-yellow-500"
-                            onClick={() => handleChangeStatus(applicationId, { status: 'REJECTION' })}
+                            onClick={() => handleChangeStatus(applicationId, { status: 'UNSELECTED' })}
                           >
                             반려
                           </Button>
@@ -75,7 +75,7 @@ export default function WaitingYoutuber() {
                           </Button>
                         </>
                       )}
-                      {status === 'REJECTION' && (
+                      {status === 'UNSELECTED' && (
                         <>
                           <Button
                             variant="secondary"

@@ -14,6 +14,7 @@ import { fetchAdsById, newAds, updateAds } from '@/api/ads';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
 import { useCategory } from '@/hooks/use-category';
+import { toast } from 'react-toastify';
 
 const init = {
   productName: '',
@@ -45,16 +46,16 @@ export default function EnrollForm() {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: () => {
-      navigate('/login');
+    onError: (e) => {
+      toast.error(e.toString().replace('Error:', ''));
     },
   });
   const updateAd = useMutation(() => updateAds(param.campaignId, form), {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: () => {
-      navigate('/login');
+    onError: (e) => {
+      console.log(e);
     },
   });
 

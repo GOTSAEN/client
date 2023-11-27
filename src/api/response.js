@@ -12,8 +12,9 @@ export function ApiResponse(response) {
 
 export function ErrorResponse(error) {
   const status = error.response.status;
-  const message = error.response.data.message;
-  console.log(status);
+  const message = error.response.data;
+  console.log(error);
+  console.log(status, message);
   switch (status) {
     case 500:
       deleteUserSession();
