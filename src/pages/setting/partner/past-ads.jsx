@@ -15,7 +15,6 @@ export default function PartnerPastAds() {
   const { isLoading, data: ads, error } = GetAdsList(page, 'finished');
   return (
     <>
-
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
@@ -29,18 +28,20 @@ export default function PartnerPastAds() {
           <TableBody>
             {ads?.length > 0 ? (
               ads.map(({ advertisementId, imageUrl, productName, category, numberOfRecruit }) => (
-                <TableRow className="grid grid-cols-8 px-1">
-                  <TableCell className="col-span-4">
-                    <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
+                <Link to={`campaign/${advertisementId}`}>
+                  <TableRow className="grid grid-cols-8 px-1">
+                    <TableCell className="col-span-4">
+                      <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
 
-                    <Link to={`product/${advertisementId}`} className={link_text}>
-                      {productName}
-                    </Link>
-                  </TableCell>
+                      <Link to={`product/${advertisementId}`} className={link_text}>
+                        {productName}
+                      </Link>
+                    </TableCell>
 
-                  <TableCell className="col-span-2 justify-center">{category}</TableCell>
-                  <TableCell className="text-right right col-span-2 justify-center">{numberOfRecruit}</TableCell>
-                </TableRow>
+                    <TableCell className="col-span-2 justify-center">{category}</TableCell>
+                    <TableCell className="text-right right col-span-2 justify-center">{numberOfRecruit}</TableCell>
+                  </TableRow>
+                </Link>
               ))
             ) : (
               <EmptyRow mainMessage="종료된 광고가 없습니다😂" />
