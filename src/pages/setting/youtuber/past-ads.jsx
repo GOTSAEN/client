@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { imageSize } from '@/css/image';
 import { link_text, setting_btn } from '@/css';
 import { useAdsList } from './hooks/use-ads-list';
+import EmptyRow from '@/components/common/EmptyRow';
 export default function PastAds() {
   const [page, setPage] = useState(1);
   const { GetAdsList } = useAdsList();
@@ -23,7 +24,7 @@ export default function PastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 &&
+            {ads?.length > 0 ? (
               ads.map(({ applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, lastModifiedAt }) => (
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
                   <TableCell className="col-span-2">
@@ -41,7 +42,10 @@ export default function PastAds() {
                     </a>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            ) : (
+              <EmptyRow mainMessage="이전에 진행했던 광고가 없습니다 😢" />
+            )}
           </TableBody>
         </Table>
       </Card>

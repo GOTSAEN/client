@@ -46,16 +46,16 @@ export default function EnrollForm() {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: () => {
-      navigate('/login');
+    onError: (e) => {
+      toast.error(e.toString().replace('Error:', ''));
     },
   });
   const updateAd = useMutation(() => updateAds(param.campaignId, form), {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: () => {
-      navigate('/login');
+    onError: (e) => {
+      console.log(e);
     },
   });
 

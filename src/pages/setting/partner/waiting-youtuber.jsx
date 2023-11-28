@@ -7,28 +7,29 @@ import { Button } from '@/components/ui/button';
 import { useApplication } from '@/hooks/use-application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { useYoutuberList } from './hooks/use-youtuber-list';
+import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
 
 export default function WaitingYoutuber() {
   const [page, setPage] = useState(1);
   const params = useParams();
+  const campaignId = params.campaignId;
   const { updateStatus } = useApplication();
   const { GetYoutuberList } = useYoutuberList();
-  const { isLoading, data: youtubers, error } = GetYoutuberList(params.campaignId, page, 'waiting');
+  const { isLoading, data: youtubers, error } = GetYoutuberList(campaignId, page, 'waiting');
   const handleChangeStatus = (applicationId, data) => {
     updateStatus({ applicationId, data, status: 'waiting' });
   };
 
   return (
     <>
+      <CompactAdInfo id={campaignId} />
       <Card className="flex justify-center">
         <Table>
           <TableHeader>
             <TableRow className="grid grid-cols-8 items-center">
               <TableHead className="col-span-2">유튜버</TableHead>
-
               <TableHead className="justify-center">구독자</TableHead>
               <TableHead className="text-right justify-center">뷰 수</TableHead>
-
               <TableHead className="text-center justify-center col-span-2 ">신청일</TableHead>
               <TableHead className="text-center justify-center col-span-2"></TableHead>
             </TableRow>
@@ -61,7 +62,7 @@ export default function WaitingYoutuber() {
                           <Button
                             variant="bright"
                             className="bg-yellow-500"
-                            onClick={() => handleChangeStatus(applicationId, { status: 'REJECTION' })}
+                            onClick={() => handleChangeStatus(applicationId, { status: 'UNSELECTED' })}
                           >
                             반려
                           </Button>
@@ -74,7 +75,7 @@ export default function WaitingYoutuber() {
                           </Button>
                         </>
                       )}
-                      {status === 'REJECTION' && (
+                      {status === 'UNSELECTED' && (
                         <>
                           <Button
                             variant="secondary"

@@ -25,7 +25,7 @@ export const newAds = (data) => {
   return authAds
     .post('', data)
     .then((res) => res.data)
-    .catch((e) => ErrorResponse(e));
+    .catch(ErrorResponse);
 };
 
 export const updateAds = (id, data) => {
@@ -65,8 +65,8 @@ export const toProgressAd = (id) => {
 };
 
 export const toFinishAd = (id) => {
-  authAds
+  return authAds
     .patch(`/${id}/finishAd`)
-    .then((res) => res)
-    .catch(ErrorResponse);
+    .then((res) => res.status)
+    .catch((e) => ErrorResponse(e));
 };

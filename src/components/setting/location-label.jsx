@@ -35,7 +35,7 @@ export default function LocationLabel() {
     setLabels(getUrlList(url));
   }, [location]);
   return (
-    <div className="flex items-end pb-4">
+    <div className="flex items-end pb-6">
       <h4 className="text-xs text-muted-foreground">
         {labels.length > 0 && (
           <>

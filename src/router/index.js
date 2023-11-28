@@ -28,6 +28,7 @@ import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber';
 import Bookmarks from '@/pages/setting/youtuber/bookmarks';
 import PartnerPastAds from '@/pages/setting/partner/past-ads';
 import ScrollTop from '@/components/common/ScrollTop';
+import PastYoutuber from '@/pages/setting/partner/past-youtuber';
 
 export default function Router() {
   return (
@@ -109,6 +110,7 @@ export default function Router() {
 
             <Route path="ads/waiting/campaign/:campaignId" element={<WaitingYoutuber />} />
             <Route path="ads/progress/campaign/:campaignId" element={<ProgressYoutuber />} />
+            <Route path="ads/past/campaign/:campaignId" element={<PastYoutuber />} />
 
             <Route path="ads/past" element={<PartnerPastAds />} />
             <Route path="ads/waiting" element={<WaitingAds />} />

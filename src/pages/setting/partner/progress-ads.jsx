@@ -30,7 +30,6 @@ export default function PartnerProgressAds() {
             <TableRow className="grid grid-cols-11 items-center">
               <TableHead className="col-span-4">상품</TableHead>
               <TableHead className="justify-center col-span-1">카테고리</TableHead>
-
               <TableHead className="justify-center col-span-2">유튜버 수</TableHead>
               <TableHead className="text-right col-span-2 justify-center">진행률</TableHead>
               <TableHead className="text-center col-span-2 justify-center"></TableHead>
