@@ -11,7 +11,7 @@ export default function ProductDetail() {
 
   const { data, isLoading, error } = useQuery(
     ['ads', `${params.id}`],
-    async () => await fetchAdsById(params.id).then((res) => res),
+    async () => await fetchAdsById(params.id).then((res) => res)
   );
 
   return (
