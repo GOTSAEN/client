@@ -35,7 +35,7 @@ function App() {
           </AuthProvider>
         </CookiesProvider>
       </DarkModeProvider>
-      {/* <ReactQueryDevtools /> */}
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

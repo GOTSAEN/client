@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { fetchAdsByFilter } from '@/api/ads';
 import MultiCarousel from '../common/carousel/multi-carousel';
 
-export default function Promotion({ promotion, mainTitle, subTitle, position }) {
+export default function Promotion({ promotion, mainTitle, subTitle, color }) {
   const [page, setPage] = useState(1);
   const responsive = {
     superLargeDesktop: {
@@ -30,15 +30,30 @@ export default function Promotion({ promotion, mainTitle, subTitle, position }) 
     data: ads,
     error,
   } = useQuery(['ads', promotion], () => fetchAdsByFilter(promotion, page), { staleTime: 1000 * 60 * 24 });
+
   return (
-    <section className={`flex flex-row `}>
-      <div>
-        {mainTitle && <h2>{mainTitle}</h2>}
-        {subTitle && <h4>{subTitle}</h4>}
-      </div>
-      <MultiCarousel responsive={responsive} showDots={false}>
-        {ads?.length > 0 && ads.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
-      </MultiCarousel>
-    </section>
+    <>
+      {ads?.length > 0 && (
+        <section className="mb-8">
+          <div className="text-center">
+            {mainTitle && (
+              <h2 className="text-2xl Jalnan fit-content">
+                <span style={{ background: color }}>{mainTitle}</span>
+              </h2>
+            )}
+            {subTitle && <h4 className="text-lg font-semibold">{subTitle}</h4>}
+          </div>
+
+          <MultiCarousel responsive={responsive} showDots={false} autoPlay={true}>
+            {ads?.length > 0 &&
+              ads.map((ad, idx) => (
+                <div className="m-2" key={ad.advertisementId}>
+                  <AdsCard adsCardInfo={ad} />
+                </div>
+              ))}
+          </MultiCarousel>
+        </section>
+      )}
+    </>
   );
 }
