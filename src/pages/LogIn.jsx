@@ -9,7 +9,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUserType, saveUserType } from '@/service/login-auth';
 import { useAuth } from '@/context/AuthContext';
 import { useMutation } from 'react-query';
-import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 import { auth_form } from '@/css';
 

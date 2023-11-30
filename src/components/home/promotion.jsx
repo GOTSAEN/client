@@ -34,11 +34,13 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
   return (
     <>
       {ads?.length > 0 && (
-        <section className="mb-8">
+        <section className="my-8">
           <div className="text-center">
             {mainTitle && (
               <h2 className="text-2xl Jalnan fit-content">
-                <span style={{ background: color }}>{mainTitle}</span>
+                <span className="pt-1" style={{ background: color }}>
+                  {mainTitle}
+                </span>
               </h2>
             )}
             {subTitle && <h4 className="text-lg font-semibold">{subTitle}</h4>}

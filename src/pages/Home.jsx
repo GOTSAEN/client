@@ -6,13 +6,13 @@ export default function Home() {
     <main className="flex flex-col gap-4">
       <Promotion
         promotion="mostBookmarked"
-        mainTitle="🔥 인기가 많은 상품이에요"
+        mainTitle="🔥인기가 많은 상품이에요"
         subTitle="찜이 많아요"
         color={'rgba(255, 102, 102, 0.3)'}
       />
       <Promotion
         promotion="nearDeadline"
-        mainTitle="⏰ 신청 마감일이 임박한 상품이에요"
+        mainTitle="⏰신청 마감일이 임박한 상품이에요"
         subTitle="서둘러서 신청하세요"
         color={'rgba(131, 162, 255, 0.3)'}
       />
