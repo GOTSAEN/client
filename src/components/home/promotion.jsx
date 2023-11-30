@@ -3,6 +3,7 @@ import AdsCard from '../AdsCard';
 import { useQuery } from 'react-query';
 import { fetchAdsByFilter } from '@/api/ads';
 import MultiCarousel from '../common/carousel/multi-carousel';
+import PromotionSkeleton from './promotion-skeleton';
 
 export default function Promotion({ promotion, mainTitle, subTitle, color }) {
   const [page, setPage] = useState(1);
@@ -33,6 +34,7 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
 
   return (
     <>
+      {isLoading && <PromotionSkeleton mainTitle={mainTitle} subTitle={subTitle} color={color} />}
       {ads?.length > 0 && (
         <section className="my-8">
           <div className="text-center">
