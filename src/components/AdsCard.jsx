@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function AdsCard({ adsCardInfo }) {
   const { advertisementId, productName, numberOfRecruit, category, imageUrl } = adsCardInfo;
-  console.log(productName);
 
   return (
     <Link to={`/product/${advertisementId}`} className="bg-card">
