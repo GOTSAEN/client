@@ -31,11 +31,9 @@ export default function ProgressYoutuber() {
           </TableHeader>
           <TableBody>
             {isLoading && <AdItemSkeleton type={'rounded-full'} />}
-            {youtubers?.length > 0 ? (
-              youtubers?.map((youtuber) => <ProgressYoutuberItem data={youtuber} key={youtuber.applicationId} />)
-            ) : (
-              <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />
-            )}
+            {youtubers?.length > 0 &&
+              youtubers?.map((youtuber) => <ProgressYoutuberItem data={youtuber} key={youtuber.applicationId} />)}
+            {youtubers?.length === 0 && <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />}
           </TableBody>
         </Table>
       </Card>

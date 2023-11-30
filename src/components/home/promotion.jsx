@@ -48,7 +48,7 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
 
           <MultiCarousel responsive={responsive} showDots={false} autoPlay={true}>
             {ads?.length > 0 &&
-              ads.map((ad, idx) => (
+              ads.map((ad) => (
                 <div className="m-2" key={ad.advertisementId}>
                   <AdsCard adsCardInfo={ad} />
                 </div>

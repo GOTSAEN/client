@@ -8,6 +8,7 @@ import { useApplication } from '@/hooks/use-application';
 import EmptyRow from '@/components/common/EmptyRow';
 import { useYoutuberList } from './hooks/use-youtuber-list';
 import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function WaitingYoutuber() {
   const [page, setPage] = useState(1);
@@ -34,65 +35,57 @@ export default function WaitingYoutuber() {
               <TableHead className="text-center justify-center col-span-2"></TableHead>
             </TableRow>
           </TableHeader>
-          {isLoading ? (
-            <EmptyRow mainMessage="로딩중..." />
-          ) : error ? (
-            <EmptyRow mainMessage="에러🚨" />
-          ) : (
-            <TableBody>
-              {Array.isArray(youtubers) && youtubers.length > 0 ? (
-                youtubers.map(({ applicationId, status, createdAt, youtubeMemberImage, youtubeMemberNickname }) => (
-                  <TableRow className="grid grid-cols-8 hover:cursor-pointer">
-                    <TableCell className="font-medium col-span-2" key={applicationId}>
-                      <img src={youtubeMemberImage} className="h-[40px] w-[40px] cover block rounded-full m-2" />
-                      {youtubeMemberNickname}
-                    </TableCell>
-                    <TableCell className="justify-center">119만명</TableCell>
-                    <TableCell className="justify-center">77만회</TableCell>
 
-                    <TableCell className="col-span-2 text-right right  justify-center">
-                      {createdAt?.slice(0, 10)}
-                    </TableCell>
-                    <TableCell className="text-center justify-center gap-2 col-span-2">
-                      {status === 'WAITING' && (
-                        <>
-                          <Button onClick={() => handleChangeStatus(applicationId, { status: 'PROGRESS' })}>
-                            확정
-                          </Button>
-                          <Button
-                            variant="bright"
-                            className="bg-yellow-500"
-                            onClick={() => handleChangeStatus(applicationId, { status: 'UNSELECTED' })}
-                          >
-                            반려
-                          </Button>
-                        </>
-                      )}
-                      {status === 'PROGRESS' && (
-                        <>
-                          <Button onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}>
-                            확정 취소
-                          </Button>
-                        </>
-                      )}
-                      {status === 'UNSELECTED' && (
-                        <>
-                          <Button
-                            variant="secondary"
-                            onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}
-                          >
-                            반려 취소
-                          </Button>
-                        </>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />
-              )}
-            </TableBody>
-          )}
+          <TableBody>
+            {isLoading && <AdItemSkeleton type="rounded-full" />}
+            {youtubers?.length > 0 &&
+              youtubers.map(({ applicationId, status, createdAt, youtubeMemberImage, youtubeMemberNickname }) => (
+                <TableRow className="grid grid-cols-8 hover:cursor-pointer">
+                  <TableCell className="font-medium col-span-2" key={applicationId}>
+                    <img src={youtubeMemberImage} className="h-[40px] w-[40px] cover block rounded-full m-2" />
+                    {youtubeMemberNickname}
+                  </TableCell>
+                  <TableCell className="justify-center">119만명</TableCell>
+                  <TableCell className="justify-center">77만회</TableCell>
+
+                  <TableCell className="col-span-2 text-right right  justify-center">
+                    {createdAt?.slice(0, 10)}
+                  </TableCell>
+                  <TableCell className="text-center justify-center gap-2 col-span-2">
+                    {status === 'WAITING' && (
+                      <>
+                        <Button onClick={() => handleChangeStatus(applicationId, { status: 'PROGRESS' })}>확정</Button>
+                        <Button
+                          variant="bright"
+                          className="bg-yellow-500"
+                          onClick={() => handleChangeStatus(applicationId, { status: 'UNSELECTED' })}
+                        >
+                          반려
+                        </Button>
+                      </>
+                    )}
+                    {status === 'PROGRESS' && (
+                      <>
+                        <Button onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}>
+                          확정 취소
+                        </Button>
+                      </>
+                    )}
+                    {status === 'UNSELECTED' && (
+                      <>
+                        <Button
+                          variant="secondary"
+                          onClick={() => handleChangeStatus(applicationId, { status: 'WAITING' })}
+                        >
+                          반려 취소
+                        </Button>
+                      </>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            {youtubers?.length === 0 && <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />}
+          </TableBody>
         </Table>
       </Card>
     </>
