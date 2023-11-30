@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
     console.log('로그아웃합니다');
     const cookieList = ['SESSIONID', 'RENEW', 'Email', 'Refresh', 'Authorization'];
     cookieList.map((name) => cookies.remove(name));
+    setUser({});
   };
 
   const checkAuth = () => {

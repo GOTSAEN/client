@@ -9,6 +9,7 @@ import { useWaitingAds } from './hooks/use-waiting-ads';
 import { imageSize } from '@/css/image';
 import { useAds } from './hooks/use-ads';
 import { useState } from 'react';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function PartnerWaitingAds() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ export default function PartnerWaitingAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {isLoading && <AdItemSkeleton />}
             {error && <p>Error</p>}
             {ads?.length === 0 && (
               <EmptyRow
@@ -53,7 +55,7 @@ export default function PartnerWaitingAds() {
             )}
             {ads?.length > 0 &&
               ads.map((ad) => (
-                <Link to={`campaign/${ad.advertisementId}`}>
+                <Link to={`campaign/${ad.advertisementId}`} key={ad.advertisementId}>
                   <TableRow
                     className="grid grid-cols-12 px-1 hover:cursor-pointer"
                     onClick={() => console.log('click')}
