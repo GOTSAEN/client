@@ -18,10 +18,7 @@ export const fetchAdsByStatus = async (status, page) => {
 export const fetchAdsByFilter = async (filter, page) => {
   return await ads
     .get(`/${filter}?page=${page}&size=20`)
-    .then((res) => {
-      console.log(res.data.data);
-      return res.data.data;
-    })
+    .then((res) => res.data.data)
     .catch(ErrorResponse);
 };
 

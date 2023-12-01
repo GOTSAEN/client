@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import EmptyRow from '@/components/common/EmptyRow';
 import ProgressYoutuberItem from './progress-youtuber-item';
 import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function PastYoutuber() {
   const campaignId = useParams().campaignId;
@@ -27,13 +28,12 @@ export default function PastYoutuber() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {youtubers?.length > 0 ? (
+            {isLoading && <AdItemSkeleton type={'rounded-full'} />}
+            {youtubers?.length > 0 &&
               youtubers?.map((youtuber) => (
                 <ProgressYoutuberItem data={youtuber} key={youtuber.applicationId} campaignStatus="FINISHED" />
-              ))
-            ) : (
-              <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />
-            )}
+              ))}
+            {youtubers?.length === 0 && <EmptyRow mainMessage="유튜버를 모집중 입니다😂" />}
           </TableBody>
         </Table>
       </Card>

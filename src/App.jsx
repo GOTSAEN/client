@@ -11,7 +11,13 @@ import { ToastProvider } from './context/ToastContext';
 import { CookiesProvider } from 'react-cookie';
 import Footer from './Layout/Footer';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
@@ -20,8 +26,9 @@ function App() {
         <CookiesProvider>
           <AuthProvider>
             <ToastProvider>
-              <div className="gradient blur-3xl rotate-45 z-0"></div>
-              <div className="gradient-2 blur-3xl rotate-45 z-0"></div>
+              <div className="gradient blur-3xl rotate-45 z-0 aspect-[1155/678] poly"></div>
+              <div className="gradient-2 blur-3xl rotate-45 z-0 ploy"></div>
+
               <div className="sticky top-0 z-20 bg-background">
                 <Header />
                 <HorizontalMenuBar />

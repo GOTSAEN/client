@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/utils/lib';
-import { useMutation } from 'react-query';
-import { enrollWaiting, getApplicationStatus } from '@/api/application';
+import { useQueryClient } from 'react-query';
+import { getApplicationStatus } from '@/api/application';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Cookies } from 'react-cookie';
 import { useEffect } from 'react';
 import { getBookmarkStatus, changeBookmarkStatus } from '@/api/bookmark';
 import { useAuth } from '@/context/AuthContext';
 import { useWaiting } from '@/hooks/use-waiting';
+import { ErrorResponse } from '@/api/response';
 export default function ProductContent({ data }) {
   const cookie = new Cookies();
   const param = useParams();
@@ -20,8 +20,8 @@ export default function ProductContent({ data }) {
   const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
   const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
-  const { waitingAsync, waitingLoading, handleEnroll } = useWaiting();
-
+  const { waitingLoading, handleEnroll } = useWaiting();
+  const queryClient = useQueryClient();
   const { user } = useAuth();
 
   const toggleHeartStatus = () => {
@@ -29,7 +29,10 @@ export default function ProductContent({ data }) {
       changeBookmarkStatus({
         advertisementId,
         memberId,
-      }).then(setBookmark);
+      }).then((res) => {
+        setBookmark(res);
+        queryClient.invalidateQueries(['bookmark']);
+      });
     } else navigate('/login');
   };
 
@@ -89,10 +92,10 @@ export default function ProductContent({ data }) {
             onClick={async () => {
               try {
                 const res = await handleEnroll({ advertisementId: param.id, memberId });
-                console.log(res);
                 setApplication(res);
+                queryClient.invalidateQueries();
               } catch (error) {
-                console.error(error);
+                ErrorResponse(error);
               }
             }}
             disabled={waitingLoading}

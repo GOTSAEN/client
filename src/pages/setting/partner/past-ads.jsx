@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '../../../components/ui/card';
-import { Link, useParams } from 'react-router-dom';
-import { usePastAds } from './hooks/use-past-ads';
+import { Link } from 'react-router-dom';
 import EmptyRow from '@/components/common/EmptyRow';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
 import { useAds } from './hooks/use-ads';
-import CompactAdInfo from '@/components/common/ad/CompactAdInfo';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 export default function PartnerPastAds() {
   const [page, setPage] = useState(1);
   const { GetAdsList } = useAds();
@@ -26,9 +25,10 @@ export default function PartnerPastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 ? (
+            {isLoading && <AdItemSkeleton />}
+            {ads?.length > 0 &&
               ads.map(({ advertisementId, imageUrl, productName, category, numberOfRecruit }) => (
-                <Link to={`campaign/${advertisementId}`}>
+                <Link to={`campaign/${advertisementId}`} key={advertisementId}>
                   <TableRow className="grid grid-cols-8 px-1">
                     <TableCell className="col-span-4">
                       <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
@@ -42,10 +42,8 @@ export default function PartnerPastAds() {
                     <TableCell className="text-right right col-span-2 justify-center">{numberOfRecruit}</TableCell>
                   </TableRow>
                 </Link>
-              ))
-            ) : (
-              <EmptyRow mainMessage="종료된 광고가 없습니다😂" />
-            )}
+              ))}
+            {ads?.length === 0 && <EmptyRow mainMessage="종료된 광고가 없습니다😂" />}
           </TableBody>
         </Table>
       </Card>

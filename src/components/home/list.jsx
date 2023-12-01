@@ -39,7 +39,7 @@ export default function List() {
   }, [location]);
 
   return (
-    <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <section className="grid sm:grid-cols-2 md:grid-cols-4  lg:grid-cols-5 xl:grid-cols-5  2xl:grid-cols-5 gap-4">
       {ads?.length > 0 && ads.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
     </section>
   );

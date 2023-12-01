@@ -10,6 +10,7 @@ import { Check } from 'lucide-react';
 import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
 import { useAds } from './hooks/use-ads';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function PartnerProgressAds() {
   const [page, setPage] = useState(1);
@@ -36,7 +37,8 @@ export default function PartnerProgressAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 ? (
+            {isLoading && <AdItemSkeleton />}
+            {ads?.length > 0 &&
               ads.map(({ advertisementId, productName, imageUrl, category }) => (
                 <Link to={`campaign/${advertisementId}`}>
                   <TableRow className="grid grid-cols-11 px-1 hover:cursor-pointer">
@@ -58,10 +60,8 @@ export default function PartnerProgressAds() {
                     </TableCell>
                   </TableRow>
                 </Link>
-              ))
-            ) : (
-              <EmptyRow mainMessage={'진행중인 광고가 없습니다😢'} />
-            )}
+              ))}
+            {ads?.length === 0 && <EmptyRow mainMessage={'진행중인 광고가 없습니다😢'} />}
           </TableBody>
         </Table>
       </Card>

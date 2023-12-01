@@ -3,6 +3,7 @@ import AdsCard from '../AdsCard';
 import { useQuery } from 'react-query';
 import { fetchAdsByFilter } from '@/api/ads';
 import MultiCarousel from '../common/carousel/multi-carousel';
+import PromotionSkeleton from './promotion-skeleton';
 
 export default function Promotion({ promotion, mainTitle, subTitle, color }) {
   const [page, setPage] = useState(1);
@@ -33,12 +34,15 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
 
   return (
     <>
+      {isLoading && <PromotionSkeleton mainTitle={mainTitle} subTitle={subTitle} color={color} />}
       {ads?.length > 0 && (
-        <section className="mb-8">
+        <section className="my-8">
           <div className="text-center">
             {mainTitle && (
               <h2 className="text-2xl Jalnan fit-content">
-                <span style={{ background: color }}>{mainTitle}</span>
+                <span className="pt-1" style={{ background: color }}>
+                  {mainTitle}
+                </span>
               </h2>
             )}
             {subTitle && <h4 className="text-lg font-semibold">{subTitle}</h4>}
@@ -46,7 +50,7 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
 
           <MultiCarousel responsive={responsive} showDots={false} autoPlay={true}>
             {ads?.length > 0 &&
-              ads.map((ad, idx) => (
+              ads.map((ad) => (
                 <div className="m-2" key={ad.advertisementId}>
                   <AdsCard adsCardInfo={ad} />
                 </div>
