@@ -6,8 +6,9 @@ import YoutuberList from '@/components/youtuber/youtuber-list';
 
 import YoutuberListSkeleton from '@/components/youtuber/youtuber-list-skeleton';
 import useYoutuber from './use-youtuber';
+import EmptyRow from '../common/EmptyRow';
 export default function YoutuberTable({ page, category }) {
-  const { FetchAllYoutubers, FetchYoutubersByCategory, youtubers, isLoading, error } = useYoutuber();
+  const { isLoading, youtubers, error } = useYoutuber(page, category);
 
   return (
     <Card className="mt-2">
@@ -21,10 +22,11 @@ export default function YoutuberTable({ page, category }) {
         </TableHeader>
         <TableBody>
           {isLoading && <YoutuberListSkeleton />}
-          {/* {error && <p>Error</p>}
-      {isLoading && <p>로딩중..</p>} */}
+          {error && <p>Error</p>}
+
           {youtubers?.length > 0 &&
             youtubers.map((youtuber) => <YoutuberList youtuber={youtuber} key={youtuber.youtuberMemberId} />)}
+          {youtubers?.length === 0 && <EmptyRow mainMessage={'조회가능 한 유튜버가 없어요😢'} />}
         </TableBody>
       </Table>
     </Card>
