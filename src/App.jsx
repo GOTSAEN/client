@@ -11,7 +11,13 @@ import { ToastProvider } from './context/ToastContext';
 import { CookiesProvider } from 'react-cookie';
 import Footer from './Layout/Footer';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (

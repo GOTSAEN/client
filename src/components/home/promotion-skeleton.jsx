@@ -24,7 +24,7 @@ export default function PromotionSkeleton({ mainTitle, subTitle, color }) {
   };
   return (
     <>
-      <div className="text-center">
+      <div className="text-center my-8">
         {mainTitle && (
           <h2 className="text-2xl Jalnan fit-content">
             <span className="pt-1" style={{ background: color }}>
