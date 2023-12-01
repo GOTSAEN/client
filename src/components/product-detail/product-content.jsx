@@ -17,7 +17,7 @@ export default function ProductContent({ data }) {
   const navigate = useNavigate();
   const [bookmark, setBookmark] = useState(false);
   const [application, setApplication] = useState(false);
-  const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
+  const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId, status } = data;
   const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
   const { waitingLoading, handleEnroll } = useWaiting();
@@ -86,7 +86,7 @@ export default function ProductContent({ data }) {
           <label className={label_style}>✨ 제공내용</label>
           <aside className="py-4">{offer}</aside>
         </div>
-        {cookie.get('User') === 'youtuber' && (
+        {cookie.get('User') === 'youtuber' && status === 'WAITING' && (
           <Button
             className={cn('w-full')}
             onClick={async () => {
