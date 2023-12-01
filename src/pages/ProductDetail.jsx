@@ -17,7 +17,7 @@ export default function ProductDetail() {
 
   return (
     <main className="w-full h-full py-2 lg:px-[60px]">
-      <ProductDetailSkeleton />
+      {isLoading && <ProductDetailSkeleton />}
       {data && (
         <>
           <section className="lg:flex  md:flex py-5 px-2">
