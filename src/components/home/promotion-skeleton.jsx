@@ -45,7 +45,7 @@ export default function PromotionSkeleton({ mainTitle, subTitle, color }) {
 
 export function AdCardSkeleton() {
   return (
-    <article className="border rounded-lg shadow-sm p-3 aspect-1 ">
+    <article className="border rounded-lg shadow-sm p-3 aspect-1 m-2">
       <div className="flex flex-col gap-2">
         <Skeleton className="w-full h-full outline-1 outline-border hover:scale-105 rounded-sm aspect-1" />
         <div className="flex flex-col gap-2">
