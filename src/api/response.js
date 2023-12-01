@@ -12,14 +12,24 @@ export function ApiResponse(response) {
 }
 
 export function ErrorResponse(error) {
-  const status = error.response.status;
-  const message = error.response.data.message;
+  return error;
+  // const error = response.data;
+  // console.log(error);
+  // const { status, message } = error;
 
-  switch (status) {
-    case 500:
-      deleteUserSession();
-      window.location.href = '/login';
-    default:
-      toast.error(message);
-  }
+  // switch (status) {
+  //   case 500:
+  //     deleteUserSession();
+  //     window.location.href = '/login';
+  //   case 400:
+  //   // if (Boolean(filedError)) {
+  //   //   console.log('400 걸림');
+  //   //   return Error(`${filedError}에 입력 규칙 문제가 있습니다`);
+  //   // }
+  //   case 401:
+  //     return message;
+
+  //   default:
+  //     toast.error(message);
+  // }
 }

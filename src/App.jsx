@@ -11,15 +11,20 @@ import { ToastProvider } from './context/ToastContext';
 import { CookiesProvider } from 'react-cookie';
 import Footer from './Layout/Footer';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import useApiError from './hooks/use-api-error';
 
 function App() {
+  const { handleError } = useApiError();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+      mutations: {
+        onError: handleError,
+      },
+    },
+  });
   return (
     <QueryClientProvider client={queryClient}>
       <DarkModeProvider>

@@ -27,11 +27,14 @@ export default function SignUp() {
   });
 
   const { mutate, isLoading } = useMutation(() => newMember(form), {
-    onSuccess: () => {
-      navigate('/welcome');
-      saveUserType('advertisement');
+    throwOnError: true,
+    onSuccess: (res) => {
+      console.log(res);
+      // navigate('/welcome');
+      // saveUserType('advertisement');
     },
     onError: (err) => {
+      console.log(err);
       toast.error(err.message);
     },
   });
@@ -50,6 +53,7 @@ export default function SignUp() {
 
     if (!validatePassword(form.password)) {
       toast.warning('패스워드는 8자리 이상의 숫자와 문자 조합입니다');
+      return;
     }
 
     mutate();

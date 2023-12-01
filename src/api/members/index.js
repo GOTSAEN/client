@@ -4,8 +4,8 @@ import { ApiResponse, ErrorResponse } from '../response';
 export const newMember = (data) => {
   return members
     .post('', data)
-    .then((res) => ApiResponse(res))
-    .catch((e) => ErrorResponse(e));
+    .then((res) => res)
+    .catch((e) => e);
 };
 
 export const getMember = () => {

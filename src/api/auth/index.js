@@ -12,5 +12,8 @@ export const signIn = (data, email) => {
 
       return authInfo;
     })
-    .catch((e) => ErrorResponse(e));
+    .catch((e) => {
+      console.log('걸리세요?');
+      ErrorResponse(e);
+    });
 };
