@@ -5,7 +5,7 @@ import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { cn } from '@/utils/lib';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { Eye, EyeOff} from 'lucide-react';
 export default function PwChange() {
   const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
@@ -43,7 +43,7 @@ export default function PwChange() {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                 />
-                <Button onClick={toggleCurrentPasswordVisibility}>{currentPasswordVisible ? 'x' : 'x'}</Button>
+                <Button onClick={toggleCurrentPasswordVisibility}>{currentPasswordVisible ? <EyeOff size={12}/> : <Eye size={12}/>}</Button>
               </div>
               <div className="flex items-center gap-3">
                 <Input
@@ -53,7 +53,7 @@ export default function PwChange() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <Button onClick={toggleNewPasswordVisibility}>{newPasswordVisible ? 'x' : 'x'}</Button>
+                <Button onClick={toggleNewPasswordVisibility}>{newPasswordVisible ? <EyeOff size={12}/> : <Eye size={12}/>}</Button>
               </div>
               <div className="flex items-center gap-3">
                 <Input
@@ -63,7 +63,7 @@ export default function PwChange() {
                   value={rePassword}
                   onChange={(e) => setRePassword(e.target.value)}
                 />
-                <Button onClick={toggleReNewPasswordVisibility}>{reNewPasswordVisible ? 'x' : 'x'}</Button>
+                <Button onClick={toggleReNewPasswordVisibility}>{reNewPasswordVisible ? <EyeOff size={12}/> : <Eye size={12}/>}</Button>
               </div>
               <Button className={cn('w-full')}>
                 <Link to="/">확인</Link>
