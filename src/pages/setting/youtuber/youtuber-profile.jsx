@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Input } from '@/components/ui/input';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { fetchCategories } from '@/api/categories';
 import { toast } from 'react-toastify';
 import { getYoutuber } from '@/api/youtuber';
+import { updateYoutuberCategory } from '@/api/youtuber';
 
 const init = {
   category: '',
 };
 
 export default function YoutuberProfile() {
-  const [inputEmail, setInputEmail] = useState('');
-  const [inputName, setInputName] = useState('');
-  const [inputAddress, setInputAddress] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const [form, setForm] = useState(init);
 
+  useEffect(() => {
+    const storedCategory = localStorage.getItem('selectedCategory');
+    if (storedCategory) {
+      setSelectedCategory(storedCategory);
+    }
+  }, []);
+
   const {
-    isLoading: memberLoading,
-    data: memberData,
-    error: memberError,
-  } = useQuery(['members'], getYoutuber, {
+    isLoading: youtuberLoading,
+    data: youtuberData,
+    error: youtuberError,
+  } = useQuery(['youtuber'], getYoutuber, {
     refetchOnWindowFocus: false,
   });
 
@@ -35,31 +42,21 @@ export default function YoutuberProfile() {
   });
 
   const handleDataChange = (name, value) => {
+    setSelectedCategory(value);
+    localStorage.setItem('selectedCategory', value);
     setForm({ ...form, [name]: value });
   };
 
-  useEffect(() => {
-    if (memberData) {
-      setInputEmail(memberData.email);
-      setInputName(memberData.businessName);
-      setInputAddress(memberData.businessAddress);
-    }
-  }, [memberData]);
-
   const handleUpdateProfile = async () => {
-    // if (
-    //   inputEmail !== '' &&
-    //   inputName !== '' &&
-    //   inputAddress !== ''
-    // ) {
-    //   await updateMember({
-    //     email: inputEmail,
-    //     businessName: inputName,
-    //     businessAddress: inputAddress,
-    //   }).then(() => {
-    //     toast.success('회원정보가 수정되었습니다.')
-    //   })
-    // }
+    if (form.category !== '') {
+      await updateYoutuberCategory({
+        category: form.category,
+      }).then(() => {
+        toast.success('회원정보가 수정되었습니다.');
+      });
+    } else {
+      toast.warning('카테고리를 선택하세요.');
+    }
   };
 
   return (
@@ -68,64 +65,27 @@ export default function YoutuberProfile() {
         <div className="w-full max-w-screen-md ">
           <h2 className="text-lg font-bold">내 정보</h2>
         </div>
-        {memberLoading && <p>로딩중</p>}
-        {memberError && <p>에러</p>}
-        {memberData && (
+        {youtuberLoading && <p>로딩중</p>}
+        {youtuberError && <p>에러</p>}
+        {youtuberData && (
           <div className="flex justify-center flex-col mt-8 gap-5">
             <div className="flex justify-center flex-col gap-2">
-              <h3>YoutuberMemberId</h3>
-              <Input
-                value={inputEmail}
-                onChange={(e) => {
-                  setInputEmail(e.target.value);
-                }}
-                disabled
-              />
+              <h3>이메일</h3>
+              <Input value={youtuberData.email} disabled />
             </div>
             <div className="flex justify-center flex-col gap-2">
-              <h3>Email</h3>
-              <Input
-                value={inputName}
-                onChange={(e) => {
-                  setInputName(e.target.value);
-                }}
-                disabled
-              />
+              <h3>닉네임</h3>
+              <Input value={youtuberData.nickname} disabled />
             </div>
             <div className="flex justify-center flex-col gap-2">
-              <h3>Nickname</h3>
-              <Input
-                value={inputAddress}
-                onChange={(e) => {
-                  setInputAddress(e.target.value);
-                }}
-                disabled
-              />
-              {inputAddress === '' && <p className="text-red-500">칸이 비어 있습니다.</p>}
+              <h3>프로필 사진</h3>
+              <Avatar>
+                <AvatarImage src={youtuberData.avatarUri} />
+              </Avatar>
             </div>
             <div className="flex justify-center flex-col gap-2">
-              <h3>AvatarUri</h3>
-              <Input
-                value={inputEmail}
-                onChange={(e) => {
-                  setInputEmail(e.target.value);
-                }}
-                disabled
-              />
-            </div>
-            <div className="flex justify-center flex-col gap-2">
-              <h3>ChannelId</h3>
-              <Input
-                value={inputEmail}
-                onChange={(e) => {
-                  setInputEmail(e.target.value);
-                }}
-                disabled
-              />
-            </div>
-            <div className="flex justify-center flex-col gap-2">
-              <h3>Category</h3>
-              <Select onValueChange={(val) => handleDataChange('category', val)} value={form.category}>
+              <h3>카테고리</h3>
+              <Select onValueChange={(val) => handleDataChange('category', val)} value={selectedCategory}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="-- 카테고리 --" />
                 </SelectTrigger>
@@ -140,8 +100,8 @@ export default function YoutuberProfile() {
               </Select>
             </div>
             <div>
-              <Button className="w-32" onClick={handleUpdateProfile}>
-                Update Profile
+              <Button className="w-auto" onClick={handleUpdateProfile}>
+                프로필 수정
               </Button>
             </div>
           </div>
