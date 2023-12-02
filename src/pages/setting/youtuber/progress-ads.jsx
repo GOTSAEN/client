@@ -23,9 +23,10 @@ export default function ProgressAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 ? (
+            {ads?.length > 0 && (
               ads.map((ad) => <ProgressAdItem data={ad} key={ad.applicationId} />)
-            ) : (
+            ) }
+            {ads?.length === 0  (
               <EmptyRow mainMessage="진행중인 광고가 없습니다😢" link="/" subMessage="새 광고를 신청해보세요" />
             )}
           </TableBody>

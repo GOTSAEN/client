@@ -30,7 +30,7 @@ export default function WaitingAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 ? (
+            {ads?.length > 0 && (
               ads.map(
                 ({ applicationId, advertisementId, adName, adImage, adCategory, createdAt, status, memberId }) => (
                   <TableRow className="grid grid-cols-7 px-1 hover:cursor-pointer" key={applicationId}>
@@ -56,7 +56,8 @@ export default function WaitingAds() {
                   </TableRow>
                 )
               )
-            ) : (
+            ) }
+            {ads?.length === 0 && (
               <EmptyRow mainMessage="대기중인 광고가 없습니다😢" link="/" subMessage="새 광고를 신청해보세요" />
             )}
           </TableBody>

@@ -24,7 +24,7 @@ export default function PastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 ? (
+            {ads?.length > 0 && (
               ads.map(({ applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, lastModifiedAt }) => (
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
                   <TableCell className="col-span-2">
@@ -43,7 +43,8 @@ export default function PastAds() {
                   </TableCell>
                 </TableRow>
               ))
-            ) : (
+            )}
+            { ads?.length === 0  (
               <EmptyRow mainMessage="이전에 진행했던 광고가 없습니다 😢" />
             )}
           </TableBody>
