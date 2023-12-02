@@ -9,6 +9,7 @@ import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
 import { useWaiting } from '@/hooks/use-waiting';
 import { useAdsList } from './hooks/use-ads-list';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function WaitingAds() {
   const [page, setPage] = useState(1);
@@ -30,6 +31,7 @@ export default function WaitingAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
+          {isLoading && <AdItemSkeleton />}
             {ads?.length > 0 && (
               ads.map(
                 ({ applicationId, advertisementId, adName, adImage, adCategory, createdAt, status, memberId }) => (
