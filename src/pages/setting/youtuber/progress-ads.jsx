@@ -6,6 +6,7 @@ import EmptyRow from '@/components/common/EmptyRow';
 import { useApplication } from '@/hooks/use-application';
 import ProgressAdItem from './progress-ad-item';
 import { Card } from '@/components/ui/card';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 export default function ProgressAds() {
   const [page, setPage] = useState(1);
@@ -23,12 +24,13 @@ export default function ProgressAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.length > 0 && (
+            {isLoading && <AdItemSkeleton />}
+            {ads?.length > 0 && 
               ads.map((ad) => <ProgressAdItem data={ad} key={ad.applicationId} />)
-            ) }
-            {ads?.length === 0  (
+             }
+            {ads?.length === 0  &&
               <EmptyRow mainMessage="진행중인 광고가 없습니다😢" link="/" subMessage="새 광고를 신청해보세요" />
-            )}
+            }
           </TableBody>
         </Table>
       </Card>

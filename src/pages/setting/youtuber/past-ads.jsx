@@ -7,6 +7,7 @@ import { imageSize } from '@/css/image';
 import { link_text, setting_btn } from '@/css';
 import { useAdsList } from './hooks/use-ads-list';
 import EmptyRow from '@/components/common/EmptyRow';
+import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 export default function PastAds() {
   const [page, setPage] = useState(1);
   const { GetAdsList } = useAdsList();
@@ -24,6 +25,7 @@ export default function PastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {isLoading && <AdItemSkeleton />}
             {ads?.length > 0 && (
               ads.map(({ applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, lastModifiedAt }) => (
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
@@ -44,9 +46,9 @@ export default function PastAds() {
                 </TableRow>
               ))
             )}
-            { ads?.length === 0  (
+            { ads?.length === 0 && 
               <EmptyRow mainMessage="이전에 진행했던 광고가 없습니다 😢" />
-            )}
+            }
           </TableBody>
         </Table>
       </Card>
