@@ -21,3 +21,10 @@ export const getYoutuberByCategory = async (page, category) => {
     .then((res) => res.data.data)
     .catch(ErrorResponse);
 };
+
+export const updateYoutuberCategory = async (category) => {
+  return authYoutubers
+    .patch('', category)
+    .then((res) => res.data)
+    .catch((e) => ErrorResponse(e));
+};
