@@ -1,8 +1,8 @@
-import { deleteUserSession, getUser } from '@/service/login-auth';
+import { getUser } from '@/service/login-auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 
-const AuthContext = createContext();
+const AuthContext = createContext({ user: undefined, logout: () => {} });
 const cookies = new Cookies();
 
 export function AuthProvider({ children }) {
@@ -30,7 +30,6 @@ export function AuthProvider({ children }) {
     console.log('로그아웃합니다');
     const cookieList = ['SESSIONID', 'RENEW', 'Email', 'Refresh', 'Authorization'];
     cookieList.map((name) => cookies.remove(name));
-    setUser({});
   };
 
   const checkAuth = () => {

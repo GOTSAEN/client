@@ -24,7 +24,7 @@ export default function LogIn() {
     password: '',
   });
   const [auth, setAuth] = useState('');
-  const { mutate, isLoading } = useMutation(async () => await signIn(form, form.email), {
+  const { mutate: handleSignIn, isLoading } = useMutation(async () => await signIn(form, form.email), {
     onSuccess: (data) => {
       login(data);
       navigate('/');
@@ -38,7 +38,7 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    mutate();
+    handleSignIn();
   };
 
   useEffect(() => {
