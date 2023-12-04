@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { getYoutuber } from '@/api/youtuber';
 import { updateYoutuberCategory } from '@/api/youtuber';
 import { Card } from '@/components/ui/card';
-
+import { Skeleton } from '@/components/ui/skeleton';
 const init = {
   category: '',
 };
@@ -63,7 +63,7 @@ export default function YoutuberProfile() {
   return (
     <>
       <div className="flex justify-center items-center mt-10">
-        {youtuberLoading && <p>로딩중</p>}
+        {youtuberLoading &&  <Skeleton className="w-[450px] h-[370px]" />}
         {youtuberError && <p>에러</p>}
         {youtuberData && (
           <Card className="p-4 w-[450px]">
@@ -103,7 +103,7 @@ export default function YoutuberProfile() {
                   </Select>
                 </div>
                 <div></div>
-                <Button className="w-auto" onClick={handleUpdateProfile}>
+                <Button className="w-auto" onClick={handleUpdateProfile} disabled={youtuberLoading}>
                   프로필 수정
                 </Button>
               </div>
