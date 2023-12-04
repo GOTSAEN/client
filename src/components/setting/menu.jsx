@@ -30,11 +30,13 @@ export default function Menu() {
                 <NavigationMenuLink className={navigation_styles}>회원정보 변경</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem className="w-full">
-              <Link to="/setting/me/pwchange" className="px-0" legacyBehavior passHref>
-                <NavigationMenuLink className={navigation_styles}>패스워드 변경</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+            {user?.auth === 'advertisement' && (
+              <NavigationMenuItem className="w-full">
+                <Link to="/setting/me/pwchange" className="px-0" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigation_styles}>패스워드 변경</NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
             <NavigationMenuItem className="w-full">
               <Link to="/setting/secession" legacyBehavior passHref>
                 <NavigationMenuLink className={navigation_styles}>회원탈퇴</NavigationMenuLink>
