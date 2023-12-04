@@ -23,15 +23,11 @@ export const YOUTUBER_ROUTES = [
     children: <Bookmarks />,
   },
   {
-    path: 'me/profile',
+    path: 'profile',
     children: <YoutuberProfile />,
   },
   {
     path: 'secession',
     children: <Secession />,
-  },
-  {
-    path: 'ads/waiting',
-    children: <WaitingAds />,
   },
 ];

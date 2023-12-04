@@ -38,11 +38,11 @@ export const PARTNER_ROUTES = [
     children: <Secession />,
   },
   {
-    path: 'me/pwchange',
+    path: 'pwchange',
     children: <PwChange />,
   },
   {
-    path: 'me/profile',
+    path: 'profile',
     children: <Profile />,
   },
 ];
