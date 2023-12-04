@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 import { getBookmarkStatus, changeBookmarkStatus } from '@/api/bookmark';
 import { useAuth } from '@/context/AuthContext';
 import { useWaiting } from '@/hooks/use-waiting';
-import { ErrorResponse } from '@/api/response';
 export default function ProductContent({ data }) {
   const cookie = new Cookies();
   const param = useParams();
@@ -90,13 +89,9 @@ export default function ProductContent({ data }) {
           <Button
             className={cn('w-full')}
             onClick={async () => {
-              try {
-                const res = await handleEnroll({ advertisementId: param.id, memberId });
-                setApplication(res);
-                queryClient.invalidateQueries();
-              } catch (error) {
-                ErrorResponse(error);
-              }
+              const res = await handleEnroll({ advertisementId: param.id, memberId });
+              setApplication(res);
+              queryClient.invalidateQueries(['youtuber', 'waiting', 'ads']);
             }}
             disabled={waitingLoading}
           >

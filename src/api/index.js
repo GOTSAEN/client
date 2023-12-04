@@ -10,9 +10,10 @@ function createInstanceWithAuth(url) {
 }
 
 function createInstanceNoAuth(url) {
-  return axios.create({
+  const instance = axios.create({
     baseURL: `/api/${url}`,
   });
+  return setInterceptors(instance);
 }
 
 export const instance = createInstanceWithAuth('');
