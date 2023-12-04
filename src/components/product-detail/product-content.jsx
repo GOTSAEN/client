@@ -10,14 +10,13 @@ import { useEffect } from 'react';
 import { getBookmarkStatus, changeBookmarkStatus } from '@/api/bookmark';
 import { useAuth } from '@/context/AuthContext';
 import { useWaiting } from '@/hooks/use-waiting';
-import { ErrorResponse } from '@/api/response';
 export default function ProductContent({ data }) {
   const cookie = new Cookies();
   const param = useParams();
   const navigate = useNavigate();
   const [bookmark, setBookmark] = useState(false);
   const [application, setApplication] = useState(false);
-  const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId } = data;
+  const { productName, startDate, endDate, numberOfRecruit, category, offer, memberId, status } = data;
   const advertisementId = param.id;
   const label_style = 'font-semibold inline-block mr-4';
   const { waitingLoading, handleEnroll } = useWaiting();
@@ -86,17 +85,13 @@ export default function ProductContent({ data }) {
           <label className={label_style}>✨ 제공내용</label>
           <aside className="py-4">{offer}</aside>
         </div>
-        {cookie.get('User') === 'youtuber' && (
+        {cookie.get('User') === 'youtuber' && status === 'WAITING' && (
           <Button
             className={cn('w-full')}
             onClick={async () => {
-              try {
-                const res = await handleEnroll({ advertisementId: param.id, memberId });
-                setApplication(res);
-                queryClient.invalidateQueries();
-              } catch (error) {
-                ErrorResponse(error);
-              }
+              const res = await handleEnroll({ advertisementId: param.id, memberId });
+              setApplication(res);
+              queryClient.invalidateQueries(['youtuber', 'waiting', 'ads']);
             }}
             disabled={waitingLoading}
           >

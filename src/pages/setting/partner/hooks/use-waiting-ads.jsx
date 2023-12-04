@@ -1,10 +1,12 @@
 import { deleteAds, toProgressAd } from '@/api/ads';
 import { fetchPartnerAds } from '@/api/members/ads';
+import useApiError from '@/hooks/use-api-error';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 export function useWaitingAds() {
   const queryClient = useQueryClient();
+  const { handleError } = useApiError();
   const { mutate: deleteAd } = useMutation(async (id) => await deleteAds(id), {
     onSuccess: async () => {
       await queryClient.fetchQuery(['partner', 'ads', 'waiting']);
@@ -18,8 +20,8 @@ export function useWaitingAds() {
       queryClient.invalidateQueries(['partner', 'ads', 'progress']);
       toast.success('광고를 진행합니다');
     },
-    onError: (e) => {
-      toast.error(e);
+    onError: (error) => {
+      handleError(error);
     },
   });
 

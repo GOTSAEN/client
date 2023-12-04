@@ -56,11 +56,7 @@ export default function PartnerWaitingAds() {
             {ads?.length > 0 &&
               ads.map((ad) => (
                 <Link to={`campaign/${ad.advertisementId}`} key={ad.advertisementId}>
-                  <TableRow
-                    className="grid grid-cols-12 px-1 hover:cursor-pointer"
-                    onClick={() => console.log('click')}
-                    key={ad.advertisementId}
-                  >
+                  <TableRow className="grid grid-cols-12 px-1 hover:cursor-pointer" key={ad.advertisementId}>
                     <TableCell className="font-medium col-span-3">
                       <img src={ad.imageUrl ? ad.imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
                       <span

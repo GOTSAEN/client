@@ -11,9 +11,11 @@ import { useAuth } from '@/context/AuthContext';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { auth_form } from '@/css';
+import useApiError from '@/hooks/use-api-error';
 
 export default function LogIn() {
   const [popup, setPopup] = useState();
+  const { handleError } = useApiError();
   const navigate = useNavigate();
 
   const { login } = useAuth();
@@ -22,14 +24,12 @@ export default function LogIn() {
     password: '',
   });
   const [auth, setAuth] = useState('');
-  const { mutate, isLoading } = useMutation(async () => await signIn(form, form.email), {
+  const { mutate: handleSignIn, isLoading } = useMutation(async () => await signIn(form, form.email), {
     onSuccess: (data) => {
       login(data);
       navigate('/');
     },
-    onError: (err) => {
-      toast.error(err.message);
-    },
+    onError: (err) => handleError(err),
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +38,7 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    mutate();
+    handleSignIn();
   };
 
   useEffect(() => {

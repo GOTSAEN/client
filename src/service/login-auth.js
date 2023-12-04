@@ -14,12 +14,6 @@ export function getUser() {
   };
 }
 
-export function deleteUserSession() {
-  cookies.remove('SESSIONID');
-  cookies.remove('RENEW');
-  cookies.remove('Email');
-}
-
 export function getUserType() {
   return cookies.get('User');
 }

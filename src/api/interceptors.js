@@ -1,4 +1,3 @@
-import { deleteUserSession } from '@/service/login-auth';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
@@ -11,9 +10,10 @@ export function setInterceptors(instance) {
       return config;
     },
     function (error) {
+      console.log('인터셉터에 도착한 에러2', error);
       // Do something with request error
       return Promise.reject(error);
-    },
+    }
   );
 
   // Add a response interceptor
@@ -22,16 +22,11 @@ export function setInterceptors(instance) {
       return response;
     },
     function (error) {
-      let { data } = error.response;
-      if (data.code === 101 || error.response?.status === 403 || error.response?.status === 500) {
-        // logout()
-        deleteUserSession();
-      } else if (data.code === 205) {
-        console.log('bad-request');
-      }
+      const { data } = error.response;
+      console.log(error);
 
-      return Promise.reject(error);
-    },
+      return Promise.reject(data);
+    }
   );
   return instance;
 }

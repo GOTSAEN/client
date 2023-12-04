@@ -12,9 +12,11 @@ import { toast, useToast } from 'react-toastify';
 import { saveUserType } from '@/service/login-auth';
 import { checkSameValue, validatePassword } from '@/service/common';
 import { auth_form } from '@/css';
+import useApiError from '@/hooks/use-api-error';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const { handleError } = useApiError();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rePasswordVisible, setRePasswordVisible] = useState(false);
   const [rePassword, setRePassword] = useState('');
@@ -27,12 +29,13 @@ export default function SignUp() {
   });
 
   const { mutate, isLoading } = useMutation(() => newMember(form), {
+    throwOnError: true,
     onSuccess: () => {
       navigate('/welcome');
       saveUserType('advertisement');
     },
-    onError: (err) => {
-      toast.error(err.message);
+    onError: (error) => {
+      handleError(error);
     },
   });
 
@@ -50,6 +53,7 @@ export default function SignUp() {
 
     if (!validatePassword(form.password)) {
       toast.warning('패스워드는 8자리 이상의 숫자와 문자 조합입니다');
+      return;
     }
 
     mutate();
