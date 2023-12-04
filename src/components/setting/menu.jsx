@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -5,44 +6,44 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/utils/lib';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
-import YoutuberMenu from './youtuber-menu';
+import { MENU_ITEMS } from '@/data/setting-auth-menu';
 import { useAuth } from '@/context/AuthContext';
-import PartnerMenu from './partner-menu';
+
 
 export const navigation_styles =
-  'group inline-flex h-10 bg-transparent w-max items-center justify-center rounded-md  rounded-none bg-background px-4 py-2 text-sm font-medium transition-colors border-l-[1px] hover:border-zinc-900  hover:brightness-110 focus:bg-accent focus:text-accent/50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 w-full';
+  'group inline-flex h-10 bg-transparent w-max items-center justify-center rounded-md  rounded-none bg-background px-4 py-2 text-sm font-medium transition-colors border-l-[1px] hover:border-gray-500  hover:brightness-110 focus:bg-accent focus:text-accent/50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 w-full';
+export const highlight_navigation_styles = navigation_styles + ' border-zinc-900'
+console.log(highlight_navigation_styles)
 export default function Menu() {
   const { user } = useAuth();
+  const location = useLocation()
+  const menus = MENU_ITEMS[user?.auth]
+  
   return (
     <nav className="w-fit mt-4 pl-2 pr-12 sticky top-[140px]">
       <div className="sticky top-40 max-sm:static">
         <NavigationMenu>
           <NavigationMenuList className={cn('flex flex-col')}>
-            <DropdownMenuLabel className="text-sm font-semibold px-2 py-2 w-full">광고 관리</DropdownMenuLabel>
-            {user?.auth === 'youtuber' ? <YoutuberMenu /> : <PartnerMenu />}
-            <DropdownMenuLabel className="text-sm font-semibold px-2 py-2 w-full">정보 관리</DropdownMenuLabel>
+            {
+              menus.map(menu => (
+                <>
+                  <DropdownMenuLabel className="text-sm font-semibold px-2 py-2 w-full">{menu.label}</DropdownMenuLabel>
+                  {
+                    menu.menus?.map(item => (
+                        <NavigationMenuItem className="w-full">
+                          <Link to={`${menu.url}${item.path}`} legacyBehavior passHref>
+                            <NavigationMenuLink className={ location.pathname?.includes(item.path) ? highlight_navigation_styles : navigation_styles} >{item.name}</NavigationMenuLink>
+                          </Link>
+                        </NavigationMenuItem>
+                    ))
+                  }
+                </>
+              ))
+            }
 
-            <NavigationMenuItem className="w-full">
-              <Link to="/setting/me/profile" legacyBehavior passHref>
-                <NavigationMenuLink className={navigation_styles}>회원정보 변경</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            {user?.auth === 'advertisement' && (
-              <NavigationMenuItem className="w-full">
-                <Link to="/setting/me/pwchange" className="px-0" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigation_styles}>패스워드 변경</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            )}
-            <NavigationMenuItem className="w-full">
-              <Link to="/setting/secession" legacyBehavior passHref>
-                <NavigationMenuLink className={navigation_styles}>회원탈퇴</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
+            </NavigationMenuList>
         </NavigationMenu>
       </div>
     </nav>
