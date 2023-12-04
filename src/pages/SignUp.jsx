@@ -15,6 +15,7 @@ import { auth_form } from '@/css';
 import useApiError from '@/hooks/use-api-error';
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const { handleError } = useApiError();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rePasswordVisible, setRePasswordVisible] = useState(false);
@@ -29,9 +30,9 @@ export default function SignUp() {
 
   const { mutate, isLoading } = useMutation(() => newMember(form), {
     throwOnError: true,
-    onSuccess: (res) => {
-      // navigate('/welcome');
-      // saveUserType('advertisement');
+    onSuccess: () => {
+      navigate('/welcome');
+      saveUserType('advertisement');
     },
     onError: (error) => {
       handleError(error);
