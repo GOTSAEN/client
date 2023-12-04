@@ -35,9 +35,9 @@ export default function Router() {
     <BrowserRouter>
       <ScrollTop />
       <Routes>
-        <Route element={<App />}>
-          <Route index path="/" element={<Home />} />
-          <Route path="/youtuber" element={<Youtuber />} />
+        <Route exact element={<App />}>
+          <Route exact index path="/" element={<Home />} />
+          <Route exact path="/youtuber" element={<Youtuber />} />
           <Route
             path="/login"
             element={
@@ -54,10 +54,10 @@ export default function Router() {
               </NoAuthRoutes>
             }
           />
-          <Route path="/search" element={<Search />} />
-          <Route path="/welcome" element={<Welcome />} />
+          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/welcome" element={<Welcome />} />
 
-          <Route path="/ads/:category" element={<Ads />} />
+          <Route exact path="/ads/:category" element={<Ads />} />
           <Route
             path="/product/update/campaign/:campaignId"
             exact
@@ -68,7 +68,7 @@ export default function Router() {
             }
           />
 
-          <Route path="/product/:id" element={<ProductDetail />} exact />
+          <Route exact path="/product/:id" element={<ProductDetail />} />
           <Route
             path="/product/create"
             element={
@@ -87,13 +87,13 @@ export default function Router() {
               </ProtectedRoutes>
             }
           >
-            <Route path="me/profile" element={<YoutuberProfile />} />
-            <Route path="me/pwchange" element={<PwChange />} />
-            <Route path="secession" element={<Secession />} />
-            <Route index path="ads/bookmark" element={<Bookmarks />} />
-            <Route index path="ads/progress" element={<ProgressAds />} />
-            <Route path="ads/past" element={<PastAds />} />
-            <Route path="ads/waiting" element={<WaitingAds />} />
+            <Route exact path="me/profile" element={<YoutuberProfile />} />
+            <Route exact path="me/pwchange" element={<PwChange />} />
+            <Route exact path="secession" element={<Secession />} />
+            <Route exact index path="ads/bookmark" element={<Bookmarks />} />
+            <Route exact index path="ads/progress" element={<ProgressAds />} />
+            <Route exact path="ads/past" element={<PastAds />} />
+            <Route exact path="ads/waiting" element={<WaitingAds />} />
           </Route>
 
           {/* 광고주의 광고 상품 관련 url */}
@@ -105,18 +105,18 @@ export default function Router() {
               </ProtectedAdminRoutes>
             }
           >
-            <Route path="ads/progress" element={<PartnerProgressAds />} />
-            <Route path="ads/waiting" element={<PartnerWaitingAds />} />
+            <Route exact path="ads/progress" element={<PartnerProgressAds />} />
+            <Route exact path="ads/waiting" element={<PartnerWaitingAds />} />
 
-            <Route path="ads/waiting/campaign/:campaignId" element={<WaitingYoutuber />} />
-            <Route path="ads/progress/campaign/:campaignId" element={<ProgressYoutuber />} />
-            <Route path="ads/past/campaign/:campaignId" element={<PastYoutuber />} />
+            <Route exact path="ads/waiting/campaign/:campaignId" element={<WaitingYoutuber />} />
+            <Route exact path="ads/progress/campaign/:campaignId" element={<ProgressYoutuber />} />
+            <Route exact path="ads/past/campaign/:campaignId" element={<PastYoutuber />} />
 
-            <Route path="ads/past" element={<PartnerPastAds />} />
-            <Route path="ads/waiting" element={<WaitingAds />} />
+            <Route exact path="ads/past" element={<PartnerPastAds />} />
+            <Route exact path="ads/waiting" element={<WaitingAds />} />
           </Route>
 
-          <Route path="*" element={<NotFound />} />
+          <Route exact path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

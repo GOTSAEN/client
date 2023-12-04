@@ -10,7 +10,6 @@ export function setInterceptors(instance) {
       return config;
     },
     function (error) {
-      console.log('인터셉터에 도착한 에러2', error);
       // Do something with request error
       return Promise.reject(error);
     }
@@ -23,7 +22,6 @@ export function setInterceptors(instance) {
     },
     function (error) {
       const { data } = error.response;
-      console.log(error);
 
       return Promise.reject(data);
     }
