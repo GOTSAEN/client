@@ -71,7 +71,7 @@ export default function YoutuberProfile() {
               <h2 className="text-md font-bold text-center">내 정보</h2>
             </div>
 
-            <section className="flex gap-8">
+            <section className="flex gap-4">
               <Avatar>
                 <AvatarImage src={youtuberData.avatarUri} />
               </Avatar>

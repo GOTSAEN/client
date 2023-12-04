@@ -88,9 +88,16 @@ export default function Router() {
             }
           >
             <Route path="me/profile" element={<YoutuberProfile />} />
-            <Route path="me/pwchange" element={<PwChange />} />
+            <Route
+              path="me/pwchange"
+              element={
+                <ProtectedAdminRoutes>
+                  <PwChange />
+                </ProtectedAdminRoutes>
+              }
+            />
             <Route path="secession" element={<Secession />} />
-            <Route index path="ads/bookmark" element={<Bookmarks />} />
+            <Route path="ads/bookmark" element={<Bookmarks />} />
             <Route index path="ads/progress" element={<ProgressAds />} />
             <Route path="ads/past" element={<PastAds />} />
             <Route path="ads/waiting" element={<WaitingAds />} />
