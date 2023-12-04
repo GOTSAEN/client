@@ -1,9 +1,10 @@
 import { NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { navigation_styles } from './menu';
+import { useAuth } from '@/context/AuthContext';
 
 export default function YoutuberMenu() {
-  const location = useLocation();
+  const { auth } = useAuth();
   const url = '/setting/ads/';
   const items = [
     { key: 'waiting', name: '대기 광고' },

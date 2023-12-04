@@ -1,9 +1,11 @@
 import { useAuth } from '@/context/AuthContext';
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const useApiError = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const handleError = useCallback((Error) => {
     const { status, message } = Error;
 
@@ -11,6 +13,7 @@ const useApiError = () => {
       // BadRequestException | ValidationError
       case 500:
         logout();
+        navigate('/');
         break;
       case 401:
         toast.error('회원정보가 일치하지 않습니다');
