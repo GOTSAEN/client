@@ -23,6 +23,7 @@ export function setInterceptors(instance) {
     },
     function (error) {
       const { data } = error.response;
+      console.log(error);
 
       return Promise.reject(data);
     }

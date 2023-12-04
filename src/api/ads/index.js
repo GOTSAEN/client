@@ -16,37 +16,33 @@ export const fetchAdsByCategory = async (category) => {
   return ads.get(`/byCategory?category=${category}`).then((res) => res.data.data);
 };
 
-export const newAds = (data) => {
-  return authAds.post('', data).then((res) => res.data);
+export const newAds = async (data) => {
+  return await authAds.post('', data).then((res) => res.data);
 };
 
-export const updateAds = (id, data) => {
-  return authAds.patch(`/${id}`, data).then(() => id);
+export const updateAds = async (id, data) => {
+  return await authAds.patch(`/${id}`, data).then(() => id);
 };
 
-export const deleteAds = (id) => {
-  return authAds.delete(`/${id}`).then((res) => {
+export const deleteAds = async (id) => {
+  return await authAds.delete(`/${id}`).then((res) => {
     if (res.status === 204) return true;
-    else new Response('Error', { status: 500 });
   });
 };
 
 export const fetchAdsById = async (id) => {
-  const data = await ads
-    .get(`/${id}`)
-    .then((res) => res.data)
-    .catch((e) => console.log(e));
+  const data = await ads.get(`/${id}`).then((res) => res.data);
   return data;
 };
 
-export const postImage = (id, data) => {
-  authAds.post(`/upload/${id}`, data);
+export const postImage = async (id, data) => {
+  await authAds.post(`/upload/${id}`, data);
 };
 
-export const toProgressAd = (id) => {
-  return authAds.patch(`/${id}/progressAd`).then((res) => res);
+export const toProgressAd = async (id) => {
+  return await authAds.patch(`/${id}/progressAd`).then((res) => res);
 };
 
-export const toFinishAd = (id) => {
-  return authAds.patch(`/${id}/finishAd`).then((res) => res.status);
+export const toFinishAd = async (id) => {
+  return await authAds.patch(`/${id}/finishAd`).then((res) => res.status);
 };

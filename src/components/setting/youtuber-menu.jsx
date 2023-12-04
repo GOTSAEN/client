@@ -4,7 +4,6 @@ import { navigation_styles } from './menu';
 
 export default function YoutuberMenu() {
   const location = useLocation();
-  console.log(location);
   const url = '/setting/ads/';
   const items = [
     { key: 'waiting', name: '대기 광고' },

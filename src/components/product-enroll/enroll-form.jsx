@@ -15,6 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
 import { useCategory } from '@/hooks/use-category';
 import { toast } from 'react-toastify';
+import useApiError from '@/hooks/use-api-error';
 
 const init = {
   productName: '',
@@ -27,12 +28,10 @@ const init = {
   precaution: '',
 };
 export default function EnrollForm() {
-  const navigate = useNavigate();
   const param = useParams();
-  const queryClient = useQueryClient();
+  const { handleError } = useApiError();
   const [form, setForm] = useState(init);
   const [advertisementId, setAdvertisementId] = useState(0);
-  const [images, setImages] = useState([]);
   const [enrollForm, setEnrollForm] = useState({
     mainTitle: '새 상품 등록',
     button: '작성 완료',
@@ -46,16 +45,16 @@ export default function EnrollForm() {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: (e) => {
-      toast.error(e.toString().replace('Error:', ''));
+    onError: (error) => {
+      handleError(error);
     },
   });
   const updateAd = useMutation(() => updateAds(param.campaignId, form), {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
-    onError: (e) => {
-      console.log(e);
+    onError: (error) => {
+      handleError(error);
     },
   });
 
@@ -67,7 +66,6 @@ export default function EnrollForm() {
     e.preventDefault();
     updateAd.mutateAsync();
   }
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;

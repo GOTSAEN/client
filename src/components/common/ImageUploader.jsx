@@ -33,7 +33,6 @@ export default function ImageUploader({ advertisementId, existImages }) {
     }
     if (existImages?.length > 0) {
       const list = [];
-      console.log(existImages);
       existImages.map((img) => list.push({ data_url: img }));
       setImages(list);
     }
