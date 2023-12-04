@@ -28,7 +28,7 @@ export default function SignUp() {
     businessAddress: '',
   });
 
-  const { mutate, isLoading } = useMutation(() => newMember(form), {
+  const { mutate: handleSignUp, isLoading } = useMutation(() => newMember(form), {
     throwOnError: true,
     onSuccess: () => {
       navigate('/welcome');
@@ -56,7 +56,7 @@ export default function SignUp() {
       return;
     }
 
-    mutate();
+    handleSignUp();
   };
   const togglePasswordVisibility = (e) => {
     e.preventDefault();
