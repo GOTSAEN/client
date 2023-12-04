@@ -13,8 +13,5 @@ export const getYoutuberByCategory = async (page, category) => {
 };
 
 export const updateYoutuberCategory = async (category) => {
-  return authYoutubers
-    .patch('', category)
-    .then((res) => res.data)
-    .catch((e) => ErrorResponse(e));
+  return await authYoutubers.patch('', category).then((res) => res.data);
 };
