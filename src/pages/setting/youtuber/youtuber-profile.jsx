@@ -8,11 +8,12 @@ import { fetchCategories } from '@/api/categories';
 import { toast } from 'react-toastify';
 import { getYoutuber } from '@/api/youtuber';
 import { updateYoutuberCategory } from '@/api/youtuber';
+import { Card } from '@/components/ui/card';
 
 const init = {
   category: '',
 };
-
+const label_style = 'text-sm ml-2 mb-1 text-muted-foreground';
 export default function YoutuberProfile() {
   const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -61,50 +62,53 @@ export default function YoutuberProfile() {
 
   return (
     <>
-      <div className="flex justify-center flex-col">
-        <div className="w-full max-w-screen-md ">
-          <h2 className="text-lg font-bold">내 정보</h2>
-        </div>
+      <div className="flex justify-center items-center mt-10">
         {youtuberLoading && <p>로딩중</p>}
         {youtuberError && <p>에러</p>}
         {youtuberData && (
-          <div className="flex justify-center flex-col mt-8 gap-5">
-            <div className="flex justify-center flex-col gap-2">
-              <h3>이메일</h3>
-              <Input value={youtuberData.email} disabled />
+          <Card className="p-4 w-[450px]">
+            <div className="w-full max-w-screen-md mb-4 ">
+              <h2 className="text-md font-bold text-center">내 정보</h2>
             </div>
-            <div className="flex justify-center flex-col gap-2">
-              <h3>닉네임</h3>
-              <Input value={youtuberData.nickname} disabled />
-            </div>
-            <div className="flex justify-center flex-col gap-2">
-              <h3>프로필 사진</h3>
+
+            <section className="flex gap-8">
               <Avatar>
                 <AvatarImage src={youtuberData.avatarUri} />
               </Avatar>
-            </div>
-            <div className="flex justify-center flex-col gap-2">
-              <h3>카테고리</h3>
-              <Select onValueChange={(val) => handleDataChange('category', val)} value={selectedCategory}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="-- 카테고리 --" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories &&
-                    categories.map(({ categoryName }) => (
-                      <SelectItem value={categoryName} key={categoryName}>
-                        {categoryName}
-                      </SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Button className="w-auto" onClick={handleUpdateProfile}>
-                프로필 수정
-              </Button>
-            </div>
-          </div>
+
+              <div className="grow flex flex-col gap-4">
+                <div>
+                  <h3 className={label_style}>이메일</h3>
+                  <Input value={youtuberData.email} disabled />
+                </div>
+                <div>
+                  <h3 className={label_style}>닉네임</h3>
+                  <Input value={youtuberData.nickname} disabled />
+                </div>
+
+                <div>
+                  <h3 className={label_style}>카테고리</h3>
+                  <Select onValueChange={(val) => handleDataChange('category', val)} value={selectedCategory}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="-- 카테고리 --" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories &&
+                        categories.map(({ categoryName }) => (
+                          <SelectItem value={categoryName} key={categoryName}>
+                            {categoryName}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div></div>
+                <Button className="w-auto" onClick={handleUpdateProfile}>
+                  프로필 수정
+                </Button>
+              </div>
+            </section>
+          </Card>
         )}
       </div>
     </>
