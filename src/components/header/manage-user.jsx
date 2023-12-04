@@ -12,9 +12,13 @@ import { cn } from '@/utils/lib';
 import { UserCircle2, LogOut } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '../ui/button';
+import { MENU_ITEMS } from '@/data/setting-auth-menu';
 export default function UserDropDownMenu() {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
+  const settingMenus = MENU_ITEMS[user?.auth]
+
+  console.log(settingMenus)
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -29,10 +33,10 @@ export default function UserDropDownMenu() {
       <DropdownMenuContent>
         <DropdownMenuLabel>{user.email?.split('@')[0]} 님</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link to="/setting/me/profile">
+        <Link to="/setting/profile">
           <DropdownMenuItem>회원정보</DropdownMenuItem>
         </Link>
-        <Link to="/setting/me/pwchange">
+        <Link to="/setting/pwchange">
           <DropdownMenuItem>패스워드 변경</DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />

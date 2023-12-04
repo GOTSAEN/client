@@ -4,6 +4,7 @@ export const MENU_ITEMS =
     {
       youtuber :  [
           {
+            key:'ads',
             url : '/setting/ads',
             label : "광고 관리",
             menus : [
@@ -15,6 +16,7 @@ export const MENU_ITEMS =
             ]
           },
           {
+            key:'user',
             url : '/setting',
             label : "정보 관리",
             menus :[
@@ -25,6 +27,7 @@ export const MENU_ITEMS =
         ],
         advertisement :  [
             {
+              key:'ads',
               url : '/setting/partner/ads',
               label : "광고 관리",
               menus : [
@@ -35,6 +38,7 @@ export const MENU_ITEMS =
               ]
             },
             {
+              key:'user',
               url : '/setting',
               label : "정보 관리",
               menus :[
