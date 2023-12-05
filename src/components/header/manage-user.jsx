@@ -16,9 +16,9 @@ import { MENU_ITEMS } from '@/data/setting-auth-menu';
 export default function UserDropDownMenu() {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const settingMenus = MENU_ITEMS[user?.auth]
 
-  console.log(settingMenus)
+  const authMenus = MENU_ITEMS[user?.auth].find((item) => item.key === 'user');
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -33,12 +33,11 @@ export default function UserDropDownMenu() {
       <DropdownMenuContent>
         <DropdownMenuLabel>{user.email?.split('@')[0]} 님</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link to="/setting/profile">
-          <DropdownMenuItem>회원정보</DropdownMenuItem>
-        </Link>
-        <Link to="/setting/pwchange">
-          <DropdownMenuItem>패스워드 변경</DropdownMenuItem>
-        </Link>
+        {authMenus?.menus.map((menu) => (
+          <Link to={`${authMenus.url}${menu.path}`}>
+            <DropdownMenuItem>{menu.name}</DropdownMenuItem>
+          </Link>
+        ))}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
           <LogOut size={15} className="mr-2" />

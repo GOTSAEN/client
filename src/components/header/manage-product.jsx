@@ -9,12 +9,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Gift, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { cn } from '@/utils/lib';
+
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '../ui/button';
+import { MENU_ITEMS } from '@/data/setting-auth-menu';
 
 export default function ProductDropDownMenu() {
   const { user } = useAuth();
+  const authMenus = MENU_ITEMS[user?.auth].find((item) => item.key === 'ads');
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -23,42 +26,18 @@ export default function ProductDropDownMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>광고상품 관리</DropdownMenuLabel>
+        <DropdownMenuLabel>{authMenus?.label}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {user.auth === 'advertisement' && (
+        {authMenus?.menus.map((menu) => (
+          <Link to={`${authMenus.url}${menu.path}`}>
+            <DropdownMenuItem>{menu.name}</DropdownMenuItem>
+          </Link>
+        ))}
+        {user?.auth === 'advertisement' && (
           <>
-            <Link to="/setting/partner/ads/waiting">
-              <DropdownMenuItem>모집 광고</DropdownMenuItem>
-            </Link>
-            <Link to="/setting/partner/ads/progress">
-              <DropdownMenuItem>진행 광고</DropdownMenuItem>
-            </Link>
-            <Link to="/setting/partner/ads/past">
-              <DropdownMenuItem>종료 광고</DropdownMenuItem>
-            </Link>
             <DropdownMenuSeparator />
             <Link to="/product/create">
-              <DropdownMenuItem>새 상품 등록</DropdownMenuItem>
-            </Link>
-          </>
-        )}
-        {user.auth === 'youtuber' && (
-          <>
-            <Link to="/setting/ads/waiting">
-              <DropdownMenuItem>대기 상품</DropdownMenuItem>
-            </Link>
-            <Link to="/setting/ads/progress">
-              <DropdownMenuItem>진행 상품</DropdownMenuItem>
-            </Link>
-            <Link to="/setting/ads/past">
-              <DropdownMenuItem>지난 상품</DropdownMenuItem>
-            </Link>
-            <DropdownMenuSeparator />
-            <Link to="/setting/ads/bookmark">
-              <DropdownMenuItem>
-                <Heart size={15} className="mr-2" fill="currentColor" />
-                찜한 광고
-              </DropdownMenuItem>
+              <DropdownMenuItem>새상품 등록</DropdownMenuItem>
             </Link>
           </>
         )}
