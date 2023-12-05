@@ -126,7 +126,7 @@ export default function EnrollForm() {
         </div>
         <Select onValueChange={(val) => handleDataChange('category', val)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="-- 카테고리 --" />
+            <SelectValue placeholder={form.category || '-- 카테고리 --'} />
           </SelectTrigger>
           <SelectContent>
             {categories &&
