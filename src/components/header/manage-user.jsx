@@ -34,7 +34,7 @@ export default function UserDropDownMenu() {
         <DropdownMenuLabel>{user.email?.split('@')[0]} 님</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {authMenus?.menus.map((menu) => (
-          <Link to={`${authMenus.url}${menu.path}`}>
+          <Link to={`${authMenus.url}${menu.path}`} key={menu.path}>
             <DropdownMenuItem>{menu.name}</DropdownMenuItem>
           </Link>
         ))}

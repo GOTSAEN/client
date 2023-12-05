@@ -29,7 +29,7 @@ export default function ProductDropDownMenu() {
         <DropdownMenuLabel>{authMenus?.label}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {authMenus?.menus.map((menu) => (
-          <Link to={`${authMenus.url}${menu.path}`}>
+          <Link to={`${authMenus.url}${menu.path}`} key={menu.path}>
             <DropdownMenuItem>{menu.name}</DropdownMenuItem>
           </Link>
         ))}
