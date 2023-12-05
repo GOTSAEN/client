@@ -29,6 +29,8 @@ import Bookmarks from '@/pages/setting/youtuber/bookmarks';
 import PartnerPastAds from '@/pages/setting/partner/past-ads';
 import ScrollTop from '@/components/common/ScrollTop';
 import PastYoutuber from '@/pages/setting/partner/past-youtuber';
+import { YOUTUBER_ROUTES } from './youtuber';
+import { PARTNER_ROUTES } from './advertiser';
 
 export default function Router() {
   return (
@@ -77,9 +79,8 @@ export default function Router() {
               </ProtectedAdminRoutes>
             }
           />
-
-          {/* 로그인 된 회원만 접근 가능  */}
           <Route
+            exact
             path="/setting"
             element={
               <ProtectedRoutes>
@@ -87,14 +88,11 @@ export default function Router() {
               </ProtectedRoutes>
             }
           >
-            <Route exact path="me/profile" element={<YoutuberProfile />} />
-            <Route exact path="me/pwchange" element={<PwChange />} />
-            <Route exact path="secession" element={<Secession />} />
-            <Route exact index path="ads/bookmark" element={<Bookmarks />} />
-            <Route exact index path="ads/progress" element={<ProgressAds />} />
-            <Route exact path="ads/past" element={<PastAds />} />
-            <Route exact path="ads/waiting" element={<WaitingAds />} />
+            {YOUTUBER_ROUTES.map(({ path, children }) => (
+              <Route exact path={path} element={children} />
+            ))}
           </Route>
+          {/* 로그인 된 회원만 접근 가능  */}
 
           {/* 광고주의 광고 상품 관련 url */}
           <Route
@@ -105,17 +103,10 @@ export default function Router() {
               </ProtectedAdminRoutes>
             }
           >
-            <Route exact path="ads/progress" element={<PartnerProgressAds />} />
-            <Route exact path="ads/waiting" element={<PartnerWaitingAds />} />
-
-            <Route exact path="ads/waiting/campaign/:campaignId" element={<WaitingYoutuber />} />
-            <Route exact path="ads/progress/campaign/:campaignId" element={<ProgressYoutuber />} />
-            <Route exact path="ads/past/campaign/:campaignId" element={<PastYoutuber />} />
-
-            <Route exact path="ads/past" element={<PartnerPastAds />} />
-            <Route exact path="ads/waiting" element={<WaitingAds />} />
+            {PARTNER_ROUTES.map(({ path, children }) => (
+              <Route exact path={path} element={children} />
+            ))}
           </Route>
-
           <Route exact path="*" element={<NotFound />} />
         </Route>
       </Routes>

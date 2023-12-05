@@ -7,7 +7,7 @@ export default function ProtectedRoutes({ children }) {
   const { user, logout } = useAuth();
   const session = cookies.get('SESSIONID');
 
-  if (!session || !user?.email) {
+  if (!session || !user) {
     logout();
     return <Navigate to="/login" replace />;
   }

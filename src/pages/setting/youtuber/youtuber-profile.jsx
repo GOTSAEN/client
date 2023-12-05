@@ -9,49 +9,21 @@ import { toast } from 'react-toastify';
 import { getYoutuber } from '@/api/youtuber';
 import { updateYoutuberCategory } from '@/api/youtuber';
 import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useCategory } from '@/hooks/use-category';
 
-const init = {
-  category: '',
-};
 const label_style = 'text-sm ml-2 mb-1 text-muted-foreground';
 export default function YoutuberProfile() {
+  const { categories } = useCategory();
+
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const [form, setForm] = useState(init);
-
-  useEffect(() => {
-    const storedCategory = localStorage.getItem('selectedCategory');
-    if (storedCategory) {
-      setSelectedCategory(storedCategory);
-    }
-  }, []);
-
-  const {
-    isLoading: youtuberLoading,
-    data: youtuberData,
-    error: youtuberError,
-  } = useQuery(['youtuber'], getYoutuber, {
-    refetchOnWindowFocus: false,
-  });
-
-  const {
-    isLoading: categoryLoading,
-    data: categories,
-    error: categoryError,
-  } = useQuery(['categories'], fetchCategories, {
-    refetchOnWindowFocus: false,
-  });
-
-  const handleDataChange = (name, value) => {
-    setSelectedCategory(value);
-    localStorage.setItem('selectedCategory', value);
-    setForm({ ...form, [name]: value });
-  };
+  const { isLoading: youtuberLoading, data: youtuberData, error: youtuberError } = useQuery(['youtuber'], getYoutuber);
 
   const handleUpdateProfile = async () => {
-    if (form.category !== '') {
+    if (selectedCategory !== '') {
       await updateYoutuberCategory({
-        category: form.category,
+        category: selectedCategory,
       }).then(() => {
         toast.success('회원정보가 수정되었습니다.');
       });
@@ -60,10 +32,14 @@ export default function YoutuberProfile() {
     }
   };
 
+  useEffect(() => {
+    if (youtuberData?.category) setSelectedCategory(youtuberData?.category);
+  }, [youtuberData]);
+
   return (
     <>
       <div className="flex justify-center items-center mt-10">
-        {youtuberLoading && <p>로딩중</p>}
+        {youtuberLoading && <Skeleton className="w-[450px] h-[370px]" />}
         {youtuberError && <p>에러</p>}
         {youtuberData && (
           <Card className="p-4 w-[450px]">
@@ -88,9 +64,9 @@ export default function YoutuberProfile() {
 
                 <div>
                   <h3 className={label_style}>카테고리</h3>
-                  <Select onValueChange={(val) => handleDataChange('category', val)} value={selectedCategory}>
+                  <Select onValueChange={setSelectedCategory}>
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="-- 카테고리 --" />
+                      <SelectValue placeholder={selectedCategory || '-- 카테고리 --'} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories &&
@@ -102,8 +78,8 @@ export default function YoutuberProfile() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div></div>
-                <Button className="w-auto" onClick={handleUpdateProfile}>
+
+                <Button className="w-auto" onClick={handleUpdateProfile} disabled={youtuberLoading}>
                   프로필 수정
                 </Button>
               </div>
