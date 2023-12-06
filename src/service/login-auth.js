@@ -7,6 +7,14 @@ export async function saveUserSession({ authorization, refresh, usertype }, { em
   cookies.set('Email', email);
 }
 
+export function deleteCookiesWithRootPath() {
+  const allCookies = cookies.getAll();
+  // Path가 '/'인 쿠키들 삭제
+  Object.keys(allCookies).forEach((cookieName) => {
+    cookies.remove(cookieName, { path: '/' });
+  });
+}
+
 export function getUser() {
   return {
     email: cookies.get('Email'),

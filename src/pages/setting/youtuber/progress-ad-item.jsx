@@ -12,30 +12,27 @@ export default function ProgressAdItem({ data }) {
   const [editableStatus, setEditableStatus] = useState(Boolean(!url));
   const { updateStatus, isLoading, isSuccess } = useApplication();
 
-  const handleChangeStatus = async () => {
-    await updateStatus({ applicationId, data: { youtubeUrl: url }, status: 'progress' });
+  const handleChangeStatus = () => {
+    updateStatus({ applicationId, data: { youtubeUrl: url }, status: 'progress' });
     if (isSuccess) setEditableStatus(false);
   };
   return (
     <TableRow className="grid grid-cols-12 px-1" key={applicationId}>
-      <TableCell className="font-medium">
-        <img src={adImage} alt="thumbnail" className={imageSize} />
-      </TableCell>
-      <TableCell className="col-span-4">
-        <Link to={`/product/${advertisementId}`} className={link_text}>
+      <TableCell className="col-span-5">
+        <img src={adImage ? adImage : '/no_img.jpg'} alt={adName} className={imageSize} />
+        <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
           {adName}
         </Link>
       </TableCell>
-
       <TableCell className="col-span-2 justify-center">{adCategory}</TableCell>
       <TableCell className="text-right right col-span-5 justify-center gap-1">
         <Input value={url} onChange={(e) => setUrl(e.target.value)} disabled={!editableStatus} />
         {editableStatus ? (
-          <Button className="w-[50px] text-[11px] px-2" onClick={handleChangeStatus} disabled={isLoading}>
+          <Button className="w-[50px] text-[11px] px-2" onClick={handleChangeStatus} disabled={isLoading} size="sm">
             확인
           </Button>
         ) : (
-          <Button className="w-[50px] text-[11px] px-2" onClick={() => setEditableStatus((prev) => !prev)}>
+          <Button className="w-[50px] text-[11px] px-2" onClick={() => setEditableStatus((prev) => !prev)} size="sm">
             수정
           </Button>
         )}
