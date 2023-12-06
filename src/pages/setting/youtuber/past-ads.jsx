@@ -18,37 +18,34 @@ export default function PastAds() {
         <Table>
           <TableHeader>
             <TableRow className="grid grid-cols-5 items-center px-2">
-              <TableHead className="col-span-2">상품</TableHead>
+              <TableHead className="col-span-2 max-sm:col-span-3">상품</TableHead>
               <TableHead className="text-right justify-center ">카테고리</TableHead>
-              <TableHead className="text-center justify-center">종료날짜</TableHead>
+              <TableHead className="text-center justify-center max-sm:hidden">종료날짜</TableHead>
               <TableHead className="text-center justify-end mr-1">URL</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading && <AdItemSkeleton />}
-            {ads?.length > 0 && (
+            {ads?.length > 0 &&
               ads.map(({ applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, lastModifiedAt }) => (
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
-                  <TableCell className="col-span-2">
+                  <TableCell className="col-span-2 max-sm:col-span-3">
                     <img src={adImage} alt="thumbnail" className={imageSize} />
-                    <Link to={`/product/${advertisementId}`} className={link_text}>
+                    <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
                       {adName}
                     </Link>
                   </TableCell>
 
                   <TableCell className="justify-center">{adCategory}</TableCell>
-                  <TableCell className="justify-center">{lastModifiedAt.slice(0, 10)}</TableCell>
+                  <TableCell className="justify-center max-sm:hidden">{lastModifiedAt.slice(0, 10)}</TableCell>
                   <TableCell className="justify-end">
                     <a target="blank" href={youtubeUrl}>
                       <Button className={setting_btn}>재생</Button>
                     </a>
                   </TableCell>
                 </TableRow>
-              ))
-            )}
-            { ads?.length === 0 && 
-              <EmptyRow mainMessage="이전에 진행했던 광고가 없습니다 😢" />
-            }
+              ))}
+            {ads?.length === 0 && <EmptyRow mainMessage="이전에 진행했던 광고가 없습니다 😢" />}
           </TableBody>
         </Table>
       </Card>
