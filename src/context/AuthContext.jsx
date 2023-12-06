@@ -1,4 +1,4 @@
-import { getUser } from '@/service/login-auth';
+import { deleteCookiesWithRootPath, getUser } from '@/service/login-auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 
@@ -22,14 +22,8 @@ export function AuthProvider({ children }) {
     });
   };
   const logout = () => {
-    initAuthCookie();
+    deleteCookiesWithRootPath();
     setUser(undefined);
-  };
-
-  const initAuthCookie = () => {
-    console.log('로그아웃합니다');
-    const cookieList = ['SESSIONID', 'RENEW', 'Email', 'Refresh', 'Authorization'];
-    cookieList.map((name) => cookies.remove(name));
   };
 
   const checkAuth = () => {
