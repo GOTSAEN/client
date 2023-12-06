@@ -1,34 +1,20 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFound from '@pages/NotFound';
 import Home from '@pages/Home';
 import App from '@/App';
 import ProductDetail from '@/pages/ProductDetail';
 import ProductEnroll from '@/pages/ProductEnroll';
 import Setting from '@/pages/Setting';
-import PastAds from '@/pages/setting/youtuber/past-ads';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ProgressAds from '@/pages/setting/youtuber/progress-ads';
-import WaitingAds from '@/pages/setting/youtuber/waiting-ads';
 import LogIn from '@/pages/LogIn';
 import SignUp from '@/pages/SignUp';
-import PartnerProgressAds from '@/pages/setting/partner/progress-ads';
-import ProgressYoutuber from '@/pages/setting/partner/progress-youtuber';
-import PwChange from '@/pages/setting/PwChange';
 import ProtectedRoutes from '@/pages/ProtectedRoutes';
 import ProtectedAdminRoutes from '@/pages/ProtectedAdvertiserRoutes';
-import Profile from '@/pages/setting/profile';
-import PartnerWaitingAds from '@/pages/setting/partner/wating-ads';
 import Ads from '@/pages/Ads';
 import Welcome from '@/pages/Welcome';
 import Search from '@/pages/Search';
-import YoutuberProfile from '@/pages/setting/youtuber/youtuber-profile';
 import NoAuthRoutes from '@/pages/NoAuthRoutes';
 import Youtuber from '@/pages/Youtuber';
-import Secession from '@/pages/Secession';
-import WaitingYoutuber from '@/pages/setting/partner/waiting-youtuber';
-import Bookmarks from '@/pages/setting/youtuber/bookmarks';
-import PartnerPastAds from '@/pages/setting/partner/past-ads';
 import ScrollTop from '@/components/common/ScrollTop';
-import PastYoutuber from '@/pages/setting/partner/past-youtuber';
 import { YOUTUBER_ROUTES } from './youtuber';
 import { PARTNER_ROUTES } from './advertiser';
 
@@ -92,9 +78,6 @@ export default function Router() {
               <Route exact path={path} element={children} />
             ))}
           </Route>
-          {/* 로그인 된 회원만 접근 가능  */}
-
-          {/* 광고주의 광고 상품 관련 url */}
           <Route
             path="/setting/partner"
             element={

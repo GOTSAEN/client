@@ -13,7 +13,7 @@ export const fetchAdsByFilter = async (filter, page) => {
 };
 
 export const fetchAdsByCategory = async (category) => {
-  return ads.get(`/byCategory?category=${category}`).then((res) => res.data.data);
+  return ads.get(`/byCategory?category=${category}`).then((res) => res.data);
 };
 
 export const newAds = async (data) => {
