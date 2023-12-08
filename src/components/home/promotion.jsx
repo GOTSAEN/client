@@ -40,7 +40,7 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
           <div className="text-center">
             {mainTitle && (
               <h2 className="text-xl Jalnan fit-content">
-                <span className="pt-1" style={{ background: color }}>
+                <span className="pt-1 px-1" style={{ background: color }}>
                   {mainTitle}
                 </span>
               </h2>

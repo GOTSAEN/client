@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { fetchCategories } from '@/api/categories';
 import { toast } from 'react-toastify';
 import { getYoutuber } from '@/api/youtuber';
 import { updateYoutuberCategory } from '@/api/youtuber';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdsCard from '@/components/AdsCard';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { fetchAdsByStatus } from '@/api/ads';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { saveUserSession } from '@/service/login-auth';
@@ -8,17 +8,22 @@ import { Cookies } from 'react-cookie';
 import { useAuth } from '@/context/AuthContext';
 
 export default function List() {
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
   const cookies = new Cookies();
-  const {
-    isLoading,
-    data: ads,
-    error,
-  } = useQuery(['ads', 'waiting'], async () => await fetchAdsByStatus('WAITING', page).then((res) => res), {
-    staleTime: 1000 * 60 * 30,
-  });
+  const { isLoading, data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useInfiniteQuery(
+    ['ads', 'waiting'],
+    async ({ pageParam = 1 }) => await fetchAdsByStatus('WAITING', pageParam).then((res) => res),
+    {
+      getNextPageParam: (res) => {
+        const nextPage = res.pageInfo.page;
+        return nextPage > res.pageInfo.totalPages ? undefined : nextPage + 1;
+      },
+
+      staleTime: 1000 * 60 * 30,
+    }
+  );
   useEffect(() => {
     if (location.search.includes('?')) {
       const urlSearchParams = new URLSearchParams(location.search.split('?')[1]);
@@ -39,9 +44,15 @@ export default function List() {
     }
   }, [location]);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
-      {ads?.length > 0 && ads.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
+      {data?.pages[0].data.length > 0 &&
+        data.pages[0].data.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
+      <button onClick={() => fetchNextPage()}>다음</button>
     </section>
   );
 }
