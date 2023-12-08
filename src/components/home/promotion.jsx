@@ -23,7 +23,7 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
   const {
@@ -39,13 +39,13 @@ export default function Promotion({ promotion, mainTitle, subTitle, color }) {
         <section className="my-8">
           <div className="text-center">
             {mainTitle && (
-              <h2 className="text-2xl Jalnan fit-content">
+              <h2 className="text-xl Jalnan fit-content">
                 <span className="pt-1" style={{ background: color }}>
                   {mainTitle}
                 </span>
               </h2>
             )}
-            {subTitle && <h4 className="text-lg font-semibold">{subTitle}</h4>}
+            {subTitle && <h4 className="text-md font-semibold">{subTitle}</h4>}
           </div>
 
           <MultiCarousel responsive={responsive} showDots={false} autoPlay={true}>

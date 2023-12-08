@@ -25,7 +25,7 @@ export default function Ads() {
         </h2>
         <p className="text-muted-foreground text-sm p-2 w-fit">총 {data?.pageInfo.totalElements || 0}개의 결과</p>
       </div>
-      <section className="grid max-sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-2">
+      <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
         {data?.data.length > 0 && data?.data.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
       </section>
       {data?.data.length === 0 && <p className="py-12 text-center ">해당 카테고리의 검색된 결과가 없습니다🥲</p>}
