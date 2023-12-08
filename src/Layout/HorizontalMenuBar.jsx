@@ -37,11 +37,6 @@ export default function HorizontalMenuBar() {
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>유튜버</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/community" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>커뮤니티</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
         <SearchBar />
