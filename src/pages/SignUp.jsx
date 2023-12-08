@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { cn } from '@/utils/lib';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineEye } from 'react-icons/ai';
 import { newMember } from '@/api/members';
 import { useMutation } from 'react-query';
-import { toast, useToast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { saveUserType } from '@/service/login-auth';
 import { checkSameValue, validatePassword } from '@/service/common';
 import { auth_form } from '@/css';

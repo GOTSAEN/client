@@ -1,8 +1,7 @@
 import { fetchAdsById } from '@/api/ads';
 import { imageSize } from '@/css/image';
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
 import CompactInfoSkeleton from './compact-info-skeleton';
 
 export default function CompactAdInfo({ id }) {

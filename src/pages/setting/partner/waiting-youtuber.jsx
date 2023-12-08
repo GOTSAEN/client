@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -42,7 +42,11 @@ export default function WaitingYoutuber() {
               youtubers.map(({ applicationId, status, createdAt, youtubeMemberImage, youtubeMemberNickname }) => (
                 <TableRow className="grid grid-cols-8 hover:cursor-pointer max-sm:grid-cols-6">
                   <TableCell className="font-medium col-span-2" key={applicationId}>
-                    <img src={youtubeMemberImage} className="h-[40px] w-[40px] cover block rounded-full m-2" />
+                    <img
+                      src={youtubeMemberImage}
+                      alt={youtubeMemberNickname}
+                      className="h-[40px] w-[40px] cover block rounded-full m-2"
+                    />
                     {youtubeMemberNickname}
                   </TableCell>
                   <TableCell className="justify-center">119만명</TableCell>

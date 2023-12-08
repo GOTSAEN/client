@@ -26,12 +26,13 @@ export default function List() {
       const authorization = urlSearchParams.get('Access_token');
       const email = urlSearchParams.get('Email');
       const usertype = urlSearchParams.get('UserType');
-      const cookie = cookies.get('Refresh');
+      const refresh = urlSearchParams.get('Refresh_token');
 
       saveUserSession(
         {
           authorization,
           usertype,
+          refresh,
         },
         { email }
       );
