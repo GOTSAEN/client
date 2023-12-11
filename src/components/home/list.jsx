@@ -8,11 +8,10 @@ import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 
 export default function List() {
   const location = useLocation();
-  const size = 2;
 
   const { data, fetchNextPage, hasNextPage, error } = useInfiniteQuery(
     ['ads', 'waiting'],
-    async ({ pageParam = 1 }) => await fetchAdsByStatus('WAITING', pageParam, size).then((res) => res),
+    async ({ pageParam = 1 }) => await fetchAdsByStatus('WAITING', pageParam).then((res) => res),
     {
       select: (data) => ({
         pages: data.pages,
@@ -45,10 +44,6 @@ export default function List() {
       );
     }
   }, [location]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">

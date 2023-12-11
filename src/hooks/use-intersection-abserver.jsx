@@ -17,7 +17,6 @@ export const useIntersectionObserver = ({ threshold, hasNextPage, fetchNextPage 
     const observer = new IntersectionObserver(observerCallback, {
       threshold,
     });
-    console.log('intersection');
     observer.observe(target);
 
     return () => observer.unobserve(target);
