@@ -26,7 +26,7 @@ export function setInterceptors(instance, needConfigOption) {
     function (error) {
       const { data } = error.response;
       if (data.status === 500) {
-        deleteCookiesWithRootPath();
+        // deleteCookiesWithRootPath();
       }
       return Promise.reject(data);
     }

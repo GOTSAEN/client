@@ -7,11 +7,14 @@ import { imageSize } from '@/css/image';
 import { link_text } from '@/css';
 import { useAds } from './hooks/use-ads';
 import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
+import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 export default function PartnerPastAds() {
   const [page, setPage] = useState(1);
   const { GetAdsList } = useAds();
 
-  const { isLoading, data: ads, error } = GetAdsList(page, 'finished');
+  const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('finished');
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
+
   return (
     <>
       <Card className="flex justify-center">
@@ -25,25 +28,28 @@ export default function PartnerPastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoading && <AdItemSkeleton />}
-            {ads?.length > 0 &&
-              ads.map(({ advertisementId, imageUrl, productName, category, numberOfRecruit }) => (
-                <Link to={`campaign/${advertisementId}`} key={advertisementId}>
-                  <TableRow className="grid grid-cols-8 px-1">
-                    <TableCell className="col-span-4">
-                      <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
+            {ads?.pages ?? <AdItemSkeleton />}
+            {ads?.pages.length > 0 &&
+              ads.pages.map((page) => {
+                return page.data?.map(({ advertisementId, productName, imageUrl, category, numberOfRecruit }) => (
+                  <Link to={`campaign/${advertisementId}`} key={advertisementId}>
+                    <TableRow className="grid grid-cols-8 px-1">
+                      <TableCell className="col-span-4">
+                        <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
 
-                      <Link to={`product/${advertisementId}`} className={link_text}>
-                        {productName}
-                      </Link>
-                    </TableCell>
+                        <Link to={`product/${advertisementId}`} className={link_text}>
+                          {productName}
+                        </Link>
+                      </TableCell>
 
-                    <TableCell className="col-span-2 justify-center">{category}</TableCell>
-                    <TableCell className="text-right right col-span-2 justify-center">{numberOfRecruit}</TableCell>
-                  </TableRow>
-                </Link>
-              ))}
-            {ads?.length === 0 && <EmptyRow mainMessage="종료된 광고가 없습니다😂" />}
+                      <TableCell className="col-span-2 justify-center">{category}</TableCell>
+                      <TableCell className="text-right right col-span-2 justify-center">{numberOfRecruit}</TableCell>
+                    </TableRow>
+                  </Link>
+                ));
+              })}
+            {ads?.pages.length === 0 && <EmptyRow mainMessage="종료된 광고가 없습니다😂" />}
+            <div ref={setTarget} className="h-0"></div>
           </TableBody>
         </Table>
       </Card>
