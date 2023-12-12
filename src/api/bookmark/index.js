@@ -8,6 +8,6 @@ export const changeBookmarkStatus = async (data) => {
   return bookmarks.post('', data).then(({ data }) => data);
 };
 
-export const getBookmarks = async (page) => {
-  return bookmarks.get(`?page=${page}&size=20`).then((res) => res.data.data);
+export const getBookmarks = async (pageParam) => {
+  return bookmarks.get(`?page=${pageParam}&size=2`).then((res) => res.data);
 };

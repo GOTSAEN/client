@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AdsCard from '@/components/AdsCard';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { fetchAdsByStatus } from '@/api/ads';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { saveUserSession } from '@/service/login-auth';
-import { Cookies } from 'react-cookie';
-import { useAuth } from '@/context/AuthContext';
+import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
+import ListSkeleton from './list-skeleton';
 
 export default function List() {
-  // const [page, setPage] = useState(1);
   const location = useLocation();
-  const navigate = useNavigate();
-  const cookies = new Cookies();
-  const { isLoading, data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useInfiniteQuery(
+
+  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = useInfiniteQuery(
     ['ads', 'waiting'],
     async ({ pageParam = 1 }) => await fetchAdsByStatus('WAITING', pageParam).then((res) => res),
     {
+      select: (data) => ({
+        pages: data.pages,
+        pageParams: data.pageParams,
+      }),
       getNextPageParam: (res) => {
         const nextPage = res.pageInfo.page;
-        return nextPage > res.pageInfo.totalPages ? undefined : nextPage + 1;
+        return nextPage >= res.pageInfo.totalPages ? undefined : nextPage + 1;
       },
-
       staleTime: 1000 * 60 * 30,
     }
   );
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
   useEffect(() => {
     if (location.search.includes('?')) {
       const urlSearchParams = new URLSearchParams(location.search.split('?')[1]);
@@ -44,15 +46,16 @@ export default function List() {
     }
   }, [location]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
-    <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
-      {data?.pages[0].data.length > 0 &&
-        data.pages[0].data.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />)}
-      <button onClick={() => fetchNextPage()}>다음</button>
-    </section>
+    <>
+      {isLoading && <ListSkeleton />}
+      <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
+        {data?.pages.length > 0 &&
+          data?.pages.map((page) => {
+            return page.data?.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />);
+          })}
+        <div ref={setTarget}></div>
+      </section>
+    </>
   );
 }

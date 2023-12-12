@@ -6,7 +6,7 @@ export const fetchAds = async () => {
 
 //TODO 무한 스크롤 구현하기 위해 수정하는 중
 export const fetchAdsByStatus = async (status, page) => {
-  return await ads.get(`/byStatus?status=${status}&page=${page}&size=2`).then((res) => res.data);
+  return await ads.get(`/byStatus?status=${status}&page=${page}&size=10`).then((res) => res.data);
 };
 
 export const fetchAdsByFilter = async (filter, page) => {

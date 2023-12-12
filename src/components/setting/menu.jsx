@@ -30,7 +30,7 @@ export default function Menu() {
                 <DropdownMenuLabel className="text-sm font-semibold px-2 py-2 w-full">{menu.label}</DropdownMenuLabel>
                 {menu.menus?.map((item) => (
                   <NavigationMenuItem className="w-full" key={item.path}>
-                    <Link to={`${menu.url}${item.path}`} legacyBehavior passHref>
+                    <Link to={`${menu.url}${item.path}`}>
                       <NavigationMenuLink
                         className={
                           location.pathname?.includes(item.path) ? highlight_navigation_styles : navigation_styles

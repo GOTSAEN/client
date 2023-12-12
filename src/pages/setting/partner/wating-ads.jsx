@@ -1,18 +1,26 @@
 import React from 'react';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
-
 import EmptyRow from '@/components/common/EmptyRow';
 import { useAds } from './hooks/use-ads';
 import { useState } from 'react';
 import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 
 import WaitingAdsItem from './waiting-ads-item';
+import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 
 export default function PartnerWaitingAds() {
-  const [page, setPage] = useState(1);
   const { GetAdsList } = useAds();
-  const { isLoading, data: ads, error } = GetAdsList(page, 'waiting');
+  const {
+    isLoading,
+    data: ads,
+    error,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  } = GetAdsList('waiting');
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
 
   return (
     <>
@@ -32,14 +40,19 @@ export default function PartnerWaitingAds() {
           <TableBody>
             {isLoading && <AdItemSkeleton />}
             {error && <p>Error</p>}
-            {ads?.length === 0 && (
+            {ads?.pages?.[0].pageInfo?.totalElements === 0 && (
               <EmptyRow
                 mainMessage="등록된 광고가 없습니다😢"
                 link="/product/create"
                 subMessage="새 광고를 등록해보세요"
               />
             )}
-            {ads?.length > 0 && ads.map((ads) => <WaitingAdsItem ads={ads} />)}
+            {ads?.pages.length > 0 &&
+              ads?.pages.map((page) => {
+                return page.data?.map((ad) => <WaitingAdsItem ads={ad} key={ad.advertisementId} />);
+              })}
+
+            <div ref={setTarget} className="h-0"></div>
           </TableBody>
         </Table>
       </Card>

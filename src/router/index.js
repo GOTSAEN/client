@@ -75,7 +75,7 @@ export default function Router() {
             }
           >
             {YOUTUBER_ROUTES.map(({ path, children }) => (
-              <Route exact path={path} element={children} />
+              <Route exact path={path} element={children} key={path} />
             ))}
           </Route>
           <Route
@@ -87,7 +87,7 @@ export default function Router() {
             }
           >
             {PARTNER_ROUTES.map(({ path, children }) => (
-              <Route exact path={path} element={children} />
+              <Route exact path={path} element={children} key={path} />
             ))}
           </Route>
           <Route exact path="*" element={<NotFound />} />
