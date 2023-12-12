@@ -11,8 +11,16 @@ import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 
 export default function PartnerWaitingAds() {
   const { GetAdsList } = useAds();
-  const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('waiting');
-  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
+  const {
+    isLoading,
+    data: ads,
+    error,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  } = GetAdsList('waiting');
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
 
   return (
     <>

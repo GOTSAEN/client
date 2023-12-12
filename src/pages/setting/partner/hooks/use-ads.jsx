@@ -22,9 +22,9 @@ export function useAds() {
       }
     );
 
-    const { data, fetchNextPage, hasNextPage, error, isLoading } = queryResult;
+    const { data, error, isLoading, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = queryResult;
 
-    return { data, fetchNextPage, hasNextPage, error, isLoading };
+    return { data, error, isLoading, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage };
   };
 
   return { GetAdsList };

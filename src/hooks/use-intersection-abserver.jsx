@@ -1,25 +1,30 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+// use-intersection-observer.jsx
+import { useEffect, useState } from 'react';
 
-export const useIntersectionObserver = ({ threshold, hasNextPage, fetchNextPage }) => {
+export const useIntersectionObserver = ({ threshold, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching }) => {
   const [target, setTarget] = useState();
 
   const observerCallback = (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting && hasNextPage) {
-        fetchNextPage();
+      if (entry.isIntersecting && hasNextPage && !isFetchingNextPage && !isFetching) {
+        const fetchData = async () => {
+          await fetchNextPage();
+        };
+        fetchData();
       }
     });
   };
 
   useEffect(() => {
     if (!target) return;
+
     const observer = new IntersectionObserver(observerCallback, {
       threshold,
     });
     observer.observe(target);
 
     return () => observer.unobserve(target);
-  }, [observerCallback, threshold, target]);
+  }, [target, observerCallback, threshold]);
+
   return { setTarget };
 };

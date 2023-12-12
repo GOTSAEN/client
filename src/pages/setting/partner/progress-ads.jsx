@@ -15,8 +15,16 @@ import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 
 export default function PartnerProgressAds() {
   const { GetAdsList } = useAds();
-  const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('progress');
-  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
+  const {
+    isLoading,
+    data: ads,
+    error,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  } = GetAdsList('progress');
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
   const [updateAdToFinish] = useProgressAds();
   console.log('error', ads);
   const handleAdToFinish = (e, id) => {

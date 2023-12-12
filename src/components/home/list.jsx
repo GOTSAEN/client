@@ -5,11 +5,12 @@ import { fetchAdsByStatus } from '@/api/ads';
 import { useLocation } from 'react-router-dom';
 import { saveUserSession } from '@/service/login-auth';
 import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
+import ListSkeleton from './list-skeleton';
 
 export default function List() {
   const location = useLocation();
 
-  const { data, fetchNextPage, hasNextPage, error } = useInfiniteQuery(
+  const { isLoading, data, fetchNextPage, isFetching, isFetchingNextPage, hasNextPage } = useInfiniteQuery(
     ['ads', 'waiting'],
     async ({ pageParam = 1 }) => await fetchAdsByStatus('WAITING', pageParam).then((res) => res),
     {
@@ -24,7 +25,7 @@ export default function List() {
       staleTime: 1000 * 60 * 30,
     }
   );
-  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
   useEffect(() => {
     if (location.search.includes('?')) {
       const urlSearchParams = new URLSearchParams(location.search.split('?')[1]);
@@ -46,12 +47,15 @@ export default function List() {
   }, [location]);
 
   return (
-    <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
-      {data?.pages.length > 0 &&
-        data?.pages.map((page) => {
-          return page.data?.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />);
-        })}
-      <div ref={setTarget} className="h-[1rem]"></div>
-    </section>
+    <>
+      {isLoading && <ListSkeleton />}
+      <section className="grid max-sm:grid-cols-2 max-md:grid-cols-3 grid-cols-4 gap-4 py-2">
+        {data?.pages.length > 0 &&
+          data?.pages.map((page) => {
+            return page.data?.map((ad) => <AdsCard key={ad.advertisementId} adsCardInfo={ad} />);
+          })}
+        <div ref={setTarget}></div>
+      </section>
+    </>
   );
 }

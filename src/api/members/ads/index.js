@@ -1,7 +1,7 @@
 import { partnerAds } from '@/api';
 
 export const fetchPartnerAds = async (page, status) => {
-  return await partnerAds.get(`?page=${page}&size=2&status=${status}`).then((res) => res.data);
+  return await partnerAds.get(`?page=${page}&size=20&status=${status}`).then((res) => res.data);
 };
 
 export const fetchPartnerAdsYoutuber = async (page, id) => {

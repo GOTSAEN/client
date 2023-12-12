@@ -10,8 +10,16 @@ import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 export default function PartnerPastAds() {
   const { GetAdsList } = useAds();
-  const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('finished');
-  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
+  const {
+    isLoading,
+    data: ads,
+    error,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
+  } = GetAdsList('finished');
+  const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage, isFetchingNextPage, isFetching });
 
   return (
     <>

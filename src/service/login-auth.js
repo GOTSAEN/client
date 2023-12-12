@@ -11,7 +11,7 @@ export function deleteCookiesWithRootPath() {
   const allCookies = cookies.getAll();
   // Path가 '/'인 쿠키들 삭제
   Object.keys(allCookies).forEach((cookieName) => {
-    cookies.remove(cookieName, { path: '/' });
+    if (cookieName !== 'User') cookies.remove(cookieName, { path: '/' });
   });
 }
 
