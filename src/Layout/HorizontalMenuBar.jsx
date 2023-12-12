@@ -33,7 +33,7 @@ export default function HorizontalMenuBar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/youtuber" legacyBehavior passHref>
+              <Link to="/youtuber">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>유튜버</NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
