@@ -39,8 +39,8 @@ export default function PastAds() {
                   <TableCell className="justify-center">{adCategory}</TableCell>
                   <TableCell className="justify-center max-sm:hidden">{lastModifiedAt.slice(0, 10)}</TableCell>
                   <TableCell className="justify-end">
-                    <a target="blank" href={youtubeUrl}>
-                      <Button className={setting_btn}>재생</Button>
+                    <a target="blank" href={youtubeUrl} className={setting_btn}>
+                      재생
                     </a>
                   </TableCell>
                 </TableRow>

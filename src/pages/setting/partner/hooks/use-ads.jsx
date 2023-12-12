@@ -10,7 +10,7 @@ export function useAds() {
       {
         select: (data) => {
           return {
-            pages: data.pages,
+            pages: data.pages ?? [],
             pageParams: data.pageParams,
           };
         },
@@ -22,9 +22,9 @@ export function useAds() {
       }
     );
 
-    const { data, fetchNextPage, hasNextPage, error } = queryResult;
+    const { data, fetchNextPage, hasNextPage, error, isLoading } = queryResult;
 
-    return { data, fetchNextPage, hasNextPage, error };
+    return { data, fetchNextPage, hasNextPage, error, isLoading };
   };
 
   return { GetAdsList };

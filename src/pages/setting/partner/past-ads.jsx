@@ -9,9 +9,7 @@ import { useAds } from './hooks/use-ads';
 import AdItemSkeleton from '@/components/setting/ad-item-skeleton';
 import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 export default function PartnerPastAds() {
-  const [page, setPage] = useState(1);
   const { GetAdsList } = useAds();
-
   const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('finished');
   const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
 
@@ -28,7 +26,7 @@ export default function PartnerPastAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.pages ?? <AdItemSkeleton />}
+            {isLoading && <AdItemSkeleton />}
             {ads?.pages.length > 0 &&
               ads.pages.map((page) => {
                 return page.data?.map(({ advertisementId, productName, imageUrl, category, numberOfRecruit }) => (
@@ -48,7 +46,7 @@ export default function PartnerPastAds() {
                   </Link>
                 ));
               })}
-            {ads?.pages.length === 0 && <EmptyRow mainMessage="종료된 광고가 없습니다😂" />}
+            {ads?.pages?.[0].pageInfo?.totalElements === 0 && <EmptyRow mainMessage="종료된 광고가 없습니다😂" />}
             <div ref={setTarget} className="h-0"></div>
           </TableBody>
         </Table>

@@ -1,12 +1,7 @@
-import { useAuth } from '@/context/AuthContext';
 import { useCallback } from 'react';
-import { isError } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const useApiError = () => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
   const handleError = useCallback((Error) => {
     const { status, message } = Error;
     switch (status) {

@@ -38,9 +38,9 @@ export default function PartnerProgressAds() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ads?.pages ?? <AdItemSkeleton />}
+            {isLoading && <AdItemSkeleton />}
 
-            {ads?.pages.length === 0 && <EmptyRow mainMessage={'진행중인 광고가 없습니다😢'} />}
+            {ads?.pages?.[0].pageInfo?.totalElements === 0 && <EmptyRow mainMessage={'진행중인 광고가 없습니다😢'} />}
             {ads?.pages.length > 0 &&
               ads?.pages.map((page) => {
                 return page.data?.map(({ advertisementId, productName, imageUrl, category }) => (

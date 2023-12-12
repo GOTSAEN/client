@@ -10,10 +10,8 @@ import WaitingAdsItem from './waiting-ads-item';
 import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 
 export default function PartnerWaitingAds() {
-  const [page, setPage] = useState(1);
   const { GetAdsList } = useAds();
   const { isLoading, data: ads, error, fetchNextPage, hasNextPage } = GetAdsList('waiting');
-  console.log(ads);
   const { setTarget } = useIntersectionObserver({ hasNextPage, fetchNextPage });
 
   return (
@@ -34,7 +32,7 @@ export default function PartnerWaitingAds() {
           <TableBody>
             {isLoading && <AdItemSkeleton />}
             {error && <p>Error</p>}
-            {ads?.pages[0]?.data?.length === 0 && (
+            {ads?.pages?.[0].pageInfo?.totalElements === 0 && (
               <EmptyRow
                 mainMessage="등록된 광고가 없습니다😢"
                 link="/product/create"
