@@ -16,7 +16,7 @@ export default function LogIn() {
     <section className="main flex justify-center items-center">
       {auth && (
         <Tabs defaultValue={auth} className={auth_form}>
-          <TabsList className={cn('grid w-full grid-cols-2')}>
+          <TabsList className={cn('grid w-full grid-cols-2 mb-1')}>
             <TabsTrigger value="youtuber" onClick={() => saveUserType('youtuber')}>
               유튜버
             </TabsTrigger>

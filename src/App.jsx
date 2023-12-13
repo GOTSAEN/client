@@ -36,7 +36,6 @@ function App() {
 
               <div className="sticky top-0 z-20 bg-background">
                 <Header />
-                <HorizontalMenuBar />
               </div>
               <main className="relative main w-full max-w-[1400px] z-10 mx-auto p-2">
                 <Outlet />

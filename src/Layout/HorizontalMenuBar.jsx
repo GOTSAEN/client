@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,7 +13,7 @@ import SearchBar from '@/components/common/SearchBar';
 import { ListItem } from '@/components/ui/list-item';
 import { useCategory } from '@/hooks/use-category';
 
-export default function HorizontalMenuBar() {
+const HorizontalMenuBar = memo(() => {
   const navigate = useNavigate();
   const { categories } = useCategory();
   return (
@@ -43,4 +43,6 @@ export default function HorizontalMenuBar() {
       </div>
     </nav>
   );
-}
+});
+
+export default HorizontalMenuBar;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -15,7 +15,7 @@ export const navigation_styles =
   'group inline-flex h-10 bg-transparent w-max items-center justify-center rounded-md  rounded-none bg-background px-4 py-2 text-sm font-medium transition-colors border-l-[1px] hover:border-gray-500  hover:brightness-110 focus:bg-accent focus:text-accent/50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 w-full';
 export const highlight_navigation_styles = navigation_styles + ' border-zinc-900';
 
-export default function Menu() {
+const Menu = memo(() => {
   const { user } = useAuth();
   const location = useLocation();
   const menus = MENU_ITEMS[user?.auth];
@@ -48,7 +48,9 @@ export default function Menu() {
       </div>
     </nav>
   );
-}
+});
+
+export default Menu;
 
 const ListItem = React.forwardRef(({ className, title, children, ...props }, ref) => {
   return (

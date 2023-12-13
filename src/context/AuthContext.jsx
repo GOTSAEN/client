@@ -1,5 +1,5 @@
 import { deleteCookiesWithRootPath, getUser } from '@/service/login-auth';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { Cookies } from 'react-cookie';
 
 const AuthContext = createContext({ user: undefined, logout: () => {} });
@@ -26,9 +26,9 @@ export function AuthProvider({ children }) {
     setUser(undefined);
   };
 
-  const checkAuth = () => {
+  const checkAuth = useCallback(() => {
     setUser(getUser());
-  };
+  });
 
   useEffect(() => {
     checkAuth();

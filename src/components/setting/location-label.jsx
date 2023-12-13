@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function LocationLabel() {
+const LocationLabel = memo(() => {
   const location = useLocation();
   const [labels, setLabels] = useState([]);
   const url = location.pathname;
@@ -47,4 +47,6 @@ export default function LocationLabel() {
       <h1 className="text-xs font-semibold px-1">{labels[labels.length - 1]}</h1>
     </div>
   );
-}
+});
+
+export default LocationLabel;

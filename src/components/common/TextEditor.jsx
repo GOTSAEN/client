@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 
-function TextEditor({ name, onChange, value }) {
+const TextEditor = memo(({ name, onChange, value }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (newEditorState) => {
@@ -43,6 +43,6 @@ function TextEditor({ name, onChange, value }) {
       />
     </div>
   );
-}
+});
 
 export default TextEditor;
