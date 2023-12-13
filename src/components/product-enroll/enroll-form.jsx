@@ -8,13 +8,11 @@ import { Label } from '../ui/label';
 import TextEditor from '../common/TextEditor';
 import { Button } from '@/components/ui/button';
 import ImageUploader from '../common/ImageUploader';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { fetchCategories } from '@/api/categories';
+import { useMutation } from 'react-query';
 import { fetchAdsById, newAds, updateAds } from '@/api/ads';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
 import { useCategory } from '@/hooks/use-category';
-import { toast } from 'react-toastify';
 import useApiError from '@/hooks/use-api-error';
 
 const init = {

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const LocationLabel = memo(() => {

@@ -1,17 +1,16 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 
 const TextEditor = memo(({ name, onChange, value }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-  const onEditorStateChange = (newEditorState) => {
+  const onEditorStateChange = useCallback((newEditorState) => {
     setEditorState(newEditorState);
     const contentState = newEditorState.getCurrentContent();
     const contentStateStr = JSON.stringify(convertToRaw(contentState));
     onChange(name, draftToHtml(JSON.parse(contentStateStr)));
-  };
+  });
 
   useEffect(() => {
     if (value !== draftToHtml(convertToRaw(editorState.getCurrentContent()))) {

@@ -1,7 +1,6 @@
 import { deleteAds, toProgressAd } from '@/api/ads';
-import { fetchPartnerAds } from '@/api/members/ads';
 import useApiError from '@/hooks/use-api-error';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 export function useWaitingAds() {

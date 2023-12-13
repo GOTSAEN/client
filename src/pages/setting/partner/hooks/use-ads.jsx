@@ -1,5 +1,4 @@
 import { fetchPartnerAds } from '@/api/members/ads';
-import { useIntersectionObserver } from '@/hooks/use-intersection-abserver';
 import { useInfiniteQuery } from 'react-query';
 
 export function useAds() {

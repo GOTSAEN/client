@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card } from '../../../components/ui/card';
 import { Link } from 'react-router-dom';

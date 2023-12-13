@@ -1,4 +1,3 @@
-// use-intersection-observer.jsx
 import { useEffect, useState } from 'react';
 
 export const useIntersectionObserver = ({ threshold, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching }) => {

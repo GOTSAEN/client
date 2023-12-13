@@ -1,6 +1,5 @@
 import { fetchAdsByCategory } from '@/api/ads';
 import AdsCard from '@/components/AdsCard';
-import { Search } from 'lucide-react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';

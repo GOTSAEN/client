@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Gift, Heart } from 'lucide-react';
+import { Gift } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/context/AuthContext';

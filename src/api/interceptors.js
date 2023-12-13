@@ -1,4 +1,3 @@
-import { deleteCookiesWithRootPath } from '@/service/login-auth';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
