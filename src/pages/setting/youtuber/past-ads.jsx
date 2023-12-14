@@ -30,7 +30,7 @@ export default function PastAds() {
               ads.map(({ applicationId, advertisementId, adName, adImage, adCategory, youtubeUrl, lastModifiedAt }) => (
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
                   <TableCell className="col-span-2 max-sm:col-span-3">
-                    <img src={adImage} alt="thumbnail" className={imageSize} />
+                    <img loading="lazy" src={adImage} alt="thumbnail" className={imageSize} />
                     <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
                       {adName}
                     </Link>

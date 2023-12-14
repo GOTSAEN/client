@@ -12,7 +12,12 @@ export default function ProgressYoutuberItem({ data, campaignStatus }) {
   return (
     <TableRow className={campaignStatus === 'FINISHED' ? 'grid grid-cols-5' : 'grid grid-cols-7'} key={applicationId}>
       <TableCell className="font-medium col-span-2">
-        <img src={youtubeMemberImage} alt="thumbnail" className="h-[40px] w-[40px] cover block rounded-full m-2" />
+        <img
+          loading="lazy"
+          src={youtubeMemberImage}
+          alt="thumbnail"
+          className="h-[40px] w-[40px] cover block rounded-full m-2"
+        />
         {youtubeMemberNickname}
       </TableCell>
       <TableCell className="col-span-2 justify-center">{lastModifiedAt.slice(0, 10)}</TableCell>

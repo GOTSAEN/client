@@ -28,12 +28,12 @@ export default function ImagesCarousel({ images }) {
         {images?.length > 0 ? (
           images.map((image, idx) => (
             <div className="w-full h-full overflow-hidden aspect-1" key={idx}>
-              <img src={image} alt={idx} className="object-cover w-full h-full" />
+              <img loading="lazy" src={image} alt={idx} className="object-cover w-full h-full" />
             </div>
           ))
         ) : (
           <div className="w-full cursor-pointer hover:shadow-lg bg-cover">
-            <img className="w-full h-full" src="/no_img.jpg" alt="no image" />
+            <img loading="lazy" className="w-full h-full" src="/no_img.jpg" alt="no image" />
           </div>
         )}
       </MultiCarousel>

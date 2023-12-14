@@ -64,7 +64,7 @@ export default function ImageUploader({ advertisementId, existImages }) {
                 <div className="flex gap-x-1 p-4">
                   {imageList.map((image, index) => (
                     <div key={index} className="image-item flex relative">
-                      <img src={image.data_url} alt="" width="200" className="rounded" />
+                      <img loading="lazy" src={image.data_url} alt="" width="200" className="rounded" />
                       <div className="image-item__btn-wrapper absolute right-1 top-1">
                         <Button onClick={() => onImageRemove(index)}>x</Button>
                       </div>

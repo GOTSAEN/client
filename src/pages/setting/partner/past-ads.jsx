@@ -40,7 +40,12 @@ export default function PartnerPastAds() {
                   <Link to={`campaign/${advertisementId}`} key={advertisementId}>
                     <TableRow className="grid grid-cols-8 px-1">
                       <TableCell className="col-span-4">
-                        <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
+                        <img
+                          loading="lazy"
+                          src={imageUrl ? imageUrl : '/no_img.jpg'}
+                          alt="thumbnail"
+                          className={imageSize}
+                        />
 
                         <Link to={`product/${advertisementId}`} className={link_text}>
                           {productName}

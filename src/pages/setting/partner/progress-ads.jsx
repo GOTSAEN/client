@@ -54,7 +54,12 @@ export default function PartnerProgressAds() {
                   <Link to={`campaign/${advertisementId}`}>
                     <TableRow className="grid grid-cols-11 px-1 hover:cursor-pointer max-sm:grid-cols-9">
                       <TableCell className="col-span-4">
-                        <img src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
+                        <img
+                          loading="lazy"
+                          src={imageUrl ? imageUrl : '/no_img.jpg'}
+                          alt="thumbnail"
+                          className={imageSize}
+                        />
                         <Link to={`/product/${advertisementId}`} className={link_text}>
                           {productName}
                         </Link>

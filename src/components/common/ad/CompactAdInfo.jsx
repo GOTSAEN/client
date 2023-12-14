@@ -13,7 +13,12 @@ export default function CompactAdInfo({ id }) {
       {data && (
         <div className="flex flex-col gap-2">
           <dd className="flex">
-            <img src={data?.imageUrls[0] || 'no_image.jpg'} alt={data?.productName} className={imageSize} />
+            <img
+              loading="lazy"
+              src={data?.imageUrls[0] || 'no_image.jpg'}
+              alt={data?.productName}
+              className={imageSize}
+            />
             <h2 className="text-xl font-semibold">{data?.productName}</h2>
           </dd>
           <div className="text-sm">

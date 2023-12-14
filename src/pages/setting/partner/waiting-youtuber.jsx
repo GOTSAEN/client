@@ -43,6 +43,7 @@ export default function WaitingYoutuber() {
                 <TableRow className="grid grid-cols-8 hover:cursor-pointer max-sm:grid-cols-6">
                   <TableCell className="font-medium col-span-2" key={applicationId}>
                     <img
+                      loading="lazy"
                       src={youtubeMemberImage}
                       alt={youtubeMemberNickname}
                       className="h-[40px] w-[40px] cover block rounded-full m-2"
