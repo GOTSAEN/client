@@ -13,7 +13,7 @@ export const updateMember = (data) => {
 };
 
 export const editPassword = (data) => {
-  return members
+  return authMembers
     .patch('/password', data)
     .then((res) => {
       return res;
