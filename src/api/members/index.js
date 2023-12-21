@@ -11,3 +11,14 @@ export const getMember = () => {
 export const updateMember = (data) => {
   return authMembers.patch('', data).then((res) => res);
 };
+
+export const editPassword = (data) => {
+  return members
+    .patch('/password', data)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
