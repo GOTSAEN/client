@@ -3,10 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/utils/lib';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { checkSameValue, validatePassword } from '@/service/common';
 import { toast } from 'react-toastify';
+import { editPassword } from '@/api/members';
 
 export default function PwChange() {
   const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
@@ -36,10 +36,11 @@ export default function PwChange() {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!checkSameValue(form.newPassword, rePassword)) {
-      toast.warning('패스워드가 일치하지 않습니다');
+      toast.warning('새로운 패스워드가 일치하지 않습니다');
       return;
     }
 
@@ -48,7 +49,16 @@ export default function PwChange() {
       return;
     }
 
-    //TODO 패스워드 수정해주는 API 등록해주기
+    const res = await editPassword({ currentPassword: form.currentPassword, password: form.newPassword });
+    console.log(res);
+    if (res.status === 401) {
+      toast.warning('현재 비밀번호가 일치하지 않습니다.');
+      return;
+    } else if (res.status === 400) {
+      toast.warning('패스워드는 8자리 이상의 숫자와 문자 조합입니다');
+    } else {
+      toast.success('비밀번호가 변경되었습니다.');
+    }
   };
   return (
     <div className="flex justify-center items-center mt-10">
@@ -67,7 +77,7 @@ export default function PwChange() {
                 name="currentPassword"
                 onChange={handleChange}
               />
-              <Button onClick={toggleCurrentPasswordVisibility}>
+              <Button onClick={toggleCurrentPasswordVisibility} type="button">
                 {currentPasswordVisible ? <EyeOff size={12} /> : <Eye size={12} />}
               </Button>
             </div>
@@ -80,7 +90,7 @@ export default function PwChange() {
                 name="newPassword"
                 onChange={handleChange}
               />
-              <Button onClick={toggleNewPasswordVisibility}>
+              <Button onClick={toggleNewPasswordVisibility} type="button">
                 {newPasswordVisible ? <EyeOff size={12} /> : <Eye size={12} />}
               </Button>
             </div>
@@ -92,12 +102,12 @@ export default function PwChange() {
                 value={rePassword}
                 onChange={(e) => setRePassword(e.target.value)}
               />
-              <Button onClick={toggleReNewPasswordVisibility}>
+              <Button onClick={toggleReNewPasswordVisibility} type="button">
                 {reNewPasswordVisible ? <EyeOff size={12} /> : <Eye size={12} />}
               </Button>
             </div>
-            <Button className={cn('w-full')}>
-              <Link to="/">확인</Link>
+            <Button className={cn('w-full')} type="submit">
+              변경
             </Button>
           </CardContent>
         </Card>
