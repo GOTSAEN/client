@@ -9,6 +9,9 @@ export const validatePassword = (password) => {
 };
 
 export const formatDate = (inputDate) => {
+  if (inputDate.length > 10) {
+    throw new Error('날짜 형식에 맞지 않습니다.');
+  }
   const [year, month, day] = inputDate.split('-').map((item) => item.padStart(2, '0'));
   return `${year}-${month}-${day}`;
 };
