@@ -19,7 +19,7 @@ describe('Test validatePassword for suitable regex', () => {
 });
 
 describe('Test formatDate for Date Format', () => {
-  test('Incorrect Date Length throw an error', () => {
+  test('Date Length Over 10 throw an error', () => {
     expect(() => {
       formatDate('2023-12-233');
     }).toThrow('날짜 형식에 맞지 않습니다.');
