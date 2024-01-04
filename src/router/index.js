@@ -20,7 +20,7 @@ import { PARTNER_ROUTES } from './advertiser';
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollTop />
       <Routes>
         <Route exact element={<App />}>
