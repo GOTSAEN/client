@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { ads } from '../../api/index';
 import MockAdapter from 'axios-mock-adapter';
 
 export function createMockAds() {
