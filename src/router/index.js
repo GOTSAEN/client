@@ -45,7 +45,7 @@ export default function Router() {
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/welcome" element={<Welcome />} />
 
-          <Route exact path="/ads/:category" element={<Ads />} />
+          <Route exact path="/ads" element={<Ads />} />
           <Route
             path="/product/update/campaign/:campaignId"
             exact

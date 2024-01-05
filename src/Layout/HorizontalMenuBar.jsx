@@ -27,7 +27,11 @@ const HorizontalMenuBar = memo(() => {
                 <ul className="grid max-w-[600px] gap-3 p-4 lg:grid-cols-3 md:w-[500px] md:grid-cols-2 sm:w-[400px] sm:grid-cols-2">
                   {categories &&
                     categories?.map(({ categoryId, categoryName }) => (
-                      <ListItem key={categoryId} title={categoryName} onClick={() => navigate(`ads/${categoryName}`)} />
+                      <ListItem
+                        key={categoryId}
+                        title={categoryName}
+                        onClick={() => navigate(`ads?category=${categoryName}`)}
+                      />
                     ))}
                 </ul>
               </NavigationMenuContent>
