@@ -31,7 +31,7 @@ export default function PastAds() {
                 <TableRow className="grid grid-cols-5 px-1" key={applicationId}>
                   <TableCell className="col-span-2 max-sm:col-span-3">
                     <img loading="lazy" src={adImage} alt="thumbnail" className={imageSize} />
-                    <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
+                    <Link to={`/product?id=${advertisementId}`} className={`${link_text} line-clamp-2`}>
                       {adName}
                     </Link>
                   </TableCell>

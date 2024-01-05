@@ -3,17 +3,14 @@ import ImagesFetcher from '@/components/product-detail/imges-fetcher';
 import ProductContent from '@/components/product-detail/product-content';
 import ProductDetailSkeleton from '@/components/product-detail/product-detail-skeleton';
 import ProductExplain from '@/components/product-detail/product-explan';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export default function ProductDetail() {
-  const params = useParams();
+  const id = useSearchParams()[0].get('id');
 
-  const { data, isLoading, error } = useQuery(
-    ['ads', `${params.id}`],
-    async () => await fetchAdsById(params.id).then((res) => res)
-  );
+  const { data, isLoading, error } = useQuery(['ads', `${id}`], async () => await fetchAdsById(id).then((res) => res));
 
   return (
     <main className="w-full h-full py-2 lg:px-[60px]">

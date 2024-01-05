@@ -60,7 +60,7 @@ export default function PartnerProgressAds() {
                           alt="thumbnail"
                           className={imageSize}
                         />
-                        <Link to={`/product/${advertisementId}`} className={link_text}>
+                        <Link to={`/product?id=${advertisementId}`} className={link_text}>
                           {productName}
                         </Link>
                       </TableCell>

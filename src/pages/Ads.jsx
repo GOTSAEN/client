@@ -2,7 +2,7 @@ import { fetchAdsByCategory } from '@/api/ads';
 import AdsCard from '@/components/AdsCard';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Ads() {
   const category = useSearchParams()[0].get('category');

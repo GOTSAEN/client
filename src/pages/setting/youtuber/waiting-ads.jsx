@@ -38,7 +38,7 @@ export default function WaitingAds() {
                   <TableRow className="grid grid-cols-7 px-1 hover:cursor-pointer" key={applicationId}>
                     <TableCell className="col-span-3 max-sm:col-span-4">
                       <img loading="lazy" src={adImage ? adImage : '/no_img.jpg'} alt={adName} className={imageSize} />
-                      <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
+                      <Link to={`/product?id=${advertisementId}`} className={`${link_text} line-clamp-2`}>
                         {adName}
                       </Link>
                     </TableCell>

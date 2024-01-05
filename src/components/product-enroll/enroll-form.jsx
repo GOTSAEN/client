@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import ImageUploader from '../common/ImageUploader';
 import { useMutation } from 'react-query';
 import { fetchAdsById, newAds, updateAds } from '@/api/ads';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { formatDate } from '@/service/common';
 import { useCategory } from '@/hooks/use-category';
 import useApiError from '@/hooks/use-api-error';
@@ -26,7 +26,7 @@ const init = {
   precaution: '',
 };
 export default function EnrollForm() {
-  const param = useParams();
+  const campaignId = useSearchParams()[0].get('id');
   const { handleError } = useApiError();
   const [form, setForm] = useState(init);
   const [advertisementId, setAdvertisementId] = useState(0);
@@ -47,7 +47,7 @@ export default function EnrollForm() {
       handleError(error);
     },
   });
-  const updateAd = useMutation(() => updateAds(param.campaignId, form), {
+  const updateAd = useMutation(() => updateAds(campaignId, form), {
     onSuccess: (id) => {
       setAdvertisementId(id);
     },
@@ -76,13 +76,13 @@ export default function EnrollForm() {
   };
 
   useEffect(() => {
-    if (param.campaignId) {
+    if (campaignId) {
       setEnrollForm({
         mainTitle: '정보 수정',
         button: '수정 완료',
         handleSubmit: handleUpdate,
       });
-      fetchAdsById(param.campaignId).then((res) => {
+      fetchAdsById(campaignId).then((res) => {
         setExistImages(res.imageUrls);
         setForm(res);
       });
@@ -93,7 +93,7 @@ export default function EnrollForm() {
         handleSubmit: handleCreate,
       });
     return setForm(init);
-  }, [param]);
+  }, [campaignId]);
 
   return (
     <form onSubmit={enrollForm.handleSubmit}>

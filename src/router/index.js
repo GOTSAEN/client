@@ -47,7 +47,7 @@ export default function Router() {
 
           <Route exact path="/ads" element={<Ads />} />
           <Route
-            path="/product/update/campaign/:campaignId"
+            path="/product/update/campaign"
             exact
             element={
               <ProtectedAdminRoutes>
@@ -56,7 +56,7 @@ export default function Router() {
             }
           />
 
-          <Route exact path="/product/:id" element={<ProductDetail />} />
+          <Route exact path="/product" element={<ProductDetail />} />
           <Route
             path="/product/create"
             element={

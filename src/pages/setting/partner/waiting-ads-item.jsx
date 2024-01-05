@@ -15,7 +15,7 @@ export default function WaitingAdsItem({ ads }) {
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
-    navigate(`/product/update/campaign/${id}`);
+    navigate(`/product/update/campaign?id=${id}`);
   };
 
   const handleAdToProgress = (e, id) => {
@@ -28,7 +28,7 @@ export default function WaitingAdsItem({ ads }) {
       <TableRow className="grid grid-cols-12  max-sm:grid-cols-6 px-1 hover:cursor-pointer" key={advertisementId}>
         <TableCell className="font-medium col-span-3">
           <img loading="lazy" src={imageUrl ? imageUrl : '/no_img.jpg'} alt="thumbnail" className={imageSize} />
-          <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
+          <Link to={`/product?id=${advertisementId}`} className={`${link_text} line-clamp-2`}>
             {productName}
           </Link>
         </TableCell>

@@ -20,7 +20,7 @@ export default function ProgressAdItem({ data }) {
     <TableRow className="grid grid-cols-12 px-1" key={applicationId}>
       <TableCell className="col-span-5">
         <img loading="lazy" src={adImage ? adImage : '/no_img.jpg'} alt={adName} className={imageSize} />
-        <Link to={`/product/${advertisementId}`} className={`${link_text} line-clamp-2`}>
+        <Link to={`/product?id=${advertisementId}`} className={`${link_text} line-clamp-2`}>
           {adName}
         </Link>
       </TableCell>

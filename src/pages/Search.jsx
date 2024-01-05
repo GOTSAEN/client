@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { useQuery } from 'react-query';
 import { fetchByKeyword } from '@/api/search';
@@ -7,9 +7,7 @@ import AdsCard from '@/components/AdsCard';
 import ListSkeleton from '@/components/home/list-skeleton';
 
 export default function SearchPage() {
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const keyword = params.get('keyword');
+  const keyword = useSearchParams()[0].get('keyword');
   const [page, setPage] = useState(1);
 
   const { isLoading, data, error } = useQuery(
