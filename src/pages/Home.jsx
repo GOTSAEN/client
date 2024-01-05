@@ -2,6 +2,7 @@ import List from '@/components/home/list';
 import Promotion from '@/components/home/promotion';
 
 export default function Home() {
+  console.log('들어왔어');
   return (
     <main className="flex flex-col gap-4">
       <Promotion
